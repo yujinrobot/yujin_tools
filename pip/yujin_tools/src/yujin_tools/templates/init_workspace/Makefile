@@ -4,16 +4,17 @@ PWD:=$(shell pwd)
 
 # Use this to set a different workspace directory, e.g.
 #WORKSPACE="--directory=./arm-linux-gnu"
-WORKSPACE="./"
+WORKSPACE=${PWD}
 
 # Build directory name, relative to workspace
 BUILD="build"
 
 # Location of sources relative to workspace
-SOURCE="./src"
+SOURCE="../src"
 
+# Location of installation directory
 #CMAKE_INSTALL_PREFIX:=${PWD}/install
-INSTALL="-DCMAKE_INSTALL_PREFIX=install"
+INSTALL="-DCMAKE_INSTALL_PREFIX=${WORKSPACE}/install"
 
 # Configure with a toolchain module
 TOOLCHAIN=
@@ -53,4 +54,4 @@ clean:
 	rm -rf devel
 	rm -rf install
 
-.PHONY: clean
+.PHONY: build install ccmake cmake tests clean

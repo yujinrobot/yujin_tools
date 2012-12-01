@@ -1,3 +1,6 @@
+0.1.1
+ - parallel native and cross build directories.
+ - added a setup.bash
 0.1.0
  - cfind and yujin_init_workspace added
 

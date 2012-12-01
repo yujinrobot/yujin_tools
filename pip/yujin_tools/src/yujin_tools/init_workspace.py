@@ -84,9 +84,8 @@ def init_workspace():
     if os.path.isdir(os.path.join(cwd,'src')):
         sys.exit("This workspace is already initialised")
     os.mkdir(os.path.join(cwd,'src'))
-    os.mkdir(os.path.join(cwd,'build')) 
-    os.mkdir(os.path.join(cwd,'devel')) 
-    os.mkdir(os.path.join(cwd,'install')) 
+    os.mkdir(os.path.join(cwd,'cross')) 
+    os.mkdir(os.path.join(cwd,'native')) 
     os.chdir(os.path.join(cwd,'src'))
     os.system('wstool init')
     catkin_init_workspace = create_groovy_script('catkin_init_workspace')
@@ -95,7 +94,10 @@ def init_workspace():
 
     name = os.path.basename(cwd)
     template_dir = os.path.join(os.path.dirname(__file__),'templates','init_workspace')
-    shutil.copy(os.path.join(template_dir,'Makefile'), cwd)
+    shutil.copy(os.path.join(template_dir,'Makefile'), os.path.join(cwd,'native'))
+    shutil.copy(os.path.join(template_dir,'Makefile'), os.path.join(cwd,'cross'))
+    shutil.copy(os.path.join(template_dir,'setup.bash'), cwd)
+    os.chmod(os.path.join(cwd, 'setup.bash'), stat.S_IRWXU)
     shutil.copy(os.path.join(template_dir,'.bashrc'), cwd)
     instantiate_template('konsole',name, cwd)
     instantiate_template('gnome-terminal',name, cwd)
