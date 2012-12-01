@@ -24,9 +24,14 @@ TOOLCHAIN=
 PLATFORM=
 #PLATFORM="-C ./src/xsfdasdf"
 
+# Blacklist certain packages
+BLACKLIST=
+#BLACKLIST="-DCATKIN_BLACKLIST_PACKAGES=cslam_qt_monitor;cslam_web_monitor"
+
 help:
 	@echo ""
 	@echo "Usage: make <target>"
+	@echo "   cmake:     force a cmake reconfiguration."
 	@echo "   ccmake:    view/modify cmake variables in an existing build directory."
 	@echo "   build:     compile sources"
 	@echo "   install:   install into target directory"
@@ -35,13 +40,13 @@ help:
 	@echo ""
 
 cmake:
-	cd ${WORKSPACE}/${BUILD}; cmake .
+	catkin_make --force-cmake --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}
 
 ccmake:
 	cd ${WORKSPACE}/${BUILD}; ccmake .
 	
 build: 
-	catkin_make --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} --force-cmake
+	catkin_make --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}
 
 install:
 	cd ${WORKSPACE}/${BUILD}; make -j5 install
