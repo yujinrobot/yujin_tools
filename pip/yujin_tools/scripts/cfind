@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# -I processes without all the binary garbage
+grep -n -I --color=always -r "$*" . --exclude="*.svn*" --exclude="*.git*"

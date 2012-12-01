@@ -1,0 +1,3 @@
+#!/bin/bash
+#exec gnome-terminal --geometry=85x70 -x bash --init-file /opt/multimaster/.bashrc
+exec gnome-terminal -x bash --init-file %(cwd)s/.bashrc

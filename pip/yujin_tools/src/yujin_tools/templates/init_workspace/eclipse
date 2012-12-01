@@ -1,0 +1,6 @@
+#!/bin/bash
+# This only needed by ubuntu karmic, otherwise comment out
+export GDK_NATIVE_WINDOWS=1
+source /opt/ros/groovy/setup.bash
+# Add the full path if eclipse is not in PATH
+exec eclipse -data ~/workspace/%(name)s
