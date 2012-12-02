@@ -98,7 +98,7 @@ def init_workspace():
     shutil.copy(os.path.join(template_dir,'Makefile'), os.path.join(cwd,'cross'))
     shutil.copy(os.path.join(template_dir,'setup.bash'), cwd)
     os.chmod(os.path.join(cwd, 'setup.bash'), stat.S_IRWXU)
-    shutil.copy(os.path.join(template_dir,'.bashrc'), cwd)
+    instantiate_template('.bashrc',name, cwd)
     instantiate_template('konsole',name, cwd)
     instantiate_template('gnome-terminal',name, cwd)
     instantiate_template('eclipse',name, cwd)
