@@ -1,0 +1,94 @@
+#!/bin/bash
+
+defined() {
+  [ ${!1-X} == ${!1-Y} ]
+}
+quit() {
+  echo $1
+  exit
+}
+
+echo ""
+echo "ACHTUNG: this script is being depracated and only exists"
+echo "         for ros legacy style builds."
+echo ""
+
+defined ROS_ROOT || quit "ROS_ROOT is not set --> go to your rosroot and run '. ./setup.bash'"
+defined ROS_WORKSPACE || quit "ROS_WORKSPACE is not set --> check ROS_WORKSPACE is set in setup.sh'"
+
+# Deprecate these eventually
+YCS_ROOT=`rosstack find ycs_tools 2>/dev/null | sed -e 's/\/ycs_tools$//' `
+YCS_BIN=`rospack find ycs_bin 2>/dev/null`
+
+NAME=${ROS_WORKSPACE##*/}
+SETUPSH=$ROS_WORKSPACE/setup.sh
+SETUPBASH=$ROS_WORKSPACE/setup.bash
+
+# See if 'multiple' cores has already been added.
+if [ -z "`cat ${SETUPSH} | grep multiple`" ]; then
+  echo "Adding to $ROS_WORKSPACE/setup.sh"
+  if [ ! -z "${YCS_ROOT}" ]; then
+    echo "export YCS_ROOT=$YCS_ROOT" >> $SETUPSH
+  fi
+  if [ ! -z "${YCS_BIN}" ]; then
+    echo "export PATH=\${PATH}:${YCS_BIN}/scripts" >> $SETUPSH
+  fi
+  echo '# If you have multiple cores, uncomment this (# = no of cores + 1)' >> $SETUPSH
+  echo '# export ROS_PARALLEL_JOBS="-l3"' >> $SETUPSH
+else
+  echo "The file setup.sh has already been expanded."
+fi
+
+RC=${ROS_WORKSPACE}/.bashrc
+if [ ! -f ${RC} ]; then
+  echo "Creating ${RC}"
+  echo '#!/bin/bash' >  ${RC}
+  echo "if [ -f /etc/bashrc ]; then" >> ${RC}
+  echo "  . /etc/bashrc" >> ${RC}
+  echo "fi" >> ${RC}
+  echo "if [ -f ~/.profile ]; then" >> ${RC}
+  echo "  . ~/.profile" >> ${RC}
+  echo "fi" >> ${RC}
+  case "$ROS_PACKAGE_PATH" in
+    */opt/ros/fuerte*) echo 'source /opt/ros/fuerte/setup.bash' >> ${RC} ;;
+    *) ;;
+  esac
+  echo "source ${SETUPBASH}" >> ${RC}
+else 
+  echo "The file ${RC} already exists."
+fi
+
+SCRIPT=${ROS_WORKSPACE}/gnome-terminal
+if [ ! -f ${SCRIPT} ]; then
+  echo "Creating ${SCRIPT}"
+  echo '#!/bin/bash' >  ${SCRIPT}
+  echo '#exec gnome-terminal --geometry=85x70 -x bash --init-file '${RC} >> ${SCRIPT}
+  echo 'exec gnome-terminal -x bash --init-file '${RC} >> ${SCRIPT}
+  chmod 755 ${SCRIPT}
+else
+  echo "The file ${SCRIPT} already exists."
+fi
+
+SCRIPT=${ROS_WORKSPACE}/konsole
+if [ ! -f ${SCRIPT} ]; then
+  echo "Creating ${SCRIPT}"
+  echo '#!/bin/bash' >  ${SCRIPT}
+  echo 'konsole -e /bin/bash --init-file '${RC} >> ${SCRIPT}
+  chmod 755 ${SCRIPT}
+else
+  echo "The file ${SCRIPT} already exists."
+fi
+
+SCRIPT=${ROS_WORKSPACE}/eclipse
+if [ ! -f ${SCRIPT} ]; then
+  echo "Creating ${SCRIPT}"
+  echo '#!/bin/bash' >  ${SCRIPT}
+  echo '# This only needed by ubuntu karmic, otherwise comment out' >> ${SCRIPT}
+  echo 'export GDK_NATIVE_WINDOWS=1' >> ${SCRIPT}
+  echo 'source '${ROS_WORKSPACE}'/setup.bash' >> ${SCRIPT}
+  echo '# Add the full path if eclipse is not in PATH' >> ${SCRIPT}
+  echo 'exec eclipse -data ~/workspace/'${NAME} >> ${SCRIPT}
+  chmod 755 ${SCRIPT}
+else
+  echo "The file ${SCRIPT} already exists."
+fi
