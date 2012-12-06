@@ -41,7 +41,7 @@ help:
 
 cmake:
 	mkdir -p ${WORKSPACE}/${BUILD}
-	cd ${WORKSPACE}/${BUILD}; cmake ../${SOURCE}
+	cd ${WORKSPACE}/${BUILD}; cmake ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST} ../${SOURCE}
 
 ccmake:
 	cd ${WORKSPACE}/${BUILD}; ccmake .
