@@ -40,13 +40,14 @@ help:
 	@echo ""
 
 cmake:
-	catkin_make --force-cmake --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}
+	mkdir -p ${WORKSPACE}/${BUILD}
+	cd ${WORKSPACE}/${BUILD}; cmake ../${SOURCE}
 
 ccmake:
 	cd ${WORKSPACE}/${BUILD}; ccmake .
 	
 build: 
-	catkin_make --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}
+	catkin_make --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}; \
 
 install:
 	cd ${WORKSPACE}/${BUILD}; make -j5 install
@@ -55,6 +56,7 @@ tests:
 	cd ${WORKSPACE}/${BUILD}; make -j5 tests
 
 clean:
+
 	rm -rf build
 	rm -rf devel
 	rm -rf install
