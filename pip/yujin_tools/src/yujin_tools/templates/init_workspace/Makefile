@@ -28,6 +28,9 @@ PLATFORM=
 BLACKLIST=
 #BLACKLIST="-DCATKIN_BLACKLIST_PACKAGES=cslam_qt_monitor;cslam_web_monitor"
 
+# Development space relative to workspace
+DEVEL="-DCATKIN_DEVEL_PREFIX=../devel"
+
 help:
 	@echo ""
 	@echo "Usage: make <target>"
@@ -41,7 +44,7 @@ help:
 
 cmake:
 	mkdir -p ${WORKSPACE}/${BUILD}
-	cd ${WORKSPACE}/${BUILD}; cmake ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST} ../${SOURCE}
+	cd ${WORKSPACE}/${BUILD}; cmake ${DEVEL} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST} ../${SOURCE}
 
 ccmake:
 	cd ${WORKSPACE}/${BUILD}; ccmake .
@@ -56,7 +59,6 @@ tests:
 	cd ${WORKSPACE}/${BUILD}; make -j5 tests
 
 clean:
-
 	rm -rf build
 	rm -rf devel
 	rm -rf install
