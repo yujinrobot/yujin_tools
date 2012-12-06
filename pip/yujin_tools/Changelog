@@ -1,7 +1,7 @@
+0.1.8
+ - put devel folder in ./devel in the make cmake
 0.1.7
- - bugfixes
-  - needed cmake options in the make cmake
-  - put devel folder in ./devel in the make cmake
+ - bugfix cmake options in the make cmake
 0.1.6
  - added cmake only build type in yujin_init_workspace.
 0.1.5
