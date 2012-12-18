@@ -40,7 +40,7 @@ Use wstool to add source repos to the src directory and you'll find
 makefiles in the native/cross directories for parallel building.
 
 
-## Developing & Packaging ==
+## Developing & Packaging
 
     > git clone https://github.com/yujinrobot/yujin_tools.git
     > cd yujin_tools/pip/yujin_tools
