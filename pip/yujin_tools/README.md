@@ -26,7 +26,8 @@ Template style wizard shortcuts for creating ros packages, stacks.
 * make some changes
 * bump the version in `src/yujin_tools/__init__.py
 * add a note to the `Changelog`
-* upload
+
+Finally, upload
 
     > make build
     > make upload
