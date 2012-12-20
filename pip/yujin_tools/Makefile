@@ -8,13 +8,18 @@ endif
  
 
 help:
-	@echo "  build    : build the python package."
-	@echo "  install  : install the python package into /usr/local."
-	@echo "  uninstall: uninstall the python package from /usr/local."
-	@echo "  distro   : build the distribution tarball."
-	@echo "  register : register the package with PyPI."
-	@echo "  upload   : upload the package to PyPI."
-	@echo "  clean    : clean build/dist directories."
+	@echo "Local Build"
+	@echo "  build     : build the python package."
+	@echo "  install   : install the python package into /usr/local."
+	@echo "  uninstall : uninstall the python package from /usr/local."
+	@echo "Pypi package"
+	@echo "  register  : register the package with PyPI."
+	@echo "  distro    : build the distribution tarball."
+	@echo "  pypi      : upload the package to PyPI."
+	@echo "Deb package"
+	@echo "  deb_distro: build the distribution tarball."
+	@echo "  ppa       : upload to the launchpad ppa."
+	@echo "  clean     : clean build/dist directories."
 
 build:
 	python setup.py build
@@ -38,19 +43,17 @@ clean_dist:
 distro:
 	python setup.py sdist
 
-deb_dist:
+deb_distro:
 	python setup.py --command-packages=stdeb.command sdist_dsc bdist_deb
 
 register:
 	python setup.py register
 
-upload:
+pypi: 
 	python setup.py sdist upload
 
-pypi: upload
-
 ppa:
-	dput ppa:yujinrobot/ppa deb_dist/yujin-tools_${VERSION}-1_amd64.changes	
+	dput -u ppa:yujinrobot/ppa deb_dist/yujin-tools_${VERSION}-1_amd64.changes	
 
 clean:  clean_dist
 	echo "clean"
