@@ -1,7 +1,10 @@
-from distutils.core import setup
+#!/usr/bin/env python
+#from distutils.core import setup
+#import sys
 
-import sys
-sys.path.insert(0, 'src')
+from setuptools import setup, find_packages
+
+#sys.path.insert(0, 'src')
 
 from yujin_tools import __version__
 
@@ -27,6 +30,7 @@ setup(name='yujin_tools',
            ]},
       author = "Daniel Stonier",
       author_email = "d.stonier@gmail.com",
+      maintainer='Daniel Stonier',
       url = "http://pypi.python.org/pypi/yujin_tools",
       download_url = "https://github.com/yujinrobot/yujin_tools.git",
       keywords = ["Yujin Robot"],

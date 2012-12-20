@@ -1,4 +1,4 @@
-
+VERSION=`./setup.py --version`
 FILE_EXISTS:=$(wildcard install.record)
 ifeq ($(strip $(FILE_EXISTS)),)
     UNINSTALL_FILES:=
@@ -19,15 +19,27 @@ help:
 build:
 	python setup.py build
 
-install:
+# Another install method that might be better:
+#       sudo checkinstall python setup.py install
+install: distro
 	sudo python setup.py install --record install.record
 
-# Use -f to ignore any warnings about it being an empty argument
 uninstall:
 	sudo rm -f ${UNINSTALL_FILES}
 
+setup:
+	echo "building version ${VERSION}"
+
+clean_dist:
+	-rm -f MANIFEST
+	-rm -rf build dist
+	-rm -rf deb_dist
+
 distro:
 	python setup.py sdist
+
+deb_dist:
+	python setup.py --command-packages=stdeb.command sdist_dsc bdist_deb
 
 register:
 	python setup.py register
@@ -35,6 +47,11 @@ register:
 upload:
 	python setup.py sdist upload
 
-clean:
-	rm -rf build dist MANIFEST
+pypi: upload
+
+ppa:
+	dput ppa:yujinrobot/ppa deb_dist/yujin-tools_${VERSION}-1_amd64.changes	
+
+clean:  clean_dist
+	echo "clean"
 

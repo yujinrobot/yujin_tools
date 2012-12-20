@@ -39,6 +39,7 @@ help:
 	@echo "   build:     compile sources"
 	@echo "   install:   install into target directory"
 	@echo "   tests:     build tests"
+	@echo "   run_tests: run tests"
 	@echo "   clean:     remove all build, devel and install directories."
 	@echo ""
 
@@ -57,6 +58,9 @@ install:
  
 tests:
 	cd ${WORKSPACE}/${BUILD}; make -j5 tests
+
+run_tests:
+	cd ${WORKSPACE}/${BUILD}; make run_tests
 
 clean:
 	rm -rf build
