@@ -39,6 +39,9 @@ clean_dist:
 	-rm -f MANIFEST
 	-rm -rf build dist
 	-rm -rf deb_dist
+	-rm -rf debian
+	-rm -rf ../*.build
+	-rm -rf ../*.gz
 
 distro:
 	python setup.py sdist
@@ -51,6 +54,11 @@ register:
 
 pypi: 
 	python setup.py sdist upload
+
+debianize:
+	python setup.py sdist # creates a tarball
+	@mv dist/yujin_tools-${VERSION}.tar.gz ../yujin-tools_${VERSION}.orig.tar.gz
+	python setup.py --command-packages=stdeb.command debianize
 
 ppa:
 	dput -u ppa:yujinrobot/ppa deb_dist/yujin-tools_${VERSION}-1_amd64.changes	
