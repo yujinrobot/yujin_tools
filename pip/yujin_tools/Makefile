@@ -64,5 +64,8 @@ ppa:
 	dput -u ppa:yujinrobot/ppa deb_dist/yujin-tools_${VERSION}-1_amd64.changes	
 
 clean:  clean_dist
+	-rm -f install.record
+	-rm -rf build
+	-rm -rf src/yujin_tools.egg-info
 	echo "clean"
 

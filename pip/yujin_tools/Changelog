@@ -1,3 +1,5 @@
+0.1.10
+ - yujin_init_workspace args for workspace location and cross environment.
 0.1.9
  - added run_tests target to workpace makefile targets
 0.1.8

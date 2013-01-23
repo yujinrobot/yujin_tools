@@ -31,22 +31,22 @@ BLACKLIST=
 # Development space relative to workspace
 DEVEL="-DCATKIN_DEVEL_PREFIX=../devel"
 
-BUILD_TYPE="-DCMAKE_BUILD_TYPE=DebugWithRelSymbols"
+BUILD_TYPE="-DCMAKE_BUILD_TYPE=Release"
 
 help:
 	@echo ""
 	@echo "Usage: make <target>"
-	@echo "   cmake:     cmake (re)configuration only, no compiling."
+    @echo "   cmake:     cmake (re)configuration only, no compiling."
 	@echo "   ccmake:    view/modify cmake variables in an existing build directory."
 	@echo "   build:     compile sources"
-	@echo "   rebuild:   force a redo of cmake configuration and rebuild"
+    @echo "   rebuild:   force a redo of cmake configuration and rebuild"
 	@echo "   install:   install into target directory"
 	@echo "   tests:     build tests"
 	@echo "   run_tests: run tests"
 	@echo "   clean:     remove all build, devel and install directories."
 	@echo ""
-	@echo "Most common targets will be build, rebuild and clean."
-	@echo ""
+    @echo "Most common targets will be build, rebuild and clean."
+    @echo ""
 
 cmake:
 	mkdir -p ${WORKSPACE}/${BUILD}
@@ -54,14 +54,14 @@ cmake:
 
 ccmake:
 	cd ${WORKSPACE}/${BUILD}; ccmake .
-
-# Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation	
+	
+# Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation   
 build: 
 	catkin_make --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}; \
 
-# Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation	
+# Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation   
 rebuild: 
-	catkin_make --force-cmake --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}; \
+    catkin_make --force-cmake --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}; \
 
 # No parallelisation for this
 install:

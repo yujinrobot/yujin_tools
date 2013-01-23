@@ -4,7 +4,8 @@
 
 from setuptools import setup, find_packages
 
-#sys.path.insert(0, 'src')
+import sys
+sys.path.insert(0, 'src')
 
 from yujin_tools import __version__
 
@@ -20,6 +21,7 @@ setup(name='yujin_tools',
       ],
       package_data = {'yujin_tools': [
            'templates/init_workspace/Makefile',
+           'templates/init_workspace/Makefile-Release',
            'templates/init_workspace/.bashrc',
            'templates/init_workspace/konsole',
            'templates/init_workspace/gnome-terminal',
