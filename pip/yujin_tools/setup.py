@@ -2,7 +2,9 @@
 #from distutils.core import setup
 #import sys
 
-from setuptools import setup, find_packages
+# Setuptools' sdist does not respect package_data
+#from setuptools import setup, find_packages
+from distutils.core import setup
 
 import sys
 sys.path.insert(0, 'src')
@@ -12,7 +14,7 @@ from yujin_tools import __version__
 setup(name='yujin_tools',
       version= __version__,
       packages=['yujin_tools'],
-      package_dir = {'':'src'},
+      package_dir = {'yujin_tools':'src/yujin_tools'},
       scripts = ['scripts/cfind',
            'scripts/yujin_init_workspace',
            'scripts/roscreate-shortcuts',
