@@ -1,6 +1,10 @@
-0.1.12
+0.1.14
  - specify overlay directories
  - option to create just a very simple single build workspace
+0.1.13
+ - use debug/devel as the default environment if it exists.
+0.1.12
+ - bugfix tabs in release makefile.
 0.1.11
  - bugfix package_data not getting installed for yujin_init_workspace.
 0.1.10
