@@ -1,3 +1,3 @@
 #!/bin/bash
 
-source /opt/ros/groovy/setup.bash
+source %(overlay)s/setup.bash

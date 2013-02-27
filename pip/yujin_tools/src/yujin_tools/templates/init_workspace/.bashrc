@@ -5,5 +5,5 @@ fi
 if [ -f ~/.profile ]; then
   . ~/.profile
 fi
-source /opt/ros/groovy/setup.bash
+source %(overlay)s/setup.bash
 export YUJIN_WORKSPACE=%(cwd)s
