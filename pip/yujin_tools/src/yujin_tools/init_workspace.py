@@ -9,14 +9,17 @@ from argparse import RawTextHelpFormatter
 import subprocess
 import tempfile
 # local imports
-from .init_build import init_build
+from .init_build import init_configured_build
 import console
 
 
 def help_string():
     overview = 'This is a convenience script for auto-generating a catkin workspace.\n\n'
-    instructions = "It acts on the specified directory (or the current directory if unspecified) and creates:\n\n \
- - ./src : initialised with a catkin CMakeLists.txt and a wstool .rosinstall file.\n \
+    instructions = " \
+ - 'yujin_init_workspace ecl' : create an empty workspace in ./ecl.\n \
+ - 'yujin_init_workspace ~/ecl' : create an empty workspace in ~/ecl.\n \
+ - 'yujin_init_workspace ecl ecl.rosinstall' : populate a workspace from rosinstall file.\n \
+ - 'yujin_init_workspace ecl https://raw.github.com/stonier/ecl_core/groovy-devel/ecl.rosinstall' : populate from uri.\n \
 "
     return overview + instructions
 
@@ -34,6 +37,7 @@ def create_groovy_script(script_name):
 def parse_arguments():
     parser = argparse.ArgumentParser(description=help_string(), formatter_class=RawTextHelpFormatter)
     parser.add_argument('dir', nargs='?', default=os.getcwd(), help='directory to use for the workspace [current working directory]')
+    parser.add_argument('uri', nargs='?', default=None, help='uri for a rosinstall file [None]')
     parser.add_argument('-s', '--simple', action='store_true', help='just create a basic single build workspace (usual ros style) [false]')
     args = parser.parse_args()
     return args
@@ -95,19 +99,28 @@ def init_workspace():
         os.mkdir(workspace_dir)
     if os.path.isdir(os.path.join(workspace_dir, 'src')):
         sys.exit("This workspace is already initialised")
-
+    if args.uri:
+        uri = args.uri  # assume its an absolute path or http uri
+        if not os.path.isabs(args.uri):
+            if os.path.isfile(os.path.join(os.getcwd(), args.uri)):
+                uri = os.path.join(os.getcwd(), args.uri)
+    else:
+        uri = ""
     console.pretty_println("Creating a workspace in " + workspace_dir, console.bold)
     os.mkdir(os.path.join(workspace_dir, 'src'))
     os.chdir(os.path.join(workspace_dir, 'src'))
-    os.system('wstool init . ')
+    if uri:
+        os.system('wstool init . ' + uri)
+        os.system('wstool update')
+    else:
+        os.system('wstool init . ')
     catkin_init_workspace = create_groovy_script('catkin_init_workspace')
     unused_process = subprocess.call(catkin_init_workspace.name, shell=True)
     os.chdir(workspace_dir)
 
     if args.simple:
         console.pretty_println("Auto creating a special build directory", console.cyan)
-        #init_build()
-        # maybe also catkin_make
+        init_configured_build()
     else:
         console.pretty_println("Done - add source directories with `wstool` and configure parallel build dirs with 'yujin_init_build'.", console.cyan)
 

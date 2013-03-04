@@ -10,7 +10,7 @@ WORKSPACE=${PWD}
 BUILD="build"
 
 # Location of sources relative to workspace
-SOURCE="%(source_directory)s"
+SOURCE="%(source_dir)s"
 
 # Location of installation directory
 INSTALL="-DCMAKE_INSTALL_PREFIX=%(install_prefix)s"

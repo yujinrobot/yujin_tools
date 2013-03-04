@@ -3,8 +3,8 @@
 export GDK_NATIVE_WINDOWS=1
 
 export YUJIN_WORKSPACE=%(cwd)s
-if [ -d ${YUJIN_WORKSPACE}/build/devel ]; then
-  source ${YUJIN_WORKSPACE}/build/devel/setup.bash
+if [ -d ${YUJIN_WORKSPACE}/devel ]; then
+  source ${YUJIN_WORKSPACE}/devel/setup.bash
   alias cddevel="cd ${YUJIN_WORKSPACE}/build/devel"
   alias m1="export ROS_MASTER_URI=http://localhost:11311"
   alias m2="export ROS_MASTER_URI=http://localhost:11312"
