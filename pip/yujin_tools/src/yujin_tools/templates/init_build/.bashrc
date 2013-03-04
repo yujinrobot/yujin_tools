@@ -5,11 +5,10 @@ fi
 if [ -f ~/.profile ]; then
   . ~/.profile
 fi
-source %(overlay)s/setup.bash
 export YUJIN_WORKSPACE=%(cwd)s
-if [ -d ${YUJIN_WORKSPACE}/debug/devel ]; then
-  source ${YUJIN_WORKSPACE}/debug/devel/setup.bash
-  alias cddevel="cd ${YUJIN_WORKSPACE}/debug/devel"
+if [ -d ${YUJIN_WORKSPACE}/build/devel ]; then
+  source ${YUJIN_WORKSPACE}/build/devel/setup.bash
+  alias cddevel="cd ${YUJIN_WORKSPACE}/build/devel"
   alias m1="export ROS_MASTER_URI=http://localhost:11311"
   alias m2="export ROS_MASTER_URI=http://localhost:11312"
   alias m3="export ROS_MASTER_URI=http://localhost:11313"

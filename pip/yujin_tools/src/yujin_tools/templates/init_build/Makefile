@@ -10,11 +10,13 @@ WORKSPACE=${PWD}
 BUILD="build"
 
 # Location of sources relative to workspace
-SOURCE="../src"
+SOURCE="%(source_directory)s"
 
 # Location of installation directory
-#CMAKE_INSTALL_PREFIX:=${PWD}/install
-INSTALL="-DCMAKE_INSTALL_PREFIX=${WORKSPACE}/install"
+INSTALL="-DCMAKE_INSTALL_PREFIX=%(install_prefix)s"
+
+# Underlays
+UNDERLAYS="-DCMAKE_PREFIX_PATH=%(underlays)s"
 
 # Configure with a toolchain module
 TOOLCHAIN=
@@ -29,9 +31,10 @@ BLACKLIST=
 #BLACKLIST="-DCATKIN_BLACKLIST_PACKAGES=cslam_qt_monitor;cslam_web_monitor"
 
 # Development space relative to workspace
-DEVEL="-DCATKIN_DEVEL_PREFIX=../devel"
+DEVEL="-DCATKIN_DEVEL_PREFIX=./devel"
 
-BUILD_TYPE="-DCMAKE_BUILD_TYPE=Release"
+# Build mode - DebugWithRelSymbols, Release
+BUILD_TYPE="-DCMAKE_BUILD_TYPE=%(build_type)s"
 
 help:
 	@echo ""
@@ -50,18 +53,18 @@ help:
 
 cmake:
 	mkdir -p ${WORKSPACE}/${BUILD}
-	cd ${WORKSPACE}/${BUILD}; cmake ${BUILD_TYPE} ${DEVEL} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST} ../${SOURCE}
+	cd ${WORKSPACE}/${BUILD}; cmake ${BUILD_TYPE} ${DEVEL} ${UNDERLAYS} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST} ../${SOURCE}
 
 ccmake:
 	cd ${WORKSPACE}/${BUILD}; ccmake .
-	
-# Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation   
-build: 
-	catkin_make --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}; \
 
-# Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation   
+# Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation	
+build: 
+	catkin_make --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${UNDERLAYS} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}; \
+
+# Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation	
 rebuild: 
-    catkin_make --force-cmake --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}; \
+	catkin_make --force-cmake --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${UNDERLAYS} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}; \
 
 # No parallelisation for this
 install:
