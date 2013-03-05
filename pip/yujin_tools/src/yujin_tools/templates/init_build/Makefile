@@ -19,11 +19,11 @@ INSTALL="-DCMAKE_INSTALL_PREFIX=%(install_prefix)s"
 UNDERLAYS="-DCMAKE_PREFIX_PATH=%(underlays)s"
 
 # Configure with a toolchain module
-TOOLCHAIN=
+TOOLCHAIN=%(toolchain)s
 #TOOLCHAIN=-DCMAKE_TOOLCHAIN_FILE=./src/dfsadf
 
 # Initialise the cache with global variables (usually use for platform specific variables)
-PLATFORM=
+PLATFORM=%(platform)s
 #PLATFORM="-C ./src/xsfdasdf"
 
 # Blacklist certain packages

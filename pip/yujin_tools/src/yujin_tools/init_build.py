@@ -7,8 +7,8 @@ import sys
 import stat  # file permissions
 import argparse
 from argparse import RawTextHelpFormatter
-import subprocess
 import tempfile
+import shutil
 import console
 
 
@@ -40,7 +40,10 @@ def parse_arguments():
     parser.add_argument('-r', '--release', action='store_true', help='build in Release mode instead of RelWithDebugSymbols [false]')
     parser.add_argument('-i', '--install', action='store', default='/not_set_directory', help='installation location [workspace/install]')
     parser.add_argument('-u', '--underlays', action='store', default='/opt/ros/groovy', help='semi-colon list of catkin workspaces to utilise [/opt/ros/groovy]')
-    parser.add_argument('--list-toolchains', action='store', help='list all currently available toolchains')
+    parser.add_argument('-t', '--toolchain', action='store', default='', help='toolchain cmake module to load []')
+    parser.add_argument('-p', '--platform', action='store', default='', help='platform cmake cache module to load []')
+    parser.add_argument('--list-toolchains', action='store_true', help='list all currently available toolchain modules [false]')
+    parser.add_argument('--list-platforms', action='store_true', help='list all currently available platform modules [false]')
     args = parser.parse_args()
     return args
 
@@ -87,23 +90,22 @@ def instantiate_template(filename, name, cwd):
         f.close()
 
 
-def fill_in_makefile(template, cwd, source_dir, underlays, install_prefix, build_type):
+def fill_in_makefile(template, cwd, source_dir, underlays, install_prefix, build_type, toolchain, platform):
     return template % locals()
 
 
-def instantiate_makefile(filename, cwd, source_dir, underlays, install_prefix, build_type):
+def instantiate_makefile(filename, cwd, source_dir, underlays, install_prefix, build_type, toolchain, platform):
     template_dir = os.path.join(os.path.dirname(__file__), 'templates', 'init_build')
     tmpl = read_template(os.path.join(template_dir, filename))
-    contents = fill_in_makefile(tmpl, cwd, source_dir, underlays, install_prefix, build_type)
+    contents = fill_in_makefile(tmpl, cwd, source_dir, underlays, install_prefix, build_type, toolchain, platform)
     try:
         f = open(os.path.join(cwd, filename), 'w')
         f.write(contents.encode('utf-8'))
     finally:
-        #os.fchmod(f.fileno(), stat.S_IRWU)
         f.close()
 
 
-def print_build_details(build_dir, source_dir, install_prefix, build_type, underlays, name):
+def print_build_details(build_dir, source_dir, install_prefix, build_type, underlays, name, toolchain, platform):
     console.pretty_println("*********** Parallel Development Workspace Details ***********", console.bold)
     console.pretty_print("Build directory : ", console.cyan)
     console.pretty_println(build_dir, console.yellow)
@@ -117,18 +119,32 @@ def print_build_details(build_dir, source_dir, install_prefix, build_type, under
     console.pretty_println(underlays, console.yellow)
     console.pretty_print("Eclipse Name    : ", console.cyan)
     console.pretty_println(name, console.yellow)
+    if not toolchain == "":
+        console.pretty_print("Toolchain       : ", console.cyan)
+        console.pretty_println(toolchain, console.yellow)
+    if not platform == "":
+        console.pretty_print("Platform        : ", console.cyan)
+        console.pretty_println(platform, console.yellow)
     console.pretty_println("**************************************************************", console.bold)
 
 
 def list_toolchains():
-    console.pretty_println("Toolchain List")
+    console.pretty_println("********************** Toolchain List ************************", console.bold)
+    for (unused_dirpath, unused_dirname, filenames) in os.walk(os.path.join(os.path.dirname(__file__), 'toolchains')):
+        for filename in filenames:
+            print(" -- %s" % os.path.splitext(os.path.basename(filename))[0])
+    console.pretty_println("**************************************************************", console.bold)
 
 
 def list_platforms():
-    console.pretty_println("Platform List")
+    console.pretty_println("*********************** Platform List ************************", console.bold)
+    for (unused_dirpath, unused_dirname, filenames) in os.walk(os.path.join(os.path.dirname(__file__), 'platforms')):
+        for filename in filenames:
+            print(" -- %s" % os.path.splitext(os.path.basename(filename))[0])
+    console.pretty_println("**************************************************************", console.bold)
 
 
-def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt/ros/groovy", install_prefix_="./install", release_=False):
+def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt/ros/groovy", install_prefix_="./install", release_=False, toolchain_="", platform_=""):
     '''
       This one is used with pre-configured parameters. Note that
       init_build generates parameters parsed from the command line and then
@@ -176,6 +192,25 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
             #underlays = "/opt/ros/groovy;" + underlays_
             underlays = underlays_ + ";/opt/ros/groovy"
     ##########################
+    # Toolchain
+    ##########################
+    toolchain = toolchain_
+    if not toolchain_ == "":
+        toolchains_dir = os.path.join(os.path.dirname(__file__), 'toolchains')
+        if os.path.isfile(os.path.join(toolchains_dir, toolchain_ + ".cmake")):
+            shutil.copy(os.path.join(toolchains_dir, toolchain_ + ".cmake"), build_dir)
+            toolchain = '-DCMAKE_TOOLCHAIN_FILE=' + toolchain_ + ".cmake"
+    ##########################
+    # Platform
+    ##########################
+    platform = platform_
+    if not platform_ == "":
+        platforms_dir = os.path.join(os.path.dirname(__file__), 'platforms')
+        if os.path.isfile(os.path.join(platforms_dir, platform_ + ".cmake")):
+            shutil.copy(os.path.join(platforms_dir, platform_ + ".cmake"), build_dir)
+            platform = '-C ' + platform_ + ".cmake"
+
+    ##########################
     # Other Args
     ##########################
     if install_prefix_ == "/not_set_directory":
@@ -188,21 +223,25 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
         build_type = "DebugWithRelSymbols"
     name = os.path.basename(workspace_dir) + "_" + os.path.basename(build_dir)
 
-    print_build_details(build_dir, source_dir, install_prefix, build_type, underlays, name)
+    print_build_details(build_dir, source_dir, install_prefix, build_type, underlays, name, toolchain_, platform_)
     os.chdir(build_dir)
 
     ##########################
     # Templates
     ##########################
-
     instantiate_template('.bashrc', name, build_dir)
     instantiate_template('konsole', name, build_dir)
     instantiate_template('gnome-terminal', name, build_dir)
     instantiate_template('eclipse', name, build_dir)
-    instantiate_makefile('Makefile', os.path.relpath(build_dir, os.getcwd()), os.path.relpath(source_dir, build_dir), underlays, install_prefix, build_type)
+    instantiate_makefile('Makefile', os.path.relpath(build_dir, os.getcwd()), os.path.relpath(source_dir, build_dir), underlays, install_prefix, build_type, toolchain, platform)
 
 
 def init_build():
     args = parse_arguments()
-    #if args.list_toolchains:
-    init_configured_build(args.dir, args.sources, args.underlays, args.install, args.release)
+    if args.list_toolchains:
+        list_toolchains()
+        sys.exit(0)
+    if args.list_platforms:
+        list_toolchains()
+        sys.exit(0)
+    init_configured_build(args.dir, args.sources, args.underlays, args.install, args.release, args.toolchain, args.platform)
