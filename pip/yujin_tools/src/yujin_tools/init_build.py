@@ -40,6 +40,7 @@ def parse_arguments():
     parser.add_argument('-r', '--release', action='store_true', help='build in Release mode instead of RelWithDebugSymbols [false]')
     parser.add_argument('-i', '--install', action='store', default='/not_set_directory', help='installation location [workspace/install]')
     parser.add_argument('-u', '--underlays', action='store', default='/opt/ros/groovy', help='semi-colon list of catkin workspaces to utilise [/opt/ros/groovy]')
+    parser.add_argument('--list-toolchains', action='store', help='list all currently available toolchains')
     args = parser.parse_args()
     return args
 
@@ -119,6 +120,14 @@ def print_build_details(build_dir, source_dir, install_prefix, build_type, under
     console.pretty_println("**************************************************************", console.bold)
 
 
+def list_toolchains():
+    console.pretty_println("Toolchain List")
+
+
+def list_platforms():
+    console.pretty_println("Platform List")
+
+
 def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt/ros/groovy", install_prefix_="./install", release_=False):
     '''
       This one is used with pre-configured parameters. Note that
@@ -159,13 +168,13 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     ##########################
     # Underlays
     ##########################
+    underlays = underlays_
     if underlays_.find("/opt/ros/groovy") == -1:
         if underlays_ == "":
             underlays = "/opt/ros/groovy"
         else:
-            underlays = "/opt/ros/groovy;" + underlays_
-    else:
-        underlays = underlays_
+            #underlays = "/opt/ros/groovy;" + underlays_
+            underlays = underlays_ + ";/opt/ros/groovy"
     ##########################
     # Other Args
     ##########################
@@ -195,4 +204,5 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
 
 def init_build():
     args = parse_arguments()
+    #if args.list_toolchains:
     init_configured_build(args.dir, args.sources, args.underlays, args.install, args.release)
