@@ -8,6 +8,9 @@ import argparse
 from argparse import RawTextHelpFormatter
 import subprocess
 import tempfile
+import urlparse
+import yaml
+import urllib2
 # local imports
 from .init_build import init_configured_build
 import console
@@ -19,8 +22,11 @@ def help_string():
  - 'yujin_init_workspace ecl' : create an empty workspace in ./ecl.\n \
  - 'yujin_init_workspace ~/ecl' : create an empty workspace in ~/ecl.\n \
  - 'yujin_init_workspace ecl ecl.rosinstall' : populate a workspace from rosinstall file.\n \
- - 'yujin_init_workspace ecl https://raw.github.com/stonier/ecl_core/groovy-devel/ecl.rosinstall' : populate from uri.\n \
-"
+ - 'yujin_init_workspace ecl ecl' : populate a workspace from our rosinstall database.\n \
+ - 'yujin_init_workspace ecl https://raw.github.com/stonier/ecl_core/groovy-devel/ecl.rosinstall' : populate from uri.\n\n \
+ If you wish to add to the rosinstall database, edit and pull request at\n\n \
+     https://github.com/yujinrobot/yujin_tools/blob/master/pip/yujin_tools/rosinstalls/groovy.yaml\n \
+ "
     return overview + instructions
 
 
@@ -39,6 +45,7 @@ def parse_arguments():
     parser.add_argument('dir', nargs='?', default=os.getcwd(), help='directory to use for the workspace [current working directory]')
     parser.add_argument('uri', nargs='?', default=None, help='uri for a rosinstall file [None]')
     parser.add_argument('-s', '--simple', action='store_true', help='just create a basic single build workspace (usual ros style) [false]')
+    parser.add_argument('--list-rosinstalls', action='store_true', help='list all currently available rosinstalls [false]')
     args = parser.parse_args()
     return args
 
@@ -85,8 +92,19 @@ def instantiate_template(filename, name, cwd):
         f.close()
 
 
+def list_rosinstalls():
+    response = urllib2.urlopen('https://raw.github.com/yujinrobot/yujin_tools/master/pip/yujin_tools/rosinstalls/groovy.yaml')
+    rosinstalls = yaml.load(response.read())
+    for r in rosinstalls.keys():
+        console.pretty_print(" " + r + ": ", console.cyan)
+        console.pretty_println(rosinstalls[r], console.yellow)
+
+
 def init_workspace():
     args = parse_arguments()
+    if args.list_rosinstalls:
+        list_rosinstalls()
+        sys.exit(0)
     if not which("/opt/ros/groovy/bin/catkin_init_workspace"):
         sys.exit("\nCatkin is not installed: 'sudo apt-get install ros-groovy-catkin'\n")
     if not which("wstool"):
@@ -104,6 +122,13 @@ def init_workspace():
         if not os.path.isabs(args.uri):
             if os.path.isfile(os.path.join(os.getcwd(), args.uri)):
                 uri = os.path.join(os.getcwd(), args.uri)
+            else:
+                if urlparse.urlparse(args.uri).scheme == "":  # not a http element, let's look up our databas
+                    response = urllib2.urlopen('https://raw.github.com/yujinrobot/yujin_tools/master/pip/yujin_tools/rosinstalls/groovy.yaml')
+                    rosinstalls = yaml.load(response.read())
+                    if args.uri in rosinstalls:
+                        uri = rosinstalls[args.uri]
+                        print("Retrived uri from the yujin_tools rosinstall database: %s" % uri)
     else:
         uri = ""
     console.pretty_println("Creating a workspace in " + workspace_dir, console.bold)
