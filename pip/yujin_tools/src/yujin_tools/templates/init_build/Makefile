@@ -60,11 +60,13 @@ ccmake:
 
 # Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation	
 build: 
-	catkin_make --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${UNDERLAYS} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}; \
+	. /opt/ros/groovy/setup.sh; \
+	catkin_make --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${UNDERLAYS} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}
 
 # Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation	
 rebuild: 
-	catkin_make --force-cmake --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${UNDERLAYS} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}; \
+	. /opt/ros/groovy/setup.sh; \
+	catkin_make --force-cmake --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${UNDERLAYS} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}
 
 # No parallelisation for this
 install:
