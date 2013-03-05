@@ -133,7 +133,10 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     if os.path.isabs(build_dir_):
         build_dir = build_dir_
     else:
-        build_dir = os.path.join(os.getcwd(), build_dir_)
+        if build_dir_ == "." or build_dir_ == "./":
+            build_dir = os.getcwd()
+        else:
+            build_dir = os.path.join(os.getcwd(), build_dir_)
     if not os.path.isfile(os.path.join(build_dir, "Makefile")):
         if not os.path.isdir(build_dir):  # remember ./ is a valid build dir, even if it's not populated yet
             os.mkdir(build_dir)
@@ -160,7 +163,7 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
         if underlays_ == "":
             underlays = "/opt/ros/groovy"
         else:
-            underlays = underlays_ + ";/opt/ros/groovy"
+            underlays = "/opt/ros/groovy;" + underlays_
     else:
         underlays = underlays_
     ##########################

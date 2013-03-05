@@ -111,7 +111,7 @@ def init_workspace():
     os.chdir(os.path.join(workspace_dir, 'src'))
     if uri:
         os.system('wstool init . ' + uri)
-        os.system('wstool update')
+        # os.system('wstool update') Not needed if adding the uri to wstool init
     else:
         os.system('wstool init . ')
     catkin_init_workspace = create_groovy_script('catkin_init_workspace')
