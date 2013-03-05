@@ -15,10 +15,10 @@ import console
 def help_string():
     overview = 'This is a convenience script for auto-generating a catkin parallel build directory.\n\n'
     instructions = " \
- 'yujin_init_build' prepares conventional ros build directories in ./ linked to ./src \n \
- 'yujin_init_build --release release' prepares a release directory in ./release linked to ./src \n \
- 'yujin_init_build debug ~/ecl/src' prepares a build directory in ./debug linked to ~/ecl/src \n \
- 'yujin_init_build --cross=arm-pc-linux-gnueabi arm' prepares a build directory in ./arm with toolchain module linked to ./src \n \
+ 'yujin_init_build' prepares conventional ros build directories in ./ linked to sources in ./src \n \
+ 'yujin_init_build --release release' prepares a release directory in ./release linked to sources in ./src \n \
+ 'yujin_init_build debug ~/ecl/src' prepares a build directory in ./debug linked to sources in ~/ecl/src \n \
+ 'yujin_init_build --toolchain=arm-pc-linux-gnueabi arm' prepares a build directory in ./arm with the specified toolchain module \n \
 "
     return overview + instructions
 

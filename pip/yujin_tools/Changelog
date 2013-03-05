@@ -1,3 +1,5 @@
+0.1.16
+ - bugfix devel locations in .bashrc
 0.1.15
  - split yujin_init_workspace functionality into workspace and build scripots.
 0.1.14
