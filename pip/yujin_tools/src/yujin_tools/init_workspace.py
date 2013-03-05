@@ -129,6 +129,9 @@ def init_workspace():
                     if args.uri in rosinstalls:
                         uri = rosinstalls[args.uri]
                         print("Retrived uri from the yujin_tools rosinstall database: %s" % uri)
+                    else:
+                        console.logerror("Uri not an absolute path, local file, http or in our rosinstall database.")
+                        sys.exit(1)
     else:
         uri = ""
     console.pretty_println("Creating a workspace in " + workspace_dir, console.bold)
