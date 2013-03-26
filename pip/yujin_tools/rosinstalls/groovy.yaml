@@ -1,3 +1,4 @@
 ecl: https://raw.github.com/stonier/ecl_core/groovy-devel/ecl.rosinstall
 rocon: https://raw.github.com/robotics-in-concert/rocon_concert/hydro-devel/rocon.rosinstall
 qt_ros: https://raw.github.com/stonier/qt_ros/groovy-devel/qt_ros.rosinstall
+kobuki_factory_test: https://bitbucket.org/yujinrobot/kobuki_factory_test/raw/groovy-devel/kobuki_factory_test_groovy.rosinstall
