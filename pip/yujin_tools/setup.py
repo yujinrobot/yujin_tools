@@ -23,6 +23,7 @@ setup(name='yujin_tools',
            'scripts/yujin_platform',
       ],
       package_data = {'yujin_tools': [
+           'cmake/*',
            'templates/init_build/Makefile',
            'templates/init_build/.bashrc',
            'templates/init_build/konsole',
