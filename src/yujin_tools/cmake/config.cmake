@@ -1,7 +1,7 @@
 ###########################
 # Parameterised Variables
 ###########################
-set(UNDERLAY_ROOTS "%(config_underlay_roots)s" CACHE PATH "Semi-colon separated list of underlay roots.")
+set(UNDERLAY_ROOTS "%(config_underlays)s" CACHE PATH "Semi-colon separated list of underlay roots.")
 
 ###########################
 # CMake
@@ -15,7 +15,7 @@ set(UNDERLAY_ROOTS "%(config_underlay_roots)s" CACHE PATH "Semi-colon separated 
 # - call the visual studio shell script (usually in src/setup.bat) in debug mode
 # - make sure any projects on top are built in debug mode also.
 set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Build mode type.")
-set(CMAKE_INSTALL_PREFIX %(config_install_root)s CACHE PATH "Install root location.")
+set(CMAKE_INSTALL_PREFIX %(config_install_prefix)s CACHE PATH "Install root location.")
 set(CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH};${UNDERLAY_ROOTS}" CACHE PATH "semi-colon separated software/ros workspace paths.")
 # We use CMAKE_USER_MAKE_RULES_OVERRIDE to configure CMAKE_CXX_FLAGS_INIT ()
 set(YUJIN_CXX_FLAGS_INIT "" CACHE STRING "Initial flags that get passed to CMAKE_CXX_FLAGS via the cmake override file.")

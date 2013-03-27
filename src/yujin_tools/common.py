@@ -71,17 +71,23 @@ def set_default_track(track=DEFAULT_TRACK):
     return track
 
 
-def create_environment_script(script_name):
-    f = tempfile.NamedTemporaryFile(delete=False)
-    f.write("#!/bin/bash\n")
-    f.write("source /opt/ros/groovy/setup.bash\n")
-    f.write(script_name + "\n")
-    os.chmod(f.name, stat.S_IRWXU)
-    f.close()
-    return f
+#def create_environment_script(script_name):
+#    f = tempfile.NamedTemporaryFile(delete=False)
+#    f.write("#!/bin/bash\n")
+#    f.write("source /opt/ros/groovy/setup.bash\n")
+#    f.write(script_name + "\n")
+#    os.chmod(f.name, stat.S_IRWXU)
+#    f.close()
+#    return f
 
-#def whereis_catkin(src_path, track):
-#    if os.path.exists(os.path.
+
+def override_filename():
+    return os.path.join(os.path.dirname(__file__), 'cmake', 'overrides.cmake')
+
+
+def parent_directory(path):
+    return os.path.abspath(os.path.join(path, os.pardir))
+
 #
 #def read_template(tmplf):
 #    f = open(tmplf, 'r')

@@ -23,6 +23,7 @@ import common
 # Methods
 ##############################################################################
 
+
 def help_string():
     overview = 'This is a convenience script for auto-generating a catkin parallel build directory.\n\n'
     instructions = " \
@@ -104,16 +105,35 @@ def instantiate_template(filename, name, cwd):
         f.close()
 
 
-def fill_in_makefile(template, cwd, source_dir, underlays, install_prefix, build_type, toolchain, platform):
+def fill_in_makefile(template, rel_source_dir, catkin_make, toolchain, override):
     return template % locals()
 
 
-def instantiate_makefile(filename, cwd, source_dir, underlays, install_prefix, build_type, toolchain, platform):
+def instantiate_makefile(filename, build_dir, rel_source_dir, catkin_make, toolchain):
     template_dir = os.path.join(os.path.dirname(__file__), 'templates', 'init_build')
     tmpl = read_template(os.path.join(template_dir, filename))
-    contents = fill_in_makefile(tmpl, cwd, source_dir, underlays, install_prefix, build_type, toolchain, platform)
+    contents = fill_in_makefile(tmpl, rel_source_dir, catkin_make, toolchain, common.override_filename())
     try:
-        f = open(os.path.join(cwd, filename), 'w')
+        f = open(os.path.join(build_dir, filename), 'w')
+        f.write(contents.encode('utf-8'))
+    finally:
+        f.close()
+
+
+def fill_in_config_cmake(template, config_install_prefix, config_underlays):
+    return template % locals()
+
+
+def instantiate_config_cmake(build_path, config_install_prefix, config_underlays):
+    '''
+      Copy the cache configuration template to the build path.
+    '''
+    template_dir = os.path.join(os.path.dirname(__file__), 'cmake')
+    template = read_template(os.path.join(template_dir, "config.cmake"))
+    contents = fill_in_config_cmake(template, config_install_prefix, config_underlays)
+    config_cmake_file = os.path.join(build_path, "config.cmake")
+    try:
+        f = open(config_cmake_file, 'w')
         f.write(contents.encode('utf-8'))
     finally:
         f.close()
@@ -166,6 +186,7 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     '''
     # Help us build the name for the eclipse workspace...usually we call in the workspace itself.
     workspace_dir = os.getcwd()
+
     ##########################
     # Build directory
     ##########################
@@ -182,6 +203,7 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     else:
         console.logerror("This build directory is already initialised")
         sys.exit(1)
+
     ##########################
     # Source directory
     ##########################
@@ -195,16 +217,22 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     if not os.path.isfile(os.path.join(source_dir, ".rosinstall")):
         console.logerror("Could not find a valid source folder (must contain a .rosinstall file therein)'")
         sys.exit(1)
+
     ##########################
     # Underlays
     ##########################
-    underlays = underlays_
-    if underlays_.find("/opt/ros/groovy") == -1:
-        if underlays_ == "":
-            underlays = "/opt/ros/groovy"
-        else:
-            #underlays = "/opt/ros/groovy;" + underlays_
-            underlays = underlays_ + ";/opt/ros/groovy"
+    env_underlays = os.environ['CMAKE_PREFIX_PATH']
+    underlays_list = underlays_.split(';')
+    env_underlays_list = env_underlays.split(';')
+    for underlay in env_underlays_list:
+        if underlay not in underlays_list:
+            underlays_list.append(underlay)
+    for underlay in underlays_list:
+        if os.path.isfile(os.path.join(underlay, 'bin', 'catkin_make')):
+            catkin_make = os.path.join(underlay, 'bin', 'catkin_make')
+            break
+    underlays = ';'.join(underlays_list)
+
     ##########################
     # Toolchain
     ##########################
@@ -212,17 +240,16 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     if not toolchain_ == "":
         toolchains_dir = os.path.join(os.path.dirname(__file__), 'toolchains')
         if os.path.isfile(os.path.join(toolchains_dir, toolchain_ + ".cmake")):
-            shutil.copy(os.path.join(toolchains_dir, toolchain_ + ".cmake"), build_dir)
-            toolchain = '-DCMAKE_TOOLCHAIN_FILE=' + toolchain_ + ".cmake"
+            shutil.copy(os.path.join(toolchains_dir, toolchain_ + ".cmake"), os.path.join(build_dir, "toolchain.cmake"))
+            toolchain = toolchain = "-DCMAKE_TOOLCHAIN_FILE=toolchain.cmake"
+
     ##########################
     # Platform
     ##########################
-    platform = platform_
     if not platform_ == "":
         platforms_dir = os.path.join(os.path.dirname(__file__), 'platforms')
         if os.path.isfile(os.path.join(platforms_dir, platform_ + ".cmake")):
-            shutil.copy(os.path.join(platforms_dir, platform_ + ".cmake"), build_dir)
-            platform = '-C ' + platform_ + ".cmake"
+            shutil.copy(os.path.join(platforms_dir, platform_ + ".cmake"), os.path.join(build_dir, "platform.cmake"))
 
     ##########################
     # Other Args
@@ -241,19 +268,25 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     os.chdir(build_dir)
 
     ##########################
+    # Cache
+    ##########################
+    instantiate_config_cmake(build_dir, install_prefix, underlays)
+
+    ##########################
     # Templates
     ##########################
     instantiate_template('.bashrc', name, build_dir)
     instantiate_template('konsole', name, build_dir)
     instantiate_template('gnome-terminal', name, build_dir)
     instantiate_template('eclipse', name, build_dir)
-    instantiate_makefile('Makefile', os.path.relpath(build_dir, os.getcwd()), os.path.relpath(source_dir, build_dir), underlays, install_prefix, build_type, toolchain, platform)
+    #instantiate_makefile('Makefile', os.path.relpath(build_dir, os.getcwd()), os.path.relpath(source_dir, build_dir), underlays, install_prefix, build_type, toolchain, platform)
+    instantiate_makefile('Makefile', build_dir, os.path.relpath(source_dir, build_dir), catkin_make, toolchain)
 
 
 def init_build():
     args = parse_arguments()
     ##########################
-    # Tracks 
+    # Tracks
     ##########################
     if args.get_default_track:
         console.pretty_print("\nDefault Track: ", console.cyan)
@@ -266,7 +299,7 @@ def init_build():
     if not args.track:
         args.track = common.get_default_track()
     ##########################
-    # Toolchains and Platform 
+    # Toolchains and Platform
     ##########################
     if args.list_toolchains:
         list_toolchains()

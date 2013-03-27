@@ -3,38 +3,23 @@
 PWD:=$(shell pwd)
 
 # Use this to set a different workspace directory, e.g.
-#WORKSPACE="--directory=./arm-linux-gnu"
-WORKSPACE=${PWD}
+BUILD=build
 
-# Build directory name, relative to workspace
-BUILD="build"
+# Location of sources relative to BUILDSPACE
+SOURCE="%(rel_source_dir)s"
 
-# Location of sources relative to workspace
-SOURCE="%(source_dir)s"
-
-# Location of installation directory
-INSTALL="-DCMAKE_INSTALL_PREFIX=%(install_prefix)s"
-
-# Underlays
-UNDERLAYS="-DCMAKE_PREFIX_PATH=%(underlays)s"
+# Full path to catkin_make
+CATKIN_MAKE="%(catkin_make)s"
 
 # Configure with a toolchain module
 TOOLCHAIN=%(toolchain)s
 #TOOLCHAIN=-DCMAKE_TOOLCHAIN_FILE=./src/dfsadf
 
 # Initialise the cache with global variables (usually use for platform specific variables)
-PLATFORM=%(platform)s
-#PLATFORM="-C ./src/xsfdasdf"
+CACHE=-C "config.cmake"
 
-# Blacklist certain packages
-BLACKLIST=
-#BLACKLIST="-DCATKIN_BLACKLIST_PACKAGES=cslam_qt_monitor;cslam_web_monitor"
-
-# Development space relative to workspace
-DEVEL="-DCATKIN_DEVEL_PREFIX=./devel"
-
-# Build mode - DebugWithRelSymbols, Release
-BUILD_TYPE="-DCMAKE_BUILD_TYPE=%(build_type)s"
+# User override file, used to set global compiler flags set in config.cmake
+OVERRIDE="-DCMAKE_USER_MAKE_RULES_OVERRIDE:STRING=%(override)s"
 
 help:
 	@echo ""
@@ -52,36 +37,34 @@ help:
 	@echo ""
 
 cmake:
-	mkdir -p ${WORKSPACE}/${BUILD}
-	cd ${WORKSPACE}/${BUILD}; cmake ${BUILD_TYPE} ${DEVEL} ${UNDERLAYS} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST} ../${SOURCE}
+	mkdir -p ${PWD}/${BUILD}
+	cd ${BUILD}; cmake ${TOOLCHAIN} ${CACHE} ../${SOURCE}
 
 ccmake:
-	cd ${WORKSPACE}/${BUILD}; ccmake .
+	cd ${BUILD}; ccmake .
 
 # Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation	
 build: 
-	. /opt/ros/groovy/setup.sh; \
-	catkin_make --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${UNDERLAYS} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}
+	${CATKIN_MAKE} --directory=${PWD} --source=${SOURCE} --build=${BUILD} ${TOOLCHAIN} ${CACHE}
 
 # Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation	
 rebuild: 
-	. /opt/ros/groovy/setup.sh; \
-	catkin_make --force-cmake --directory=${WORKSPACE} --source=${SOURCE} --build=${BUILD} ${BUILD_TYPE} ${UNDERLAYS} ${TOOLCHAIN} ${PLATFORM} ${INSTALL} ${BLACKLIST}
+	${CATKIN_MAKE} --force-cmake --directory=${PWD} --source=${SOURCE} --build=${BUILD} ${TOOLCHAIN} ${CACHE}
 
 # No parallelisation for this
 install:
-	cd ${WORKSPACE}/${BUILD}; make -j5 install
+	cd ${BUILD}; make -j5 install
  
 # No parallelisation for this
 tests:
-	cd ${WORKSPACE}/${BUILD}; make -j5 tests
+	cd ${BUILD}; make -j5 tests
 
 run_tests:
-	cd ${WORKSPACE}/${BUILD}; make run_tests
+	cd ${BUILD}; make run_tests
 
 clean:
-	rm -rf build
+	rm -rf ${BUILD}
 	rm -rf devel
 	rm -rf install
 
-.PHONY: build install ccmake cmake tests clean
+.PHONY: ${BUILD} install ccmake cmake tests clean
