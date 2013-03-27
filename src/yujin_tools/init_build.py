@@ -1,4 +1,6 @@
-
+##############################################################################
+# Imports
+##############################################################################
 
 import os
 import os.path
@@ -9,8 +11,17 @@ import argparse
 from argparse import RawTextHelpFormatter
 import tempfile
 import shutil
-import console
 
+##############################################################################
+# Local imports
+##############################################################################
+
+import console
+import common
+
+##############################################################################
+# Methods
+##############################################################################
 
 def help_string():
     overview = 'This is a convenience script for auto-generating a catkin parallel build directory.\n\n'
@@ -44,6 +55,9 @@ def parse_arguments():
     parser.add_argument('-p', '--platform', action='store', default='', help='platform cmake cache module to load []')
     parser.add_argument('--list-toolchains', action='store_true', help='list all currently available toolchain modules [false]')
     parser.add_argument('--list-platforms', action='store_true', help='list all currently available platform modules [false]')
+    parser.add_argument('--track', action='store', default=None, help='retrieve rosinstalls relevant to this track [groovy|hydro][groovy]')
+    parser.add_argument('--get-default-track', action='store_true', help='print the default track that is being followed to screen')
+    parser.add_argument('--set-default-track', action='store', default=None, help='set a new default track to work from %s' % common.VALID_TRACKS)
     args = parser.parse_args()
     return args
 
@@ -238,6 +252,22 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
 
 def init_build():
     args = parse_arguments()
+    ##########################
+    # Tracks 
+    ##########################
+    if args.get_default_track:
+        console.pretty_print("\nDefault Track: ", console.cyan)
+        console.pretty_println("%s\n" % common.get_default_track(), console.yellow)
+        sys.exit(0)
+    if args.set_default_track:
+        console.pretty_print("\nNew Default Track: ", console.cyan)
+        console.pretty_println("%s\n" % common.set_default_track(args.set_default_track), console.yellow)
+        sys.exit(0)
+    if not args.track:
+        args.track = common.get_default_track()
+    ##########################
+    # Toolchains and Platform 
+    ##########################
     if args.list_toolchains:
         list_toolchains()
         sys.exit(0)

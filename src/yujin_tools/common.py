@@ -80,6 +80,8 @@ def create_environment_script(script_name):
     f.close()
     return f
 
+#def whereis_catkin(src_path, track):
+#    if os.path.exists(os.path.
 #
 #def read_template(tmplf):
 #    f = open(tmplf, 'r')

@@ -55,7 +55,7 @@ def parse_arguments():
     parser.add_argument('uri', nargs='?', default=None, help='uri for a rosinstall file [None]')
     parser.add_argument('-s', '--simple', action='store_true', help='just create a basic single build workspace (usual ros style) [false]')
     parser.add_argument('--list-rosinstalls', action='store_true', help='list all currently available rosinstalls [false]')
-    parser.add_argument('-t', '--track', action='store', default=None, help='retrieve rosinstalls relevant to this track [groovy|hydro][groovy]')
+    parser.add_argument('--track', action='store', default=None, help='retrieve rosinstalls relevant to this track [groovy|hydro][groovy]')
     parser.add_argument('--get-default-track', action='store_true', help='print the default track that is being followed to screen')
     parser.add_argument('--set-default-track', action='store', default=None, help='set a new default track to work from %s' % common.VALID_TRACKS)
     args = parser.parse_args()
@@ -73,6 +73,21 @@ def populate_worskpace(base_path, rosinstall_file_uri):
                         rosinstall_file_uri,
                         ]
     wstool.wstool_cli.wstool_main(wstool_arguments)
+
+
+def write_toplevel_cmake(base_path, track):
+    '''
+      Makes a basic assumption that toplevel.cmake is a very constant thing. This may not be true.
+      Note that we aren't actually looking for catkin in the workspace yet.
+    '''
+    # This file should get very stable, though at the moment it may be very catkin and rosdistro dependant.
+    # u = urllib2.urlopen( "https://raw.github.com/ros-windows/catkin/%s-devel/cmake/toplevel.cmake" % track )
+    # Catkin doesn't have a hydro-devel yet.
+    u = urllib2.urlopen( "https://raw.github.com/ros-windows/catkin/groovy-devel/cmake/toplevel.cmake" )
+    local_file = open(os.path.join(base_path, 'CMakeLists.txt'), 'w')
+    local_file.write(u.read().encode('utf-8'))
+    local_file.close()
+
 
 def list_rosinstalls(track):
     response = urllib2.urlopen('https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/%s.yaml' % track)
@@ -126,4 +141,5 @@ def init_workspace():
         uri = ""
     console.pretty_println("Creating a workspace in " + workspace_dir, console.bold)
     populate_worskpace(os.path.join(workspace_dir, 'src'), uri)
+    #write_toplevel_cmake(os.path.join(workspace_dir, 'src'))
     console.pretty_println("Done - add source directories with `wstool` and configure parallel build dirs with 'yujin_init_build'.", console.cyan)
