@@ -4,11 +4,8 @@
 
 import os
 import sys
-import stat  # file permissions
-#import shutil
 import argparse
 from argparse import RawTextHelpFormatter
-import subprocess
 import urlparse
 import yaml
 import urllib2
@@ -41,7 +38,10 @@ def help_string():
  - 'yujin_init_workspace ecl' : create an empty workspace in ./ecl.\n \
  - 'yujin_init_workspace ~/ecl' : create an empty workspace in ~/ecl.\n \
  - 'yujin_init_workspace ecl ecl.rosinstall' : populate a workspace from rosinstall file.\n \
- - 'yujin_init_workspace ecl ecl' : populate a workspace from our rosinstall database.\n \
+ - 'yujin_init_workspace ecl ecl' : populate a workspace from our rosinstall database from the deafult track.\n \
+ - 'yujin_init_workspace --get-default-track' : shows the currently set default track.\n \
+ - 'yujin_init_workspace --set-default-track=groovy' : sets the currently set default track.\n \
+ - 'yujin_init_workspace --track=hydro ecl ecl' : populate a workspace from our rosinstall database for hydro.\n \
  - 'yujin_init_workspace ecl https://raw.github.com/stonier/ecl_core/groovy-devel/ecl.rosinstall' : populate from uri.\n\n \
  If you wish to add to the rosinstall database, edit and pull request at\n\n \
      https://github.com/yujinrobot/yujin_tools/blob/master/pip/yujin_tools/rosinstalls/groovy.yaml\n \
@@ -74,34 +74,8 @@ def populate_worskpace(base_path, rosinstall_file_uri):
                         ]
     wstool.wstool_cli.wstool_main(wstool_arguments)
 
-
-def read_template(tmplf):
-    f = open(tmplf, 'r')
-    try:
-        t = f.read()
-    finally:
-        f.close()
-    return t
-
-
-def fill_in_template(template, name, cwd):
-    return template % locals()
-
-
-def instantiate_template(filename, name, cwd):
-    template_dir = os.path.join(os.path.dirname(__file__), 'templates', 'init_workspace')
-    tmpl = read_template(os.path.join(template_dir, filename))
-    contents = fill_in_template(tmpl, name, cwd)
-    try:
-        f = open(os.path.join(cwd, filename), 'w')
-        f.write(contents.encode('utf-8'))
-    finally:
-        os.fchmod(f.fileno(), stat.S_IRWXU)
-        f.close()
-
-
-def list_rosinstalls():
-    response = urllib2.urlopen('https://raw.github.com/yujinrobot/yujin_tools/master/pip/yujin_tools/rosinstalls/groovy.yaml')
+def list_rosinstalls(track):
+    response = urllib2.urlopen('https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/%s.yaml' % track)
     rosinstalls = yaml.load(response.read())
     for r in rosinstalls.keys():
         console.pretty_print(" " + r + ": ", console.cyan)
@@ -110,9 +84,6 @@ def list_rosinstalls():
 
 def init_workspace():
     args = parse_arguments()
-    if args.list_rosinstalls:
-        list_rosinstalls()
-        sys.exit(0)
     if args.get_default_track:
         console.pretty_print("\nDefault Track: ", console.cyan)
         console.pretty_println("%s\n" % common.get_default_track(), console.yellow)
@@ -123,6 +94,9 @@ def init_workspace():
         sys.exit(0)
     if not args.track:
         args.track = common.get_default_track()
+    if args.list_rosinstalls:
+        list_rosinstalls(args.track)
+        sys.exit(0)
 #    if not which("/opt/ros/" + args.track + "/bin/catkin_init_workspace"):
 #        sys.exit("\nCatkin is not installed: 'sudo apt-get install ros-%s-catkin'\n" % args.track)
     if os.path.isabs(args.dir):
@@ -140,7 +114,7 @@ def init_workspace():
                 uri = os.path.join(os.getcwd(), args.uri)
             else:
                 if urlparse.urlparse(args.uri).scheme == "":  # not a http element, let's look up our databas
-                    response = urllib2.urlopen('https://raw.github.com/yujinrobot/yujin_tools/master/pip/yujin_tools/rosinstalls/%s.yaml' % args.track)
+                    response = urllib2.urlopen('https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/%s.yaml' % args.track)
                     rosinstalls = yaml.load(response.read())
                     if args.uri in rosinstalls:
                         uri = rosinstalls[args.uri]
@@ -152,22 +126,4 @@ def init_workspace():
         uri = ""
     console.pretty_println("Creating a workspace in " + workspace_dir, console.bold)
     populate_worskpace(os.path.join(workspace_dir, 'src'), uri)
-#    #os.mkdir(os.path.join(workspace_dir, 'src'))
-#    # 
-#    # os.chdir(os.path.join(workspace_dir, 'src'))
-#    if uri:
-#        os.system('wstool init . ' + uri)
-#        # os.system('wstool update') Not needed if adding the uri to wstool init
-#    else:
-#        os.system('wstool init . ')
-#    catkin_init_workspace = create_groovy_script('catkin_init_workspace')
-#    unused_process = subprocess.call(catkin_init_workspace.name, shell=True)
-#    os.chdir(workspace_dir)
-
-#    if args.simple:
-#        console.pretty_println("Auto creating a special build directory", console.cyan)
-#        init_configured_build()
-#    else:
     console.pretty_println("Done - add source directories with `wstool` and configure parallel build dirs with 'yujin_init_build'.", console.cyan)
-
-#    os.unlink(catkin_init_workspace.name)

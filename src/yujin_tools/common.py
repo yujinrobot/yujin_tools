@@ -79,3 +79,28 @@ def create_environment_script(script_name):
     os.chmod(f.name, stat.S_IRWXU)
     f.close()
     return f
+
+#
+#def read_template(tmplf):
+#    f = open(tmplf, 'r')
+#    try:
+#        t = f.read()
+#    finally:
+#        f.close()
+#    return t
+#
+#
+#def fill_in_template(template, name, cwd):
+#    return template % locals()
+#
+#
+#def instantiate_template(filename, name, cwd):
+#    template_dir = os.path.join(os.path.dirname(__file__), 'templates', 'init_workspace')
+#    tmpl = read_template(os.path.join(template_dir, filename))
+#    contents = fill_in_template(tmpl, name, cwd)
+#    try:
+#        f = open(os.path.join(cwd, filename), 'w')
+#        f.write(contents.encode('utf-8'))
+#    finally:
+#        os.fchmod(f.fileno(), stat.S_IRWXU)
+#        f.close()
