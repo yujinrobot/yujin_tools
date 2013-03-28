@@ -39,8 +39,11 @@ def _parse_args(args=sys.argv[1:]):
     parser.add_argument('-j', '--jobs', type=int, metavar='JOBS', nargs='?', help='Specifies the number of jobs (commands) to run simultaneously. Defaults to the environment variable ROS_PARALLEL_JOBS and falls back to the number of CPU cores.')
     parser.add_argument('--force-cmake', action='store_true', help='Invoke "cmake" even if it has been executed before [false]')
     parser.add_argument('-p', '--pre-clean', action='store_true', help='Clean build temporaries before making [false]')
-    parser.add_argument('-i', '--install', action='store_true', help='Run install step after making [false]')
-    parser.add_argument('--no-color', action='store_true', help='Disables colored ouput (only for catkin_make and CMake)')
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('-i', '--install', action='store_true', help='Run install step after making [false]')
+    group.add_argument('-t', '--tests', action='store_true', help='Make tests [false]')
+    group.add_argument('-r', '--run_tests', action='store_true', help='Make and run tests [false]')
+    parser.add_argument('--no-color', action='store_true', help='Disables colored ouput')
     parser.add_argument('--pkg', help='Invoke "make" on a specific package only')
     parser.add_argument('--cmake-args', dest='cmake_args', nargs='*', type=str,
         help='Arbitrary arguments which are passes to CMake. It must be passed after other arguments since it collects all following options.')
@@ -151,6 +154,10 @@ def make_main():
     # invoke make
     if args.install:
         cmd = ['make', 'install']
+    elif args.tests:
+        cmd = ['make', 'tests']
+    elif args.run_tests:
+        cmd = ['make', 'run_tests']
     else:
         cmd = ['make']
     jobs = args.jobs
