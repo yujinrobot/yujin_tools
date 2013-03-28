@@ -137,6 +137,7 @@ def make_main():
         # Hack for catkin-python
         #########################
         underlays_list = common.get_underlays_list_from_config_cmake()
+        print underlays_list
         unused_catkin_toplevel, catkin_python_path = common.find_catkin(underlays_list)
 
         env = os.environ.copy()

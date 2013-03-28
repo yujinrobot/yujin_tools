@@ -89,11 +89,8 @@ def get_underlays_list_from_config_cmake():
     f = open('config.cmake')
     for line in f:
         m = re.search('^set\(UNDERLAY_ROOTS "(.*)"', line)
-        print line
-        print m.group(0)
-        #print m.group(1).split(';')
-        #if m:
-        #    return m.group(1).split(';')
+        if m:
+            return m.group(1).split(';')
     return []
 
 
@@ -108,7 +105,7 @@ def create_symlink(src, dst):
         os.symlink(src, dst)
         console.pretty_print('Creating symlink', console.white)
         console.pretty_print(' "%s" ' % dst, console.bold)
-        console.pretty_print(" -> ", console.white)
+        console.pretty_print("->", console.white)
         console.pretty_println(' "%s." ' % src, console.bold)
     except Exception as ex_symlink:
         console.logerror("Could not symlink '%s' to %s [%s]." % (src, dst, str(ex_symlink)))
