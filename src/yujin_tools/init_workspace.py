@@ -132,4 +132,4 @@ def print_details(workspace_dir, uri):
     console.pretty_print("Rosinstall: ", console.cyan)
     console.pretty_println(uri, console.yellow)
     console.pretty_println("**********************************************************************************", console.bold)
-    console.pretty_println("\nNow add source directories with `wstool` and configure parallel build dirs with 'yujin_init_build'.\n", console.cyan)
+    console.pretty_println("\nMerge additional source directories with `wstool` and configure parallel builds with 'yujin_init_build'.\n", console.cyan)
