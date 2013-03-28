@@ -13,9 +13,6 @@ import shutil
 import console
 import python_setup
 
-DEFAULT_TRACK = "groovy"
-VALID_TRACKS = ["groovy", "hydro"]
-
 
 def which(program):
     def is_exe(fpath):
@@ -32,46 +29,6 @@ def which(program):
                 return exe_file
 
     return None
-
-
-def yujin_tools_home():
-    """
-    Get directory location of '.yujin_tools' directory (aka Yujin Tools home).
-
-    @param env: override os.environ dictionary
-    @type  env: dict
-    @return: path to use use for log file directory
-    @rtype: str
-    """
-    home_dir = os.path.join(os.path.expanduser('~'), '.yujin_tools')
-    if not os.path.exists(home_dir):
-        os.makedirs(home_dir)
-    return home_dir
-
-
-def get_default_track():
-    filename = os.path.join(yujin_tools_home(), "track")
-    try:
-        f = open(filename, 'r')
-    except IOError:
-        set_default_track()
-        return DEFAULT_TRACK
-    track = f.read()
-    f.close()
-    return track
-
-
-def set_default_track(track=DEFAULT_TRACK):
-    if track not in VALID_TRACKS:
-        console.logerror("The track '%s' is not a valid track. Choose from %s\n" % (track, VALID_TRACKS))
-        sys.exit(1)
-    filename = os.path.join(yujin_tools_home(), "track")
-    f = open(filename, 'w+')
-    try:
-        f.write(track.encode('utf-8'))
-    finally:
-        f.close()
-    return track
 
 
 def override_filename():

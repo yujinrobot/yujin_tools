@@ -16,6 +16,7 @@ import shutil
 
 import console
 import common
+import settings
 
 ##############################################################################
 # Methods
@@ -45,8 +46,6 @@ def parse_arguments():
     parser.add_argument('--list-toolchains', action='store_true', help='list all currently available toolchain modules [false]')
     parser.add_argument('--list-platforms', action='store_true', help='list all currently available platform modules [false]')
     parser.add_argument('--track', action='store', default=None, help='retrieve rosinstalls relevant to this track [groovy|hydro][groovy]')
-    parser.add_argument('--get-default-track', action='store_true', help='print the default track that is being followed to screen')
-    parser.add_argument('--set-default-track', action='store', default=None, help='set a new default track to work from %s' % common.VALID_TRACKS)
     args = parser.parse_args()
     return args
 
@@ -225,11 +224,11 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     ##########################
     if not catkin_toplevel:
         # Add the default track underlay
-        default_track = common.get_default_track()
+        default_track = settings.get_default_track()
         if os.path.isfile(os.path.join("/opt/ros/%s" % default_track, 'share', 'catkin', 'cmake', 'toplevel.cmake')):
             catkin_toplevel = os.path.join("/opt/ros/%s" % default_track, 'share', 'catkin', 'cmake', 'toplevel.cmake')
             unused_catkin_python_path = os.path.join("/opt/ros/%s" % default_track, 'lib', 'python2.7', 'dist-packages')
-            console.pretty_println("No catkin found, adding the default track underlay [/opt/ros/%s]" % default_track)
+            console.pretty_println("No catkin found, adding the default track underlay (use yujin_tools_settings to change) [/opt/ros/%s]" % default_track)
             underlays_list.append("/opt/ros/%s" % default_track)
         else:
             console.logerror("Could not find an underlying catkin installation.")
@@ -288,16 +287,8 @@ def init_build():
     ##########################
     # Tracks
     ##########################
-    if args.get_default_track:
-        console.pretty_print("\nDefault Track: ", console.cyan)
-        console.pretty_println("%s\n" % common.get_default_track(), console.yellow)
-        sys.exit(0)
-    if args.set_default_track:
-        console.pretty_print("\nNew Default Track: ", console.cyan)
-        console.pretty_println("%s\n" % common.set_default_track(args.set_default_track), console.yellow)
-        sys.exit(0)
     if not args.track:
-        args.track = common.get_default_track()
+        args.track = settings.get_default_track()
     ##########################
     # Toolchains and Platform
     ##########################

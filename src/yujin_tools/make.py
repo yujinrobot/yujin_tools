@@ -14,7 +14,7 @@ import shutil
 import multiprocessing
 import subprocess
 from catkin_pkg.packages import find_packages
-import re
+
 ##############################################################################
 # Local imports
 ##############################################################################

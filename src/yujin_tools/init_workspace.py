@@ -18,6 +18,7 @@ import shutil
 from .init_build import init_configured_build
 import console
 import common
+import settings
 
 ##############################################################################
 # Import checks
@@ -57,8 +58,6 @@ def parse_arguments():
     parser.add_argument('-s', '--simple', action='store_true', help='just create a basic single build workspace (usual ros style) [false]')
     parser.add_argument('--list-rosinstalls', action='store_true', help='list all currently available rosinstalls [false]')
     parser.add_argument('--track', action='store', default=None, help='retrieve rosinstalls relevant to this track [groovy|hydro][groovy]')
-    parser.add_argument('--get-default-track', action='store_true', help='print the default track that is being followed to screen')
-    parser.add_argument('--set-default-track', action='store', default=None, help='set a new default track to work from %s' % common.VALID_TRACKS)
     args = parser.parse_args()
     return args
 
@@ -86,16 +85,8 @@ def list_rosinstalls(track):
 
 def init_workspace():
     args = parse_arguments()
-    if args.get_default_track:
-        console.pretty_print("\nDefault Track: ", console.cyan)
-        console.pretty_println("%s\n" % common.get_default_track(), console.yellow)
-        sys.exit(0)
-    if args.set_default_track:
-        console.pretty_print("\nNew Default Track: ", console.cyan)
-        console.pretty_println("%s\n" % common.set_default_track(args.set_default_track), console.yellow)
-        sys.exit(0)
     if not args.track:
-        args.track = common.get_default_track()
+        args.track = settings.get_default_track()
     if args.list_rosinstalls:
         list_rosinstalls(args.track)
         sys.exit(0)

@@ -1,0 +1,8 @@
+#!/usr/bin/env python
+
+import yujin_tools
+
+if __name__ == "__main__":
+    yujin_tools.settings.main()
+
+
