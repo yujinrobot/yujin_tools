@@ -2,14 +2,12 @@
 # Imports
 ##############################################################################
 
-import os
 import os.path
 
 import sys
 import stat  # file permissions
 import argparse
 from argparse import RawTextHelpFormatter
-import tempfile
 import shutil
 
 ##############################################################################
@@ -33,16 +31,6 @@ def help_string():
  'yujin_init_build --toolchain=arm-pc-linux-gnueabi arm' prepares a build directory in ./arm with the specified toolchain module \n \
 "
     return overview + instructions
-
-
-def create_groovy_script(script_name):
-    f = tempfile.NamedTemporaryFile(delete=False)
-    f.write("#!/bin/bash\n")
-    f.write("source /opt/ros/groovy/setup.bash\n")
-    f.write(script_name + "\n")
-    os.chmod(f.name, stat.S_IRWXU)
-    f.close()
-    return f
 
 
 def parse_arguments():
@@ -105,14 +93,14 @@ def instantiate_template(filename, name, cwd):
         f.close()
 
 
-def fill_in_makefile(template, rel_source_dir, catkin_make, toolchain, override):
+def fill_in_makefile(template, rel_source_dir, catkin_make, catkin_python_path, toolchain, override):
     return template % locals()
 
 
-def instantiate_makefile(filename, build_dir, rel_source_dir, catkin_make, toolchain):
+def instantiate_makefile(filename, build_dir, rel_source_dir, catkin_make, catkin_python_path, toolchain):
     template_dir = os.path.join(os.path.dirname(__file__), 'templates', 'init_build')
     tmpl = read_template(os.path.join(template_dir, filename))
-    contents = fill_in_makefile(tmpl, rel_source_dir, catkin_make, toolchain, common.override_filename())
+    contents = fill_in_makefile(tmpl, rel_source_dir, catkin_make, catkin_python_path, toolchain, common.override_filename())
     try:
         f = open(os.path.join(build_dir, filename), 'w')
         f.write(contents.encode('utf-8'))
@@ -207,30 +195,52 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     ##########################
     # Source directory
     ##########################
-    if os.path.isabs(source_dir_):
-        source_dir = source_dir_
-    else:
-        source_dir = os.path.join(os.getcwd(), source_dir_)
+    # Absolute path - should probably use os.path.abspath here
+    #if os.path.isabs(source_dir_):
+    #    source_dir = source_dir_
+    #else:
+    #    source_dir = os.path.join(os.getcwd(), source_dir_)
+    source_dir = os.path.abspath(source_dir_)
+    build_source_dir = os.path.join(build_dir, 'src')
     if not os.path.isdir(source_dir):
-        console.logerror("Specified source folder does not exist [" + source_dir + "]")
+        console.logerror("Specified source space does not exist [" + source_dir + "]")
         sys.exit(1)
     if not os.path.isfile(os.path.join(source_dir, ".rosinstall")):
         console.logerror("Could not find a valid source folder (must contain a .rosinstall file therein)'")
         sys.exit(1)
+    if os.path.exists(build_source_dir):
+        if not source_dir == build_source_dir:
+            console.error("The build directory already has a ./src directory which doesn't match the desired source directory [%s]" % source_dir)
+            sys.exit(1)
+    else:  # create a symlink to the sources
+        common.symlink_dir(source_dir, build_source_dir)
 
     ##########################
     # Underlays
     ##########################
     env_underlays = os.environ['CMAKE_PREFIX_PATH']
     underlays_list = underlays_.split(';')
-    env_underlays_list = env_underlays.split(';')
+    env_underlays_list = env_underlays.split(':')
     for underlay in env_underlays_list:
         if underlay not in underlays_list:
             underlays_list.append(underlay)
+    catkin_found = False
     for underlay in underlays_list:
         if os.path.isfile(os.path.join(underlay, 'bin', 'catkin_make')):
             catkin_make = os.path.join(underlay, 'bin', 'catkin_make')
+            catkin_python_path = os.path.join(underlay, 'lib', 'python2.7', 'dist-packages')
+            catkin_found = True
             break
+    if not catkin_found:
+        # Add the default track underlay
+        default_track = common.get_default_track()
+        if os.path.isfile(os.path.join("/opt/ros/%s" % default_track, 'bin', 'catkin_make')):
+            console.pretty_println("No catkin found, adding the default track underlay [/opt/ros/%s]" % default_track)
+            underlays_list.append("/opt/ros/%s" % default_track)
+            catkin_make = os.path.join("/opt/ros/%s" % default_track, 'bin', 'catkin_make')
+            catkin_python_path = os.path.join("/opt/ros/%s" % default_track, 'lib', 'python2.7', 'dist-packages')
+        else:
+            console.logerror("Could not find an underlying catkin installation.")
     underlays = ';'.join(underlays_list)
 
     ##########################
@@ -279,8 +289,7 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     instantiate_template('konsole', name, build_dir)
     instantiate_template('gnome-terminal', name, build_dir)
     instantiate_template('eclipse', name, build_dir)
-    #instantiate_makefile('Makefile', os.path.relpath(build_dir, os.getcwd()), os.path.relpath(source_dir, build_dir), underlays, install_prefix, build_type, toolchain, platform)
-    instantiate_makefile('Makefile', build_dir, os.path.relpath(source_dir, build_dir), catkin_make, toolchain)
+    instantiate_makefile('Makefile', build_dir, os.path.relpath(source_dir, build_dir), catkin_make, catkin_python_path, toolchain)
 
 
 def init_build():

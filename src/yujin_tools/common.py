@@ -6,7 +6,8 @@ Created on Mar 27, 2013
 
 import os
 import sys
-import tempfile
+#import tempfile
+import shutil
 # Local imports
 import console
 
@@ -87,6 +88,25 @@ def override_filename():
 
 def parent_directory(path):
     return os.path.abspath(os.path.join(path, os.pardir))
+
+
+def symlink_dir(src, dst):
+    """
+    Creates a symlink at dst to src, or if not possible, attempts to copy.
+    """
+    if not os.path.isdir(src):
+        console.logerror("'%s' is not a valid dir" % src)
+        sys.exit(1)
+
+    # try to symlink file
+    try:
+        os.symlink(src, dst)
+        console.pretty_print('Creating symlink', console.white)
+        console.pretty_print(' "%s" ' % dst, console.bold)
+        console.pretty_print(" pointing to ", console.white)
+        console.pretty_println(' "%s." ' % src, console.bold)
+    except Exception as ex_symlink:
+        console.logerror("Could not symlink '%s' to %s [%s]." % (src, dst, str(ex_symlink)))
 
 #
 #def read_template(tmplf):

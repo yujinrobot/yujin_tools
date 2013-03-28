@@ -137,7 +137,7 @@ def init_workspace():
                     console.pretty_print(" %s " % args.uri, console.yellow)
                     console.pretty_print("on track", console.cyan)
                     console.pretty_print(" %s " % args.track, console.yellow)
-                    console.pretty_println("from the rosinstall database.", console.cyan)
+                    console.pretty_println("from yujin's rosinstall database.", console.cyan)
                     response = urllib2.urlopen('https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/%s.yaml' % args.track)
                     rosinstalls = yaml.load(response.read())
                     if args.uri in rosinstalls:
@@ -147,7 +147,16 @@ def init_workspace():
                         sys.exit(1)
     else:
         uri = ""
-    console.pretty_println("Creating a workspace in " + workspace_dir, console.cyan)
     populate_worskpace(os.path.join(workspace_dir, 'src'), uri)
     write_toplevel_cmake(os.path.join(workspace_dir, 'src'))
-    console.pretty_println("Done - add source directories with `wstool` and configure parallel build dirs with 'yujin_init_build'.", console.cyan)
+    print_details(workspace_dir, uri)
+
+
+def print_details(workspace_dir, uri):
+    console.pretty_println("\n******************* Development Workspace ********************", console.bold)
+    console.pretty_print("Workspace directory : ", console.cyan)
+    console.pretty_println(workspace_dir, console.yellow)
+    console.pretty_print("Rosinstall: ", console.cyan)
+    console.pretty_println(uri, console.yellow)
+    console.pretty_println("**************************************************************", console.bold)
+    console.pretty_println("\nNow add source directories with `wstool` and configure parallel build dirs with 'yujin_init_build'.\n", console.cyan)

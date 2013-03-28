@@ -13,11 +13,14 @@ from yujin_tools import __version__
 
 setup(name='yujin_tools',
       version= __version__,
-      packages=['yujin_tools'],
-      package_dir = {'yujin_tools':'src/yujin_tools'},
-      scripts = ['scripts/cfind',
+      packages=['yujin_tools', 'catkin_make'],
+      package_dir = {'yujin_tools':'src/yujin_tools', 'catkin_make':'src/catkin_make'},
+      scripts = [
+           'scripts/cfind',
            'scripts/yujin_init_workspace',
            'scripts/yujin_init_build',
+           'scripts/yujin_make',
+           'scripts/yujin_make_isolated',
            'scripts/roscreate-shortcuts',
            'scripts/yujin_toolchain',
            'scripts/yujin_platform',

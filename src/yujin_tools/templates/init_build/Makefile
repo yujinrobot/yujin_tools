@@ -2,24 +2,27 @@
 
 PWD:=$(shell pwd)
 
-# Use this to set a different workspace directory, e.g.
-BUILD=build
-
 # Location of sources relative to BUILDSPACE
 SOURCE="%(rel_source_dir)s"
-
-# Full path to catkin_make
-CATKIN_MAKE="%(catkin_make)s"
 
 # Configure with a toolchain module
 TOOLCHAIN=%(toolchain)s
 #TOOLCHAIN=-DCMAKE_TOOLCHAIN_FILE=./src/dfsadf
 
+# Path to catkin_make (we're using yujin_make module till catkin 0.5.65 hits debs)
+# CATKIN_MAKE=%(catkin_make)s)
+
+# Python path to catkin's python module (we're using yujin_make module till catkin 0.5.65 hits debs)
+# CATKIN_PYTHON_PATH=%(catkin_python_path)s)
+
 # Initialise the cache with global variables (usually use for platform specific variables)
-CACHE=-C "config.cmake"
+CACHE=-C${PWD}/config.cmake
 
 # User override file, used to set global compiler flags set in config.cmake
 OVERRIDE="-DCMAKE_USER_MAKE_RULES_OVERRIDE:STRING=%(override)s"
+
+# Number of jobs for installs.
+JOBS=5
 
 help:
 	@echo ""
@@ -37,34 +40,34 @@ help:
 	@echo ""
 
 cmake:
-	mkdir -p ${PWD}/${BUILD}
-	cd ${BUILD}; cmake ${TOOLCHAIN} ${CACHE} ../${SOURCE}
+	mkdir -p ${PWD}/build
+	cd build; cmake ${TOOLCHAIN} ${CACHE} ../${SOURCE}
 
 ccmake:
-	cd ${BUILD}; ccmake .
+	cd build; ccmake .
 
 # Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation	
 build: 
-	${CATKIN_MAKE} --directory=${PWD} --source=${SOURCE} --build=${BUILD} ${TOOLCHAIN} ${CACHE}
+	yujin_make --source=${SOURCE} --cmake-args ${TOOLCHAIN} ${CACHE}
 
 # Note that this defaults to ROS_PARALLEL_JOBS and falls back to no. of cores for parallelisation	
 rebuild: 
-	${CATKIN_MAKE} --force-cmake --directory=${PWD} --source=${SOURCE} --build=${BUILD} ${TOOLCHAIN} ${CACHE}
+	yujin_make --force-cmake --source=${SOURCE} --cmake-args ${TOOLCHAIN} ${CACHE}
 
 # No parallelisation for this
 install:
-	cd ${BUILD}; make -j5 install
+	cd build; make -j5 install
  
 # No parallelisation for this
 tests:
-	cd ${BUILD}; make -j5 tests
+	cd build; make -j5 tests
 
 run_tests:
-	cd ${BUILD}; make run_tests
+	cd build; make run_tests
 
 clean:
-	rm -rf ${BUILD}
+	rm -rf build
 	rm -rf devel
 	rm -rf install
 
-.PHONY: ${BUILD} install ccmake cmake tests clean
+.PHONY: build install ccmake cmake tests clean

@@ -1,3 +1,6 @@
+0.2.0
+ - using tracks instead of hardcoded groovy
+ - using our own non environment dependant make script
 0.1.17
  - rosdistro style rosinstall database for us
 0.1.16
