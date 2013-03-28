@@ -155,7 +155,6 @@ def run_command(cmd, cwd, quiet=False, colorize=False, env=None):
     capture = (quiet or colorize)
     stdout_pipe = subprocess.PIPE if capture else None
     stderr_pipe = subprocess.STDOUT if capture else None
-    print("PYTHONPATH.............%s"%env["PYTHONPATH"])
     try:
         proc = subprocess.Popen(
             cmd, cwd=cwd, shell=False,

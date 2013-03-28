@@ -193,6 +193,7 @@ def make_main():
         if args.pkg:
             make_path = os.path.join(make_path, packages_by_name[args.pkg])
         builder.print_command_banner(cmd, make_path, color=not args.no_color)
+        print("Run Command")
         builder.run_command(cmd, make_path)
     except subprocess.CalledProcessError:
         return fmt('@{rf}Invoking @{boldon}"make"@{boldoff} failed')
