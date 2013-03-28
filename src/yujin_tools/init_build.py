@@ -113,7 +113,7 @@ def instantiate_config_cmake(build_path, config_build_type, config_install_prefi
 
 
 def print_build_details(build_dir, source_dir, install_prefix, build_type, underlays, name, toolchain, platform):
-    console.pretty_println("*********** Parallel Development Workspace Details ***********", console.bold)
+    console.pretty_println("************************** Parallel Buildspace Details ***************************", console.bold)
     console.pretty_print("Build directory : ", console.cyan)
     console.pretty_println(build_dir, console.yellow)
     console.pretty_print("Source directory: ", console.cyan)
@@ -132,23 +132,23 @@ def print_build_details(build_dir, source_dir, install_prefix, build_type, under
     if not platform == "":
         console.pretty_print("Platform        : ", console.cyan)
         console.pretty_println(platform, console.yellow)
-    console.pretty_println("**************************************************************", console.bold)
+    console.pretty_println("**********************************************************************************", console.bold)
 
 
 def list_toolchains():
-    console.pretty_println("********************** Toolchain List ************************", console.bold)
+    console.pretty_println("******************************** Toolchain List **********************************", console.bold)
     for (unused_dirpath, unused_dirname, filenames) in os.walk(os.path.join(os.path.dirname(__file__), 'toolchains')):
         for filename in filenames:
             print(" -- %s" % os.path.splitext(os.path.basename(filename))[0])
-    console.pretty_println("**************************************************************", console.bold)
+    console.pretty_println("**********************************************************************************", console.bold)
 
 
 def list_platforms():
-    console.pretty_println("*********************** Platform List ************************", console.bold)
+    console.pretty_println("********************************* Platform List **********************************", console.bold)
     for (unused_dirpath, unused_dirname, filenames) in os.walk(os.path.join(os.path.dirname(__file__), 'platforms')):
         for filename in filenames:
             print(" -- %s" % os.path.splitext(os.path.basename(filename))[0])
-    console.pretty_println("**************************************************************", console.bold)
+    console.pretty_println("**********************************************************************************", console.bold)
 
 
 def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt/ros/groovy", install_prefix_="./install", release_=False, toolchain_="", platform_=""):
@@ -192,8 +192,11 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
         if not source_dir == build_source_dir:
             console.error("The build directory already has a ./src directory which doesn't match the desired source directory [%s]" % source_dir)
             sys.exit(1)
-    else:  # create a symlink to the sources
-        common.symlink_dir(source_dir, build_source_dir)
+    else:
+        os.mkdir(build_source_dir)
+        source_subdirectories = os.walk(source_dir).next()[1]
+        for d in source_subdirectories:
+            common.create_symlink(os.path.join(source_dir, d), os.path.join(build_source_dir, d))
 
     ##########################
     # Underlays
@@ -207,19 +210,31 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     for underlay in env_underlays_list:
         if underlay not in underlays_list:
             underlays_list.append(underlay)
-    catkin_found = False
-    for underlay in underlays_list:
-        if os.path.isfile(os.path.join(underlay, 'bin', 'catkin_make')):
-            catkin_found = True
-            break
-    if not catkin_found:
+
+    ##########################
+    # Locate Catkin
+    ##########################
+    catkin_toplevel = None
+    if os.path.isfile(os.path.join(source_dir, 'catkin', 'cmake', 'toplevel.cmake')):
+        catkin_toplevel = os.path.join(source_dir, 'catkin', 'cmake', 'toplevel.cmake')
+    else:
+        catkin_toplevel, unused_catkin_python_path = common.find_catkin(underlays_list)
+
+    ##########################
+    # Add toplevel if exists
+    ##########################
+    if not catkin_toplevel:
         # Add the default track underlay
         default_track = common.get_default_track()
-        if os.path.isfile(os.path.join("/opt/ros/%s" % default_track, 'bin', 'catkin_make')):
+        if os.path.isfile(os.path.join("/opt/ros/%s" % default_track, 'share', 'catkin', 'cmake', 'toplevel.cmake')):
+            catkin_toplevel = os.path.join("/opt/ros/%s" % default_track, 'share', 'catkin', 'cmake', 'toplevel.cmake')
+            unused_catkin_python_path = os.path.join("/opt/ros/%s" % default_track, 'lib', 'python2.7', 'dist-packages')
             console.pretty_println("No catkin found, adding the default track underlay [/opt/ros/%s]" % default_track)
             underlays_list.append("/opt/ros/%s" % default_track)
         else:
             console.logerror("Could not find an underlying catkin installation.")
+            sys.exit(1)
+    common.create_symlink(catkin_toplevel, os.path.join(build_source_dir, "CMakeLists.txt"))
     underlays = ';'.join(underlays_list)
 
     ##########################

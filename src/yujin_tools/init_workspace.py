@@ -76,23 +76,6 @@ def populate_worskpace(base_path, rosinstall_file_uri):
     wstool.wstool_cli.wstool_main(wstool_arguments)
 
 
-def write_toplevel_cmake(base_path):
-    '''
-      Makes a basic assumption that toplevel.cmake is a very constant thing. This may not be true.
-    '''
-    toplevel_cmake = os.path.join(base_path, 'src', 'catkin', 'cmake', 'toplevel.cmake')
-    if os.path.isfile(toplevel_cmake):
-        shutil.copy(toplevel_cmake, os.path.join(base_path, 'src'))
-    else:
-        # This file should get very stable, though at the moment it may be very catkin and rosdistro dependant.
-        # u = urllib2.urlopen( "https://raw.github.com/ros-windows/catkin/%s-devel/cmake/toplevel.cmake" % track )
-        # Catkin doesn't have a hydro-devel yet.
-        u = urllib2.urlopen("https://raw.github.com/ros-windows/catkin/groovy-devel/cmake/toplevel.cmake")
-        local_file = open(os.path.join(base_path, 'CMakeLists.txt'), 'w')
-        local_file.write(u.read().encode('utf-8'))
-        local_file.close()
-
-
 def list_rosinstalls(track):
     response = urllib2.urlopen('https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/%s.yaml' % track)
     rosinstalls = yaml.load(response.read())
@@ -148,15 +131,14 @@ def init_workspace():
     else:
         uri = ""
     populate_worskpace(os.path.join(workspace_dir, 'src'), uri)
-    write_toplevel_cmake(os.path.join(workspace_dir, 'src'))
     print_details(workspace_dir, uri)
 
 
 def print_details(workspace_dir, uri):
-    console.pretty_println("\n******************* Development Workspace ********************", console.bold)
-    console.pretty_print("Workspace directory : ", console.cyan)
+    console.pretty_println("\n***************************** Development Workspace ******************************", console.bold)
+    console.pretty_print("Workspace : ", console.cyan)
     console.pretty_println(workspace_dir, console.yellow)
     console.pretty_print("Rosinstall: ", console.cyan)
     console.pretty_println(uri, console.yellow)
-    console.pretty_println("**************************************************************", console.bold)
+    console.pretty_println("**********************************************************************************", console.bold)
     console.pretty_println("\nNow add source directories with `wstool` and configure parallel build dirs with 'yujin_init_build'.\n", console.cyan)

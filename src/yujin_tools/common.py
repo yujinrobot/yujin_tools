@@ -6,10 +6,12 @@ Created on Mar 27, 2013
 
 import os
 import sys
+import re
 #import tempfile
 import shutil
 # Local imports
 import console
+import python_setup
 
 DEFAULT_TRACK = "groovy"
 VALID_TRACKS = ["groovy", "hydro"]
@@ -72,16 +74,6 @@ def set_default_track(track=DEFAULT_TRACK):
     return track
 
 
-#def create_environment_script(script_name):
-#    f = tempfile.NamedTemporaryFile(delete=False)
-#    f.write("#!/bin/bash\n")
-#    f.write("source /opt/ros/groovy/setup.bash\n")
-#    f.write(script_name + "\n")
-#    os.chmod(f.name, stat.S_IRWXU)
-#    f.close()
-#    return f
-
-
 def override_filename():
     return os.path.join(os.path.dirname(__file__), 'cmake', 'overrides.cmake')
 
@@ -90,45 +82,49 @@ def parent_directory(path):
     return os.path.abspath(os.path.join(path, os.pardir))
 
 
-def symlink_dir(src, dst):
-    """
-    Creates a symlink at dst to src, or if not possible, attempts to copy.
-    """
-    if not os.path.isdir(src):
-        console.logerror("'%s' is not a valid dir" % src)
-        sys.exit(1)
+def get_underlays_list_from_config_cmake():
+    '''
+      Parse the config.cmake looking for the underlays list.
+    '''
+    f = open('config.cmake')
+    for line in f:
+        m = re.search('^set\(UNDERLAY_ROOTS "(.*)"', line)
+        print line
+        print m.group(0)
+        #print m.group(1).split(';')
+        #if m:
+        #    return m.group(1).split(';')
+    return []
 
-    # try to symlink file
+
+def create_symlink(src, dst):
+    """
+    Creates a symlink at dst to src.
+    """
+    if not os.path.exists(src):
+        console.logerror("'%s' is not a valid path" % src)
+        sys.exit(1)
     try:
         os.symlink(src, dst)
         console.pretty_print('Creating symlink', console.white)
         console.pretty_print(' "%s" ' % dst, console.bold)
-        console.pretty_print(" pointing to ", console.white)
+        console.pretty_print(" -> ", console.white)
         console.pretty_println(' "%s." ' % src, console.bold)
     except Exception as ex_symlink:
         console.logerror("Could not symlink '%s' to %s [%s]." % (src, dst, str(ex_symlink)))
+        raise RuntimeError()
 
-#
-#def read_template(tmplf):
-#    f = open(tmplf, 'r')
-#    try:
-#        t = f.read()
-#    finally:
-#        f.close()
-#    return t
-#
-#
-#def fill_in_template(template, name, cwd):
-#    return template % locals()
-#
-#
-#def instantiate_template(filename, name, cwd):
-#    template_dir = os.path.join(os.path.dirname(__file__), 'templates', 'init_workspace')
-#    tmpl = read_template(os.path.join(template_dir, filename))
-#    contents = fill_in_template(tmpl, name, cwd)
-#    try:
-#        f = open(os.path.join(cwd, filename), 'w')
-#        f.write(contents.encode('utf-8'))
-#    finally:
-#        os.fchmod(f.fileno(), stat.S_IRWXU)
-#        f.close()
+
+def find_catkin(underlays_list):
+    '''
+      Search the underlays looking for catkin's toplevel.cmake and python module.
+    '''
+    catkin_toplevel = None
+    catkin_python_path = None
+    for underlay in underlays_list:
+        if os.path.isfile(os.path.join(underlay, 'share', 'catkin', 'cmake', 'toplevel.cmake')):
+            catkin_toplevel = os.path.join(underlay, 'share', 'catkin', 'cmake', 'toplevel.cmake')
+            if os.path.isfile(os.path.join(underlay, python_setup.get_global_python_destination(), 'catkin', 'builder.py')):
+                catkin_python_path = os.path.join(underlay, python_setup.get_global_python_destination())
+            break
+    return catkin_toplevel, catkin_python_path

@@ -53,6 +53,7 @@ except ImportError as e:
 
 from .terminal_color import ansi, disable_ANSI_colors, fmt, sanitize
 
+
 def split_arguments(args, splitter_name, default=None):
     if splitter_name not in args:
         return args, default
@@ -146,18 +147,19 @@ def print_command_banner(cmd, cwd, color):
         print('####')
 
 
-def run_command_colorized(cmd, cwd, quiet=False):
-    run_command(cmd, cwd, quiet=quiet, colorize=True)
+def run_command_colorized(cmd, cwd, quiet=False, env=None):
+    run_command(cmd, cwd, quiet=quiet, colorize=True, env=env)
 
 
-def run_command(cmd, cwd, quiet=False, colorize=False):
+def run_command(cmd, cwd, quiet=False, colorize=False, env=None):
     capture = (quiet or colorize)
     stdout_pipe = subprocess.PIPE if capture else None
     stderr_pipe = subprocess.STDOUT if capture else None
+    print("PYTHONPATH.............%s"%env["PYTHONPATH"])
     try:
         proc = subprocess.Popen(
             cmd, cwd=cwd, shell=False,
-            stdout=stdout_pipe, stderr=stderr_pipe
+            stdout=stdout_pipe, stderr=stderr_pipe, env=env
         )
     except OSError as e:
         raise OSError("Failed command '%s': %s" % (cmd, e))
@@ -173,7 +175,7 @@ def run_command(cmd, cwd, quiet=False, colorize=False):
             except Exception as e:
                 import traceback
                 traceback.print_exc()
-                print('<caktin_make> color formatting problem: ' + str(e),
+                print('<yujin_make> color formatting problem: ' + str(e),
                       file=sys.stderr)
             out.write(line)
     proc.wait()

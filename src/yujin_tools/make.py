@@ -14,13 +14,14 @@ import shutil
 import multiprocessing
 import subprocess
 from catkin_pkg.packages import find_packages
-
+import re
 ##############################################################################
 # Local imports
 ##############################################################################
 
 import console
 import common
+import python_setup
 
 import catkin_make.terminal_color as terminal_color
 from catkin_make.terminal_color import fmt
@@ -132,12 +133,23 @@ def make_main():
             cmd.append(config_cmd)
         cmd += cmake_args
         print cmd
+        #########################
+        # Hack for catkin-python
+        #########################
+        underlays_list = common.get_underlays_list_from_config_cmake()
+        unused_catkin_toplevel, catkin_python_path = common.find_catkin(underlays_list)
+
+        env = os.environ.copy()
+        try:
+            env['PYTHONPATH'] = env['PYTHONPATH'] + os.pathsep + catkin_python_path
+        except KeyError:
+            env['PYTHONPATH'] = catkin_python_path
         try:
             builder.print_command_banner(cmd, build_path, color=not args.no_color)
             if args.no_color:
-                builder.run_command(cmd, build_path)
+                builder.run_command(cmd, build_path, env=env)
             else:
-                builder.run_command_colorized(cmd, build_path)
+                builder.run_command_colorized(cmd, build_path, env=env)
         except subprocess.CalledProcessError:
             return fmt('@{rf}Invoking @{boldon}"cmake"@{boldoff} failed')
     else:
