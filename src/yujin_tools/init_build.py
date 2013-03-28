@@ -93,17 +93,17 @@ def instantiate_template(filename, name, cwd):
         f.close()
 
 
-def fill_in_config_cmake(template, config_install_prefix, config_underlays):
+def fill_in_config_cmake(template, config_build_type, config_install_prefix, config_underlays, config_override_file):
     return template % locals()
 
 
-def instantiate_config_cmake(build_path, config_install_prefix, config_underlays):
+def instantiate_config_cmake(build_path, config_build_type, config_install_prefix, config_underlays):
     '''
       Copy the cache configuration template to the build path.
     '''
     template_dir = os.path.join(os.path.dirname(__file__), 'cmake')
     template = read_template(os.path.join(template_dir, "config.cmake"))
-    contents = fill_in_config_cmake(template, config_install_prefix, config_underlays)
+    contents = fill_in_config_cmake(template, config_build_type, config_install_prefix, config_underlays, common.override_filename())
     config_cmake_file = os.path.join(build_path, "config.cmake")
     try:
         f = open(config_cmake_file, 'w')
@@ -180,11 +180,6 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     ##########################
     # Source directory
     ##########################
-    # Absolute path - should probably use os.path.abspath here
-    #if os.path.isabs(source_dir_):
-    #    source_dir = source_dir_
-    #else:
-    #    source_dir = os.path.join(os.getcwd(), source_dir_)
     source_dir = os.path.abspath(source_dir_)
     build_source_dir = os.path.join(build_dir, 'src')
     if not os.path.isdir(source_dir):
@@ -203,7 +198,10 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     ##########################
     # Underlays
     ##########################
-    env_underlays = os.environ['CMAKE_PREFIX_PATH']
+    try:
+        env_underlays = os.environ['CMAKE_PREFIX_PATH']
+    except KeyError:
+        env_underlays = ""
     underlays_list = underlays_.split(';')
     env_underlays_list = env_underlays.split(':')
     for underlay in env_underlays_list:
@@ -212,8 +210,6 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     catkin_found = False
     for underlay in underlays_list:
         if os.path.isfile(os.path.join(underlay, 'bin', 'catkin_make')):
-            catkin_make = os.path.join(underlay, 'bin', 'catkin_make')
-            catkin_python_path = os.path.join(underlay, 'lib', 'python2.7', 'dist-packages')
             catkin_found = True
             break
     if not catkin_found:
@@ -222,8 +218,6 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
         if os.path.isfile(os.path.join("/opt/ros/%s" % default_track, 'bin', 'catkin_make')):
             console.pretty_println("No catkin found, adding the default track underlay [/opt/ros/%s]" % default_track)
             underlays_list.append("/opt/ros/%s" % default_track)
-            catkin_make = os.path.join("/opt/ros/%s" % default_track, 'bin', 'catkin_make')
-            catkin_python_path = os.path.join("/opt/ros/%s" % default_track, 'lib', 'python2.7', 'dist-packages')
         else:
             console.logerror("Could not find an underlying catkin installation.")
     underlays = ';'.join(underlays_list)
@@ -231,12 +225,10 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     ##########################
     # Toolchain
     ##########################
-    toolchain = toolchain_
     if not toolchain_ == "":
         toolchains_dir = os.path.join(os.path.dirname(__file__), 'toolchains')
         if os.path.isfile(os.path.join(toolchains_dir, toolchain_ + ".cmake")):
             shutil.copy(os.path.join(toolchains_dir, toolchain_ + ".cmake"), os.path.join(build_dir, "toolchain.cmake"))
-            toolchain = toolchain = "-DCMAKE_TOOLCHAIN_FILE=toolchain.cmake"
 
     ##########################
     # Platform
@@ -265,7 +257,7 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     ##########################
     # Cache
     ##########################
-    instantiate_config_cmake(build_dir, install_prefix, underlays)
+    instantiate_config_cmake(build_dir, build_type, install_prefix, underlays)
 
     ##########################
     # Templates
