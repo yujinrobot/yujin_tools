@@ -27,7 +27,6 @@ setup(name='yujin_tools',
       ],
       package_data = {'yujin_tools': [
            'cmake/*',
-           'templates/init_build/Makefile',
            'templates/init_build/.bashrc',
            'templates/init_build/konsole',
            'templates/init_build/gnome-terminal',

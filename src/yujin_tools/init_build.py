@@ -93,21 +93,6 @@ def instantiate_template(filename, name, cwd):
         f.close()
 
 
-def fill_in_makefile(template, rel_source_dir, catkin_make, catkin_python_path, toolchain, override):
-    return template % locals()
-
-
-def instantiate_makefile(filename, build_dir, rel_source_dir, catkin_make, catkin_python_path, toolchain):
-    template_dir = os.path.join(os.path.dirname(__file__), 'templates', 'init_build')
-    tmpl = read_template(os.path.join(template_dir, filename))
-    contents = fill_in_makefile(tmpl, rel_source_dir, catkin_make, catkin_python_path, toolchain, common.override_filename())
-    try:
-        f = open(os.path.join(build_dir, filename), 'w')
-        f.write(contents.encode('utf-8'))
-    finally:
-        f.close()
-
-
 def fill_in_config_cmake(template, config_install_prefix, config_underlays):
     return template % locals()
 
@@ -289,7 +274,6 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     instantiate_template('konsole', name, build_dir)
     instantiate_template('gnome-terminal', name, build_dir)
     instantiate_template('eclipse', name, build_dir)
-    instantiate_makefile('Makefile', build_dir, os.path.relpath(source_dir, build_dir), catkin_make, catkin_python_path, toolchain)
 
 
 def init_build():
