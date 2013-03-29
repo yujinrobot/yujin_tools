@@ -1,128 +1,79 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
-import argparse
-import os
+
 import sys
-
-from yujin_make.builder import build_workspace_isolated, colorize_line, extract_cmake_and_make_arguments
-
-
-def extract_cmake_args(args=sys.argv[1:]):
-    # extract -D* and -G* arguments
-    cmake_args = [a for a in args if a.startswith('-D') or a.startswith('-G')]
-    args = [a for a in args if a not in cmake_args]
-
-    return cmake_args, args
-
-
-def parse_args(args=sys.argv[1:]):
-    args, cmake_args, make_args = extract_cmake_and_make_arguments(args)
-
-    parser = argparse.ArgumentParser(
-        description='Builds each catkin (and non-catkin) package from '
-                    'a given workspace in isolation, but still in '
-                    'topological order.'
-    )
-    add = parser.add_argument
-    add('-C', '--directory', dest='workspace',
-        help='The base path of the workspace (default ".")'
-    )
-    add('--source', '--source-space', default=None,
-        help='The path to the source space (default "src")'
-    )
-    add('--build', '--build-space', default=None,
-        help='The path to the build space (default "build_isolated")'
-    )
-    add('--devel', '--devel-space', default=None,
-        help='Sets the target devel space (default "devel_isolated")'
-    )
-    add('--merge', action='store_true', default=False,
-        help='Build each catkin package into a common devel space.'
-    )
-    add('--install-space', dest='install_space', default=None,
-        help='Sets the target install space (default "install_isolated")'
-    )
-    add('--install', action='store_true', default=False,
-        help='Causes each catkin package to be installed.'
-    )
-    add('-j', '--jobs', type=int, metavar='JOBS', nargs='?',
-        help='Specifies the number of jobs (commands) to run simultaneously. '
-             'Defaults to the number of CPU cores.'
-    )
-    add('--force-cmake', action='store_true', default=False,
-        help='Runs cmake explicitly for each catkin package.'
-    )
-    add('--no-color', action='store_true', default=False,
-        help='Disables colored output (only for catkin_make and CMake)'
-    )
-    add('--pkg', nargs='+', metavar='PKGNAME', dest='packages',
-        help='Invoke "make" on specific packages (only after initial invocation)'
-    )
-    add('-q', '--quiet', action='store_true', default=False,
-        help='Suppresses the cmake and make output until an error occurs.'
-    )
-    add('--cmake-args', dest='cmake_args', nargs='*', type=str,
-        help='Arbitrary arguments which are passes to CMake. '
-             'It must be passed after other arguments since it collects all following options.'
-    )
-    add('--make-args', dest='make_args', nargs='*', type=str,
-        help='Arbitrary arguments which are passes to make.'
-             'It must be passed after other arguments since it collects all following options.'
-    )
-    opts = parser.parse_args(args)
-    opts.cmake_args = cmake_args
-    opts.make_args = make_args
-    return opts
-
-
-def handle_cmake_args(cmake_args, opts):
-    # Process cmake arugments
-    for arg in list(cmake_args):
-        if arg.startswith('-DCMAKE_INSTALL_PREFIX='):
-            if opts.install_space is None:
-                opts.install_space = arg.split('=', 1)[-1]
-            else:
-                print(colorize_line(
-                    "Warning: both the cmake argument '" + str(arg) + "' " +
-                    "and the --install-space argument have been used, " +
-                    "using the --install-space argument."
-                ))
-            cmake_args.remove(arg)
-        elif arg.startswith('-DCATKIN_DEVEL_PREFIX='):
-            if opts.devel is None:
-                opts.devel = arg.split('=', 1)[-1]
-            else:
-                print(colorize_line(
-                    "Warning: both the cmake argument '" + str(arg) + "' " +
-                    "and the --devel-space argument have been used, " +
-                    "using the --devel-space argument."
-                ))
-            cmake_args.remove(arg)
-    return cmake_args, opts
-
-
-def main():
-    print("This is experimental!")
-    opts = parse_args()
-    cmake_args, opts = handle_cmake_args(opts.cmake_args, opts)
-
-    build_workspace_isolated(
-        workspace=opts.workspace or '.',
-        sourcespace=opts.source,
-        buildspace=opts.build,
-        develspace=opts.devel,
-        installspace=opts.install_space,
-        merge=opts.merge,
-        install=opts.install,
-        jobs=opts.jobs,
-        force_cmake=opts.force_cmake,
-        colorize=not opts.no_color,
-        build_packages=opts.packages,
-        quiet=opts.quiet,
-        cmake_args=cmake_args,
-        make_args=opts.make_args
-    )
+from yujin_tools import make_isolated_main
 
 if __name__ == '__main__':
-    main()
+    try:
+        sys.exit(make_isolated_main())
+    except Exception as e:
+        sys.exit(str(e))
+
+##!/usr/bin/env python
+#
+#from __future__ import print_function
+#import argparse
+#import os
+#
+#from yujin_make.builder import build_workspace_isolated, colorize_line, extract_cmake_and_make_arguments
+#
+#
+#def extract_cmake_args(args=sys.argv[1:]):
+#    # extract -D* and -G* arguments
+#    cmake_args = [a for a in args if a.startswith('-D') or a.startswith('-G')]
+#    args = [a for a in args if a not in cmake_args]
+#
+#    return cmake_args, args
+#
+#
+#def handle_cmake_args(cmake_args, opts):
+#    # Process cmake arugments
+#    for arg in list(cmake_args):
+#        if arg.startswith('-DCMAKE_INSTALL_PREFIX='):
+#            if opts.install_space is None:
+#                opts.install_space = arg.split('=', 1)[-1]
+#            else:
+#                print(colorize_line(
+#                    "Warning: both the cmake argument '" + str(arg) + "' " +
+#                    "and the --install-space argument have been used, " +
+#                    "using the --install-space argument."
+#                ))
+#            cmake_args.remove(arg)
+#        elif arg.startswith('-DCATKIN_DEVEL_PREFIX='):
+#            if opts.devel is None:
+#                opts.devel = arg.split('=', 1)[-1]
+#            else:
+#                print(colorize_line(
+#                    "Warning: both the cmake argument '" + str(arg) + "' " +
+#                    "and the --devel-space argument have been used, " +
+#                    "using the --devel-space argument."
+#                ))
+#            cmake_args.remove(arg)
+#    return cmake_args, opts
+#
+#
+#def main():
+#    print("This is experimental!")
+#    cmake_args, opts = handle_cmake_args(opts.cmake_args, opts)
+#
+#    build_workspace_isolated(
+#        workspace=opts.workspace or '.',
+#        sourcespace=opts.source,
+#        buildspace=opts.build,
+#        develspace=opts.devel,
+#        installspace=opts.install_space,
+#        merge=opts.merge,
+#        install=opts.install,
+#        jobs=opts.jobs,
+#        force_cmake=opts.force_cmake,
+#        colorize=not opts.no_color,
+#        build_packages=opts.packages,
+#        quiet=opts.quiet,
+#        cmake_args=cmake_args,
+#        make_args=opts.make_args
+#    )
+#
+#if __name__ == '__main__':
+#    main()
