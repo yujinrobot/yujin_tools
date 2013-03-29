@@ -4,7 +4,6 @@
 
 import os.path
 
-import sys
 import stat  # file permissions
 import argparse
 from argparse import RawTextHelpFormatter
@@ -137,11 +136,27 @@ def print_build_details(build_dir, source_dir, install_prefix, build_type, under
     console.pretty_println("**********************************************************************************\n", console.bold)
 
 
+def get_toolchains():
+    toolchains = {}
+    for (dirpath, unused_dirname, filenames) in os.walk(os.path.join(os.path.dirname(__file__), 'toolchains')):
+        family = os.path.basename(dirpath)
+        if family != 'toolchains':
+            toolchains[family] = []
+            # we are in a subdirectory, i.e. a family, good!
+            for filename in filenames:
+                toolchains[family].append(os.path.splitext(filename)[0])  # leave off the .cmake extension
+    return toolchains
+
+
 def list_toolchains():
     console.pretty_println("\n******************************** Toolchain List **********************************", console.bold)
-    for (unused_dirpath, unused_dirname, filenames) in os.walk(os.path.join(os.path.dirname(__file__), 'toolchains')):
-        for filename in filenames:
-            console.pretty_println(" -- %s" % os.path.splitext(os.path.basename(filename))[0], console.cyan)
+    toolchains = get_toolchains()
+    console.pretty_println("Official:", console.bold)
+    for family in toolchains:
+        for platform in toolchains[family]:
+            console.pretty_print(" -- %s/" % family, console.cyan)
+            console.pretty_println("%s" % platform, console.yellow)
+    console.pretty_println("Custom:", console.bold)
     console.pretty_println("**********************************************************************************\n", console.bold)
 
 
@@ -270,9 +285,23 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     # Toolchain
     ##########################
     if not toolchain_ == "":
+        tmp_list = toolchain_.split('/')
+        if len(tmp_list) != 2:
+            raise RuntimeError("Toolchain specification invalid, must be <family>/<tuple> [%s]" % toolchain_)
+        family = tmp_list[0]
+        toolchain_tuple = tmp_list[1]
+        toolchains = get_toolchains()
         toolchains_dir = os.path.join(os.path.dirname(__file__), 'toolchains')
-        if os.path.isfile(os.path.join(toolchains_dir, toolchain_ + ".cmake")):
-            shutil.copy(os.path.join(toolchains_dir, toolchain_ + ".cmake"), os.path.join(build_dir, "toolchain.cmake"))
+        try:
+            if not toolchain_tuple in toolchains[family]:
+                raise RuntimeError("Toolchain %s for family %s not available." % (family, toolchain_tuple))
+        except KeyError:
+            raise RuntimeError("No toolchains available for family %s" % family)
+        toolchain_file = os.path.join(toolchains_dir, family, toolchain_tuple + ".cmake")
+        if os.path.isfile(toolchain_file):
+            shutil.copy(toolchain_file, os.path.join(build_dir, "toolchain.cmake"))
+        else:
+            raise RuntimeError("Toolchain module not available [%s]" % toolchain_file)
 
     ##########################
     # Platform
