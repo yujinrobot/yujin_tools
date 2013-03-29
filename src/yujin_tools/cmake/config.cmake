@@ -6,14 +6,7 @@ set(UNDERLAY_ROOTS "%(config_underlays)s" CACHE PATH "Semi-colon separated list 
 ###########################
 # CMake
 ###########################
-# Be careful changing the build type - the rosdeps are typically 
-# built Release or RelWithDebInfo. Mixed mode building typically does
-# not work with msvc, so Debug won't work against rosdeps built as stated
-# above. 
-# If you do want to build Debug:
-# - compile the rosdeps in debug mode
-# - call the visual studio shell script (usually in src/setup.bat) in debug mode
-# - make sure any projects on top are built in debug mode also.
+set(CMAKE_VERBOSE_MAKEFILE OFF CACHE BOOL "Verbosity in the makefile compilations.")
 set(CMAKE_BUILD_TYPE %(config_build_type)s CACHE STRING "Build mode type.")
 set(CMAKE_INSTALL_PREFIX %(config_install_prefix)s CACHE PATH "Install root location.")
 set(CMAKE_PREFIX_PATH "${UNDERLAY_ROOTS}" CACHE PATH "semi-colon separated software/ros workspace paths.")
