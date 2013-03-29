@@ -90,7 +90,7 @@ def instantiate_template(filename, name, cwd):
         f.close()
 
 
-def fill_in_config_cmake(template, config_build_type, config_install_prefix, config_underlays, config_override_file):
+def fill_in_config_cmake(template, config_build_type, config_devel, config_install_prefix, config_underlays, config_override_file):
     return template % locals()
 
 
@@ -103,7 +103,8 @@ def instantiate_config_cmake(platform_content, build_path, config_build_type, co
     '''
     template_dir = os.path.join(os.path.dirname(__file__), 'cmake')
     template = read_template(os.path.join(template_dir, "config.cmake"))
-    contents = fill_in_config_cmake(template, config_build_type, config_install_prefix, config_underlays, common.override_filename())
+    config_devel = os.path.join(build_path, 'devel')
+    contents = fill_in_config_cmake(template, config_build_type, config_devel, config_install_prefix, config_underlays, common.override_filename())
     config_cmake_file = os.path.join(build_path, "config.cmake")
     try:
         f = open(config_cmake_file, 'w')

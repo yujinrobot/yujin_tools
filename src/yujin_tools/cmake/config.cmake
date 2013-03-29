@@ -25,7 +25,7 @@ set(CMAKE_USER_MAKE_RULES_OVERRIDE "%(config_override_file)s" CACHE PATH "User o
 # Excluding or including packages
 #set(CATKIN_BLACKLIST_PACKAGES "" CACHE STRING "List of ';' separated packages to exclude")
 #set(CATKIN_WHITELIST_PACKAGES "" CACHE STRING "List of ';' separated packages to build (must be a complete list)")
-set(CATKIN_DEVEL_PREFIX "devel")
+set(CATKIN_DEVEL_PREFIX "%(config_devel)s" CACHE PATH "Relative location of the devel space [devel]")
 
 ###########################
 # Boost

@@ -103,6 +103,8 @@ def make_main():
     # check for new build
     if not os.path.exists(build_path):
         os.mkdir(build_path)
+    #if not os.path.exists(devel_path):
+    #    os.mkdir(devel_path)
 
     # ensure toplevel cmake file exists
     toplevel_cmake = os.path.join(source_path, 'CMakeLists.txt')
@@ -133,14 +135,10 @@ def make_main():
         if config_cmd:
             cmd.append(config_cmd)
         cmd += cmake_args
-        print cmd
         #########################
         # Hack for catkin-python
         #########################
         underlays_list = common.get_underlays_list_from_config_cmake()
-        print("Underlay List")
-        print underlays_list
-        print("Underlay List")
         unused_catkin_toplevel, catkin_python_path = common.find_catkin(underlays_list)
 
         env = os.environ.copy()
