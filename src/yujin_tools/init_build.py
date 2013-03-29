@@ -36,13 +36,13 @@ def help_string():
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description=help_string(), formatter_class=RawTextHelpFormatter)
-    parser.add_argument('dir', nargs='?', default="./", help='directory to use for the parallel development space [./]')
+    parser.add_argument('dir', nargs='?', default=".", help='directory to use for the parallel development space [./]')
     parser.add_argument('sources', nargs='?', default="src", help='directory where the sources reside [./src]')
     parser.add_argument('-r', '--release', action='store_true', help='build in Release mode instead of RelWithDebugSymbols [false]')
     parser.add_argument('-i', '--install', action='store', default='/not_set_directory', help='installation location [workspace/install]')
-    parser.add_argument('-u', '--underlays', action='store', default='/opt/ros/groovy', help='semi-colon list of catkin workspaces to utilise [/opt/ros/groovy]')
+    parser.add_argument('-u', '--underlays', action='store', default='', help='semi-colon list of catkin workspaces to utilise [/opt/ros/groovy]')
     parser.add_argument('-t', '--toolchain', action='store', default='', help='toolchain cmake module to load []')
-    parser.add_argument('-p', '--platform', action='store', default='', help='platform cmake cache module to load []')
+    parser.add_argument('-p', '--platform', action='store', default='default', help='platform cmake cache module to load [default]')
     parser.add_argument('--list-toolchains', action='store_true', help='list all currently available toolchain modules [false]')
     parser.add_argument('--list-platforms', action='store_true', help='list all currently available platform modules [false]')
     parser.add_argument('--track', action='store', default=None, help='retrieve rosinstalls relevant to this track [groovy|hydro][groovy]')
@@ -108,48 +108,65 @@ def instantiate_config_cmake(platform_content, build_path, config_build_type, co
     config_cmake_file = os.path.join(build_path, "config.cmake")
     try:
         f = open(config_cmake_file, 'w')
+        f.write(platform_content.encode('utf-8'))
         f.write(contents.encode('utf-8'))
     finally:
         f.close()
 
 
 def print_build_details(build_dir, source_dir, install_prefix, build_type, underlays, name, toolchain, platform):
-    console.pretty_println("************************** Parallel Buildspace Details ***************************", console.bold)
-    console.pretty_print("Build directory : ", console.cyan)
+    console.pretty_println("\n************************** Parallel Buildspace Details ***************************", console.bold)
+    console.pretty_print(" -- Build directory : ", console.cyan)
     console.pretty_println(build_dir, console.yellow)
-    console.pretty_print("Source directory: ", console.cyan)
+    console.pretty_print(" -- Source directory: ", console.cyan)
     console.pretty_println(source_dir, console.yellow)
-    console.pretty_print("Install prefix  : ", console.cyan)
+    console.pretty_print(" -- Install prefix  : ", console.cyan)
     console.pretty_println(install_prefix, console.yellow)
-    console.pretty_print("Build Type      : ", console.cyan)
+    console.pretty_print(" -- Build Type      : ", console.cyan)
     console.pretty_println(build_type, console.yellow)
-    console.pretty_print("Underlays       : ", console.cyan)
+    console.pretty_print(" -- Underlays       : ", console.cyan)
     console.pretty_println(underlays, console.yellow)
-    console.pretty_print("Eclipse Name    : ", console.cyan)
+    console.pretty_print(" -- Eclipse Name    : ", console.cyan)
     console.pretty_println(name, console.yellow)
     if not toolchain == "":
-        console.pretty_print("Toolchain       : ", console.cyan)
+        console.pretty_print(" -- Toolchain       : ", console.cyan)
         console.pretty_println(toolchain, console.yellow)
     if not platform == "":
-        console.pretty_print("Platform        : ", console.cyan)
+        console.pretty_print(" -- Platform        : ", console.cyan)
         console.pretty_println(platform, console.yellow)
-    console.pretty_println("**********************************************************************************", console.bold)
+    console.pretty_println("**********************************************************************************\n", console.bold)
 
 
 def list_toolchains():
-    console.pretty_println("******************************** Toolchain List **********************************", console.bold)
+    console.pretty_println("\n******************************** Toolchain List **********************************", console.bold)
     for (unused_dirpath, unused_dirname, filenames) in os.walk(os.path.join(os.path.dirname(__file__), 'toolchains')):
         for filename in filenames:
-            print(" -- %s" % os.path.splitext(os.path.basename(filename))[0])
-    console.pretty_println("**********************************************************************************", console.bold)
+            console.pretty_println(" -- %s" % os.path.splitext(os.path.basename(filename))[0], console.cyan)
+    console.pretty_println("**********************************************************************************\n", console.bold)
+
+
+def get_platforms():
+    platforms = {}
+    for (dirpath, unused_dirname, filenames) in os.walk(os.path.join(os.path.dirname(__file__), 'platforms')):
+        family = os.path.basename(dirpath)
+        if family != 'platforms':
+            platforms[family] = []
+            # we are in a subdirectory, i.e. a family, good!
+            for filename in filenames:
+                platforms[family].append(os.path.splitext(filename)[0])  # leave off the .cmake extension
+    return platforms
 
 
 def list_platforms():
-    console.pretty_println("********************************* Platform List **********************************", console.bold)
-    for (unused_dirpath, unused_dirname, filenames) in os.walk(os.path.join(os.path.dirname(__file__), 'platforms')):
-        for filename in filenames:
-            print(" -- %s" % os.path.splitext(os.path.basename(filename))[0])
-    console.pretty_println("**********************************************************************************", console.bold)
+    console.pretty_println("\n********************************* Platform List **********************************", console.bold)
+    platforms = get_platforms()
+    console.pretty_println("Official:", console.bold)
+    for family in platforms:
+        for platform in platforms[family]:
+            console.pretty_print(" -- %s/" % family, console.cyan)
+            console.pretty_println("%s" % platform, console.yellow)
+    console.pretty_println("Custom:", console.bold)
+    console.pretty_println("**********************************************************************************\n", console.bold)
 
 
 def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt/ros/groovy", install_prefix_="./install", release_=False, toolchain_="", platform_=""):
@@ -175,8 +192,7 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
         if not os.path.isdir(build_dir):  # remember ./ is a valid build dir, even if it's not populated yet
             os.mkdir(build_dir)
     else:
-        console.logerror("This build directory is already initialised")
-        sys.exit(1)
+        raise RuntimeError("This build directory is already initialised")
 
     ##########################
     # Source directory
@@ -184,15 +200,12 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     source_dir = os.path.abspath(source_dir_)
     build_source_dir = os.path.join(build_dir, 'src')
     if not os.path.isdir(source_dir):
-        console.logerror("Specified source space does not exist [" + source_dir + "]")
-        sys.exit(1)
+        raise RuntimeError("Specified source space does not exist [" + source_dir + "]")
     if not os.path.isfile(os.path.join(source_dir, ".rosinstall")):
-        console.logerror("Could not find a valid source folder (must contain a .rosinstall file therein)'")
-        sys.exit(1)
+        raise RuntimeError("Could not find a valid source folder (must contain a .rosinstall file therein)'")
     if os.path.exists(build_source_dir):
         if not source_dir == build_source_dir:
-            console.error("The build directory already has a ./src directory which doesn't match the desired source directory [%s]" % source_dir)
-            sys.exit(1)
+            raise RuntimeError("The build directory already has a ./src directory which doesn't match the desired source directory [%s]" % source_dir)
     else:
         os.mkdir(build_source_dir)
         source_subdirectories = os.walk(source_dir).next()[1]
@@ -206,8 +219,8 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
         env_underlays = os.environ['CMAKE_PREFIX_PATH']
     except KeyError:
         env_underlays = ""
-    underlays_list = underlays_.split(';')
-    env_underlays_list = env_underlays.split(':')
+    underlays_list = [underlay for underlay in underlays_.split(';') if underlay]
+    env_underlays_list = [underlay for underlay in env_underlays.split(':') if underlay]
     for underlay in env_underlays_list:
         if underlay not in underlays_list:
             underlays_list.append(underlay)
@@ -230,11 +243,10 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
         if os.path.isfile(os.path.join("/opt/ros/%s" % default_track, 'share', 'catkin', 'cmake', 'toplevel.cmake')):
             catkin_toplevel = os.path.join("/opt/ros/%s" % default_track, 'share', 'catkin', 'cmake', 'toplevel.cmake')
             unused_catkin_python_path = os.path.join("/opt/ros/%s" % default_track, 'lib', 'python2.7', 'dist-packages')
-            console.pretty_println("No catkin found, adding the default track underlay (use yujin_tools_settings to change) [/opt/ros/%s]" % default_track)
+            console.pretty_println("No catkin found, adding the default track underlay (use yujin_tools_settings to change) [/opt/ros/%s]" % default_track, console.cyan)
             underlays_list.append("/opt/ros/%s" % default_track)
         else:
-            console.logerror("Could not find an underlying catkin installation.")
-            sys.exit(1)
+            raise RuntimeError("Could not find an underlying catkin installation.")
     common.create_symlink(catkin_toplevel, os.path.join(build_source_dir, "CMakeLists.txt"))
     underlays = ';'.join(underlays_list)
 
@@ -266,10 +278,27 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     # Platform
     ##########################
     platform_content = ""
-    if not platform_ == "":
-        platforms_dir = os.path.join(os.path.dirname(__file__), 'platforms')
-        if os.path.isfile(os.path.join(platforms_dir, platform_ + ".cmake")):
-            shutil.copy(os.path.join(platforms_dir, platform_ + ".cmake"), os.path.join(build_dir, "platform.cmake"))
+    if not platform_ == "default":
+        tmp_list = platform_.split('/')
+        if len(tmp_list) != 2:
+            raise RuntimeError("Platform specification invalid, must be <family>/<platform type> [%s]" % platform_)
+        family = tmp_list[0]
+        platform = tmp_list[1]
+        platforms = get_platforms()
+        try:
+            if not platform in platforms[family]:
+                raise RuntimeError("Platform %s for family %s not available." % (family, platform))
+        except KeyError:
+            raise RuntimeError("No platforms available for family %s" % family)
+    platform_file = os.path.join(os.path.dirname(__file__), 'platforms', platform_ + ".cmake")
+    if os.path.isfile(platform_file):
+        f = open(platform_file, 'r')
+        try:
+            platform_content = f.read()
+        finally:
+            f.close()
+    else:
+        raise RuntimeError("Platform configuration not available [%s]" % platform_)
 
     ##########################
     # Cache
@@ -297,8 +326,8 @@ def init_build():
     ##########################
     if args.list_toolchains:
         list_toolchains()
-        sys.exit(0)
+        return
     if args.list_platforms:
-        list_toolchains()
-        sys.exit(0)
+        list_platforms()
+        return
     init_configured_build(args.dir, args.sources, args.underlays, args.install, args.release, args.toolchain, args.platform)

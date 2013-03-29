@@ -7,8 +7,6 @@ Created on Mar 27, 2013
 import os
 import sys
 import re
-#import tempfile
-import shutil
 # Local imports
 import console
 import python_setup
@@ -45,7 +43,8 @@ def get_underlays_list_from_config_cmake():
     '''
     f = open('config.cmake')
     for line in f:
-        m = re.search('^set\(UNDERLAY_ROOTS "(.*)"', line)
+        # use .*? where ? makes the match non-greedy
+        m = re.search('^set\(UNDERLAY_ROOTS "(.*?)"', line)
         if m:
             return m.group(1).split(';')
     return []

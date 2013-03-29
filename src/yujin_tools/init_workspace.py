@@ -9,15 +9,12 @@ from argparse import RawTextHelpFormatter
 import urlparse
 import yaml
 import urllib2
-import shutil
 
 ##############################################################################
 # Local imports
 ##############################################################################
 
-from .init_build import init_configured_build
 import console
-import common
 import settings
 
 ##############################################################################
