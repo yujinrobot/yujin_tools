@@ -35,7 +35,6 @@ def _parse_args(args=sys.argv[1:]):
     args, cmake_args, make_args = builder.extract_cmake_and_make_arguments(args)
 
     parser = argparse.ArgumentParser(description='Creates the catkin workspace layout and invokes cmake and make. Any argument starting with "-D" will be passed to the "cmake" invocation. All other arguments (i.e. target names) are passed to the "make" invocation.')
-    parser.add_argument('--source', help='The path to the source space (default "src")')
     parser.add_argument('-j', '--jobs', type=int, metavar='JOBS', nargs='?', help='Specifies the number of jobs (commands) to run simultaneously. Defaults to the environment variable ROS_PARALLEL_JOBS and falls back to the number of CPU cores.')
     parser.add_argument('--force-cmake', action='store_true', help='Invoke "cmake" even if it has been executed before [false]')
     parser.add_argument('-p', '--pre-clean', action='store_true', help='Clean build temporaries before making [false]')
@@ -72,13 +71,16 @@ def make_main():
     build_path = os.path.join(base_path, 'build')
     devel_path = os.path.join(base_path, 'devel')
 
-    # verify that the base path does not contain a CMakeLists.txt, except if base path equals source path
-    if (args.source is None or os.path.realpath(base_path) != os.path.realpath(args.source)) and os.path.exists(os.path.join(base_path, 'CMakeLists.txt')):
-        return fmt('@{rf}The specified base path @{boldon}"%s"@{boldoff} contains a CMakeLists.txt but "catkin_make" must be invoked in the root of workspace' % base_path)
+    if not os.path.isfile(os.path.join(base_path, 'config.cmake')):
+        return fmt('@{rf}Switch to a valid build directory (must contain a config.cmake cmake cache file).')
+
+    # verify that the base path does not contain a CMakeLists.txt
+    if os.path.exists(os.path.join(base_path, 'CMakeLists.txt')):
+        return fmt('@{rf}Switch to a valid build directory (this one is a cmake project, i.e. contains a CMakeLists.txt).')
 
     # verify that the base path does not contain a package.xml
     if os.path.exists(os.path.join(base_path, 'package.xml')):
-        return fmt('@{rf}The specified base path @{boldon}"%s"@{boldoff} contains a package but "catkin_make" must be invoked in the root of workspace' % base_path)
+        return fmt('@{rf}Switch to a valid build directory (this one is a catkin package, i.e. contains a package.xml).')
 
     # this will have been generated already by yujin_init_build
     source_path = os.path.join(base_path, 'src')
