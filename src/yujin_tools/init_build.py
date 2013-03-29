@@ -137,51 +137,58 @@ def print_build_details(build_dir, source_dir, install_prefix, build_type, under
     console.pretty_println("**********************************************************************************\n", console.bold)
 
 
-def get_toolchains():
-    toolchains = {}
-    for (dirpath, unused_dirname, filenames) in os.walk(os.path.join(os.path.dirname(__file__), 'toolchains')):
-        family = os.path.basename(dirpath)
-        if family != 'toolchains':
-            toolchains[family] = []
-            # we are in a subdirectory, i.e. a family, good!
+def get_toolchains_or_platforms(base_path):
+    '''
+      Does a look up in the path for either toolchain or platform files.
+      @param base_path : start of the search (ends in either toolchains or platforms).
+    '''
+    d = {}
+    for (dirpath, unused_dirname, filenames) in os.walk(base_path):
+        if dirpath != base_path:  # skip the root, only find files in subfolders
+            family = os.path.basename(dirpath)
+            d[family] = []
             for filename in filenames:
-                toolchains[family].append(os.path.splitext(filename)[0])  # leave off the .cmake extension
-    return toolchains
+                d[family].append(os.path.splitext(filename)[0])  # leave off the .cmake extension
+    return d
 
 
 def list_toolchains():
     console.pretty_println("\n******************************** Toolchain List **********************************", console.bold)
-    toolchains = get_toolchains()
+    toolchains = get_toolchains_or_platforms(os.path.join(os.path.dirname(__file__), 'toolchains'))
     console.pretty_println("Official:", console.bold)
     for family in toolchains:
         for platform in toolchains[family]:
             console.pretty_print(" -- %s/" % family, console.cyan)
             console.pretty_println("%s" % platform, console.yellow)
     console.pretty_println("Custom:", console.bold)
+    toolchains = get_toolchains_or_platforms(os.path.join(settings.yujin_tools_home(), 'toolchains'))
+    if toolchains:
+        for family in toolchains:
+            for platform in toolchains[family]:
+                console.pretty_print(" -- %s/" % family, console.cyan)
+                console.pretty_println("%s" % platform, console.yellow)
+    else:
+        console.pretty_println(" -- ", console.cyan)
     console.pretty_println("**********************************************************************************\n", console.bold)
-
-
-def get_platforms():
-    platforms = {}
-    for (dirpath, unused_dirname, filenames) in os.walk(os.path.join(os.path.dirname(__file__), 'platforms')):
-        family = os.path.basename(dirpath)
-        if family != 'platforms':
-            platforms[family] = []
-            # we are in a subdirectory, i.e. a family, good!
-            for filename in filenames:
-                platforms[family].append(os.path.splitext(filename)[0])  # leave off the .cmake extension
-    return platforms
 
 
 def list_platforms():
     console.pretty_println("\n********************************* Platform List **********************************", console.bold)
-    platforms = get_platforms()
+    platforms = get_toolchains_or_platforms(os.path.join(os.path.dirname(__file__), 'platforms'))
     console.pretty_println("Official:", console.bold)
     for family in platforms:
         for platform in platforms[family]:
             console.pretty_print(" -- %s/" % family, console.cyan)
             console.pretty_println("%s" % platform, console.yellow)
     console.pretty_println("Custom:", console.bold)
+    platforms = get_toolchains_or_platforms(os.path.join(settings.yujin_tools_home(), 'platforms'))
+    if platforms:
+        for family in platforms:
+            for platform in platforms[family]:
+                console.pretty_print(" -- %s/" % family, console.cyan)
+                console.pretty_println("%s" % platform, console.yellow)
+    else:
+        console.pretty_println(" -- ", console.cyan)
     console.pretty_println("**********************************************************************************\n", console.bold)
 
 
@@ -286,19 +293,23 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     # Toolchain
     ##########################
     if not toolchain_ == "":
+        toolchains_dir = os.path.join(os.path.dirname(__file__), 'toolchains')
+        custom_toolchains_dir = os.path.join(settings.yujin_tools_home(), 'toolchains')
         tmp_list = toolchain_.split('/')
         if len(tmp_list) != 2:
             raise RuntimeError("Toolchain specification invalid, must be <family>/<tuple> [%s]" % toolchain_)
         family = tmp_list[0]
         toolchain_tuple = tmp_list[1]
-        toolchains = get_toolchains()
-        toolchains_dir = os.path.join(os.path.dirname(__file__), 'toolchains')
-        try:
-            if not toolchain_tuple in toolchains[family]:
-                raise RuntimeError("Toolchain %s for family %s not available." % (family, toolchain_tuple))
-        except KeyError:
+        toolchains = get_toolchains_or_platforms(toolchains_dir)
+        custom_toolchains = get_toolchains_or_platforms(custom_toolchains_dir)
+        if not family in toolchains and not family in custom_toolchains:
             raise RuntimeError("No toolchains available for family %s" % family)
-        toolchain_file = os.path.join(toolchains_dir, family, toolchain_tuple + ".cmake")
+        if family in toolchains and toolchain_tuple in toolchains[family]:
+            toolchain_file = os.path.join(toolchains_dir, family, toolchain_tuple + ".cmake")
+        elif family in custom_toolchains and toolchain_tuple in custom_toolchains[family]:
+            toolchain_file = os.path.join(custom_toolchains_dir, family, toolchain_tuple + ".cmake")
+        else:
+            raise RuntimeError("Platform %s for family %s not available." % (family, toolchain_tuple))
         if os.path.isfile(toolchain_file):
             shutil.copy(toolchain_file, os.path.join(build_dir, "toolchain.cmake"))
         else:
@@ -308,19 +319,26 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     # Platform
     ##########################
     platform_content = ""
+    platforms_dir = os.path.join(os.path.dirname(__file__), 'platforms')
+    custom_platforms_dir = os.path.join(settings.yujin_tools_home(), 'platforms')
     if not platform_ == "default":
         tmp_list = platform_.split('/')
         if len(tmp_list) != 2:
             raise RuntimeError("Platform specification invalid, must be <family>/<platform type> [%s]" % platform_)
         family = tmp_list[0]
         platform = tmp_list[1]
-        platforms = get_platforms()
-        try:
-            if not platform in platforms[family]:
-                raise RuntimeError("Platform %s for family %s not available." % (family, platform))
-        except KeyError:
+        platforms = get_toolchains_or_platforms(platforms_dir)
+        custom_platforms = get_toolchains_or_platforms(custom_platforms_dir)
+        if not family in platforms and not family in custom_platforms:
             raise RuntimeError("No platforms available for family %s" % family)
-    platform_file = os.path.join(os.path.dirname(__file__), 'platforms', platform_ + ".cmake")
+        if family in platforms and platform in platforms[family]:
+            platform_file = os.path.join(platforms_dir, family, platform + ".cmake")
+        elif family in custom_platforms and platform in custom_platforms[family]:
+            platform_file = os.path.join(custom_platforms_dir, family, platform + ".cmake")
+        else:
+            raise RuntimeError("Platform %s for family %s not available." % (family, platform))
+    else:
+        platform_file = os.path.join(platforms_dir, 'default.cmake')
     if os.path.isfile(platform_file):
         f = open(platform_file, 'r')
         try:
