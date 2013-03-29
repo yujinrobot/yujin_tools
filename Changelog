@@ -1,3 +1,8 @@
+0.2.3
+ - bugfix for missing arg in yujin_init_build's config.cmake dump.
+0.2.2
+ - install target for yujin_make
+ - symlink'd source space into build space to remove shared toplevel.cmake dependancy
 0.2.1
  - add tests and run_tests options
 0.2.0

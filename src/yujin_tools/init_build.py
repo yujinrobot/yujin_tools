@@ -63,7 +63,6 @@ def which(program):
             exe_file = os.path.join(path, program)
             if is_exe(exe_file):
                 return exe_file
-
     return None
 
 
@@ -96,9 +95,12 @@ def fill_in_config_cmake(template, config_build_type, config_install_prefix, con
     return template % locals()
 
 
-def instantiate_config_cmake(build_path, config_build_type, config_install_prefix, config_underlays):
+def instantiate_config_cmake(platform_content, build_path, config_build_type, config_install_prefix, config_underlays):
     '''
       Copy the cache configuration template to the build path.
+
+      @param platform_content : content to prepend to the default configuration file
+      @param build_path : location of the build directory to save the config.cmake file.
     '''
     template_dir = os.path.join(os.path.dirname(__file__), 'cmake')
     template = read_template(os.path.join(template_dir, "config.cmake"))
@@ -237,22 +239,6 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     underlays = ';'.join(underlays_list)
 
     ##########################
-    # Toolchain
-    ##########################
-    if not toolchain_ == "":
-        toolchains_dir = os.path.join(os.path.dirname(__file__), 'toolchains')
-        if os.path.isfile(os.path.join(toolchains_dir, toolchain_ + ".cmake")):
-            shutil.copy(os.path.join(toolchains_dir, toolchain_ + ".cmake"), os.path.join(build_dir, "toolchain.cmake"))
-
-    ##########################
-    # Platform
-    ##########################
-    if not platform_ == "":
-        platforms_dir = os.path.join(os.path.dirname(__file__), 'platforms')
-        if os.path.isfile(os.path.join(platforms_dir, platform_ + ".cmake")):
-            shutil.copy(os.path.join(platforms_dir, platform_ + ".cmake"), os.path.join(build_dir, "platform.cmake"))
-
-    ##########################
     # Other Args
     ##########################
     if install_prefix_ == "/not_set_directory":
@@ -269,9 +255,26 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     os.chdir(build_dir)
 
     ##########################
+    # Toolchain
+    ##########################
+    if not toolchain_ == "":
+        toolchains_dir = os.path.join(os.path.dirname(__file__), 'toolchains')
+        if os.path.isfile(os.path.join(toolchains_dir, toolchain_ + ".cmake")):
+            shutil.copy(os.path.join(toolchains_dir, toolchain_ + ".cmake"), os.path.join(build_dir, "toolchain.cmake"))
+
+    ##########################
+    # Platform
+    ##########################
+    platform_content = ""
+    if not platform_ == "":
+        platforms_dir = os.path.join(os.path.dirname(__file__), 'platforms')
+        if os.path.isfile(os.path.join(platforms_dir, platform_ + ".cmake")):
+            shutil.copy(os.path.join(platforms_dir, platform_ + ".cmake"), os.path.join(build_dir, "platform.cmake"))
+
+    ##########################
     # Cache
     ##########################
-    instantiate_config_cmake(build_dir, build_type, install_prefix, underlays)
+    instantiate_config_cmake(platform_content, build_dir, build_type, install_prefix, underlays)
 
     ##########################
     # Templates
