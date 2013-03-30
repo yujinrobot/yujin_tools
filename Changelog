@@ -1,3 +1,9 @@
+0.2.7
+ - pre-clean for yujin_make_isolated
+0.2.6
+ - bugfix for yujin_make's pythonpath when calling make or run tests
+0.2.5
+ - make isolated is working!
 0.2.3
  - bugfix for missing arg in yujin_init_build's config.cmake dump.
 0.2.2
