@@ -1,6 +1,7 @@
 ###############################################################################
 # Family : arm
 # Platform : arm1176jzf-s
+# Notes: use with armel compilers.
 ###############################################################################
 
 # Some useful custom variables that uniquely define this platform module
