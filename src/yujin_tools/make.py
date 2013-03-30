@@ -21,6 +21,7 @@ from catkin_pkg.packages import find_packages
 
 import console
 import common
+import config_cache
 
 import catkin_make.terminal_color as terminal_color
 from catkin_make.terminal_color import fmt
@@ -35,7 +36,7 @@ def _parse_args(args=sys.argv[1:]):
     args, cmake_args, make_args = builder.extract_cmake_and_make_arguments(args)
 
     parser = argparse.ArgumentParser(description='Creates the catkin workspace layout and invokes cmake and make. Any argument starting with "-D" will be passed to the "cmake" invocation. All other arguments (i.e. target names) are passed to the "make" invocation.')
-    parser.add_argument('-j', '--jobs', type=int, metavar='JOBS', nargs='?', help='Specifies the number of jobs (commands) to run simultaneously. Defaults to the environment variable ROS_PARALLEL_JOBS and falls back to the number of CPU cores.')
+    parser.add_argument('-j', '--jobs', type=int, metavar='JOBS', default=None, nargs='?', help='Specifies the number of jobs (commands) to run simultaneously. Defaults to the environment variable ROS_PARALLEL_JOBS and falls back to the number of CPU cores.')
     parser.add_argument('--force-cmake', action='store_true', help='Invoke "cmake" even if it has been executed before [false]')
     parser.add_argument('-p', '--pre-clean', action='store_true', help='Clean build temporaries before making [false]')
     group = parser.add_mutually_exclusive_group()
@@ -49,13 +50,37 @@ def _parse_args(args=sys.argv[1:]):
     parser.add_argument('--make-args', dest='make_args', nargs='*', type=str,
         help='Arbitrary arguments which are passes to make. It must be passed after other arguments since it collects all following options. This is only necessary in combination with --cmake-args since else all unknown arguments are passed to make anyway.')
 
-    namespace, unknown_args = parser.parse_known_args(args)
-    # support -j/--jobs without an argument which argparse can not distinguish
-    if not namespace.jobs and [a for a in args if a == '-j' or a == '--jobs']:
-        namespace.jobs = ''
-    namespace.cmake_args = cmake_args
-    namespace.make_args = unknown_args + make_args
-    return namespace
+    options, unknown_args = parser.parse_known_args(args)
+    if not options.jobs and not [a for a in args if a == '-j' or a == '--jobs']:
+        options.jobs = common.good_number_of_jobs()
+    options.cmake_args = cmake_args
+    options.make_args = unknown_args + make_args
+    return options
+
+
+def validate_build_space(base_path):
+    if not os.path.isfile(os.path.join(base_path, 'config.cmake')):
+        raise RuntimeError('Switch to a valid build directory (must contain a config.cmake cmake cache file).')
+
+    # verify that the base path does not contain a CMakeLists.txt
+    if os.path.exists(os.path.join(base_path, 'CMakeLists.txt')):
+        raise RuntimeError('Switch to a valid build directory (this one is a cmake project, i.e. contains a CMakeLists.txt).')
+
+    # verify that the base path does not contain a package.xml
+    if os.path.exists(os.path.join(base_path, 'package.xml')):
+        raise RuntimeError('Switch to a valid build directory (this one is a catkin package, i.e. contains a package.xml).')
+
+    # this will have been generated already by yujin_init_build
+    source_path = os.path.join(base_path, 'src')
+    if os.path.exists(source_path):
+        if os.path.islink(source_path):
+            absolute_source_path = os.readlink(source_path)
+        else:
+            absolute_source_path = source_path
+        if not os.path.exists(absolute_source_path):
+            raise RuntimeError('The specified source space does not exist [%s]' % absolute_source_path)
+    else:
+        raise RuntimeError('Could not find a valid source path (did you init build correctly?)')
 
 
 def make_main():
@@ -70,29 +95,9 @@ def make_main():
     base_path = os.path.abspath('.')
     build_path = os.path.join(base_path, 'build')
     devel_path = os.path.join(base_path, 'devel')
-
-    if not os.path.isfile(os.path.join(base_path, 'config.cmake')):
-        return fmt('@{rf}Switch to a valid build directory (must contain a config.cmake cmake cache file).')
-
-    # verify that the base path does not contain a CMakeLists.txt
-    if os.path.exists(os.path.join(base_path, 'CMakeLists.txt')):
-        return fmt('@{rf}Switch to a valid build directory (this one is a cmake project, i.e. contains a CMakeLists.txt).')
-
-    # verify that the base path does not contain a package.xml
-    if os.path.exists(os.path.join(base_path, 'package.xml')):
-        return fmt('@{rf}Switch to a valid build directory (this one is a catkin package, i.e. contains a package.xml).')
-
-    # this will have been generated already by yujin_init_build
     source_path = os.path.join(base_path, 'src')
-    if os.path.exists(source_path):
-        if os.path.islink(source_path):
-            absolute_source_path = os.readlink(source_path)
-        else:
-            absolute_source_path = source_path
-        if not os.path.exists(absolute_source_path):
-            return fmt('@{rf}The specified source space @{boldon}"%s"@{boldoff} does not exist' % absolute_source_path)
-    else:
-        return fmt('@{rf}Could not find a valid source path (did you init build correctly?)')
+
+    validate_build_space(base_path)  # raises a RuntimeError if there is a problem
 
     # Clear out previous temporaries if requested
     if args.pre_clean:
@@ -117,7 +122,7 @@ def make_main():
     if args.pkg:
         packages_by_name = {p.name: path for path, p in packages.iteritems()}
         if args.pkg not in packages_by_name:
-            return fmt('@{rf}Package @{boldon}"%s"@{boldoff} not found in the workspace' % args.pkg)
+            raise RuntimeError('Package %s not found in the workspace' % args.pkg)
 
     # check if cmake must be run (either for a changed list of package paths or changed cmake arguments)
     force_cmake, _ = builder.cmake_input_changed(packages, build_path, cmake_args=cmake_args)
@@ -125,6 +130,14 @@ def make_main():
     # check if toolchain.cmake, config.cmake exist
     toolchain_cmd = "-DCMAKE_TOOLCHAIN_FILE=%s" % os.path.join(base_path, 'toolchain.cmake') if os.path.isfile(os.path.join(base_path, 'toolchain.cmake')) else None
     config_cmd = "-C%s" % os.path.join(base_path, 'config.cmake') if os.path.isfile(os.path.join(base_path, 'config.cmake')) else None
+
+    # Help find catkin cmake and python
+    unused_catkin_toplevel, catkin_python_path, unused_catkin_cmake_path = common.find_catkin()
+    env = os.environ.copy()
+    try:
+        env['PYTHONPATH'] = env['PYTHONPATH'] + os.pathsep + catkin_python_path
+    except KeyError:
+        env['PYTHONPATH'] = catkin_python_path
 
     # consider calling cmake
     makefile = os.path.join(build_path, 'Makefile')
@@ -135,17 +148,7 @@ def make_main():
         if config_cmd:
             cmd.append(config_cmd)
         cmd += cmake_args
-        #########################
-        # Hack for catkin-python
-        #########################
-        underlays_list = common.get_underlays_list_from_config_cmake()
-        unused_catkin_toplevel, catkin_python_path = common.find_catkin(underlays_list)
 
-        env = os.environ.copy()
-        try:
-            env['PYTHONPATH'] = env['PYTHONPATH'] + os.pathsep + catkin_python_path
-        except KeyError:
-            env['PYTHONPATH'] = catkin_python_path
         try:
             builder.print_command_banner(cmd, build_path, color=not args.no_color)
             if args.no_color:
@@ -159,9 +162,9 @@ def make_main():
         try:
             builder.print_command_banner(cmd, build_path, color=not args.no_color)
             if args.no_color:
-                builder.run_command(cmd, build_path)
+                builder.run_command(cmd, build_path, env=env)
             else:
-                builder.run_command_colorized(cmd, build_path)
+                builder.run_command_colorized(cmd, build_path, env=env)
         except subprocess.CalledProcessError:
             return fmt('@{rf}Invoking @{boldon}"make cmake_check_build_system"@{boldoff} failed')
 

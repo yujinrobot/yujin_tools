@@ -1,15 +1,22 @@
-'''
-Created on Mar 27, 2013
-
-@author: snorri
-'''
+##############################################################################
+# Imports
+##############################################################################
 
 import os
 import sys
-import re
+import multiprocessing
+
+##############################################################################
 # Local imports
+##############################################################################
+
 import console
 import python_setup
+import config_cache
+
+##############################################################################
+# Methods
+##############################################################################
 
 
 def which(program):
@@ -29,25 +36,36 @@ def which(program):
     return None
 
 
+#def modified_environment(catkin_python_path, env=None):
+#    '''
+#      Prepends the path to the PYTHONPATH environment variable.
+#      Could use some checking to make sure it is a single path, not a
+#      pathsep list.
+#    '''
+#    if not env:
+#        env = os.environ.copy()
+#    try:
+#        env['PYTHONPATH'] = env['PYTHONPATH'] + os.pathsep + catkin_python_path
+#    except KeyError:
+#        env['PYTHONPATH'] = catkin_python_path
+
+def good_number_of_jobs():
+    if 'ROS_PARALLEL_JOBS' in os.environ:
+        jobs = os.environ['ROS_PARALLEL_JOBS']
+    else:
+        try:
+            jobs = multiprocessing.cpu_count()
+        except NotImplementedError:
+            jobs = 1
+    return jobs
+
+
 def override_filename():
     return os.path.join(os.path.dirname(__file__), 'cmake', 'overrides.cmake')
 
 
 def parent_directory(path):
     return os.path.abspath(os.path.join(path, os.pardir))
-
-
-def get_underlays_list_from_config_cmake():
-    '''
-      Parse the config.cmake looking for the underlays list.
-    '''
-    f = open('config.cmake')
-    for line in f:
-        # use .*? where ? makes the match non-greedy
-        m = re.search('^set\(UNDERLAY_ROOTS "(.*?)"', line)
-        if m:
-            return m.group(1).split(';')
-    return []
 
 
 def create_symlink(src, dst):
@@ -68,16 +86,20 @@ def create_symlink(src, dst):
         raise RuntimeError()
 
 
-def find_catkin(underlays_list):
+def find_catkin(underlays_list=None):
     '''
       Search the underlays looking for catkin's toplevel.cmake and python module.
     '''
+    if underlays_list is None:
+        underlays_list = config_cache.get_underlays_list_from_config_cmake()
     catkin_toplevel = None
     catkin_python_path = None
+    catkin_cmake_path = None
     for underlay in underlays_list:
         if os.path.isfile(os.path.join(underlay, 'share', 'catkin', 'cmake', 'toplevel.cmake')):
+            catkin_cmake_path = os.path.join(underlay, 'share', 'catkin', 'cmake')
             catkin_toplevel = os.path.join(underlay, 'share', 'catkin', 'cmake', 'toplevel.cmake')
             if os.path.isfile(os.path.join(underlay, python_setup.get_global_python_destination(), 'catkin', 'builder.py')):
                 catkin_python_path = os.path.join(underlay, python_setup.get_global_python_destination())
             break
-    return catkin_toplevel, catkin_python_path
+    return catkin_toplevel, catkin_python_path, catkin_cmake_path

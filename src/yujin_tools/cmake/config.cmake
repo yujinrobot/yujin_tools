@@ -13,7 +13,7 @@ set(UNDERLAY_ROOTS "%(config_underlays)s" CACHE PATH "Semi-colon separated list 
 ###########################
 set(CMAKE_VERBOSE_MAKEFILE OFF CACHE BOOL "Verbosity in the makefile compilations.")
 set(CMAKE_BUILD_TYPE %(config_build_type)s CACHE STRING "Build mode type.")
-set(CMAKE_INSTALL_PREFIX %(config_install_prefix)s CACHE PATH "Install root location.")
+set(CMAKE_INSTALL_PREFIX "%(config_install_prefix)s" CACHE PATH "Install root location.")
 set(CMAKE_PREFIX_PATH "${UNDERLAY_ROOTS}" CACHE PATH "semi-colon separated software/ros workspace paths.")
 # We use CMAKE_USER_MAKE_RULES_OVERRIDE to configure CMAKE_CXX_FLAGS_INIT ()
 set(YUJIN_CXX_FLAGS_INIT "${PLATFORM_CXX_FLAGS}" CACHE STRING "Initial flags that get passed to CMAKE_CXX_FLAGS via the cmake override file.")

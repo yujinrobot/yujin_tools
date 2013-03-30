@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 
-import yujin_tools 
+import sys
+import yujin_tools
+import yujin_tools.console as console
 
-if __name__ == "__main__":
-    yujin_tools.init_workspace()
-
-
+if __name__ == '__main__':
+    try:
+        sys.exit(yujin_tools.init_workspace())
+    except Exception as e:
+        console.logerror(str(e))
+        sys.exit(1)

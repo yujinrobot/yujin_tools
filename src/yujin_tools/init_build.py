@@ -44,7 +44,7 @@ def parse_arguments():
     parser.add_argument('-p', '--platform', action='store', default='default', help='platform cmake cache module to load [default]')
     parser.add_argument('--list-toolchains', action='store_true', help='list all currently available toolchain modules [false]')
     parser.add_argument('--list-platforms', action='store_true', help='list all currently available platform modules [false]')
-    parser.add_argument('--track', action='store', default=None, help='retrieve rosinstalls relevant to this track [groovy|hydro][groovy]')
+    parser.add_argument('--track', action='store', default=None, help='default the underlays to this track if catkin is not found [groovy|hydro][groovy]')
     args = parser.parse_args()
     return args
 
@@ -255,7 +255,7 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     if os.path.isfile(os.path.join(source_dir, 'catkin', 'cmake', 'toplevel.cmake')):
         catkin_toplevel = os.path.join(source_dir, 'catkin', 'cmake', 'toplevel.cmake')
     else:
-        catkin_toplevel, unused_catkin_python_path = common.find_catkin(underlays_list)
+        catkin_toplevel, unused_catkin_python_path, unused_catkin_cmake_path = common.find_catkin(underlays_list)
 
     ##########################
     # Add toplevel if exists

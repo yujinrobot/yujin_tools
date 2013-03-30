@@ -4,9 +4,11 @@ from __future__ import print_function
 
 import sys
 from yujin_tools import make_main
+import yujin_tools.console as console
 
 if __name__ == '__main__':
     try:
         sys.exit(make_main())
     except Exception as e:
-        sys.exit(str(e))
+        console.logerror(str(e))
+        sys.exit(1)
