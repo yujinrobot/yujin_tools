@@ -228,7 +228,6 @@ def build_workspace_isolated(
 
     # Build packages
     original_develspace = copy.deepcopy(develspace)
-    last_env = None
     for index, path_package in enumerate(ordered_packages):
         path, package = path_package
         if not merge:
@@ -237,11 +236,11 @@ def build_workspace_isolated(
             try:
                 export_tags = [e.tagname for e in package.exports]
                 is_cmake_package = 'cmake' in [e.content for e in package.exports if e.tagname == 'build_type']
-                last_env = builder.build_package(
+                builder.build_package(
                     path, package,
                     workspace, buildspace, develspace, installspace,
                     install, jobs, force_cmake or (install_toggled and is_cmake_package),
-                    quiet, last_env, cmake_args, make_args,
+                    quiet, cmake_args, make_args,
                     number=index + 1, of=len(ordered_packages),
                     catkin_cmake_path=catkin_cmake_path,
                     catkin_python_path=catkin_python_path
@@ -263,7 +262,6 @@ def build_workspace_isolated(
                 sys.exit('Command failed, exiting.')
         else:
             builder.cprint("Skipping package: '@!@{bf}" + package.name + "@|'")
-            last_env = builder.get_new_env(package, develspace, installspace, install, last_env)
 
     # Provide a top level devel space environment setup script
     if not merge and not build_packages:

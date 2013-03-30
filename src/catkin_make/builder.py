@@ -231,7 +231,7 @@ def get_python_path(path):
 def build_catkin_package(
     path, package,
     workspace, buildspace, develspace, installspace,
-    install, jobs, force_cmake, quiet, last_env, cmake_args, make_args,
+    install, jobs, force_cmake, quiet, cmake_args, make_args,
     catkin_python_path
 ):
     cprint(
@@ -241,13 +241,6 @@ def build_catkin_package(
 
     # Make the build dir
     build_dir = _check_build_dir(package.name, workspace, buildspace)
-
-    # Check last_env
-    if last_env is not None:
-        cprint(
-            blue_arrow + " Building with env: " +
-            "'{0}'".format(last_env)
-        )
 
     # Help find catkin cmake and python
     env = os.environ.copy()
@@ -328,9 +321,14 @@ def build_catkin_package(
 def build_cmake_package(
     path, package,
     workspace, buildspace, develspace, installspace,
-    install, jobs, force_cmake, quiet, last_env, cmake_args, make_args,
+    install, jobs, force_cmake, quiet, cmake_args, make_args,
     catkin_cmake_path
 ):
+    # Ros typically puts the package devel space as devel/<pkg_name>.
+    # Undesirable here since we want it to do normal cmake installs
+    # of everything into devel/ OR have environment chaining
+    # everywhere. ugh. Changing this for now - DJS.
+    develspace = os.path.abspath(os.path.join(develspace, os.pardir))
     # Notify the user that we are processing a plain cmake package
     cprint(
         "Processing @{cf}plain cmake@| package: '@!@{bf}" + package.name +
@@ -339,11 +337,6 @@ def build_cmake_package(
 
     # Make the build dir
     build_dir = _check_build_dir(package.name, workspace, buildspace)
-
-    # Check last_env
-    if last_env is not None:
-        cprint(blue_arrow + " Building with env: " +
-               "'{0}'".format(last_env))
 
     # Check for Makefile and maybe call cmake
     makefile = os.path.join(build_dir, 'Makefile')
@@ -357,16 +350,12 @@ def build_cmake_package(
         ]
         cmake_cmd.extend(cmake_args)
         isolation_print_command(' '.join(cmake_cmd))
-        if last_env is not None:
-            cmake_cmd = [last_env] + cmake_cmd
         run_command_colorized(cmake_cmd, build_dir, quiet)
     else:
         print('Makefile exists, skipping explicit cmake invocation...')
         # Check to see if cmake needs to be run via make
         make_check_cmake_cmd = ['make', 'cmake_check_build_system']
         isolation_print_command(' '.join(make_check_cmake_cmd), build_dir)
-        if last_env is not None:
-            make_check_cmake_cmd = [last_env] + make_check_cmake_cmd
         run_command_colorized(
             make_check_cmake_cmd, build_dir, quiet
         )
@@ -375,96 +364,92 @@ def build_cmake_package(
     make_cmd = ['make', '-j' + str(jobs), '-l' + str(jobs)]
     make_cmd.extend(make_args)
     isolation_print_command(' '.join(make_cmd), build_dir)
-    if last_env is not None:
-        make_cmd = [last_env] + make_cmd
     run_command(make_cmd, build_dir, quiet)
 
     # Make install
     make_install_cmd = ['make', 'install']
     isolation_print_command(' '.join(make_install_cmd), build_dir)
-    if last_env is not None:
-        make_install_cmd = [last_env] + make_install_cmd
     run_command(make_install_cmd, build_dir, quiet)
 
     # If we are installing, and a env.sh exists, don't overwrite it
-    if install and os.path.exists(os.path.join(installspace, 'env.sh')):
-        return
-    cprint(blue_arrow + " Generating an env.sh")
+#    if install and os.path.exists(os.path.join(installspace, 'env.sh')):
+#        return
+#    cprint(blue_arrow + " Generating an env.sh")
     # Generate env.sh for chaining to catkin packages
-    new_env_path = os.path.join(install_target, 'env.sh')
-    variables = {
-        'SETUP_DIR': install_target,
-        'SETUP_FILENAME': 'setup'
-    }
-    with open(os.path.join(new_env_path), 'w') as f:
-        f.write(configure_file(os.path.join(catkin_cmake_path, 'templates', 'env.sh.in'), variables))
-    os.chmod(new_env_path, stat.S_IXUSR | stat.S_IWUSR | stat.S_IRUSR)
-
-    # Generate setup.sh for chaining to catkin packages
-    new_setup_path = os.path.join(install_target, 'setup.sh')
-    subs = {}
-    subs['cmake_prefix_path'] = install_target + ":"
-    subs['ld_path'] = os.path.join(install_target, 'lib') + ":"
-    pythonpath = ":".join(get_python_path(install_target))
-    if pythonpath:
-        pythonpath += ":"
-    subs['pythonpath'] = pythonpath
-    subs['pkgcfg_path'] = os.path.join(install_target, 'lib', 'pkgconfig')
-    subs['pkgcfg_path'] += ":"
-    subs['path'] = os.path.join(install_target, 'bin') + ":"
-    if not os.path.exists(install_target):
-        os.mkdir(install_target)
-    with open(new_setup_path, 'w+') as file_handle:
-        file_handle.write("""\
-#!/usr/bin/env sh
-# generated from catkin.builder module
-
-""")
-        if last_env is not None:
-            last_setup_env = os.path.join(os.path.dirname(last_env), 'setup.sh')
-            file_handle.write('. %s\n\n' % last_setup_env)
-        file_handle.write("""\
-# detect if running on Darwin platform
-UNAME=`which uname`
-UNAME=`$UNAME`
-IS_DARWIN=0
-if [ "$UNAME" = "Darwin" ]; then
-  IS_DARWIN=1
-fi
-
-# Prepend to the environment
-export CMAKE_PREFIX_PATH="{cmake_prefix_path}$CMAKE_PREFIX_PATH"
-if [ $IS_DARWIN -eq 0 ]; then
-  export LD_LIBRARY_PATH="{ld_path}$LD_LIBRARY_PATH"
-else
-  export DYLD_LIBRARY_PATH="{ld_path}$DYLD_LIBRARY_PATH"
-fi
-export PATH="{path}$PATH"
-export PKG_CONFIG_PATH="{pkgcfg_path}$PKG_CONFIG_PATH"
-export PYTHONPATH="{pythonpath}$PYTHONPATH"
-
-exec "$@"
-""".format(**subs)
-        )
+#    new_env_path = os.path.join(install_target, 'env.sh')
+#    variables = {
+#        'SETUP_DIR': install_target,
+#        'SETUP_FILENAME': 'setup'
+#    }
+#    with open(os.path.join(new_env_path), 'w') as f:
+#        f.write(configure_file(os.path.join(catkin_cmake_path, 'templates', 'env.sh.in'), variables))
+#    os.chmod(new_env_path, stat.S_IXUSR | stat.S_IWUSR | stat.S_IRUSR)
+#
+#    # Generate setup.sh for chaining to catkin packages
+#    new_setup_path = os.path.join(install_target, 'setup.sh')
+#    subs = {}
+#    subs['cmake_prefix_path'] = install_target + ":"
+#    subs['ld_path'] = os.path.join(install_target, 'lib') + ":"
+#    pythonpath = ":".join(get_python_path(install_target))
+#    if pythonpath:
+#        pythonpath += ":"
+#    subs['pythonpath'] = pythonpath
+#    subs['pkgcfg_path'] = os.path.join(install_target, 'lib', 'pkgconfig')
+#    subs['pkgcfg_path'] += ":"
+#    subs['path'] = os.path.join(install_target, 'bin') + ":"
+#    if not os.path.exists(install_target):
+#        os.mkdir(install_target)
+#    with open(new_setup_path, 'w+') as file_handle:
+#        file_handle.write("""\
+##!/usr/bin/env sh
+## generated from catkin.builder module
+#
+#""")
+#        if last_env is not None:
+#            last_setup_env = os.path.join(os.path.dirname(last_env), 'setup.sh')
+#            file_handle.write('. %s\n\n' % last_setup_env)
+#        file_handle.write("""\
+## detect if running on Darwin platform
+#UNAME=`which uname`
+#UNAME=`$UNAME`
+#IS_DARWIN=0
+#if [ "$UNAME" = "Darwin" ]; then
+#  IS_DARWIN=1
+#fi
+#
+## Prepend to the environment
+#export CMAKE_PREFIX_PATH="{cmake_prefix_path}$CMAKE_PREFIX_PATH"
+#if [ $IS_DARWIN -eq 0 ]; then
+#  export LD_LIBRARY_PATH="{ld_path}$LD_LIBRARY_PATH"
+#else
+#  export DYLD_LIBRARY_PATH="{ld_path}$DYLD_LIBRARY_PATH"
+#fi
+#export PATH="{path}$PATH"
+#export PKG_CONFIG_PATH="{pkgcfg_path}$PKG_CONFIG_PATH"
+#export PYTHONPATH="{pythonpath}$PYTHONPATH"
+#
+#exec "$@"
+#""".format(**subs)
+#        )
 
 
 def build_package(
     path, package,
     workspace, buildspace, develspace, installspace,
-    install, jobs, force_cmake, quiet, last_env, cmake_args, make_args,
+    install, jobs, force_cmake, quiet, cmake_args, make_args,
     number=None, of=None,
     catkin_cmake_path=None,
     catkin_python_path=None
 ):
 
     cprint('@!@{gf}==>@| ', end='')
-    new_last_env = get_new_env(package, develspace, installspace, install, last_env)
+    #new_last_env = get_new_env(package, develspace, installspace, install, last_env)
     build_type = _get_build_type(package)
     if build_type == 'catkin':
         build_catkin_package(
             path, package,
             workspace, buildspace, develspace, installspace,
-            install, jobs, force_cmake, quiet, last_env, cmake_args, make_args,
+            install, jobs, force_cmake, quiet, cmake_args, make_args,
             catkin_python_path
         )
         #if not os.path.exists(new_last_env):
@@ -478,7 +463,7 @@ def build_package(
         build_cmake_package(
             path, package,
             workspace, buildspace, develspace, installspace,
-            install, jobs, force_cmake, quiet, last_env, cmake_args, make_args,
+            install, jobs, force_cmake, quiet, cmake_args, make_args,
             catkin_cmake_path
         )
     else:
@@ -489,7 +474,6 @@ def build_package(
         msg = ''
     cprint('@{gf}<==@| Finished processing package' + msg + ': \'@{bf}@!' +
            package.name + '@|\'')
-    return new_last_env
 
 
 def get_new_env(package, develspace, installspace, install, last_env):
