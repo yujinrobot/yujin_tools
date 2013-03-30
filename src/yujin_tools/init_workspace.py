@@ -42,8 +42,7 @@ def help_string():
  - 'yujin_init_workspace --set-default-track=groovy' : sets the currently set default track.\n \
  - 'yujin_init_workspace --track=hydro ecl ecl' : populate a workspace from our rosinstall database for hydro.\n \
  - 'yujin_init_workspace ecl https://raw.github.com/stonier/ecl_core/groovy-devel/ecl.rosinstall' : populate from uri.\n\n \
- Note that the track options only apply if you are using the rosinstall database. \nIf you wish to add to the database, edit and pull request at\n\n \
-     https://github.com/yujinrobot/yujin_tools/blob/master//rosinstalls/groovy.yaml\n \
+ Note that the track options only apply if you are using a rosinstall database (use yujin_tools_settings to configure)\n\n \
  "
     return overview + instructions
 
@@ -73,7 +72,7 @@ def populate_worskpace(base_path, rosinstall_file_uri):
 
 
 def list_rosinstalls(track):
-    response = urllib2.urlopen('https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/%s.yaml' % track)
+    response = urllib2.urlopen('%s/%s.yaml' % (settings.get_rosinstall_database_uri(), track))
     rosinstalls = yaml.load(response.read())
     for r in rosinstalls.keys():
         console.pretty_print(" " + r + ": ", console.cyan)
@@ -108,8 +107,9 @@ def init_workspace():
                     console.pretty_print(" %s " % args.uri, console.yellow)
                     console.pretty_print("on track", console.cyan)
                     console.pretty_print(" %s " % args.track, console.yellow)
-                    console.pretty_println("from yujin's rosinstall database.", console.cyan)
-                    response = urllib2.urlopen('https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/%s.yaml' % args.track)
+                    console.pretty_print("from", console.cyan)
+                    console.pretty_println(" %s " % settings.get_rosinstall_database_uri(), console.yellow)
+                    response = urllib2.urlopen('%s/%s.yaml' % (settings.get_rosinstall_database_uri(), args.track))
                     rosinstalls = yaml.load(response.read())
                     if args.uri in rosinstalls:
                         uri = rosinstalls[args.uri]
