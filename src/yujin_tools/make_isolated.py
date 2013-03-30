@@ -8,6 +8,7 @@ import stat  # file permissions
 import argparse
 import subprocess
 import copy
+import shutil
 try:
     from catkin_pkg.packages import find_packages
     from catkin_pkg.topological_order import topological_order_packages
@@ -53,6 +54,7 @@ def _parse_args(args=sys.argv[1:]):
     parser.add_argument('--no-color', action='store_true', help='Disables colored ouput')
     parser.add_argument('--pkg', nargs='+', metavar='PKGNAME', dest='packages', help='Invoke "make" on specific packages (only after initial invocation)')
     parser.add_argument('-q', '--quiet', action='store_true', default=False, help='Suppresses the cmake and make output until an error occurs.')
+    parser.add_argument('-p', '--pre-clean', action='store_true', help='Clean build temporaries before making [false]')
     parser.add_argument('--cmake-args', dest='cmake_args', nargs='*', type=str,
         help='Arbitrary arguments which are passes to CMake. It must be passed after other arguments since it collects all following options.')
     parser.add_argument('--make-args', dest='make_args', nargs='*', type=str,
@@ -80,6 +82,14 @@ def make_isolated_main():
     devel_path = os.path.join(base_path, 'devel')
     install_path = config_cache.get_install_prefix_from_config_cmake()
     unused_catkin_toplevel, catkin_python_path, catkin_cmake_path = common.find_catkin()
+
+    # Clear out previous temporaries if requested
+    if args.pre_clean:
+        console.pretty_print("Pre-cleaning before building.", console.cyan)
+        shutil.rmtree(devel_path, ignore_errors=True)
+        shutil.rmtree(build_path, ignore_errors=True)
+        shutil.rmtree(install_path, ignore_errors=True)
+
 
     if not os.path.exists(build_path):
         os.mkdir(build_path)
