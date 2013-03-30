@@ -13,7 +13,7 @@ Template style wizard shortcuts for creating ros packages, stacks.
 * cfind 
 * yujin_init_workspace
 * yujin_init_build
-* roscreate-shortcuts
+* yujin_make, yujin_make_isolated
 
 ## Usage
 
@@ -31,7 +31,7 @@ any file containing those keywords (also prints line numbers). e.g.
 
     > cfind CSLAM_MACRO
 
-**yujin_init_workspace**, **yujin_init_buld**
+**yujin_init_workspace**, **yujin_init_buld**, **yujin_make**, **yujin_make_isolated**
 
 * [Yujin Init Tools](https://github.com/yujinrobot/yujin_tools/wiki/yujin-init)
 
