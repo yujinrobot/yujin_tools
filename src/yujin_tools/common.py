@@ -68,22 +68,36 @@ def parent_directory(path):
     return os.path.abspath(os.path.join(path, os.pardir))
 
 
-def create_symlink(src, dst):
+def create_symlink(src, dst, quiet=False):
     """
     Creates a symlink at dst to src.
     """
     if not os.path.exists(src):
-        console.logerror("'%s' is not a valid path" % src)
-        sys.exit(1)
+        raise RuntimeError("'%s' is not a valid path" % src)
     try:
         os.symlink(src, dst)
-        console.pretty_print('Creating symlink', console.white)
-        console.pretty_print(' "%s" ' % dst, console.bold)
-        console.pretty_print("->", console.white)
-        console.pretty_println(' "%s." ' % src, console.bold)
+        if not quiet:
+            console.pretty_print('Creating symlink', console.white)
+            console.pretty_print(' "%s" ' % dst, console.bold)
+            console.pretty_print("->", console.white)
+            console.pretty_println(' "%s." ' % src, console.bold)
     except Exception as ex_symlink:
-        console.logerror("Could not symlink '%s' to %s [%s]." % (src, dst, str(ex_symlink)))
-        raise RuntimeError()
+        raise RuntimeError("Could not symlink '%s' to %s [%s]." % (src, dst, str(ex_symlink)))
+
+
+def is_broken_symlink(link_path):
+    '''
+      Checks to see if the provided link_path is firstly, a link, and secondly if
+      that link is broken.
+    '''
+    if os.path.islink(link_path):
+        target_path = os.readlink(link_path)
+        # Resolve relative symlinks
+        if not os.path.isabs(target_path):
+            target_path = os.path.join(os.path.dirname(link_path), target_path)
+        if not os.path.exists(target_path):
+            return True
+    return False
 
 
 def find_catkin(underlays_list=None):

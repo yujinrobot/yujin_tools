@@ -90,11 +90,11 @@ def make_isolated_main():
         shutil.rmtree(build_path, ignore_errors=True)
         shutil.rmtree(install_path, ignore_errors=True)
 
-
     if not os.path.exists(build_path):
         os.mkdir(build_path)
 
     make.validate_build_space(base_path)  # raises a RuntimeError if there is a problem
+    make.check_and_update_source_repo_paths(source_path)
 
     build_workspace_isolated(
         workspace=base_path,

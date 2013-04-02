@@ -83,6 +83,33 @@ def validate_build_space(base_path):
         raise RuntimeError('Could not find a valid source path (did you init build correctly?)')
 
 
+def check_and_update_source_repo_paths(build_source_path):
+    '''
+      Check that the symbolic links we possible created in the build src directory still
+      match the original source directory. If not, update.
+    '''
+    f = open(os.path.join(build_source_path, '.yujin_init_build'), 'r')
+    try:
+        rel_path = f.read()
+    finally:
+        f.close()
+    original_source_path = os.path.join(build_source_path, rel_path)
+    # broken links show up as files
+    for unused_root, build_source_subdirectories, files in os.walk(build_source_path):
+        for f in files:
+            if common.is_broken_symlink(os.path.join(build_source_path, f)):
+                build_source_subdirectories.append(f)
+    original_source_subdirectories = os.walk(original_source_path).next()[1]
+    print build_source_subdirectories
+    print original_source_subdirectories
+    removed = [d for d in build_source_subdirectories if d not in original_source_subdirectories]
+    added = [d for d in original_source_subdirectories if d not in build_source_subdirectories]
+    for d in removed:
+        os.unlink(os.path.join(build_source_path, d))
+    for d in added:
+        common.create_symlink(os.path.join(original_source_path, d), os.path.join(build_source_path, d), quiet=True)
+
+
 def make_main():
     args = _parse_args()
     cmake_args = args.cmake_args
@@ -115,6 +142,9 @@ def make_main():
     toplevel_cmake = os.path.join(source_path, 'CMakeLists.txt')
     if not os.path.exists(toplevel_cmake):
         return fmt('@{rf}No toplevel cmake file@')
+
+    # did source paths get added to the original location?
+    check_and_update_source_repo_paths(source_path)
 
     packages = find_packages(source_path, exclude_subspaces=True)
 

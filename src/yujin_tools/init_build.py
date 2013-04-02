@@ -137,6 +137,15 @@ def print_build_details(build_dir, source_dir, install_prefix, build_type, under
     console.pretty_println("**********************************************************************************\n", console.bold)
 
 
+def write_yujin_init_build_configuration(build_source_dir, source_dir):
+    try:
+        f = open(os.path.join(build_source_dir, '.yujin_init_build'), 'w')
+        rel_path = os.path.relpath(source_dir, build_source_dir)
+        f.write(rel_path.encode('utf-8'))
+    finally:
+        f.close()
+
+
 def get_toolchains_or_platforms(base_path):
     '''
       Does a look up in the path for either toolchain or platform files.
@@ -234,6 +243,7 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
         source_subdirectories = os.walk(source_dir).next()[1]
         for d in source_subdirectories:
             common.create_symlink(os.path.join(source_dir, d), os.path.join(build_source_dir, d))
+    write_yujin_init_build_configuration(build_source_dir, source_dir)
 
     ##########################
     # Underlays
