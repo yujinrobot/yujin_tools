@@ -1,3 +1,5 @@
+0.2.9
+ - bugfix the single build case for source symlink checks
 0.2.8
  - allow for empty workspaces when init'ing
  - check and update source symlinks
