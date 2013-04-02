@@ -93,12 +93,12 @@ def check_and_update_source_repo_paths(build_source_path):
         rel_path = f.read()
     finally:
         f.close()
-    original_source_path = os.path.join(build_source_path, rel_path)
+    original_source_path = os.path.abspath(os.path.join(build_source_path, rel_path))
     # broken links show up as files
-    for unused_root, build_source_subdirectories, files in os.walk(build_source_path):
-        for f in files:
-            if common.is_broken_symlink(os.path.join(build_source_path, f)):
-                build_source_subdirectories.append(f)
+    (unused_root, build_source_subdirectories, files) = os.walk(build_source_path).next()
+    for f in files:
+        if common.is_broken_symlink(os.path.join(build_source_path, f)):
+            build_source_subdirectories.append(f)
     original_source_subdirectories = os.walk(original_source_path).next()[1]
     print build_source_subdirectories
     print original_source_subdirectories
