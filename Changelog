@@ -1,3 +1,6 @@
+0.2.8
+ - allow for empty workspaces when init'ing
+ - check and update source symlinks
 0.2.7
  - pre-clean for yujin_make_isolated
 0.2.6
