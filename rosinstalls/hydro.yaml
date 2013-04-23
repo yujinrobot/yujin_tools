@@ -1,3 +1,4 @@
 rocon: https://raw.github.com/robotics-in-concert/rocon_concert/hydro-devel/rocon.rosinstall
+kobuki: https://raw.github.com/yujinrobot/kobuki/hydro-devel-devel/kobuki.rosinstall
 multinav_concert: https://raw.github.com/robotics-in-concert/rocon_multirobot_experimental/master/multinav_concert.rosinstall 
 
