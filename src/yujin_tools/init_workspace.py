@@ -50,24 +50,27 @@ def help_string():
 def parse_arguments():
     parser = argparse.ArgumentParser(description=help_string(), formatter_class=RawTextHelpFormatter)
     parser.add_argument('dir', nargs='?', default=os.getcwd(), help='directory to use for the workspace [current working directory]')
-    parser.add_argument('uri', nargs='?', default=None, help='uri for a rosinstall file [None]')
     parser.add_argument('-s', '--simple', action='store_true', help='just create a basic single build workspace (usual ros style) [false]')
     parser.add_argument('--list-rosinstalls', action='store_true', help='list all currently available rosinstalls [false]')
     parser.add_argument('--track', action='store', default=None, help='retrieve rosinstalls relevant to this track [groovy|hydro][groovy]')
+    parser.add_argument('-j', '--jobs', action='store', default=1, help='how many parallel threads to use for installing[1]')
+    parser.add_argument('uri', nargs=argparse.REMAINDER, default=None, help='uri for a rosinstall file [None]')
     args = parser.parse_args()
     return args
 
 
-def populate_worskpace(base_path, uri):
+def populate_worskpace(base_path, uri_list, parallel_jobs):
     '''
       @param base_path : location of the wstool workspace
       @param uri : the uri for the rosinstall file
     '''
     wstool_arguments = ['wstool',
                         'init',
+                        '-j %s' % str(parallel_jobs),
                         base_path,
                         ]
-    if uri:
+    #print("%s" % uri_list)
+    for uri in uri_list:
         wstool_arguments.append(uri)
     wstool.wstool_cli.wstool_main(wstool_arguments)
 
@@ -98,25 +101,25 @@ def init_workspace():
     lookup_name = None
     lookup_database = None
     lookup_track = None
-    if args.uri:
-        uri = args.uri  # assume its an absolute path or http uri
-        if not os.path.isabs(args.uri):
-            if os.path.isfile(os.path.join(os.getcwd(), args.uri)):
-                uri = os.path.join(os.getcwd(), args.uri)
+    uri_list = []
+    for uri in args.uri:
+        if os.path.isabs(uri):
+            uri_list.append(uri)
+        else:
+            if os.path.isfile(os.path.join(os.getcwd(), uri)):
+                uri_list.append(os.path.join(os.getcwd(), uri))
             else:
-                if urlparse.urlparse(args.uri).scheme == "":  # not a http element, let's look up our databas
-                    lookup_name = args.uri
+                if urlparse.urlparse(uri).scheme == "":  # not a http element, let's look up our databas
+                    lookup_name = uri
                     lookup_track = args.track
                     lookup_database = settings.get_rosinstall_database_uri()
                     response = urllib2.urlopen('%s/%s.yaml' % (lookup_database, args.track))
                     rosinstalls = yaml.load(response.read())
-                    if args.uri in rosinstalls:
-                        uri = rosinstalls[args.uri]
+                    if uri in rosinstalls:
+                        uri_list.append(rosinstalls[uri])
                     else:
                         raise RuntimeError("Uri not an absolute path, local file, http or in our rosinstall database.")
-    else:
-        uri = None
-    populate_worskpace(os.path.join(workspace_dir, 'src'), uri)
+    populate_worskpace(os.path.join(workspace_dir, 'src'), uri_list, args.jobs)
     print_details(workspace_dir, uri, lookup_name, lookup_track, lookup_database)
 
 
