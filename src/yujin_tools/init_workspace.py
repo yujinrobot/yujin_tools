@@ -102,9 +102,44 @@ def get_rosinstall_database(track):
     return rosinstall_database, lookup_track, lookup_database
 
 
-def parse_database(search_names):
+def parse_database(search_names, rosinstall_database):
     names = []
     sources = []
+    for name in search_names:
+        if name in rosinstall_database:
+            elements = rosinstall_database[name]
+            print("Elements %s" % elements)
+            new_names = []
+            new_sources = []
+            if type(elements) is list:
+                for element in elements:
+                    print("Element %s" % element)
+                    if element.endswith('.rosinstall'):
+                        print("  Rosinstall %s" % element)
+                        new_sources.append(element)
+                    else:
+                        new_names.append(element)
+                        print("  Name %s" % element)
+            else:  # single entry
+                if elements.endswith('.rosinstall'):
+                    new_sources.append(elements)
+                else:
+                    new_names.append(elements)
+            names.extend(new_names)
+            sources.extend(new_sources)
+            if new_names:
+                (new_names, new_sources) = parse_database(new_names, rosinstall_database)
+                names.extend(new_names)
+                sources.extend(new_sources)
+        else:
+            raise RuntimeError("not found in the rosinstall database [%s]" % name)
+#                    (new_names, new_sources) = parse_database([elements], rosinstall_database)
+#                        (new_names, new_sources) = parse_database([element], rosinstall_database)
+#                        names.extend(new_names)
+#                        sources.extend(new_sources)
+#                    sources.append(elements)
+#                    names.extend(new_names)
+#                    sources.extend(new_sources)
     return (names, sources)
 
 
@@ -130,21 +165,16 @@ def init_workspace():
     for uri in args.uri:
         if os.path.isabs(uri):
             uri_list.append(uri)
-            lookup_name_list.append(None)
         else:
             if os.path.isfile(os.path.join(os.getcwd(), uri)):
                 uri_list.append(os.path.join(os.getcwd(), uri))
-                lookup_name_list.append(None)
             else:
-                if urlparse.urlparse(uri).scheme == "":  # not a http element, let's look up our databas
+                if urlparse.urlparse(uri).scheme == "":  # not a http element, let's look up our database
                     lookup_name_list.append(uri)
     rosinstall_database, lookup_track, lookup_database = get_rosinstall_database(args.track)
-    for name in lookup_name_list:
-        if name in rosinstall_database:
-            uri_list.append(rosinstall_database[uri])
-        else:
-            raise RuntimeError("Uri not an absolute path, local file, http or in our rosinstall database.")
-
+    (database_name_list, database_uri_list) = parse_database(lookup_name_list, rosinstall_database)
+    lookup_name_list.extend(database_name_list)
+    uri_list.extend(database_uri_list)
     populate_worskpace(os.path.join(workspace_dir, 'src'), uri_list, args.jobs)
     print_details(workspace_dir, uri_list, lookup_name_list, lookup_track, lookup_database)
 
