@@ -1,5 +1,4 @@
 rocon: https://raw.github.com/robotics-in-concert/rocon_concert/hydro-devel/rocon.rosinstall
 kobuki: https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki.rosinstall
-dude: [kobuki, rocon]
-multinav_concert: https://raw.github.com/robotics-in-concert/rocon_multirobot_experimental/master/multinav_concert.rosinstall 
+multinav_concert: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_multirobot_experimental/hydro-devel/multinav_concert.rosinstall']
 
