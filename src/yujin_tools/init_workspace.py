@@ -108,18 +108,14 @@ def parse_database(search_names, rosinstall_database):
     for name in search_names:
         if name in rosinstall_database:
             elements = rosinstall_database[name]
-            print("Elements %s" % elements)
             new_names = []
             new_sources = []
             if type(elements) is list:
                 for element in elements:
-                    print("Element %s" % element)
                     if element.endswith('.rosinstall'):
-                        print("  Rosinstall %s" % element)
                         new_sources.append(element)
                     else:
                         new_names.append(element)
-                        print("  Name %s" % element)
             else:  # single entry
                 if elements.endswith('.rosinstall'):
                     new_sources.append(elements)

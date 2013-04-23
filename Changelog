@@ -1,3 +1,5 @@
+0.2.11
+ - remove debugging prints
 0.2.10
  - multiple targets for init_workspace
  - relational rosinstalls in the rosinstall database (again init workspace)
