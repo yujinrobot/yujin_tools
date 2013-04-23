@@ -1,3 +1,6 @@
+0.2.10
+ - multiple targets for init_workspace
+ - relational rosinstalls in the rosinstall database (again init workspace)
 0.2.9
  - bugfix the single build case for source symlink checks
 0.2.8
