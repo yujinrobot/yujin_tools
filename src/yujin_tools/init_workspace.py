@@ -69,9 +69,20 @@ def populate_worskpace(base_path, uri_list, parallel_jobs):
                         '-j %s' % str(parallel_jobs),
                         base_path,
                         ]
-    #print("%s" % uri_list)
+    wstool.wstool_cli.wstool_main(wstool_arguments)
     for uri in uri_list:
+        wstool_arguments = ['wstool',
+                            'merge',
+                            '--target-workspace=%s' % base_path
+                        ]
         wstool_arguments.append(uri)
+        wstool.wstool_cli.wstool_main(wstool_arguments)
+    # update
+    wstool_arguments = ['wstool',
+                        'update',
+                        '-j %s' % str(parallel_jobs),
+                        '--target-workspace=%s' % base_path
+                    ]
     wstool.wstool_cli.wstool_main(wstool_arguments)
 
 
@@ -81,6 +92,20 @@ def list_rosinstalls(track):
     for r in rosinstalls.keys():
         console.pretty_print(" " + r + ": ", console.cyan)
         console.pretty_println(rosinstalls[r], console.yellow)
+
+
+def get_rosinstall_database(track):
+    lookup_track = track
+    lookup_database = settings.get_rosinstall_database_uri()
+    response = urllib2.urlopen('%s/%s.yaml' % (lookup_database, track))
+    rosinstall_database = yaml.load(response.read())
+    return rosinstall_database, lookup_track, lookup_database
+
+
+def parse_database(search_names):
+    names = []
+    sources = []
+    return (names, sources)
 
 
 def init_workspace():
@@ -98,50 +123,52 @@ def init_workspace():
         os.mkdir(workspace_dir)
     if os.path.isdir(os.path.join(workspace_dir, 'src')):
         raise RuntimeError("This workspace is already initialised")
-    lookup_name = None
-    lookup_database = None
     lookup_track = None
+    lookup_database = None
     uri_list = []
+    lookup_name_list = []
     for uri in args.uri:
         if os.path.isabs(uri):
             uri_list.append(uri)
+            lookup_name_list.append(None)
         else:
             if os.path.isfile(os.path.join(os.getcwd(), uri)):
                 uri_list.append(os.path.join(os.getcwd(), uri))
+                lookup_name_list.append(None)
             else:
                 if urlparse.urlparse(uri).scheme == "":  # not a http element, let's look up our databas
-                    lookup_name = uri
-                    lookup_track = args.track
-                    lookup_database = settings.get_rosinstall_database_uri()
-                    response = urllib2.urlopen('%s/%s.yaml' % (lookup_database, args.track))
-                    rosinstalls = yaml.load(response.read())
-                    if uri in rosinstalls:
-                        uri_list.append(rosinstalls[uri])
-                    else:
-                        raise RuntimeError("Uri not an absolute path, local file, http or in our rosinstall database.")
+                    lookup_name_list.append(uri)
+    rosinstall_database, lookup_track, lookup_database = get_rosinstall_database(args.track)
+    for name in lookup_name_list:
+        if name in rosinstall_database:
+            uri_list.append(rosinstall_database[uri])
+        else:
+            raise RuntimeError("Uri not an absolute path, local file, http or in our rosinstall database.")
+
     populate_worskpace(os.path.join(workspace_dir, 'src'), uri_list, args.jobs)
-    print_details(workspace_dir, uri, lookup_name, lookup_track, lookup_database)
+    print_details(workspace_dir, uri_list, lookup_name_list, lookup_track, lookup_database)
 
 
-def print_details(workspace_dir, uri, lookup_name, lookup_track, lookup_database):
+def print_details(workspace_dir, uri_list, lookup_name_list, lookup_track, lookup_database):
     console.pretty_println("\n***************************** Development Workspace ******************************", console.bold)
-    console.pretty_print("Workspace: ", console.cyan)
+    console.pretty_print("Workspace   : ", console.cyan)
     console.pretty_println(workspace_dir, console.yellow)
-    if not uri:
-        console.pretty_print("Sources  : ", console.cyan)
-        console.pretty_println("empty workspace", console.yellow)
-    elif lookup_name:
-        console.pretty_println("Lookup Details: ", console.cyan)
-        console.pretty_print("  Name    : ", console.cyan)
-        console.pretty_println(lookup_name, console.yellow)
-        console.pretty_print("  Track   : ", console.cyan)
+    if lookup_name_list:
+        console.pretty_print("  Names     : ", console.cyan)
+        for lookup_name in lookup_name_list:
+            console.pretty_print("%s " % lookup_name, console.yellow)
+        console.pretty_println('', console.yellow)
+        console.pretty_print("    Track   : ", console.cyan)
         console.pretty_println(lookup_track, console.yellow)
-        console.pretty_print("  Database: ", console.cyan)
+        console.pretty_print("    Database: ", console.cyan)
         console.pretty_println(lookup_database, console.yellow)
-        console.pretty_print("  Sources : ", console.cyan)
-        console.pretty_println(uri, console.yellow)
+    console.pretty_print("  Sources   : ", console.cyan)
+    if uri_list:
+        console.pretty_println("%s " % uri_list[0], console.yellow)
+        for uri in uri_list[1:]:
+            console.pretty_print("            : ", console.cyan)
+            console.pretty_println("%s " % uri, console.yellow)
     else:
-        console.pretty_print("Sources  : ", console.cyan)
-        console.pretty_println(uri, console.yellow)
+        console.pretty_println("empty workspace", console.yellow)
     console.pretty_println("**********************************************************************************", console.bold)
     console.pretty_println("\nMerge additional source directories with `wstool` and configure parallel builds with 'yujin_init_build'.\n", console.cyan)
