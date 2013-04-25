@@ -1,4 +1,5 @@
-rocon: https://raw.github.com/robotics-in-concert/rocon_concert/hydro-devel/rocon.rosinstall
-kobuki: https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki.rosinstall
+rocon: 'https://raw.github.com/robotics-in-concert/rocon_concert/hydro-devel/rocon.rosinstall'
+kobuki: 'https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki.rosinstall'
 multinav: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_multirobot_experimental/hydro-devel/multinav_concert.rosinstall']
+turtlebot_android: 'https://raw.github.com/turtlebot/turtlebot_android/hydro-devel/turtlebot_android.rosinstall'
 
