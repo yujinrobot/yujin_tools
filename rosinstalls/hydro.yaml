@@ -1,4 +1,4 @@
-android: 'https://raw.github.com/ros-java/android_honeycomb/hydro-devel/android.rosinstall'
+android: [rosjava, 'https://raw.github.com/ros-java/android_honeycomb/hydro-devel/android.rosinstall']
 rosjava: 'https://raw.github.com/ros-java/rosjava_extras/hydro-devel/rosjava.rosinstall'
 kobuki: 'https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki.rosinstall'
 multinav: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_multirobot_experimental/hydro-devel/multinav_concert.rosinstall']
