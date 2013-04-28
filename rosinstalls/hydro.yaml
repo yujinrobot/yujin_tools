@@ -1,7 +1,10 @@
 android: [rosjava, 'https://raw.github.com/ros-java/android_honeycomb_core/hydro-devel/android.rosinstall']
-rosjava: 'https://raw.github.com/ros-java/rosjava_extras/hydro-devel/rosjava.rosinstall'
+android-legacy: [rosjava-legacy, 'https://raw.github.com/ros-java/android_honeycomb_core/hydro-legacy/android.rosinstall']
 kobuki: 'https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki.rosinstall'
 multinav: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_multirobot_experimental/hydro-devel/multinav_concert.rosinstall']
 rocon: 'https://raw.github.com/robotics-in-concert/rocon_concert/hydro-devel/rocon.rosinstall'
+rosjava: 'https://raw.github.com/ros-java/rosjava_extras/hydro-devel/rosjava.rosinstall'
+rosjava-legacy: 'https://raw.github.com/ros-java/rosjava_extras/hydro-legacy/rosjava.rosinstall'
 turtlebot_android: 'https://raw.github.com/turtlebot/turtlebot_android/hydro-devel/turtlebot_android.rosinstall'
+turtlebot_android-legacy: [rosjava-legacy, android-legacy, 'https://raw.github.com/turtlebot/turtlebot_android/hydro-legacy/turtlebot_android.rosinstall']
 
