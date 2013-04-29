@@ -39,7 +39,7 @@ def parse_arguments():
     parser.add_argument('sources', nargs='?', default="src", help='directory where the sources reside [./src]')
     parser.add_argument('-r', '--release', action='store_true', help='build in Release mode instead of RelWithDebugSymbols [false]')
     parser.add_argument('-i', '--install', action='store', default='/not_set_directory', help='installation location [workspace/install]')
-    parser.add_argument('-u', '--underlays', action='store', default='', help='semi-colon list of catkin workspaces to utilise [/opt/ros/groovy]')
+    parser.add_argument('-u', '--underlays', action='store', default='', help='semi-colon list of catkin workspaces to utilise, priority given from front to back [/opt/ros/groovy]')
     parser.add_argument('-t', '--toolchain', action='store', default='', help='toolchain cmake module to load []')
     parser.add_argument('-p', '--platform', action='store', default='default', help='platform cmake cache module to load [default]')
     parser.add_argument('--list-toolchains', action='store_true', help='list all currently available toolchain modules [false]')
