@@ -1,5 +1,6 @@
 android: [rosjava, 'https://raw.github.com/ros-java/android_honeycomb_core/hydro-devel/android.rosinstall']
 android-legacy: [rosjava-legacy, 'https://raw.github.com/ros-java/android_honeycomb_core/hydro-legacy/android.rosinstall']
+cafe_concert: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_demos/hydro-devel/cafe_concert.rosinstall']
 kobuki: 'https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki.rosinstall'
 multinav: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_multirobot_experimental/hydro-devel/multinav_concert.rosinstall']
 rocon: 'https://raw.github.com/robotics-in-concert/rocon_concert/hydro-devel/rocon.rosinstall'
