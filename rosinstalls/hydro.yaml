@@ -7,5 +7,5 @@ rocon: 'https://raw.github.com/robotics-in-concert/rocon_concert/hydro-devel/roc
 rosjava: 'https://raw.github.com/ros-java/rosjava_extras/hydro-devel/rosjava.rosinstall'
 rosjava-legacy: 'https://raw.github.com/ros-java/rosjava_extras/hydro-legacy/rosjava.rosinstall'
 turtlebot_android: 'https://raw.github.com/turtlebot/turtlebot_android/hydro-devel/turtlebot_android.rosinstall'
-turtlebot_android-legacy: [rosjava-legacy, android-legacy, 'https://raw.github.com/turtlebot/turtlebot_android/hydro-legacy/turtlebot_android.rosinstall']
+turtlebot_android-legacy: 'https://raw.github.com/turtlebot/turtlebot_android/hydro-legacy/turtlebot_android.rosinstall'
 
