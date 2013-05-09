@@ -39,6 +39,7 @@ def _parse_args(args=sys.argv[1:]):
     parser.add_argument('-j', '--jobs', type=int, metavar='JOBS', default=None, nargs='?', help='Specifies the number of jobs (commands) to run simultaneously. Defaults to the environment variable ROS_PARALLEL_JOBS and falls back to the number of CPU cores.')
     parser.add_argument('--force-cmake', action='store_true', help='Invoke "cmake" even if it has been executed before [false]')
     parser.add_argument('-p', '--pre-clean', action='store_true', help='Clean build temporaries before making [false]')
+    parser.add_argument('-c', '--cmake-only', action='store_true', help='Do not compile, just force a re-run of cmake [false]')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-i', '--install', action='store_true', help='Run install step after making [false]')
     group.add_argument('-t', '--tests', action='store_true', help='Make tests [false]')
@@ -199,34 +200,35 @@ def make_main():
             return fmt('@{rf}Invoking @{boldon}"make cmake_check_build_system"@{boldoff} failed')
 
     # invoke make
-    if args.install:
-        cmd = ['make', 'install']
-    elif args.tests:
-        cmd = ['make', 'tests']
-    elif args.run_tests:
-        cmd = ['make', 'run_tests']
-    else:
-        cmd = ['make']
-    jobs = args.jobs
-    if args.jobs == '':
-        cmd.append('-j')
-    else:
+    if not args.cmake_only:
+        if args.install:
+            cmd = ['make', 'install']
+        elif args.tests:
+            cmd = ['make', 'tests']
+        elif args.run_tests:
+            cmd = ['make', 'run_tests']
+        else:
+            cmd = ['make']
         jobs = args.jobs
-        if not jobs:
-            if 'ROS_PARALLEL_JOBS' in os.environ:
-                ros_parallel_jobs = os.environ['ROS_PARALLEL_JOBS']
-                cmd += [arg for arg in ros_parallel_jobs.split(' ') if arg]
-            else:
-                jobs = multiprocessing.cpu_count()
-        if jobs:
-            cmd.append('-j%d' % jobs)
-            cmd.append('-l%d' % jobs)
-    cmd += args.make_args
-    try:
-        make_path = build_path
-        if args.pkg:
-            make_path = os.path.join(make_path, packages_by_name[args.pkg])
-        builder.print_command_banner(cmd, make_path, color=not args.no_color)
-        builder.run_command(cmd, make_path, env=env)
-    except subprocess.CalledProcessError:
-        return fmt('@{rf}Invoking @{boldon}"make"@{boldoff} failed')
+        if args.jobs == '':
+            cmd.append('-j')
+        else:
+            jobs = args.jobs
+            if not jobs:
+                if 'ROS_PARALLEL_JOBS' in os.environ:
+                    ros_parallel_jobs = os.environ['ROS_PARALLEL_JOBS']
+                    cmd += [arg for arg in ros_parallel_jobs.split(' ') if arg]
+                else:
+                    jobs = multiprocessing.cpu_count()
+            if jobs:
+                cmd.append('-j%d' % jobs)
+                cmd.append('-l%d' % jobs)
+        cmd += args.make_args
+        try:
+            make_path = build_path
+            if args.pkg:
+                make_path = os.path.join(make_path, packages_by_name[args.pkg])
+            builder.print_command_banner(cmd, make_path, color=not args.no_color)
+            builder.run_command(cmd, make_path, env=env)
+        except subprocess.CalledProcessError:
+            return fmt('@{rf}Invoking @{boldon}"make"@{boldoff} failed')
