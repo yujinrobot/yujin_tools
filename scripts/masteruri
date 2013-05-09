@@ -1,0 +1,15 @@
+#!/bin/bash
+
+die () {
+    echo >&2 "$@"
+    exit 1
+}
+[ "$#" -le 1 ] || die "0 or 1 arguments required, $# provided"
+
+if [ "$#" -eq 0 ]; then
+  echo $ROS_MASTER_URI
+else
+  echo $1 | grep -E -q '^[0-9]+$' || die "Numeric argument required, $1 provided."
+  export ROS_MASTER_URI=http://localhost:1131${1} 
+  echo $ROS_MASTER_URI
+fi

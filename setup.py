@@ -17,6 +17,7 @@ setup(name='yujin_tools',
       package_dir = {'yujin_tools':'src/yujin_tools', 'catkin_make':'src/catkin_make'},
       scripts = [
            'scripts/cfind',
+           'scripts/masteruri',
            'scripts/yujin_init_workspace',
            'scripts/yujin_init_build',
            'scripts/yujin_make',
