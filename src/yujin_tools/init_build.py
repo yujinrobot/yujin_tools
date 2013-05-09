@@ -265,7 +265,7 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     if os.path.isfile(os.path.join(source_dir, 'catkin', 'cmake', 'toplevel.cmake')):
         catkin_toplevel = os.path.join(source_dir, 'catkin', 'cmake', 'toplevel.cmake')
     else:
-        catkin_toplevel, unused_catkin_python_path, unused_catkin_cmake_path = common.find_catkin(underlays_list)
+        catkin_toplevel, unused_catkin_python_path, unused_catkin_cmake_path = common.find_catkin(build_dir, underlays_list)
 
     ##########################
     # Add toplevel if exists

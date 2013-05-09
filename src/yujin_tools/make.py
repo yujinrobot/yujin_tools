@@ -5,6 +5,7 @@
 #import os
 import os.path
 
+import re
 import sys
 #import stat  # file permissions
 import argparse
@@ -101,14 +102,29 @@ def check_and_update_source_repo_paths(build_source_path):
         if common.is_broken_symlink(os.path.join(build_source_path, f)):
             build_source_subdirectories.append(f)
     original_source_subdirectories = os.walk(original_source_path).next()[1]
-    print build_source_subdirectories
-    print original_source_subdirectories
+    #print build_source_subdirectories
+    #print original_source_subdirectories
     removed = [d for d in build_source_subdirectories if d not in original_source_subdirectories]
     added = [d for d in original_source_subdirectories if d not in build_source_subdirectories]
     for d in removed:
         os.unlink(os.path.join(build_source_path, d))
     for d in added:
         common.create_symlink(os.path.join(original_source_path, d), os.path.join(build_source_path, d), quiet=True)
+
+
+def insert_yujin_make_signature(yujin_make_root, devel_path):
+    '''
+      Insert YUJIN_MAKE_ROOT=xxx into devel/setup.bash if the cmake process succeeded. This helps yujin_make
+      kickstart itself from anywhere in the future.
+    '''
+    setup_sh = open(os.path.join(devel_path, 'setup.sh'), 'a+')
+    found = False
+    for line in setup_sh:
+        if re.search('^export YUJIN_MAKE_ROOT', line):
+            found = True
+            break
+    if not found:
+        setup_sh.write("export YUJIN_MAKE_ROOT=%s\n" % yujin_make_root)
 
 
 def make_main():
@@ -120,7 +136,7 @@ def make_main():
         terminal_color.disable_ANSI_colors()
 
     # Default paths
-    base_path = os.path.abspath('.')
+    base_path = os.environ.get("YUJIN_MAKE_ROOT") or os.getcwd()  # Fallback if os.environ.get returns None
     build_path = os.path.join(base_path, 'build')
     devel_path = os.path.join(base_path, 'devel')
     source_path = os.path.join(base_path, 'src')
@@ -163,7 +179,7 @@ def make_main():
     config_cmd = "-C%s" % os.path.join(base_path, 'config.cmake') if os.path.isfile(os.path.join(base_path, 'config.cmake')) else None
 
     # Help find catkin cmake and python
-    unused_catkin_toplevel, catkin_python_path, unused_catkin_cmake_path = common.find_catkin()
+    unused_catkin_toplevel, catkin_python_path, unused_catkin_cmake_path = common.find_catkin(base_path)
     env = os.environ.copy()
     try:
         env['PYTHONPATH'] = env['PYTHONPATH'] + os.pathsep + catkin_python_path
@@ -198,6 +214,8 @@ def make_main():
                 builder.run_command_colorized(cmd, build_path, env=env)
         except subprocess.CalledProcessError:
             return fmt('@{rf}Invoking @{boldon}"make cmake_check_build_system"@{boldoff} failed')
+
+    insert_yujin_make_signature(base_path, devel_path)
 
     # invoke make
     if not args.cmake_only:

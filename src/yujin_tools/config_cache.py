@@ -2,6 +2,7 @@
 # Imports
 ##############################################################################
 
+import os
 import re
 
 ##############################################################################
@@ -23,11 +24,11 @@ def get_install_prefix_from_config_cmake():
     return ""
 
 
-def get_underlays_list_from_config_cmake():
+def get_underlays_list_from_config_cmake(base_path=os.getcwd()):
     '''
       Parse the config.cmake looking for the underlays list.
     '''
-    f = open('config.cmake')
+    f = open(os.path.join(base_path, 'config.cmake'))
     for line in f:
         # use .*? where ? makes the match non-greedy
         m = re.search('^set\(UNDERLAY_ROOTS "(.*?)"', line)

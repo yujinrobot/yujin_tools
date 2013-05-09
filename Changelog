@@ -1,3 +1,7 @@
+0.2.14
+ - bugfix broken find catkin args in yujin_init_build
+0.2.13
+ - trigger yujin_make from YUJIN_MAKE_ROOT environment variable automagically hidden in setup.bash
 0.2.12
  - help instructions for sequencing of underlays
 0.2.11

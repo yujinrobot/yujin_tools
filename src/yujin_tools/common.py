@@ -100,12 +100,12 @@ def is_broken_symlink(link_path):
     return False
 
 
-def find_catkin(underlays_list=None):
+def find_catkin(base_path, underlays_list=None):
     '''
       Search the underlays looking for catkin's toplevel.cmake and python module.
     '''
     if underlays_list is None:
-        underlays_list = config_cache.get_underlays_list_from_config_cmake()
+        underlays_list = config_cache.get_underlays_list_from_config_cmake(base_path)
     catkin_toplevel = None
     catkin_python_path = None
     catkin_cmake_path = None
