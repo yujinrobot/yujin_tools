@@ -154,19 +154,17 @@ def init_workspace():
         os.mkdir(workspace_dir)
     if os.path.isdir(os.path.join(workspace_dir, 'src')):
         raise RuntimeError("This workspace is already initialised")
-    lookup_track = None
-    lookup_database = None
     uri_list = []
     lookup_name_list = []
     for uri in args.uri:
         if os.path.isabs(uri):
             uri_list.append(uri)
-        else:
-            if os.path.isfile(os.path.join(os.getcwd(), uri)):
+        elif os.path.isfile(os.path.join(os.getcwd(), uri)):
                 uri_list.append(os.path.join(os.getcwd(), uri))
-            else:
-                if urlparse.urlparse(uri).scheme == "":  # not a http element, let's look up our database
-                    lookup_name_list.append(uri)
+        elif urlparse.urlparse(uri).scheme == "":  # not a http element, let's look up our database
+                lookup_name_list.append(uri)
+        else:  # it's a http element'
+            uri_list.append(uri)
     rosinstall_database, lookup_track, lookup_database = get_rosinstall_database(args.track)
     (database_name_list, database_uri_list) = parse_database(lookup_name_list, rosinstall_database)
     lookup_name_list.extend(database_name_list)
