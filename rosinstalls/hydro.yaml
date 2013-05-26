@@ -5,7 +5,6 @@ kobuki: 'https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki.rosinstall'
 multinav: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_multirobot_experimental/hydro-devel/multinav_concert.rosinstall']
 rocon: 'https://raw.github.com/robotics-in-concert/rocon_concert/hydro-devel/rocon.rosinstall'
 rocon_android: [android, 'https://raw.github.com/robotics-in-concert/rocon_android/hydro-devel/rocon_android.rosinstall']
-rosjava: 'https://raw.github.com/ros-java/rosjava_extras/hydro-devel/rosjava.rosinstall'
-rosjava-legacy: 'https://raw.github.com/ros-java/rosjava_extras/hydro-legacy/rosjava.rosinstall'
+rosjava: 'https://raw.github.com/ros-java/rosjava_tools/hydro-devel/rosjava.rosinstall'
 turtlebot_android-legacy: 'https://raw.github.com/turtlebot/turtlebot_android/hydro-legacy/turtlebot_android.rosinstall'
 
