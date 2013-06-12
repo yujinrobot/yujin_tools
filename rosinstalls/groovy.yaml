@@ -1,3 +1,4 @@
+cslam: https://bitbucket.org/yujinrobot/cslam/raw/groovy-devel/cslam.rosinstall
 ecl: https://raw.github.com/stonier/ecl_core/groovy-devel/ecl.rosinstall
 ecl_lite: https://raw.github.com/stonier/ecl_core/groovy-devel/ecl_lite.rosinstall
 rocon: https://raw.github.com/robotics-in-concert/rocon_concert/groovy-devel/rocon.rosinstall
