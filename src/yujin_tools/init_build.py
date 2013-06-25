@@ -201,7 +201,7 @@ def list_platforms():
     console.pretty_println("**********************************************************************************\n", console.bold)
 
 
-def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt/ros/groovy", install_prefix_="./install", release_=False, toolchain_="", platform_=""):
+def init_configured_build(track, build_dir_="./", source_dir_="./src", underlays_="/opt/ros/groovy", install_prefix_="./install", release_=False, toolchain_="", platform_=""):
     '''
       This one is used with pre-configured parameters. Note that
       init_build generates parameters parsed from the command line and then
@@ -272,12 +272,11 @@ def init_configured_build(build_dir_="./", source_dir_="./src", underlays_="/opt
     ##########################
     if not catkin_toplevel:
         # Add the default track underlay
-        default_track = settings.get_default_track()
-        if os.path.isfile(os.path.join("/opt/ros/%s" % default_track, 'share', 'catkin', 'cmake', 'toplevel.cmake')):
-            catkin_toplevel = os.path.join("/opt/ros/%s" % default_track, 'share', 'catkin', 'cmake', 'toplevel.cmake')
-            unused_catkin_python_path = os.path.join("/opt/ros/%s" % default_track, 'lib', 'python2.7', 'dist-packages')
-            console.pretty_println("No catkin found, adding the default track underlay (use yujin_tools_settings to change) [/opt/ros/%s]" % default_track, console.cyan)
-            underlays_list.append("/opt/ros/%s" % default_track)
+        if os.path.isfile(os.path.join("/opt/ros/%s" % track, 'share', 'catkin', 'cmake', 'toplevel.cmake')):
+            catkin_toplevel = os.path.join("/opt/ros/%s" % track, 'share', 'catkin', 'cmake', 'toplevel.cmake')
+            unused_catkin_python_path = os.path.join("/opt/ros/%s" % track, 'lib', 'python2.7', 'dist-packages')
+            console.pretty_println("No catkin found, adding the default track underlay (use yujin_tools_settings to change) [/opt/ros/%s]" % track, console.cyan)
+            underlays_list.append("/opt/ros/%s" % track)
         else:
             raise RuntimeError("Could not find an underlying catkin installation.")
     common.create_symlink(catkin_toplevel, os.path.join(build_source_dir, "CMakeLists.txt"))
@@ -388,4 +387,4 @@ def init_build():
     if args.list_platforms:
         list_platforms()
         return
-    init_configured_build(args.dir, args.sources, args.underlays, args.install, args.release, args.toolchain, args.platform)
+    init_configured_build(args.track, args.dir, args.sources, args.underlays, args.install, args.release, args.toolchain, args.platform)
