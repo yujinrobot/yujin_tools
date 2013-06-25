@@ -91,7 +91,7 @@ def list_rosinstalls(track):
     rosinstalls = yaml.load(response.read())
     for r in rosinstalls.keys():
         console.pretty_print(" " + r + ": ", console.cyan)
-        console.pretty_println(rosinstalls[r], console.yellow)
+        console.pretty_println("%s" % rosinstalls[r], console.yellow)
 
 
 def get_rosinstall_database(track):
