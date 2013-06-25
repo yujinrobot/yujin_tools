@@ -4,6 +4,6 @@ ecl: 'https://raw.github.com/stonier/ecl_core/hydro-devel/ecl.rosinstall'
 kobuki: 'https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki.rosinstall'
 multinav: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_multirobot_experimental/hydro-devel/multinav_concert.rosinstall']
 rocon: 'https://raw.github.com/robotics-in-concert/rocon_concert/hydro-devel/rocon.rosinstall'
-rocon_android: [android, 'https://raw.github.com/robotics-in-concert/rocon_android/hydro-devel/rocon_android_apps.rosinstall']
+rocon_android: [android, 'https://raw.github.com/robotics-in-concert/rocon_android_apps/hydro-devel/rocon_android_apps.rosinstall']
 rosjava: 'https://raw.github.com/ros-java/rosjava_tools/hydro-devel/rosjava.rosinstall'
 
