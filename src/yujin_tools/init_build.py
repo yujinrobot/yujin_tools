@@ -42,6 +42,7 @@ def parse_arguments():
     parser.add_argument('-u', '--underlays', action='store', default='', help='semi-colon list of catkin workspaces to utilise, priority given from front to back [/opt/ros/groovy]')
     parser.add_argument('-t', '--toolchain', action='store', default='', help='toolchain cmake module to load []')
     parser.add_argument('-p', '--platform', action='store', default='default', help='platform cmake cache module to load [default]')
+    parser.add_argument('-c', '--clean', action='store_true', help='cleans the current or specified build directory [false]')
     parser.add_argument('--list-toolchains', action='store_true', help='list all currently available toolchain modules [false]')
     parser.add_argument('--list-platforms', action='store_true', help='list all currently available platform modules [false]')
     parser.add_argument('--track', action='store', default=None, help='default the underlays to this track if catkin is not found [groovy|hydro][groovy]')
@@ -371,6 +372,28 @@ def init_configured_build(track, build_dir_="./", source_dir_="./src", underlays
     instantiate_template('eclipse', name, build_dir)
 
 
+def clean(dir_to_be_cleaned, dir_sources):
+    if common.is_same_dir(dir_to_be_cleaned, os.getcwd()):
+        if not os.path.isfile(os.path.join(dir_to_be_cleaned, 'config.cmake')):
+            console.logerror("Could not clean the current directory [build artifacts do not exist]")
+            return
+        console.pretty_print("\nCleaning current directory of yujin_init_build artifacts : ", console.cyan)
+        for f in [os.path.join(dir_to_be_cleaned, x) for x in ['config.cmake', 'eclipse', 'gnome-terminal', 'konsole']]:
+            if os.path.isfile(f):
+                os.remove(f)
+        for f in [os.path.join(dir_to_be_cleaned, dir_sources, x) for x in ['CMakeLists.txt', '.yujin_init_build']]:
+            if os.path.isfile(f):
+                os.remove(f)
+        console.pretty_println('done.\n', console.yellow)
+    else:
+        if os.path.isdir(os.path.abspath(dir_to_be_cleaned)):
+            console.pretty_print("Cleaning build directory : ", console.cyan)
+            console.pretty_println(dir_to_be_cleaned, console.yellow)
+            shutil.rmtree(os.path.abspath(dir_to_be_cleaned))
+        else:
+            console.logerror("Could not clean %s [does not exist]" % dir_to_be_cleaned)
+
+
 def init_build():
     args = parse_arguments()
     ##########################
@@ -386,5 +409,8 @@ def init_build():
         return
     if args.list_platforms:
         list_platforms()
+        return
+    if args.clean:
+        clean(args.dir, args.sources)
         return
     init_configured_build(args.track, args.dir, args.sources, args.underlays, args.install, args.release, args.toolchain, args.platform)

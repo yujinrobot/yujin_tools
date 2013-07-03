@@ -36,6 +36,14 @@ def which(program):
     return None
 
 
+def is_same_dir(dir_a, dir_b):
+    rel_path = os.path.relpath(os.path.abspath(dir_a), os.path.abspath(dir_b))
+    if rel_path == ".":
+        return True
+    else:
+        return False
+
+
 #def modified_environment(catkin_python_path, env=None):
 #    '''
 #      Prepends the path to the PYTHONPATH environment variable.
