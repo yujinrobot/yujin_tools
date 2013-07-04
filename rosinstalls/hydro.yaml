@@ -1,4 +1,5 @@
 android: 'https://raw.github.com/ros-java/rosjava_tools/hydro-devel/android_apps.rosinstall'
+cslam: 'cslam: https://bitbucket.org/yujinrobot/cslam/raw/groovy-devel/cslam.rosinstall'
 cafe_concert: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_demos/hydro-devel/cafe_concert.rosinstall']
 ecl: 'https://raw.github.com/stonier/ecl_core/hydro-devel/ecl.rosinstall'
 kobuki: 'https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki.rosinstall'
