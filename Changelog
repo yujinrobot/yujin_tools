@@ -1,3 +1,5 @@
+0.2.22
+ - trivial typo bugfix (eof newline) for config.cmake
 0.2.21
  - added --clean for yujin_init_build
 0.2.20
