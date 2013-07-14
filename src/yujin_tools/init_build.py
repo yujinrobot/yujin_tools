@@ -384,6 +384,9 @@ def clean(dir_to_be_cleaned, dir_sources):
         for f in [os.path.join(dir_to_be_cleaned, dir_sources, x) for x in ['CMakeLists.txt', '.yujin_init_build']]:
             if os.path.isfile(f):
                 os.remove(f)
+        for d in [os.path.join(dir_to_be_cleaned, x) for x in ['build', 'devel']]:
+            if os.path.isdir(d):
+                shutil.rmtree(d)
         console.pretty_println('done.\n', console.yellow)
     else:
         if os.path.isdir(os.path.abspath(dir_to_be_cleaned)):
