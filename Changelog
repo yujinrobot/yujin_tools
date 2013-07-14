@@ -1,3 +1,5 @@
+0.2.23
+ - init build should also clean build and devel folders
 0.2.22
  - trivial typo bugfix (eof newline) for config.cmake
 0.2.21
