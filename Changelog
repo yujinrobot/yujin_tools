@@ -1,3 +1,5 @@
+0.2.24
+ - added a --target option for yujin_make
 0.2.23
  - init build should also clean build and devel folders
 0.2.22
