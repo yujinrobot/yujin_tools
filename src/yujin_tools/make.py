@@ -22,7 +22,6 @@ from catkin_pkg.packages import find_packages
 
 import console
 import common
-import config_cache
 
 import catkin_make.terminal_color as terminal_color
 from catkin_make.terminal_color import fmt
@@ -132,15 +131,10 @@ def make_main():
     args = _parse_args()
     cmake_args = args.cmake_args
 
-    # disable colors if asked
     if args.no_color:
         terminal_color.disable_ANSI_colors()
 
-    # Default paths
-    base_path = os.environ.get("YUJIN_MAKE_ROOT") or os.getcwd()  # Fallback if os.environ.get returns None
-    build_path = os.path.join(base_path, 'build')
-    devel_path = os.path.join(base_path, 'devel')
-    source_path = os.path.join(base_path, 'src')
+    (base_path, build_path, devel_path, source_path) = common.get_default_paths()
 
     validate_build_space(base_path)  # raises a RuntimeError if there is a problem
 

@@ -125,3 +125,12 @@ def find_catkin(base_path, underlays_list=None):
                 catkin_python_path = os.path.join(underlay, python_setup.get_global_python_destination())
             break
     return catkin_toplevel, catkin_python_path, catkin_cmake_path
+
+
+def get_default_paths(isolated=False):
+    suffix = "_isolated" if isolated else ""
+    base_path = os.environ.get("YUJIN_MAKE_ROOT") or os.getcwd()  # Fallback if os.environ.get returns None
+    build_path = os.path.join(base_path, 'build' + suffix)
+    devel_path = os.path.join(base_path, 'devel' + suffix)
+    source_path = os.path.join(base_path, 'src')
+    return (base_path, build_path, devel_path, source_path)
