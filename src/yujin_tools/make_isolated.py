@@ -52,6 +52,7 @@ def _parse_args(args=sys.argv[1:]):
     parser.add_argument('-i', '--install', action='store_true', default=False, help='Run install step after making [false]')
     parser.add_argument('--force-cmake', action='store_true', default=False, help='Invoke "cmake" even if it has been executed before [false]')
     parser.add_argument('--no-color', action='store_true', help='Disables colored ouput')
+    parser.add_argument('--target', default=None, help='Build against a particular target only')
     parser.add_argument('--pkg', nargs='+', metavar='PKGNAME', dest='packages', help='Invoke "make" on specific packages (only after initial invocation)')
     parser.add_argument('-q', '--quiet', action='store_true', default=False, help='Suppresses the cmake and make output until an error occurs.')
     parser.add_argument('-p', '--pre-clean', action='store_true', help='Clean build temporaries before making [false]')
@@ -92,6 +93,14 @@ def make_isolated_main():
     if not os.path.exists(build_path):
         os.mkdir(build_path)
 
+    # Validate package argument
+    packages = find_packages(source_path, exclude_subspaces=True)
+    packages_by_name = {p.name: path for path, p in packages.iteritems()}
+    if args.packages:
+        for package in args.packages:
+            if package not in packages_by_name:
+                raise RuntimeError('Package %s not found in the workspace' % package)
+
     make.validate_build_space(base_path)  # raises a RuntimeError if there is a problem
     make.check_and_update_source_repo_paths(source_path)
     build_workspace_isolated(
@@ -106,10 +115,26 @@ def make_isolated_main():
         build_packages=args.packages,
         quiet=args.quiet,
         cmake_args=args.cmake_args,
-        make_args=args.make_args#,
-        #catkin_cmake_path=catkin_cmake_path,
-        #catkin_python_path=catkin_python_path
+        make_args=args.make_args
     )
+    if args.target:
+        env = os.environ.copy()
+        cmd = ['make', args.target]
+        make_paths = []
+        if args.packages:
+            for package in args.packages:
+                # It's an isolated build, so packages are listed under the build path as a flat list (not fully traceable dirs like in catkin_make)
+                # make_path = os.path.join(make_path, packages_by_name[package])
+                make_paths.append(os.path.join(build_path, package))
+        else:
+            for (unused_path, package) in topological_order_packages(packages):
+                make_paths.append(os.path.join(build_path, package.name))
+        for make_path in make_paths:
+            builder.print_command_banner(cmd, make_path, color=not args.no_color)
+            if args.no_color:
+                builder.run_command(cmd, make_path, env=env)
+            else:
+                builder.run_command_colorized(cmd, make_path, env=env)
 
 
 #def dbuild_workspace_isolated(
