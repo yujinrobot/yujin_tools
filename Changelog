@@ -1,3 +1,7 @@
+0.2.25
+ - bugfix yujin_make_isolated
+ - reuse actual catkin code as much as possible
+ - added a --target option for yujin_make_isolated
 0.2.24
  - added a --target option for yujin_make
 0.2.23
