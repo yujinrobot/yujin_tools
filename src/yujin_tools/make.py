@@ -46,6 +46,7 @@ def _parse_args(args=sys.argv[1:]):
     group.add_argument('-t', '--tests', action='store_true', help='Make tests [false]')
     group.add_argument('-r', '--run_tests', action='store_true', help='Make and run tests [false]')
     parser.add_argument('--no-color', action='store_true', help='Disables colored ouput')
+    parser.add_argument('--target', default=None, help='Build against a particular target only')
     parser.add_argument('--pkg', help='Invoke "make" on a specific package only')
     parser.add_argument('--cmake-args', dest='cmake_args', nargs='*', type=str,
         help='Arbitrary arguments which are passes to CMake. It must be passed after other arguments since it collects all following options.')
@@ -219,7 +220,9 @@ def make_main():
 
     # invoke make
     if not args.cmake_only:
-        if args.install:
+        if args.target:
+            cmd = ['make', args.target]
+        elif args.install:
             cmd = ['make', 'install']
         elif args.tests:
             cmd = ['make', 'tests']
