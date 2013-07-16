@@ -7,5 +7,5 @@ kobuki: 'https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki.rosinstall'
 multinav: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_multirobot_experimental/hydro-devel/multinav_concert.rosinstall']
 rocon: 'https://raw.github.com/robotics-in-concert/rocon_concert/hydro-devel/rocon.rosinstall'
 rosjava: 'https://raw.github.com/ros-java/rosjava_tools/hydro-devel/rosjava.rosinstall'
-system_deb_builder: 'https://stonier@bitbucket.org/yujinrobot/system_deb_builder.git'
+system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/hydro-devel/system_deb_builder.rosinstall'
 
