@@ -1,0 +1,4 @@
+nexell-linux-headers-yujin:
+  ubuntu: [nexell-linux-headers]
+nexell-toolchain-arm-eabi-yujin:
+  ubuntu: [nexell-toolchain-arm-eabi-yujin]
