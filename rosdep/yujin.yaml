@@ -1,4 +1,4 @@
-nexell-linux-headers-yujin:
-  ubuntu: [nexell-linux-headers]
-nexell-toolchain-arm-eabi-yujin:
-  ubuntu: [nexell-toolchain-arm-eabi-yujin]
+nexell-kernel-sources:
+  ubuntu: [nexel-kernel-sources-2.6.32.13-yujin]
+nexell-toolchain-arm-eabi:
+  ubuntu: [nexel-toolchain-arm-eabi-4.3.2-glibc-2.9-yujin]
