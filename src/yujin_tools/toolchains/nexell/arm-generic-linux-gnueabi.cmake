@@ -14,7 +14,7 @@
 ###############################################################################
 
 # Some useful custom variables that uniquely define this toolchain module
-set(TOOLCHAIN_FAMILY "nexell")
+set(TOOLCHAIN_FAMILY "nexell" CACHE STRING "Convenient grouping identifier for collections of toolchains (e.g. ubuntu, nexell, sourcery).")
 set(TOOLCHAIN_TUPLE "arm-generic-linux-gnueabi" CACHE STRING "Toolchain signature identifying cpu-vendor-platform-clibrary.")
 set(TOOLCHAIN_ROOT "/opt/nexell/toolchain/arm-eabi-4.3.2-glibc-2.9" CACHE STRING "Root of the installed toolchain")
 set(TOOLCHAIN_SYSROOT "${TOOLCHAIN_ROOT}/${TOOLCHAIN_TUPLE}/sys-root" CACHE STRING "Root of the target development environment (libraries, headers etc).")
