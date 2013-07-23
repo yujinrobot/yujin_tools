@@ -378,7 +378,7 @@ def clean(dir_to_be_cleaned, dir_sources):
             console.logerror("Could not clean the current directory [build artifacts do not exist]")
             return
         console.pretty_print("\nCleaning current directory of yujin_init_build artifacts : ", console.cyan)
-        for f in [os.path.join(dir_to_be_cleaned, x) for x in ['config.cmake', 'eclipse', 'gnome-terminal', 'konsole']]:
+        for f in [os.path.join(dir_to_be_cleaned, x) for x in ['config.cmake', 'eclipse', 'gnome-terminal', 'konsole', 'toolchain.cmake']]:
             if os.path.isfile(f):
                 os.remove(f)
         for f in [os.path.join(dir_to_be_cleaned, dir_sources, x) for x in ['CMakeLists.txt', '.yujin_init_build']]:
