@@ -1,3 +1,6 @@
+0.2.26
+ - remove toolchains when cleaning the build
+ - update the nexell toolchain for our deb
 0.2.25
  - bugfix yujin_make_isolated
  - reuse actual catkin code as much as possible
