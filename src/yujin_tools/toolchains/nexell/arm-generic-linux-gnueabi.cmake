@@ -16,10 +16,10 @@
 # Some useful custom variables that uniquely define this toolchain module
 set(TOOLCHAIN_FAMILY "nexell")
 set(TOOLCHAIN_TUPLE "arm-generic-linux-gnueabi" CACHE STRING "Toolchain signature identifying cpu-vendor-platform-clibrary.")
-set(TOOCHAIN_ROOT "/opt/nexell/toolchain/arm-eabi-4.6.3-glibc-2.13" CACHE STRING "Root of the installed toolchain")
+set(TOOLCHAIN_ROOT "/opt/nexell/toolchain/arm-eabi-4.3.2-glibc-2.9" CACHE STRING "Root of the installed toolchain")
 set(TOOLCHAIN_SYSROOT "${TOOLCHAIN_ROOT}/${TOOLCHAIN_TUPLE}/sys-root" CACHE STRING "Root of the target development environment (libraries, headers etc).")
 #set(TOOLCHAIN_INSTALL_PREFIX "${TOOLCHAIN_SYSROOT}/usr" CACHE STRING "Preferred install location when using the toolchain.")
-set(TOOLCHAIN_NAME_PREFIX "/opt/crosstools/arm-eabi-4.3.2-glibc-2.9/bin/${TOOLCHAIN_TUPLE}-")
+set(TOOLCHAIN_NAME_PREFIX "${TOOLCHAIN_ROOT}/bin/${TOOLCHAIN_TUPLE}-")
 
 # Now the cmake variables
 set(CMAKE_SYSTEM_NAME Linux)
