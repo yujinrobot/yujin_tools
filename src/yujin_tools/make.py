@@ -176,10 +176,13 @@ def make_main():
     # Help find catkin cmake and python
     unused_catkin_toplevel, catkin_python_path, unused_catkin_cmake_path = common.find_catkin(base_path)
     env = os.environ.copy()
-    try:
-        env['PYTHONPATH'] = env['PYTHONPATH'] + os.pathsep + catkin_python_path
-    except KeyError:
-        env['PYTHONPATH'] = catkin_python_path
+    # Don't add to the environment variable - this mucks up catkin's catkin_generated/setup_cached.py environment later.
+    # Maybe we can do away with this now catkin can look up install spaces?
+    #try:
+    #    env['PYTHONPATH'] = env['PYTHONPATH'] + os.pathsep + catkin_python_path
+    #except KeyError:
+    #    env['PYTHONPATH'] = catkin_python_path
+    sys.path.append(catkin_python_path)
 
     # consider calling cmake
     makefile = os.path.join(build_path, 'Makefile')
