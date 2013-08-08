@@ -9,4 +9,5 @@ nexell: 'https://bitbucket.org/yujinrobot/nexell/raw/hydro-devel/nexell.rosinsta
 rocon: 'https://raw.github.com/robotics-in-concert/rocon/hydro-devel/rocon.rosinstall'
 rosjava: 'https://raw.github.com/ros-java/rosjava_tools/hydro-devel/rosjava.rosinstall'
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/hydro-devel/system_deb_builder.rosinstall'
+turtlebot: 'https://raw.github.com/turtlebot/turtlebot/hydro-devel/turtlebot.rosinstall'
 
