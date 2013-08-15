@@ -3,5 +3,5 @@
 #
 [
 {'git': {'local-name': 'catkin', 'version': '0.5.71', 'uri':'https://github.com/ros/catkin.git'}},
-{'svn': {'local-name': 'gtest', 'uri': 'http://googletest.googlecode.com/svn/release-1.6.0'}}
+{'svn': {'local-name': 'gtest', 'uri': 'http://googletest.googlecode.com/svn/tags/release-1.6.0'}}
 ]
