@@ -1,0 +1,7 @@
+#
+# Installs catkin and gtest for use with cross compiled stacks. 
+#
+[
+{'git': {'local-name': 'catkin', 'version': '0.5.71', 'uri':'https://github.com/ros/catkin.git'}},
+{'git': {'local-name': 'gtest', 'uri': 'http://googletest.googlecode.com/svn/release-1.6.0'}}
+]
