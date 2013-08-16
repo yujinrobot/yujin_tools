@@ -11,3 +11,6 @@ set(PLATFORM_NAME "arm1176jzf-s" CACHE STRING "Platform name, usually referring 
 # Flags
 set(PLATFORM_CXX_FLAGS "-march=armv6 -mtune=arm1176jzf-s -pipe -mfloat-abi=softfp -mfpu=vfp" CACHE STRING "Compile flags specific to this platform.")
 set(PLATFORM_LINK_FLAGS "" CACHE STRING "Link flags specific to this platform.")
+
+# Custom software settings
+set(ECL_EIGEN_IS_INTERNAL_3_1_2 TRUE CACHE BOOL "Use ecls internal eigen.")
