@@ -119,10 +119,16 @@ def find_catkin(base_path, underlays_list=None):
     catkin_cmake_path = None
     for underlay in underlays_list:
         if os.path.isfile(os.path.join(underlay, 'share', 'catkin', 'cmake', 'toplevel.cmake')):
+            # it is in an underlay's install space
             catkin_cmake_path = os.path.join(underlay, 'share', 'catkin', 'cmake')
             catkin_toplevel = os.path.join(underlay, 'share', 'catkin', 'cmake', 'toplevel.cmake')
             if os.path.isfile(os.path.join(underlay, python_setup.get_global_python_destination(), 'catkin', 'builder.py')):
                 catkin_python_path = os.path.join(underlay, python_setup.get_global_python_destination())
+            break
+        elif os.path.isfile(os.path.join(underlay, python_setup.get_global_python_destination(), 'catkin', '__init__.py')):
+            # it's probably a devel space
+            console.error('Error: catkin seems to be buried in a chained devel space - not yet supporting this')
+            # catkin_python_path = os.path.join(underlay, python_setup.get_global_python_destination())
             break
     return catkin_toplevel, catkin_python_path, catkin_cmake_path
 
