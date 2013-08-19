@@ -22,6 +22,7 @@ from catkin_pkg.packages import find_packages
 
 import console
 import common
+import settings
 
 import catkin_make.terminal_color as terminal_color
 from catkin_make.terminal_color import fmt
@@ -42,6 +43,9 @@ def _parse_args(args=sys.argv[1:]):
     parser.add_argument('-c', '--cmake-only', action='store_true', help='Do not compile, just force a re-run of cmake [false]')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-i', '--install', action='store_true', help='Run install step after making [false]')
+    group.add_argument('--track', choices=['groovy', 'hydro'], dest='default_underlay', action='store', default=None, help='convenience equivalent for the --default-underlay option')
+    group.add_argument('--install-rosdeps-track', choices=['groovy', 'hydro'], dest='default_underlay', action='store', default=None, help='Install all rosdeps for the workspace sources and given track [None]')
+    group.add_argument('--install-rosdeps', action='store_true', help='Install all rosdeps for the workspace sources and track set by `yujin_tools_settings --get-default-track` [false]')
     group.add_argument('-t', '--tests', action='store_true', help='Make tests [false]')
     group.add_argument('-r', '--run_tests', action='store_true', help='Make and run tests [false]')
     parser.add_argument('--no-color', action='store_true', help='Disables colored ouput')
@@ -127,6 +131,19 @@ def insert_yujin_make_signature(yujin_make_root, devel_path):
         setup_sh.write("export YUJIN_MAKE_ROOT=%s\n" % yujin_make_root)
 
 
+def install_rosdeps(source_path, rosdistro, no_color):
+    cmd = ['rosdep', 'install', '--from-paths', source_path, '--ignore-src', '--rosdistro', rosdistro, '-y']
+    env = os.environ.copy()
+    try:
+        builder.print_command_banner(cmd, source_path, color=not no_color)
+        if no_color:
+            builder.run_command(cmd, source_path, env=env)
+        else:
+            builder.run_command_colorized(cmd, source_path, env=env)
+    except subprocess.CalledProcessError:
+        return fmt('@{rf}Invoking @{boldon}"rosdep install failed')
+
+
 def make_main():
     args = _parse_args()
     cmake_args = args.cmake_args
@@ -137,6 +154,13 @@ def make_main():
     (base_path, build_path, devel_path, source_path) = common.get_default_paths()
 
     validate_build_space(base_path)  # raises a RuntimeError if there is a problem
+
+    # Install rosdeps if requested
+    if args.install_rosdeps:
+        install_rosdeps(source_path, settings.get_default_track(), args.no_color)
+        return
+    if args.install_rosdeps_track:
+        install_rosdeps(source_path, args.install_rosdeps_track, args.no_color)
 
     # Clear out previous temporaries if requested
     if args.pre_clean:
