@@ -1,3 +1,6 @@
+0.2.29
+ - a rosdeps install option for yujin_make
+ - cancelling the default underlay for yujin_init_build
 0.2.28
  - bugfix environment pythonpath /opt/ros/hydro setting.
 0.2.27
