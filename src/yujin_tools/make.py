@@ -44,7 +44,7 @@ def _parse_args(args=sys.argv[1:]):
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-i', '--install', action='store_true', help='Run install step after making [false]')
     group.add_argument('--track', choices=['groovy', 'hydro'], dest='default_underlay', action='store', default=None, help='convenience equivalent for the --default-underlay option')
-    group.add_argument('--install-rosdeps-track', choices=['groovy', 'hydro'], dest='default_underlay', action='store', default=None, help='Install all rosdeps for the workspace sources and given track [None]')
+    group.add_argument('--install-rosdeps-track', choices=['groovy', 'hydro'], action='store', default=None, help='Install all rosdeps for the workspace sources and given track [None]')
     group.add_argument('--install-rosdeps', action='store_true', help='Install all rosdeps for the workspace sources and track set by `yujin_tools_settings --get-default-track` [false]')
     group.add_argument('-t', '--tests', action='store_true', help='Make tests [false]')
     group.add_argument('-r', '--run_tests', action='store_true', help='Make and run tests [false]')
@@ -159,8 +159,9 @@ def make_main():
     if args.install_rosdeps:
         install_rosdeps(source_path, settings.get_default_track(), args.no_color)
         return
-    if args.install_rosdeps_track:
+    if args.install_rosdeps_track is not None:
         install_rosdeps(source_path, args.install_rosdeps_track, args.no_color)
+        return
 
     # Clear out previous temporaries if requested
     if args.pre_clean:
