@@ -133,6 +133,21 @@ def find_catkin(base_path, underlays_list=None):
     return catkin_toplevel, catkin_python_path, catkin_cmake_path
 
 
+def generate_pkg_config_path(base_path):
+    '''
+      Generate a list of pkg_config_paths from the underlays
+      
+      @param base_path : used to find the config.cmake which lists the underlays
+      @return list of paths
+    '''
+    underlays_list = config_cache.get_underlays_list_from_config_cmake(base_path)
+    pkg_config_path = []
+    for underlay in underlays_list:
+        if os.path.isdir(os.path.join(underlay, 'lib', 'pkgconfig')):
+            pkg_config_path.append(os.path.join(underlay, 'lib', 'pkgconfig'))
+    return pkg_config_path
+
+
 def get_default_paths(isolated=False):
     suffix = "_isolated" if isolated else ""
     base_path = os.environ.get("YUJIN_MAKE_ROOT") or os.getcwd()  # Fallback if os.environ.get returns None
