@@ -11,8 +11,6 @@ if [ -d ${YUJIN_WORKSPACE}/devel ]; then
   alias m3="export ROS_MASTER_URI=http://localhost:11313"
   alias m4="export ROS_MASTER_URI=http://localhost:11314"
   alias m5="export ROS_MASTER_URI=http://localhost:11315"
-else
-  source /opt/ros/groovy/setup.bash
 fi
 # Add the full path if eclipse is not in PATH
 exec eclipse -data ~/workspace/%(name)s
