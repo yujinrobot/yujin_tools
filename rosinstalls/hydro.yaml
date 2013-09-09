@@ -10,6 +10,6 @@ multinav: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_mult
 nexell: 'https://bitbucket.org/yujinrobot/nexell/raw/hydro-devel/nexell.rosinstall'
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 rocon: 'https://raw.github.com/robotics-in-concert/rocon/hydro-devel/rocon.rosinstall'
-rosjava: 'https://raw.github.com/rosjava/rosjava_build_tools/hydro/rosjava.rosinstall'
+rosjava: 'https://raw.github.com/stonier/rosjava_build_tools/hydro/rosjava.rosinstall'
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/hydro-devel/system_deb_builder.rosinstall'
 turtlebot: 'https://raw.github.com/turtlebot/turtlebot/hydro-devel/turtlebot.rosinstall'
