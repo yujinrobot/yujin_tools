@@ -217,7 +217,6 @@ def make_main():
             env['PKG_CONFIG_PATH'] = env['PKG_CONFIG_PATH'] + os.pathsep + path
         except KeyError:
             env['PKG_CONFIG_PATH'] = path
-
     # consider calling cmake
     makefile = os.path.join(build_path, 'Makefile')
     if not os.path.exists(makefile) or args.force_cmake or force_cmake:
@@ -228,6 +227,7 @@ def make_main():
             cmd.append(config_cmd)
         cmd += cmake_args
 
+        #new_env = common.generate_underlays_environment(base_path)
         try:
             builder.print_command_banner(cmd, build_path, color=not args.no_color)
             if args.no_color:
@@ -238,6 +238,7 @@ def make_main():
             return fmt('@{rf}Invoking @{boldon}"cmake"@{boldoff} failed')
     else:
         cmd = ['make', 'cmake_check_build_system']
+        #new_env = common.generate_environment(base_path) # underlays + current workspace
         try:
             builder.print_command_banner(cmd, build_path, color=not args.no_color)
             if args.no_color:

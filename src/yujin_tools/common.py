@@ -13,6 +13,8 @@ import multiprocessing
 import console
 import python_setup
 import config_cache
+import subprocess
+import ast
 
 ##############################################################################
 # Methods
@@ -133,10 +135,57 @@ def find_catkin(base_path, underlays_list=None):
     return catkin_toplevel, catkin_python_path, catkin_cmake_path
 
 
+def generate_underlay_environment(base_path):
+    '''
+      Parse all the underlay environment scripts to setup an initial environment for us to work in. This
+      should be easier than manually crafting everything. We do maintain some more complexity than
+      catkin_make though as we support a pyramid of underlays, not a linear chain.
+
+      UNUSED and UNTESTED!
+    '''
+    underlays_list = config_cache.get_underlays_list_from_config_cmake(base_path)
+    env = os.environ.copy()
+    for underlay in reversed(underlays_list):
+        print("\nUnderlay: %s" % underlay)
+        env_script = os.path.join(underlay, 'env.sh')
+        # Should validate that the script exists
+        python_code = 'import os; print(dict(os.environ))'
+        print [env_script, sys.executable, '-c', python_code]
+        output = subprocess.check_output([env_script, sys.executable, '-c', python_code])
+        print output
+        # Not really positive what's going on here - this is what is in catkin.environment_cache.generate_environment_scripot
+        # I think it just safely decodes strings in the dictionary.
+        if hasattr(sys.stdout, 'encoding') and sys.stdout.encoding:
+            output = output.decode(sys.stdout.encoding)
+        env_after = ast.literal_eval(output)
+        # calculate added and modified environment variables
+        modified = {}
+        for key, value in env_after.items():
+            if key not in env:
+                env[key] = value
+            elif env[key] != value:
+                # Need to be careful here - we are dealing with paths that will need to be merged.
+                modified[key] = [env[key], value]
+        # Deal with modified keys
+        for key in sorted(modified.keys()):
+            (old_value, new_value) = modified[key]
+            if(key.contains('PATH') or old_value.contains(os.pathsep) or new_value.contains(os.pathsep)):
+                # Merge paths
+                old_elements = os.pathsep.split(old_value)
+                new_elements = os.pathsep.split(new_value)
+                for element in new_elements:
+                    if not old_elements.contains(element):
+                        env[key] = env[key] + os.pathsep + element
+            else:
+                # it's a regular variable - take the latest value assigned to it (not we're sorting underlays in the correct (reverse) order of priority
+                env[key] = new_value
+    return env
+
+
 def generate_pkg_config_path(base_path):
     '''
       Generate a list of pkg_config_paths from the underlays
-      
+
       @param base_path : used to find the config.cmake which lists the underlays
       @return list of paths
     '''
