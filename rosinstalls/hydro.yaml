@@ -1,5 +1,5 @@
-android_apps: 'https://raw.github.com/rosjava/rosjava_tools/hydro-devel/android_apps_release_fork.rosinstall'
-android_core: 'https://raw.github.com/rosjava/rosjava_tools/hydro-devel/android_core.rosinstall'
+android_apps: 'https://raw.github.com/rosjava/rosjava/hydro/android_apps_release_fork.rosinstall'
+android_core: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/catkin.rosinstall'
 cslam: [ecl, 'https://bitbucket.org/yujinrobot/cslam/raw/hydro-devel/cslam.rosinstall']
 cslam_desktop: 'https://bitbucket.org/yujinrobot/cslam_desktop/raw/hydro-devel/cslam_desktop.rosinstall'
@@ -10,6 +10,6 @@ multinav: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_mult
 nexell: 'https://bitbucket.org/yujinrobot/nexell/raw/hydro-devel/nexell.rosinstall'
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 rocon: 'https://raw.github.com/robotics-in-concert/rocon/hydro-devel/rocon.rosinstall'
-rosjava: 'https://raw.github.com/rosjava/rosjava_build_tools/hydro/rosjava.rosinstall'
+rosjava: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/hydro-devel/system_deb_builder.rosinstall'
 turtlebot: 'https://raw.github.com/turtlebot/turtlebot/hydro-devel/turtlebot.rosinstall'
