@@ -42,7 +42,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description=help_string(), formatter_class=RawTextHelpFormatter)
     parser.add_argument('dir', nargs='?', default=".", help='directory to use for the parallel development space [./]')
     parser.add_argument('sources', nargs='?', default="src", help='directory where the sources reside [./src]')
-    parser.add_argument('-r', '--release', action='store_true', help='build in Release mode instead of RelWithDebugSymbols [false]')
+    parser.add_argument('-r', '--release', action='store_true', help='build in Release mode instead of RelWithDebInfo [false]')
     parser.add_argument('-i', '--install', action='store', default='/not_set_directory', help='installation location [workspace/install]')
     #  even though we don't set a default value here, it later gets set as the default underlay if not present and --no-default-underlay is not true
     parser.add_argument('-u', '--underlays', action='store', default='', help='semi-colon list of catkin workspaces to utilise, priority given from front to back')
@@ -302,7 +302,7 @@ def init_configured_build(default_underlay, build_dir_="./", source_dir_="./src"
     if release_:
         build_type = "Release"
     else:
-        build_type = "DebugWithRelSymbols"
+        build_type = "RelWithDebInfo"
     name = os.path.basename(workspace_dir) + "_" + os.path.basename(build_dir)
 
     print_build_details(build_dir, source_dir, install_prefix, build_type, underlays, name, toolchain_, platform_)
