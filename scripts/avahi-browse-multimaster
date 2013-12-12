@@ -1,0 +1,3 @@
+#!/bin/bash
+
+avahi-browse -t -r _ros-multimaster-hub._tcp
