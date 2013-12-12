@@ -18,6 +18,7 @@ setup(name='yujin_tools',
       scripts = [
            'scripts/cfind',
            'scripts/avahi-browse-concerts',
+           'scripts/avahi-browse-multimaster',
            'scripts/masteruri',
            'scripts/yujin_init_workspace',
            'scripts/yujin_init_build',
