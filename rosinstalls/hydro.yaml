@@ -16,6 +16,7 @@ rocon: 'https://raw.github.com/robotics-in-concert/rocon/hydro/rocon.rosinstall'
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/hydro-devel/rocon.rosinstall'
 rosjava: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
 rosjava-master: 'https://raw.github.com/rosjava/rosjava/master/rosjava.rosinstall'
+rosjava-rocon: [rosjava, 'https://raw.github.com/robotics-in-concert/rocon_rosjava_msgs/hydro-devel/rocon_rosjava.rosinstall']
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/hydro-devel/system_deb_builder.rosinstall'
 turtlebot: 'https://raw.github.com/turtlebot/turtlebot/hydro-devel/turtlebot.rosinstall'
 zeroconf: 'https://raw.github.com/stonier/zeroconf_avahi_suite/hydro-devel/zeroconf.rosinstall'
