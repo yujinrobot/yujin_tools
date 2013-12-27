@@ -1,3 +1,5 @@
+0.2.36
+ - continue installing rosdeps even with errors
 0.2.35
  - added the script avahi-browse-multimaster
 0.2.34
