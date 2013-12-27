@@ -132,7 +132,8 @@ def insert_yujin_make_signature(yujin_make_root, devel_path):
 
 
 def install_rosdeps(source_path, rosdistro, no_color):
-    cmd = ['rosdep', 'install', '--from-paths', source_path, '--ignore-src', '--rosdistro', rosdistro, '-y']
+    # -r continue even with errors
+    cmd = ['rosdep', 'install', '-r', '--from-paths', source_path, '--ignore-src', '--rosdistro', rosdistro, '-y']
     env = os.environ.copy()
     try:
         builder.print_command_banner(cmd, source_path, color=not no_color)
