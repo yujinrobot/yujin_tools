@@ -4,7 +4,7 @@ android: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
 android-master: 'https://raw.github.com/rosjava/rosjava/master/android_core.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/catkin.rosinstall'
 ces-android: 'https://raw.github.com/robotics-in-concert/rocon_demos/ces_android/rocon_android.rosinstall'
-ces-rosjava: 'https://raw.github.com/robotics-in-concert/rocon_demos/ces_android/rocon_rosjava.rosinstall'
+ces-rosjava: 'https://raw.github.com/robotics-in-concert/rocon_rosjava_msgs/hydro-devel/rocon_rosjava.rosinstall'
 cslam: [ecl, 'https://bitbucket.org/yujinrobot/cslam/raw/hydro-devel/cslam.rosinstall']
 cslam_desktop: 'https://bitbucket.org/yujinrobot/cslam_desktop/raw/hydro-devel/cslam_desktop.rosinstall'
 cafe_concert: [kobuki, rocon, 'https://raw.github.com/robotics-in-concert/rocon_demos/hydro-devel/cafe_concert.rosinstall']
