@@ -89,7 +89,9 @@ def populate_worskpace(base_path, uri_list, parallel_jobs):
 def list_rosinstalls(track):
     response = urllib2.urlopen('%s/%s.yaml' % (settings.get_rosinstall_database_uri(), track))
     rosinstalls = yaml.load(response.read())
-    for r in rosinstalls.keys():
+    sorted_rosinstalls = rosinstalls.keys()
+    sorted_rosinstalls.sort()
+    for r in sorted_rosinstalls:
         console.pretty_print(" " + r + ": ", console.cyan)
         console.pretty_println("%s" % rosinstalls[r], console.yellow)
 
