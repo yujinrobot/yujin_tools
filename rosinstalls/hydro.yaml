@@ -1,7 +1,14 @@
-android_apps: 'https://raw.github.com/rosjava/rosjava/hydro/android_apps.rosinstall'
-android_apps-master: 'https://raw.github.com/rosjava/rosjava/master/android_apps.rosinstall'
-android: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
-android-master: 'https://raw.github.com/rosjava/rosjava/master/android_core.rosinstall'
+# If multiple branches (e.g. release/master, or release/devel), then use the non suffixed
+# version to point to the one we usually download for sources development.
+#
+# e.g. rosjava/android core sources, we typically build on top of so we use the release sources.
+# rocon sources on the other hand are our development, so always the devel sources.
+android-apps: [android-apps-master]
+android-apps-release: 'https://raw.github.com/rosjava/rosjava/hydro/android_apps.rosinstall'
+android-apps-master: 'https://raw.github.com/rosjava/rosjava/master/android_apps.rosinstall'
+android-core: [android-release]
+android-core-release: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
+android-core-master: 'https://raw.github.com/rosjava/rosjava/master/android_core.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/catkin.rosinstall'
 ces-android: 'https://raw.github.com/robotics-in-concert/rocon_demos/ces_android/rocon_android.rosinstall'
 ces-rosjava: [rocon-rosjava-msgs]
@@ -11,12 +18,13 @@ ecl: 'https://raw.github.com/stonier/ecl_core/hydro-devel/ecl.rosinstall'
 kobuki: 'https://raw.github.com/yujinrobot/kobuki/hydro-devel/kobuki.rosinstall'
 nexell: 'https://bitbucket.org/yujinrobot/nexell/raw/hydro-devel/nexell.rosinstall'
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
-qt_ros: 'https://raw.github.com/stonier/qt_ros/hydro/qt_ros.rosinstall'
-rocon: 'https://raw.github.com/robotics-in-concert/rocon/hydro/rocon.rosinstall'
-rocon-release: [rocon]
+qt-ros: 'https://raw.github.com/stonier/qt_ros/hydro/qt_ros.rosinstall'
+rocon: [rocon-devel]
+rocon-release: 'https://raw.github.com/robotics-in-concert/rocon/hydro/rocon.rosinstall'
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/hydro-devel/rocon.rosinstall'
-rocon-rosjava-msgs: 'https://raw.github.com/robotics-in-concert/rocon_rosjava_msgs/hydro-devel/rocon_rosjava.rosinstall'
-rosjava: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
+rocon_rosjava_msgs: 'https://raw.github.com/robotics-in-concert/rocon_rosjava_msgs/hydro-devel/rocon_rosjava.rosinstall'
+rosjava-core: [rosjava-core-release]
+rosjava-core-release: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
 rosjava-master: 'https://raw.github.com/rosjava/rosjava/master/rosjava.rosinstall'
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/hydro-devel/system_deb_builder.rosinstall'
 turtlebot: 'https://raw.github.com/turtlebot/turtlebot/hydro-devel/turtlebot.rosinstall'
