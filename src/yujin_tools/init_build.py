@@ -134,8 +134,16 @@ def print_build_details(build_dir, source_dir, install_prefix, build_type, under
     console.pretty_println(install_prefix, console.yellow)
     console.pretty_print(" -- Build Type      : ", console.cyan)
     console.pretty_println(build_type, console.yellow)
+    underlays_list = underlays.split(';')
     console.pretty_print(" -- Underlays       : ", console.cyan)
-    console.pretty_println(underlays, console.yellow)
+    if len(underlays_list) == 0:
+        console.pretty_println("-", console.yellow)
+    else:
+        underlay = underlays_list.pop(0)
+        console.pretty_println(underlay, console.yellow)
+        for underlay in underlays_list:
+            console.pretty_print("                    : ", console.cyan)
+            console.pretty_println(underlay, console.yellow)
     console.pretty_print(" -- Eclipse Name    : ", console.cyan)
     console.pretty_println(name, console.yellow)
     if not toolchain == "":
