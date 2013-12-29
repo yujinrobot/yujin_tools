@@ -387,6 +387,7 @@ def init_configured_build(default_underlay, build_dir_="./", source_dir_="./src"
     instantiate_template('konsole', name, build_dir)
     instantiate_template('gnome-terminal', name, build_dir)
     instantiate_template('eclipse', name, build_dir)
+    instantiate_template('android-studio', name, build_dir)
 
 
 def clean(dir_to_be_cleaned, dir_sources):
