@@ -1,3 +1,5 @@
+0.2.40
+ - bugfix missing android-studio template install rule
 0.2.39
  - init build template for android-studio
 0.2.38
