@@ -75,7 +75,7 @@ def make_isolated_main():
     if args.no_color:
         terminal_color.disable_ANSI_colors()
 
-    (base_path, build_path, devel_path, source_path) = common.get_default_paths(isolated=True)
+    (base_path, build_path, devel_path, source_path, doc_path) = common.get_default_paths(isolated=True)
     unused_catkin_toplevel, catkin_python_path, unused_catkin_cmake_path = common.find_catkin(base_path)
     install_path = config_cache.get_install_prefix_from_config_cmake(isolated=True)
 

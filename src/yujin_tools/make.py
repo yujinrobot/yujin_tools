@@ -151,7 +151,7 @@ def make_main():
     if args.no_color:
         terminal_color.disable_ANSI_colors()
 
-    (base_path, build_path, devel_path, source_path) = common.get_default_paths()
+    (base_path, build_path, devel_path, source_path, doc_path) = common.get_default_paths()
 
     validate_build_space(base_path)  # raises a RuntimeError if there is a problem
 
