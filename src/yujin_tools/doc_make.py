@@ -124,14 +124,16 @@ def doc_make_main():
             env['PKG_CONFIG_PATH'] = path 
 
     doc_output = {}
+    console.pretty_println('Generating documents in ' + doc_path, console.cyan)
     for name, path in packages_by_name.items():
-        print 'Generate doc for ' + name
+        console.pretty_println('  ' + name)
         output = generate_doc(name, path, doc_path)
         doc_output[name] = output
 
     generates_index_page(doc_path, packages_by_name.keys())
 
-    console.pretty_println('Document generation result. 0 may mean error. It is ok, most of time')
+    console.pretty_println('')
+    console.pretty_println('Document generation result. 0 may mean error. But it is fine most of time', console.bold_white)
     for name, err in doc_output.items():
         console.pretty_print(name, console.cyan)
         console.pretty_print(' : ')
