@@ -26,6 +26,7 @@ setup(name='yujin_tools',
            'scripts/yujin_make_isolated',
            'scripts/yujin_tools_settings',
            'scripts/yujin_list_git_branches',
+           'scripts/yujin_doc_make',
       ],
       package_data = {'yujin_tools': [
            'cmake/*',

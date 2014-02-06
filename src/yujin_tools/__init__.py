@@ -1,7 +1,8 @@
 
-__version__ = '0.2.42'
+__version__ = '0.2.43'
 
 from .init_workspace import init_workspace
 from .init_build import init_build
 from .make import make_main
 from .make_isolated import make_isolated_main
+from .doc_make import doc_make_main
