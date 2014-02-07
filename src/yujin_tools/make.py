@@ -21,6 +21,7 @@ from catkin_pkg.packages import find_packages
 ##############################################################################
 
 import console
+import config_cache
 import common
 import settings
 from make_doc import make_doc
@@ -157,7 +158,8 @@ def make_main():
     if args.no_color:
         terminal_color.disable_ANSI_colors()
 
-    (base_path, build_path, devel_path, source_path, doc_path) = common.get_default_paths()
+    (base_path, build_path, devel_path, source_path) = common.get_default_paths()
+    doc_path = config_cache.get_doc_prefix_from_config_cmake(base_path)
 
     validate_build_space(base_path)  # raises a RuntimeError if there is a problem
 

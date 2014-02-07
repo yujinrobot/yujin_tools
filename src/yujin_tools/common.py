@@ -203,5 +203,4 @@ def get_default_paths(isolated=False):
     build_path = os.path.join(base_path, 'build' + suffix)
     devel_path = os.path.join(base_path, 'devel' + suffix)
     source_path = os.path.join(base_path, 'src')
-    doc_path = os.path.join(base_path, 'doc')
-    return (base_path, build_path, devel_path, source_path, doc_path)
+    return (base_path, build_path, devel_path, source_path)
