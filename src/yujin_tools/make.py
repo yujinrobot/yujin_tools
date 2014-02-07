@@ -54,7 +54,7 @@ def _parse_args(args=sys.argv[1:]):
 
     docgroup = parser.add_mutually_exclusive_group()
     docgroup.add_argument('-d', '--doc', action='store_true', help='Generates the documents for packages in the workspace.')
-    docgroup.add_argument('--doc-only', action='store_true', help='Generates the documents for packages in the workspace.')
+    docgroup.add_argument('--doc-only', action='store_true', help='Generates the documents for packages in the workspace. Does not build source')
 
     parser.add_argument('--cmake-args', dest='cmake_args', nargs='*', type=str,
         help='Arbitrary arguments which are passes to CMake. It must be passed after other arguments since it collects all following options.')
