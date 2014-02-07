@@ -17,8 +17,7 @@ from catkin_pkg.packages import find_packages
 
 import common
 import console
-import make 
-from doc_make_html_template import html_header, html_footer
+from make_doc_html_templates import html_header, html_footer
 
 import catkin_make.terminal_color as terminal_color
 from catkin_make.terminal_color import fmt
@@ -52,7 +51,7 @@ def generates_index_page(doc_path, pkg_names):
     output(fd, html_footer)
     os.close(fd)
 
-def doc_make(source_path, doc_path, packages):
+def make_doc(source_path, doc_path, packages):
 
     if not os.path.exists(doc_path):
         os.mkdir(doc_path)

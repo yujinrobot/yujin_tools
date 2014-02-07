@@ -23,7 +23,7 @@ from catkin_pkg.packages import find_packages
 import console
 import common
 import settings
-from doc_make import doc_make
+from make_doc import make_doc
 
 import catkin_make.terminal_color as terminal_color
 from catkin_make.terminal_color import fmt
@@ -227,7 +227,7 @@ def make_main():
 
     if args.doc_only:
         console.pretty_println('Generates documents only',console.bold_white)
-        doc_make(source_path, doc_path, packages)
+        make_doc(source_path, doc_path, packages)
         return 
 
     # consider calling cmake
@@ -298,4 +298,4 @@ def make_main():
             return fmt('@{rf}Invoking @{boldon}"make"@{boldoff} failed')
 
     if args.doc:
-        doc_make(source_path, doc_path, packages)
+        make_doc(source_path, doc_path, packages)
