@@ -11,9 +11,8 @@ html_header = ['<!DOCTYPE html>',
                '  </head>      ',
                '  <body>       ',
                '    <h1> Package Lists </h1>',
-              ]
+               ]
 
-html_footer = [
-               '  </body>                     ',
+html_footer = ['  </body>                     ',
                '</html>                       ',
                ]

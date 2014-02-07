@@ -26,16 +26,19 @@ from catkin_make.terminal_color import fmt
 # Methods
 ##############################################################################
 
+
 def generate_doc(name, pkg_path, doc_path):
     document_path = doc_path + '/' + name
     args = ['rosdoc_lite', '-o', document_path, pkg_path]
     output = subprocess.call(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return output
 
+
 def output(fd, html):
     for h in html:
         os.write(fd, h)
-        os.write(fd,'\n')
+        os.write(fd, '\n')
+
 
 def generates_index_page(doc_path, pkg_names):
 
@@ -51,13 +54,14 @@ def generates_index_page(doc_path, pkg_names):
     output(fd, html_footer)
     os.close(fd)
 
+
 def make_doc(source_path, doc_path, packages):
 
     if not os.path.exists(doc_path):
         os.mkdir(doc_path)
 
     # List up packages with its absolute path
-    packages_by_name = {p.name: source_path + '/' + path  for path, p in packages.iteritems()}
+    packages_by_name = {p.name: source_path + '/' + path for path, p in packages.iteritems()}
 
     doc_output = {}
     console.pretty_println('Generating documents in ' + doc_path, console.cyan)
@@ -73,4 +77,4 @@ def make_doc(source_path, doc_path, packages):
     for name, err in doc_output.items():
         console.pretty_print(name, console.cyan)
         console.pretty_print(' : ')
-        console.pretty_println(str(err)) 
+        console.pretty_println(str(err))
