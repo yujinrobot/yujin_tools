@@ -26,10 +26,12 @@ from catkin_make.terminal_color import fmt
 # Methods
 ##############################################################################
 
+DOC_PROGRAM = 'rosdoc_lite'
+
 
 def generate_doc(name, pkg_path, doc_path):
     document_path = doc_path + '/' + name
-    args = ['rosdoc_lite', '-o', document_path, pkg_path]
+    args = [DOC_PROGRAM, '-o', document_path, pkg_path]
     output = subprocess.call(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return output
 
@@ -56,6 +58,11 @@ def generates_index_page(doc_path, pkg_names):
 
 
 def make_doc(source_path, doc_path, packages):
+
+    if not common.which(DOC_PROGRAM):
+        console.error('[' + DOC_PROGRAM + '] is not available.')
+        console.error('Please make sure [' + DOC_PROGRAM + '] is in your python path')
+        return
 
     if not os.path.exists(doc_path):
         os.mkdir(doc_path)
