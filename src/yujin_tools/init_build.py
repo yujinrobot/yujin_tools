@@ -44,10 +44,11 @@ def parse_arguments():
     parser.add_argument('sources', nargs='?', default="src", help='directory where the sources reside [./src]')
     parser.add_argument('-r', '--release', action='store_true', help='build in Release mode instead of RelWithDebInfo [false]')
     parser.add_argument('-i', '--install', action='store', default='/not_set_directory', help='installation location [workspace/install]')
+    parser.add_argument('-d', '--doc', action='store', default='/not_set_directory', help='document location [workspace/doc]')
     #  even though we don't set a default value here, it later gets set as the default underlay if not present and --no-default-underlay is not true
     parser.add_argument('-u', '--underlays', action='store', default='', help='semi-colon list of catkin workspaces to utilise, priority given from front to back')
     default_underlay_group = parser.add_mutually_exclusive_group()
-    default_underlay_group.add_argument('-d', '--default-underlay', choices=['groovy', 'hydro'], action='store', default=None, help='default the underlays to this track if catkin is not found [`yujin_tools_settings --get-default-track`]')
+    default_underlay_group.add_argument('-du', '--default-underlay', choices=['groovy', 'hydro'], action='store', default=None, help='default the underlays to this track if catkin is not found [`yujin_tools_settings --get-default-track`]')
     default_underlay_group.add_argument('--track', choices=['groovy', 'hydro'], dest='default_underlay', action='store', default=None, help='convenience equivalent for the --default-underlay option')
     default_underlay_group.add_argument('-n', '--no-default-underlay', action='store_true', help='do not automatically underlay with the default track setting [false]')
     parser.add_argument('-t', '--toolchain', action='store', default='', help='toolchain cmake module to load []')
@@ -100,11 +101,11 @@ def instantiate_template(filename, name, cwd):
         f.close()
 
 
-def fill_in_config_cmake(template, config_build_type, config_devel, config_install_prefix, config_underlays, config_override_file):
+def fill_in_config_cmake(template, config_build_type, config_devel, config_install_prefix, config_doc_prefix, config_underlays, config_override_file):
     return template % locals()
 
 
-def instantiate_config_cmake(platform_content, build_path, config_build_type, config_install_prefix, config_underlays):
+def instantiate_config_cmake(platform_content, build_path, config_build_type, config_install_prefix, config_doc_prefix, config_underlays):
     '''
       Copy the cache configuration template to the build path.
 
@@ -114,7 +115,7 @@ def instantiate_config_cmake(platform_content, build_path, config_build_type, co
     template_dir = os.path.join(os.path.dirname(__file__), 'cmake')
     template = read_template(os.path.join(template_dir, "config.cmake"))
     config_devel = os.path.join(build_path, 'devel')
-    contents = fill_in_config_cmake(template, config_build_type, config_devel, config_install_prefix, config_underlays, common.override_filename())
+    contents = fill_in_config_cmake(template, config_build_type, config_devel, config_install_prefix, config_doc_prefix, config_underlays, common.override_filename())
     config_cmake_file = os.path.join(build_path, "config.cmake")
     try:
         f = open(config_cmake_file, 'w')
@@ -124,7 +125,7 @@ def instantiate_config_cmake(platform_content, build_path, config_build_type, co
         f.close()
 
 
-def print_build_details(build_dir, source_dir, install_prefix, build_type, underlays, name, toolchain, platform):
+def print_build_details(build_dir, source_dir, install_prefix, doc_prefix, build_type, underlays, name, toolchain, platform):
     console.pretty_println("\n************************** Parallel Buildspace Details ***************************", console.bold)
     console.pretty_print(" -- Build directory : ", console.cyan)
     console.pretty_println(build_dir, console.yellow)
@@ -132,6 +133,8 @@ def print_build_details(build_dir, source_dir, install_prefix, build_type, under
     console.pretty_println(source_dir, console.yellow)
     console.pretty_print(" -- Install prefix  : ", console.cyan)
     console.pretty_println(install_prefix, console.yellow)
+    console.pretty_print(" -- Document prefix : ", console.cyan)
+    console.pretty_println(doc_prefix, console.yellow)
     console.pretty_print(" -- Build Type      : ", console.cyan)
     console.pretty_println(build_type, console.yellow)
     underlays_list = underlays.split(';')
@@ -219,7 +222,7 @@ def list_platforms():
     console.pretty_println("**********************************************************************************\n", console.bold)
 
 
-def init_configured_build(default_underlay, build_dir_="./", source_dir_="./src", underlays_="/opt/ros/groovy", install_prefix_="./install", release_=False, toolchain_="", platform_=""):
+def init_configured_build(default_underlay, build_dir_="./", source_dir_="./src", underlays_="/opt/ros/groovy", install_prefix_="./install", doc_prefix_="./doc", release_=False, toolchain_="", platform_=""):
     '''
       This one is used with pre-configured parameters. Note that
       init_build generates parameters parsed from the command line and then
@@ -307,13 +310,19 @@ def init_configured_build(default_underlay, build_dir_="./", source_dir_="./src"
         install_prefix = os.path.join(build_dir, "install")
     else:
         install_prefix = install_prefix_
+
+    if doc_prefix_ == "/not_set_directory":
+        doc_prefix = os.path.join(build_dir, "doc")
+    else:
+        doc_prefix = doc_prefix_
+
     if release_:
         build_type = "Release"
     else:
         build_type = "RelWithDebInfo"
     name = os.path.basename(workspace_dir) + "_" + os.path.basename(build_dir)
 
-    print_build_details(build_dir, source_dir, install_prefix, build_type, underlays, name, toolchain_, platform_)
+    print_build_details(build_dir, source_dir, install_prefix, doc_prefix, build_type, underlays, name, toolchain_, platform_)
     os.chdir(build_dir)
 
     ##########################
@@ -378,7 +387,7 @@ def init_configured_build(default_underlay, build_dir_="./", source_dir_="./src"
     ##########################
     # Cache
     ##########################
-    instantiate_config_cmake(platform_content, build_dir, build_type, install_prefix, underlays)
+    instantiate_config_cmake(platform_content, build_dir, build_type, install_prefix, doc_prefix, underlays)
 
     ##########################
     # Templates
@@ -438,4 +447,4 @@ def init_build():
     if args.clean:
         clean(args.dir, args.sources)
         return
-    init_configured_build(args.default_underlay, args.dir, args.sources, args.underlays, args.install, args.release, args.toolchain, args.platform)
+    init_configured_build(args.default_underlay, args.dir, args.sources, args.underlays, args.install, args.doc, args.release, args.toolchain, args.platform)

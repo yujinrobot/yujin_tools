@@ -7,6 +7,7 @@
 # Parameterised Variables
 ###########################
 set(UNDERLAY_ROOTS "%(config_underlays)s" CACHE PATH "Semi-colon separated list of underlay roots.")
+set(YUJIN_DOC_PREFIX "%(config_doc_prefix)s" CACHE PATH "Document root location")
 
 ###########################
 # CMake

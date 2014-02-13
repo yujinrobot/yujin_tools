@@ -21,8 +21,10 @@ from catkin_pkg.packages import find_packages
 ##############################################################################
 
 import console
+import config_cache
 import common
 import settings
+from make_doc import make_doc
 
 import catkin_make.terminal_color as terminal_color
 from catkin_make.terminal_color import fmt
@@ -50,6 +52,11 @@ def _parse_args(args=sys.argv[1:]):
     parser.add_argument('--no-color', action='store_true', help='Disables colored ouput')
     parser.add_argument('--target', default=None, help='Build against a particular target only')
     parser.add_argument('--pkg', help='Invoke "make" on a specific package only')
+
+    docgroup = parser.add_mutually_exclusive_group()
+    docgroup.add_argument('-d', '--doc', action='store_true', help='Generates the documents for packages in the workspace.')
+    docgroup.add_argument('--doc-only', action='store_true', help='Generates the documents for packages in the workspace. Does not build source')
+
     parser.add_argument('--cmake-args', dest='cmake_args', nargs='*', type=str,
         help='Arbitrary arguments which are passes to CMake. It must be passed after other arguments since it collects all following options.')
     parser.add_argument('--make-args', dest='make_args', nargs='*', type=str,
@@ -152,6 +159,7 @@ def make_main():
         terminal_color.disable_ANSI_colors()
 
     (base_path, build_path, devel_path, source_path) = common.get_default_paths()
+    doc_path = config_cache.get_doc_prefix_from_config_cmake(base_path)
 
     validate_build_space(base_path)  # raises a RuntimeError if there is a problem
 
@@ -168,6 +176,7 @@ def make_main():
         console.pretty_print("Pre-cleaning before building.", console.cyan)
         shutil.rmtree(devel_path, ignore_errors=True)
         shutil.rmtree(build_path, ignore_errors=True)
+        shutil.rmtree(doc_path, ignore_errors=True)
 
     # check for new build
     if not os.path.exists(build_path):
@@ -217,6 +226,12 @@ def make_main():
             env['PKG_CONFIG_PATH'] = env['PKG_CONFIG_PATH'] + os.pathsep + path
         except KeyError:
             env['PKG_CONFIG_PATH'] = path
+
+    if args.doc_only:
+        console.pretty_println('Generates documents only',console.bold_white)
+        make_doc(source_path, doc_path, packages)
+        return 
+
     # consider calling cmake
     makefile = os.path.join(build_path, 'Makefile')
     if not os.path.exists(makefile) or args.force_cmake or force_cmake:
@@ -283,3 +298,6 @@ def make_main():
             builder.run_command(cmd, make_path, env=env)
         except subprocess.CalledProcessError:
             return fmt('@{rf}Invoking @{boldon}"make"@{boldoff} failed')
+
+    if args.doc:
+        make_doc(source_path, doc_path, packages)
