@@ -1,0 +1,9 @@
+# If multiple branches (e.g. release/master, or release/devel), then use the non suffixed
+# version to point to the one we usually download for sources development.
+#
+# e.g. rosjava/android core sources, we typically build on top of so we use the release sources.
+# rocon sources on the other hand are our development, so always the devel sources.
+rocon: [rocon-devel]
+rocon-release: [rocon-devel]
+rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
+
