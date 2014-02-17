@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export YUJIN_WORKSPACE=%(cwd)s
+if [ -d ${YUJIN_WORKSPACE}/devel ]; then
+  source ${YUJIN_WORKSPACE}/devel/setup.bash
+fi
+# Add the full path if android-studio is not in PATH
+# Usually something like:
+#   exec /opt/android-studio/bin/studio.sh
+exec android-studio
