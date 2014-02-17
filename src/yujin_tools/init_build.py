@@ -48,8 +48,8 @@ def parse_arguments():
     #  even though we don't set a default value here, it later gets set as the default underlay if not present and --no-default-underlay is not true
     parser.add_argument('-u', '--underlays', action='store', default='', help='semi-colon list of catkin workspaces to utilise, priority given from front to back')
     default_underlay_group = parser.add_mutually_exclusive_group()
-    default_underlay_group.add_argument('-du', '--default-underlay', choices=['groovy', 'hydro'], action='store', default=None, help='default the underlays to this track if catkin is not found [`yujin_tools_settings --get-default-track`]')
-    default_underlay_group.add_argument('--track', choices=['groovy', 'hydro'], dest='default_underlay', action='store', default=None, help='convenience equivalent for the --default-underlay option')
+    default_underlay_group.add_argument('-du', '--default-underlay', choices=settings.VALID_TRACKS, action='store', default=None, help='default the underlays to this track if catkin is not found [`yujin_tools_settings --get-default-track`]')
+    default_underlay_group.add_argument('--track', choices=settings.VALID_TRACKS, dest='default_underlay', action='store', default=None, help='convenience equivalent for the --default-underlay option')
     default_underlay_group.add_argument('-n', '--no-default-underlay', action='store_true', help='do not automatically underlay with the default track setting [false]')
     parser.add_argument('-t', '--toolchain', action='store', default='', help='toolchain cmake module to load []')
     parser.add_argument('-p', '--platform', action='store', default='default', help='platform cmake cache module to load [default]')

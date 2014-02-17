@@ -52,7 +52,7 @@ def parse_arguments():
     parser.add_argument('dir', nargs='?', default=os.getcwd(), help='directory to use for the workspace [current working directory]')
     parser.add_argument('-s', '--simple', action='store_true', help='just create a basic single build workspace (usual ros style) [false]')
     parser.add_argument('--list-rosinstalls', action='store_true', help='list all currently available rosinstalls [false]')
-    parser.add_argument('--track', action='store', default=None, help='retrieve rosinstalls relevant to this track [groovy|hydro][groovy]')
+    parser.add_argument('--track', action='store', default=None, help='retrieve rosinstalls relevant to this track %s[%s]' % (settings.VALID_TRACKS, settings.DEFAULT_TRACK))
     parser.add_argument('-j', '--jobs', action='store', default=1, help='how many parallel threads to use for installing[1]')
     parser.add_argument('uri', nargs=argparse.REMAINDER, default=None, help='uri for a rosinstall file [None]')
     args = parser.parse_args()
