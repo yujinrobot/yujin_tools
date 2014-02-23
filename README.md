@@ -63,7 +63,7 @@ For the yujin guys:
     > cd yujin_tools
 
 * make some changes
-* bump the version in `src/yujin_tools/__init__.py
+* bump the version in `src/yujin_tools/__init__.py`
 * add a note to the `Changelog`
 
 Finally, upload
