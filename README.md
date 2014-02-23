@@ -7,9 +7,8 @@ ros environment).
 
 ## Tools
 
-* **Configuration**
- * `yujin_tools_settings` : configure the rosdistro the yujin tools should work with.
-* **Compiling**
+* **Workspace Tools**
+ * `yujin_tools_settings` : configure the rosdistro and rosinstall database the yujin tools should work with.
  * `yujin_init_workspace` : easy rosinstaller, drop in a listed rosinstall from the yujin tools rosinstall database.
  * `yujin_init_build` : configure a build dir and populate with environment startup scripts (esp. useful for parallel builds)
  * `yujin_make` : catkin_make on drugs
@@ -29,12 +28,7 @@ ros environment).
 
 ### Usage
 
-**yujin_tools_settings**
-
-This allows you to configure the rosdistro yujin_make and co. should work with. Calling with --help
-should be sufficient to grasp this tool.
-
-**yujin_init_workspace**, **yujin_init_buld**, **yujin_make**
+**yujin_tools_settings**, **yujin_init_workspace**, **yujin_init_buld**, **yujin_make**
 
 * [Yujin Init Tools](https://github.com/yujinrobot/yujin_tools/wiki/yujin-init)
 
