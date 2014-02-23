@@ -1,8 +1,6 @@
 Yujin Tools
 =========
 
-
-
 Utilies for yujin development. These are system tools (i.e. not deployed within a 
 ros environment).
 
@@ -10,10 +8,16 @@ Template style wizard shortcuts for creating ros packages, stacks.
 
 ## Tools
 
-* cfind 
-* yujin_init_workspace
-* yujin_init_build
-* yujin_make, yujin_make_isolated
+* **Configuration**
+** yujin_tools_settings : configure the rosdistro the yujin tools should work with.
+* **Compiling**
+** yujin_init_workspace : easy rosinstaller, drop in a listed rosinstall from the yujin tools rosinstall database.
+** yujin_init_build : configure a build dir and populate with environment startup scripts (esp. useful for parallel builds)
+** yujin_make : catkin_make on drugs
+* **Rocon**
+** avahi-browse-concerts
+** avahi-browse-multimaster
+** masteruri : quickly switch between ROS_MASTER_URI's (e.g. `. masteruri 2` -> 11312)
 
 ## Usage
 
@@ -24,18 +28,30 @@ Template style wizard shortcuts for creating ros packages, stacks.
 
 ### Usage
 
-**cfind**
+**yujin_tools_settings**
 
-Code finder. In any directory, simply type `cfind <keyword>` and it will recursively grep to find
-any file containing those keywords (also prints line numbers). e.g.
+This allows you to configure the rosdistro yujin_make and co. should work with. Calling with --help
+should be sufficient to grasp this tool.
 
-    > cfind CSLAM_MACRO
-
-**yujin_init_workspace**, **yujin_init_buld**, **yujin_make**, **yujin_make_isolated**
+**yujin_init_workspace**, **yujin_init_buld**, **yujin_make**
 
 * [Yujin Init Tools](https://github.com/yujinrobot/yujin_tools/wiki/yujin-init)
 
+**masteruri**
+
+Allows checking and switching of `ROS_MASTER_URI`'s on localhost.
+
+    # To check the current value:
+    > masteruri
+    http://localhost:11311
+    # To switch
+    > . masteruri 2
+    > masteruri
+    http://localhost:11312
+
 ## Developing & Packaging
+
+For the yujin guys:
 
     > git clone https://github.com/yujinrobot/yujin_tools.git
     > cd yujin_tools
