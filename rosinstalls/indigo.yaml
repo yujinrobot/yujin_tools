@@ -3,12 +3,9 @@
 #
 # e.g. rosjava/android core sources, we typically build on top of so we use the release sources.
 # rocon sources on the other hand are our development, so always the devel sources.
-android: [android-release]
-android-release: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
-android-apps: [android-apps-release]
-android-apps-release: 'https://raw.github.com/rosjava/rosjava/hydro/android_apps.rosinstall'
+android: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
+android-apps: 'https://raw.github.com/rosjava/rosjava/master/android_apps.rosinstall'
 rocon: [rocon-devel]
-rocon-release: [rocon-devel]
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
 rosjava: [rosjava-core-release]
 rosjava-release: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
