@@ -9,4 +9,4 @@ rocon: [rocon-devel]
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
 rosjava: [rosjava-core-release]
 rosjava-release: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
-
+system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/hydro-devel/system_deb_builder.rosinstall'
