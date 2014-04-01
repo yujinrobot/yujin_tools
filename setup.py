@@ -54,6 +54,10 @@ setup(name='yujin_tools',
       description = "Utilities for yujin's development environment",
       long_description = "Refer to the documentation at https://github.com/yujinrobot/yujin_tools.",
       license = "BSD"
+#      install_requires=[
+#        'argparse',
+        #'python-catkin-pkg',
+#    ],
       )
 
 # This no longer works...it has to be a special parsable syntax of pypi's.

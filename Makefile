@@ -46,6 +46,10 @@ clean_dist:
 distro:
 	python setup.py sdist
 
+# the following needs stddeb installed
+source_deb:
+	python setup.py --command-packages=stdeb.command sdist_dsc
+
 deb_distro:
 	python setup.py --command-packages=stdeb.command sdist_dsc bdist_deb
 
@@ -60,8 +64,9 @@ debianize:
 	@mv dist/yujin_tools-${VERSION}.tar.gz ../yujin-tools_${VERSION}.orig.tar.gz
 	python setup.py --command-packages=stdeb.command debianize
 
+# Still can't get this to work in any way - http://shallowsky.com/blog/programming/packaging-launchpad-ppas.html
 ppa:
-	dput -u ppa:yujinrobot/ppa deb_dist/yujin-tools_${VERSION}-1_amd64.changes	
+	dput -u ppa:d-stonier/yujin-tools deb_dist/yujin-tools_${VERSION}-1_amd64.changes	
 
 clean:  clean_dist
 	-sudo rm -f install.record
