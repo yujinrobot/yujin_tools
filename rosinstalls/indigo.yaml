@@ -7,7 +7,7 @@ android: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
 android-apps: 'https://raw.github.com/rosjava/rosjava/master/android_apps.rosinstall'
 rocon: [rocon-devel]
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
-rocon-rosjava:  'https://raw.github.com/robotics-in-concert/rocon_rosjava_core/hydro-devel/rocon_rosjava_core.rosinstall'
+rocon-rosjava:  'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon_rosjava.rosinstall'
 rosjava: [rosjava-core-release]
 rosjava-release: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/hydro-devel/system_deb_builder.rosinstall'
