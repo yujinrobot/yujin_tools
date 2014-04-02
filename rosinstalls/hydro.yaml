@@ -22,7 +22,7 @@ qt-ros: 'https://raw.github.com/stonier/qt_ros/hydro/qt_ros.rosinstall'
 rocon: [rocon-devel]
 rocon-release: 'https://raw.github.com/robotics-in-concert/rocon/hydro/rocon.rosinstall'
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/hydro-devel/rocon.rosinstall'
-rocon-rosjava-msgs: 'https://raw.github.com/robotics-in-concert/rocon_rosjava_msgs/hydro-devel/rocon_rosjava.rosinstall'
+rocon-rosjava:  'https://raw.github.com/robotics-in-concert/rocon_rosjava_core/hydro-devel/rocon_rosjava_core.rosinstall'
 rosjava-core: [rosjava-core-release]
 rosjava-core-release: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
 rosjava-master: 'https://raw.github.com/rosjava/rosjava/master/rosjava.rosinstall'
