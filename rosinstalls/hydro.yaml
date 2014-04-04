@@ -3,15 +3,13 @@
 #
 # e.g. rosjava/android core sources, we typically build on top of so we use the release sources.
 # rocon sources on the other hand are our development, so always the devel sources.
+android: [android-core-release]
 android-apps: [android-apps-master]
 android-apps-release: 'https://raw.github.com/rosjava/rosjava/hydro/android_apps.rosinstall'
 android-apps-master: 'https://raw.github.com/rosjava/rosjava/master/android_apps.rosinstall'
-android-core: [android-release]
 android-core-release: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
 android-core-master: 'https://raw.github.com/rosjava/rosjava/master/android_core.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/catkin.rosinstall'
-ces-android: 'https://raw.github.com/robotics-in-concert/rocon_demos/ces_android/ces_android.rosinstall'
-ces-software: 'https://raw.github.com/robotics-in-concert/rocon_demos/ces_software/ces_software.rosinstall'
 cslam: [ecl, 'https://bitbucket.org/yujinrobot/cslam/raw/hydro-devel/cslam.rosinstall']
 cslam_desktop: 'https://bitbucket.org/yujinrobot/cslam_desktop/raw/hydro-devel/cslam_desktop.rosinstall'
 ecl: 'https://raw.github.com/stonier/ecl_core/hydro-devel/ecl.rosinstall'
@@ -23,8 +21,8 @@ rocon: [rocon-devel]
 rocon-release: 'https://raw.github.com/robotics-in-concert/rocon/hydro/rocon.rosinstall'
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/hydro-devel/rocon.rosinstall'
 rocon-rosjava:  'https://raw.github.com/robotics-in-concert/rocon/hydro-devel/rocon_rosjava.rosinstall'
-rosjava-core: [rosjava-core-release]
-rosjava-core-release: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
+rosjava: [rosjava-release]
+rosjava-release: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
 rosjava-master: 'https://raw.github.com/rosjava/rosjava/master/rosjava.rosinstall'
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/hydro-devel/system_deb_builder.rosinstall'
 turtlebot: 'https://raw.github.com/turtlebot/turtlebot/hydro-devel/turtlebot.rosinstall'
