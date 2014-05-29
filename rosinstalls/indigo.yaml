@@ -5,6 +5,7 @@
 # rocon sources on the other hand are our development, so always the devel sources.
 android: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
 android-interactions: 'https://raw.github.com/rosjava/rosjava/master/android_interactions.rosinstall'
+ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
 rocon: [rocon-devel]
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
 rocon-rosjava:  'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon_rosjava.rosinstall'
