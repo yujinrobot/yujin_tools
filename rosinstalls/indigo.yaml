@@ -5,6 +5,7 @@
 # rocon sources on the other hand are our development, so always the devel sources.
 android: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
 android-interactions: 'https://raw.github.com/rosjava/rosjava/master/android_interactions.rosinstall'
+cslam: [ecl, 'https://bitbucket.org/yujinrobot/cslam/raw/hydro-devel/cslam.rosinstall']
 ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
 rocon: [rocon-devel]
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
@@ -12,3 +13,6 @@ rocon-rosjava:  'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon_r
 rosjava: [rosjava-release]
 rosjava-release: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/hydro-devel/system_deb_builder.rosinstall'
+nexell: 'https://bitbucket.org/yujinrobot/nexell/raw/hydro-devel/nexell.rosinstall'
+cslam_desktop: 'https://bitbucket.org/yujinrobot/cslam_desktop/raw/hydro-devel/cslam_desktop.rosinstall'
+pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
