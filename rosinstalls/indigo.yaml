@@ -8,6 +8,7 @@ android-interactions: 'https://raw.github.com/rosjava/rosjava/master/android_int
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/catkin.rosinstall'
 cslam: [ecl, 'https://bitbucket.org/yujinrobot/cslam/raw/hydro-devel/cslam.rosinstall']
 ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
+kobuki: 'https://raw.github.com/yujinrobot/kobuki/indigo/kobuki.rosinstall'
 kobuki-core: 'https://raw.github.com/yujinrobot/kobuki_core/indigo/kobuki_core.rosinstall'
 rocon: [rocon-devel]
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
