@@ -13,5 +13,9 @@
 - git: {local-name: kobuki, version: indigo, uri: 'https://github.com/yujinrobot/kobuki.git'}
 - git: {local-name: kobuki_desktop, version: indigo, uri: 'https://github.com/yujinrobot/kobuki_desktop.git'}
 
-- git: {local-name: capabilities, version: master, uri: 'https://github.com/osrf/capabilities.git'}
-- git: {local-name: std_capabilities, version: master, uri: 'https://github.com/osrf/std_capabilities.git'}
+#- git: {local-name: capabilities, version: master, uri: 'https://github.com/osrf/capabilities.git'}
+#- git: {local-name: std_capabilities, version: master, uri: 'https://github.com/osrf/std_capabilities.git'}
+
+# Not yet released in indigo
+- git: {local-name: ar_track_alvar, version: hydro-devel, uri: 'https://github.com/sniekum/ar_track_alvar.git'}
+
