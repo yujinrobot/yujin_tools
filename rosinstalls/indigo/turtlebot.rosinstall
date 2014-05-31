@@ -4,9 +4,11 @@
 #
 ##############################################################################
 
-# Kobuki / Yujin stacks
-
 - git: {local-name: turtlebot_msgs, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_msgs.git'}
 - git: {local-name: turtlebot_create, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_create.git'}
 - git: {local-name: turtlebot, version: indigo, uri: 'https://github.com/turtlebot/turtlebot.git'}
 - git: {local-name: turtlebot_apps, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_apps.git'}
+
+# Not yet released dependencies
+- git: {local-name: joystick_drivers, version: indigo-devel, uri: 'https://github.com/ros-drivers/joystick_drivers.git'}
+- git: {local-name: map_store, version: hydro-devel, uri: 'https://github.com/ros-planning/map_store.git'}
