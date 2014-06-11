@@ -20,3 +20,4 @@ rosjava: [rosjava-release]
 rosjava-release: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
 system-deb-builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/indigo/system_deb_builder.rosinstall'
 turtlebot: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/turtlebot.rosinstall'
+world-canvas: 'https://raw.githubusercontent.com/corot/world_canvas/master/world_canvas.rosinstall'
