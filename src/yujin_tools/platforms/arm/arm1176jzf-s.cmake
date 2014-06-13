@@ -13,4 +13,4 @@ set(PLATFORM_CXX_FLAGS "-march=armv6 -mtune=arm1176jzf-s -pipe -mfloat-abi=softf
 set(PLATFORM_LINK_FLAGS "" CACHE STRING "Link flags specific to this platform.")
 
 # Custom software settings
-set(ECL_EIGEN_IS_INTERNAL_3_1_2 TRUE CACHE BOOL "Use ecls internal eigen.")
+set(ECL_EIGEN_IS_INTERNAL_3_2_1 TRUE CACHE BOOL "Use ecls internal eigen.")
