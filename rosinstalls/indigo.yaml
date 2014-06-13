@@ -6,12 +6,12 @@
 android-core: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
 android-interactions: 'https://raw.github.com/rosjava/rosjava/master/android_interactions.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
-cslam: [ecl, 'https://bitbucket.org/yujinrobot/cslam/raw/hydro-devel/cslam.rosinstall']
-cslam_desktop: 'https://bitbucket.org/yujinrobot/cslam_desktop/raw/hydro-devel/cslam_desktop.rosinstall'
+cslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/cslam.rosinstall'
+cslam_desktop: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/cslam_desktop.rosinstall'
 ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
 kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki.rosinstall'
 kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki_core.rosinstall'
-nexell: 'https://bitbucket.org/yujinrobot/nexell/raw/hydro-devel/nexell.rosinstall'
+nexell: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/nexell.rosinstall'
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 rocon: [rocon-devel]
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
