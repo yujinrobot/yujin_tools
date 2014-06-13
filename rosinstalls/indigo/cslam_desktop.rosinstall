@@ -1,0 +1,1 @@
+- git: {local-name: cslam_desktop, version: indigo, uri: 'https://bitbucket.org/yujinrobot/cslam_desktop.git'}
