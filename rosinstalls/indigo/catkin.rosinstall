@@ -2,7 +2,7 @@
 # Installs catkin and gtest for use with cross compiled stacks. 
 #
 [
-{'git': {'local-name': 'catkin', 'version': '0.5.71', 'uri':'https://github.com/ros/catkin.git'}},
+{'git': {'local-name': 'catkin', 'version': 'indigo-devel', 'uri':'https://github.com/ros/catkin.git'}},
 {'git': {'local-name': 'cmake_modules', 'version': '0.3-devel', 'uri':'https://github.com/ros/cmake_modules.git'}},
 {'svn': {'local-name': 'gtest', 'uri': 'http://googletest.googlecode.com/svn/tags/release-1.6.0'}}
 ]
