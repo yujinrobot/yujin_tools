@@ -1,0 +1,2 @@
+- git: {local-name: cslam, version: indigo, uri: 'https://bitbucket.org/yujinrobot/cslam.git'}
+- git: {local-name: stam, version: indigo, uri: 'https://bitbucket.org/yujinrobot/stam.git'}
