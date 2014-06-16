@@ -6,8 +6,8 @@
 android-core: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
 android-interactions: 'https://raw.github.com/rosjava/rosjava/master/android_interactions.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
-cslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/cslam.rosinstall'
-cslam_desktop: [cslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/cslam_desktop.rosinstall']
+dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam.rosinstall'
+dslam_desktop: [dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
 ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
 kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki.rosinstall'
 kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki_core.rosinstall'
