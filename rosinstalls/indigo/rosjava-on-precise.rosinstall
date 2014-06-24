@@ -18,7 +18,7 @@
 {'git': {'local-name': 'message_runtime', 'version': 'groovy-devel', 'uri':'https://github.com/ros/message_runtime.git'}},
 {'git': {'local-name': 'cmake_modules', 'version': '0.3-devel', 'uri':'https://github.com/ros/cmake_modules.git'}},
 {'git': {'local-name': 'std_msgs', 'version': 'groovy-devel', 'uri':'https://github.com/ros/std_msgs.git'}},
-
+{'git': {'local-name': 'genjava', 'version': 'indigo', 'uri':'https://github.com/stonier/genjava.git'}},
 # do this separately and install to /opt/ros/indigo
 #{'git': {'local-name': 'console_bridge', 'version': 'master', 'uri':'https://github.com/ros/console_bridge.git'}},
 

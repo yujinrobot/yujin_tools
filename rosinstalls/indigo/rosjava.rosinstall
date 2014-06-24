@@ -9,6 +9,7 @@
 {'git': {'local-name': 'message_generation', 'version': 'groovy-devel', 'uri':'https://github.com/ros/message_generation.git'}},
 {'git': {'local-name': 'message_runtime', 'version': 'groovy-devel', 'uri':'https://github.com/ros/message_runtime.git'}},
 {'git': {'local-name': 'std_msgs', 'version': 'groovy-devel', 'uri':'https://github.com/ros/std_msgs.git'}},
+{'git': {'local-name': 'genjava', 'version': 'indigo', 'uri':'https://github.com/stonier/genjava.git'}},
 
 #{'git': {'local-name': 'rosjava_messages', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava_messages.git'}},
 #{'git': {'local-name': 'rosjava_core', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava_core.git'}},
