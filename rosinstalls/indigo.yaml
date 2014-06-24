@@ -16,8 +16,9 @@ pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 rocon: [rocon-devel]
 rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
 rocon-rosjava:  'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon_rosjava.rosinstall'
-rosjava: [rosjava-release]
-rosjava-release: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
+rosjava: [rosjava-hydro]
+rosjava-hydro: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
+rosjava-indigo: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/rosjava.rosinstall'
 system-deb-builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/indigo/system_deb_builder.rosinstall'
 turtlebot: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/turtlebot.rosinstall'
 world-canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/world_canvas.rosinstall'

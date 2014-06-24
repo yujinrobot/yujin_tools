@@ -1,26 +1,14 @@
 # The core rosjava packages
 
-# Make sure you have both catkin and whatever msg stacks (e.g. common_msgs for xxx_core tutorials and rocon_msgs for android
-# pairing apps) discoverable in an installed or source workspace before rosinstalling these.
-#
 [
 {'git': {'local-name': 'rosjava_build_tools', 'version': 'indigo', 'uri':'https://github.com/rosjava/rosjava_build_tools.git'}},
 {'git': {'local-name': 'rosjava_bootstrap', 'version': 'indigo', 'uri':'https://github.com/rosjava/rosjava_bootstrap.git'}},
 {'git': {'local-name': 'genmsg', 'version': 'indigo-devel', 'uri':'https://github.com/ros/genmsg.git'}},
-{'git': {'local-name': 'genlisp', 'version': 'groovy-devel', 'uri':'https://github.com/ros/genlisp.git'}},
 {'git': {'local-name': 'gencpp', 'version': 'indigo-devel', 'uri':'https://github.com/ros/gencpp.git'}},
 {'git': {'local-name': 'genpy', 'version': 'indigo-devel', 'uri':'https://github.com/ros/genpy.git'}},
-{'git': {'local-name': 'ros', 'version': 'indigo-devel', 'uri':'https://github.com/ros/ros.git'}},
-{'git': {'local-name': 'rospack', 'version': 'indigo-devel', 'uri':'https://github.com/ros/rospack.git'}},
-{'git': {'local-name': 'roscpp_core', 'version': 'indigo-devel', 'uri':'https://github.com/ros/roscpp_core.git'}},
-{'git': {'local-name': 'catkin', 'version': 'indigo-devel', 'uri':'https://github.com/ros/catkin.git'}},
 {'git': {'local-name': 'message_generation', 'version': 'groovy-devel', 'uri':'https://github.com/ros/message_generation.git'}},
 {'git': {'local-name': 'message_runtime', 'version': 'groovy-devel', 'uri':'https://github.com/ros/message_runtime.git'}},
-{'git': {'local-name': 'cmake_modules', 'version': '0.3-devel', 'uri':'https://github.com/ros/cmake_modules.git'}},
 {'git': {'local-name': 'std_msgs', 'version': 'groovy-devel', 'uri':'https://github.com/ros/std_msgs.git'}},
-
-# do this separately and install to /opt/ros/indigo
-#{'git': {'local-name': 'console_bridge', 'version': 'master', 'uri':'https://github.com/ros/console_bridge.git'}},
 
 #{'git': {'local-name': 'rosjava_messages', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava_messages.git'}},
 #{'git': {'local-name': 'rosjava_core', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava_core.git'}},
