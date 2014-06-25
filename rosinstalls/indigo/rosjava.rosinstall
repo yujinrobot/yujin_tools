@@ -10,6 +10,10 @@
 {'git': {'local-name': 'message_runtime', 'version': 'groovy-devel', 'uri':'https://github.com/ros/message_runtime.git'}},
 {'git': {'local-name': 'std_msgs', 'version': 'groovy-devel', 'uri':'https://github.com/ros/std_msgs.git'}},
 {'git': {'local-name': 'genjava', 'version': 'indigo', 'uri':'https://github.com/stonier/genjava.git'}},
+{'git': {'local-name': 'rosjava_test_msgs', 'version': 'indigo', 'uri':'https://github.com/stonier/rosjava_test_msgs.git'}},
+{'git': {'local-name': 'rosjava_core', 'version': 'indigo', 'uri':'https://github.com/rosjava/rosjava_core.git'}},
+{'git': {'local-name': 'rosjava_extras', 'version': 'indigo', 'uri':'https://github.com/rosjava/rosjava_extras.git'}},
+{'git': {'local-name': 'zeroconf_jmdns_suite', 'version': 'indigo', 'uri':'https://github.com/rosjava/zeroconf_jmdns_suite.git'}},
 
 #{'git': {'local-name': 'rosjava_messages', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava_messages.git'}},
 #{'git': {'local-name': 'rosjava_core', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava_core.git'}},
