@@ -22,10 +22,10 @@
 # do this separately and install to /opt/ros/indigo
 #{'git': {'local-name': 'console_bridge', 'version': 'master', 'uri':'https://github.com/ros/console_bridge.git'}},
 
-#{'git': {'local-name': 'rosjava_messages', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava_messages.git'}},
-#{'git': {'local-name': 'rosjava_core', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava_core.git'}},
-#{'git': {'local-name': 'rosjava_extras', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava_extras.git'}},
-#{'git': {'local-name': 'zeroconf_jmdns_suite', 'version': 'hydro', 'uri':'https://github.com/rosjava/zeroconf_jmdns_suite.git'}},
+#{'git': {'local-name': 'rosjava_messages', 'version': 'indigo', 'uri':'https://github.com/rosjava/rosjava_messages.git'}},
+{'git': {'local-name': 'rosjava_core', 'version': 'indigo', 'uri':'https://github.com/rosjava/rosjava_core.git'}},
+{'git': {'local-name': 'rosjava_extras', 'version': 'indigo', 'uri':'https://github.com/rosjava/rosjava_extras.git'}},
+{'git': {'local-name': 'zeroconf_jmdns_suite', 'version': 'indigo', 'uri':'https://github.com/rosjava/zeroconf_jmdns_suite.git'}},
 #{'git': {'local-name': 'rosjava', 'version': 'hydro', 'uri':'https://github.com/rosjava/rosjava.git'}},
 ]
 
