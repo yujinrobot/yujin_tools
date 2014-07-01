@@ -3,9 +3,9 @@
 #
 # e.g. rosjava/android core sources, we typically build on top of so we use the release sources.
 # rocon sources on the other hand are our development, so always the devel sources.
-android-complete: [android-core, android-interactions]
-android-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/android_core.rosinstall'
-android-interactions: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/android_interactions.rosinstall'
+android_complete: [android_core, android_interactions]
+android_core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/android_core.rosinstall'
+android_interactions: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/android_interactions.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
 dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam.rosinstall'
 dslam_desktop: [dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
@@ -14,12 +14,12 @@ kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo
 kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki_core.rosinstall'
 nexell: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/nexell.rosinstall'
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
-rocon: [rocon-devel]
-rocon-devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
-rocon-rosjava:  'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon_rosjava.rosinstall'
-rosjava: [rosjava-hydro]
-rosjava-hydro: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
-rosjava-indigo: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/rosjava.rosinstall'
+rocon: [rocon_devel]
+rocon_devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
+rocon_rosjava:  'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon_rosjava.rosinstall'
+rosjava: [rosjava_hydro]
+rosjava_hydro: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
+rosjava_indigo: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/rosjava.rosinstall'
 system-deb-builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/indigo/system_deb_builder.rosinstall'
 turtlebot: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/turtlebot.rosinstall'
-world-canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/world_canvas.rosinstall'
+world_canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/world_canvas.rosinstall'
