@@ -1,0 +1,10 @@
+# Install this on top of rosjava core workspaces
+#
+# Note: Disabling annotations messages (and dependencies) until a redesign comes through.
+# Note: usually don't have yocs_msgs sources in an underlay, so add it here.
+[
+{'git': {'local-name': 'yocs_msgs', 'version': 'indigo', 'uri':'https://github.com/yujinrobot/yocs_msgs.git'}},
+{'git': {'local-name': 'rocon_msgs', 'version': 'indigo', 'uri':'https://github.com/robotics-in-concert/rocon_msgs'}},
+{'git': {'local-name': 'uuid_msgs', 'version': 'master', 'uri':'https://github.com/ros-geographic-info/unique_identifier'}},
+{'git': {'local-name': 'rocon_rosjava_core', 'version': 'indigo', 'uri':'https://github.com/robotics-in-concert/rocon_rosjava_core'}},
+]
