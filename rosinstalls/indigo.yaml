@@ -16,7 +16,7 @@ nexell: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 rocon: [rocon_devel]
 rocon_devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
-rocon_rosjava:  'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon_rosjava.rosinstall'
+rocon_rosjava: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/rocon_rosjava.rosinstall'
 rosjava: [rosjava_indigo]
 rosjava_hydro: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
 rosjava_indigo: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/rosjava.rosinstall'
