@@ -24,7 +24,7 @@ This is assuming you have the latest android studio.
 ```
 > yujin_init_workspace android_interactions android_interactions
 > cd android_interactions
-> yujin_init_build --underlays="~/android_core/devel;~/rosjava/devel" .
+> yujin_init_build --underlays="~/android_core/devel;~/rocon_rosjava/devel;~/rosjava/devel" .
 > yujin_make
 ```
 
