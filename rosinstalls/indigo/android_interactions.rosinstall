@@ -1,0 +1,6 @@
+
+[
+{'git': {'local-name': 'android_apps', 'version': 'indigo', 'uri':'https://github.com/rosjava/android_apps.git'}},
+{'git': {'local-name': 'android_remocons', 'version': 'indigo', 'uri':'https://github.com/rosjava/android_remocons.git'}},
+]
+

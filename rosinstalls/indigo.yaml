@@ -3,8 +3,9 @@
 #
 # e.g. rosjava/android core sources, we typically build on top of so we use the release sources.
 # rocon sources on the other hand are our development, so always the devel sources.
-android-core: 'https://raw.github.com/rosjava/rosjava/hydro/android_core.rosinstall'
-android-interactions: 'https://raw.github.com/rosjava/rosjava/master/android_interactions.rosinstall'
+android-complete: [android-core, android-interactions]
+android-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/android_core.rosinstall'
+android-interactions: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/android_interactions.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
 dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam.rosinstall'
 dslam_desktop: [dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
