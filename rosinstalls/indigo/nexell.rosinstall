@@ -1,1 +1,2 @@
 - git: {local-name: nexell, version: indigo, uri: 'https://bitbucket.org/yujinrobot/nexell.git'}
+- git: {local-name: nexell_drivers, version: indigo, uri: 'https://bitbucket.org/yujinrobot/nexell_drivers.git'}
