@@ -1,2 +1,3 @@
+# This is for cross-compiled dslam installations.
 - git: {local-name: cslam_legacy, version: indigo, uri: 'https://bitbucket.org/yujinrobot/cslam.git'}
 - git: {local-name: dslam, version: indigo, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
