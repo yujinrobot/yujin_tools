@@ -1,3 +1,5 @@
+0.2.46
+ - arm1176jzf-s module updated to use EIGEN_3_2_1.
 0.2.45
  - was cleaning .bashrc or android-studio in a build clean, fixed.
 0.2.43
