@@ -1,2 +1,2 @@
 - git: {local-name: dslam_desktop, version: indigo, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
-- git: {local-name: ecto, version: master, uri: 'https://github.com/stonier/ecto.git'}
+- git: {local-name: ecto, version: indigo, uri: 'https://github.com/stonier/ecto.git'}
