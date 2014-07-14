@@ -1,0 +1,3 @@
+- git: {local-name: ecto, version: indigo, uri: 'https://github.com/stonier/ecto.git'}
+- git: {local-name: ecto_ros, version: indigo, uri: 'https://github.com/stonier/ecto_ros.git'}
+- git: {local-name: ecto_opencv, version: indigo, uri: 'https://github.com/stonier/ecto_opencv.git'}

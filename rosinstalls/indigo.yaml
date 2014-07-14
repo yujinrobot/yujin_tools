@@ -8,8 +8,9 @@ android_core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/
 android_interactions: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/android_interactions.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
 dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam.rosinstall'
-dslam_desktop: [dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
+dslam_desktop: [dslam, ecto, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
 ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
+ecto: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto.rosinstall']
 kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki.rosinstall'
 kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki_core.rosinstall'
 nexell: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/nexell.rosinstall'
