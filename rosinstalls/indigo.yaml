@@ -18,7 +18,7 @@ nexell_drivers: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstall
 nexell_bootstrap: [catkin, nexell]
 nexell_dslam: [dslam, nexell_drivers]
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
-qt_ros: 'https://raw.github.com/stonier/qt_ros/indigo/qt_ros.rosinstall'
+qt_ros: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/qt_ros.rosinstall'
 rocon: [rocon_devel]
 rocon_devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
 rocon_rosjava: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/rocon_rosjava.rosinstall'
