@@ -1,0 +1,3 @@
+[
+{'git': {'local-name': 'qt_ros', 'version': 'indigo', 'uri':'https://github.com/stonier/qt_ros.git'}},
+]
