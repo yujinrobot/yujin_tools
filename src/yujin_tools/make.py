@@ -49,6 +49,7 @@ def _parse_args(args=sys.argv[1:]):
     group.add_argument('--install-rosdeps-track', choices=settings.VALID_TRACKS, action='store', default=None, help='Install all rosdeps for the workspace sources and given track [None]')
     group.add_argument('--install-rosdeps', action='store_true', help='Install all rosdeps for the workspace sources and track set by `yujin_tools_settings --get-default-track` [false]')
     group.add_argument('-t', '--tests', action='store_true', help='Make tests [false]')
+    group.add_argument('-r', '--run-tests', action='store_true', help='Run tests (does not build them) [false]')
     parser.add_argument('--no-color', action='store_true', help='Disables colored ouput')
     parser.add_argument('--target', default=None, help='Build against a particular target only')
     parser.add_argument('--pkg', help='Invoke "make" on a specific package only')
@@ -272,6 +273,8 @@ def make_main():
         elif args.install:
             cmd = ['make', 'install']
         elif args.tests:
+            cmd = ['make', 'tests']
+        elif args.run_tests:
             cmd = ['make', 'test']
         else:
             cmd = ['make']
