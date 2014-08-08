@@ -1,3 +1,5 @@
+0.2.48
+ - use YUJIN_WORKSPACE if set to find the root
 0.2.47
  - separate build and run test options for yujin_make.
  - new buildroot toolchain for arm1176jzf-s.
