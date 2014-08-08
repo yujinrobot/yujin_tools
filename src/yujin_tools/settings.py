@@ -21,7 +21,7 @@ import console
 # Constants
 ##############################################################################
 
-DEFAULT_TRACK = "hydro"
+DEFAULT_TRACK = "indigo"
 VALID_TRACKS = ["groovy", "hydro", "indigo"]
 DEFAULT_ROSINSTALL_DATABASE = 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls'
 
