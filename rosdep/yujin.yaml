@@ -6,3 +6,4 @@ nexell-binaries:
   ubuntu: [nexell-binaries-yujin]
 yujin-opencv:
   ubuntu: [ros-indigo-opencv]
+
