@@ -15,6 +15,7 @@ ecto: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/e
 gopher: 'https://bitbucket.org/yujinrobot/gopher/raw/indigo-devel/gopher_meta/resources/rosinstall/gopher.rosinstall'
 kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki.rosinstall'
 kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki_core.rosinstall'
+navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/navigation.rosinstall'
 nexell: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/nexell.rosinstall'
 nexell_drivers: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/nexell_drivers.rosinstall'
 nexell_bootstrap: [catkin, nexell]
