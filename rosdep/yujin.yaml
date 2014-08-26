@@ -4,6 +4,6 @@ nexell-toolchain-arm-eabi:
   ubuntu: [nexell-toolchain-arm-eabi-4.3.2-glibc-2.9-yujin]
 nexell-binaries:
   ubuntu: [nexell-binaries-yujin]
-yujin-opencv:
+dude:
   ubuntu: [ros-indigo-opencv]
 
