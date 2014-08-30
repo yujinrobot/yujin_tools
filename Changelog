@@ -1,3 +1,5 @@
+0.2.52
+ - git-big-picture script added
 0.2.51
  - bugfix previous arm support for nanomsg
 0.2.50
