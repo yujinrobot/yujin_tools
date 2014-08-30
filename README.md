@@ -49,6 +49,25 @@ Allows checking and switching of `ROS_MASTER_URI`'s on localhost.
 Use in the src directory of a catkin_make/yujin_make installed source workspace populated with git
 clones. This will list the branches in each and highlight the currently used branch.
 
+**git-big-picture**
+
+This is a nice tool from https://github.com/esc/git-big-picture. It will let you easily visualise your
+bitbucket repos (doesn't have a network visualiser like github). To view the current workign directory's
+git repo in chrome, firefox:
+
+
+```
+> git-big-picture -v google-chrome
+> git-big-picture -v firefox 
+```
+
+You can also make a git alias for it:
+
+```
+> git config --global alias.bp "big-picture -v google-chrome"
+> git bp
+```
+
 ## Developing & Packaging
 
 For the yujin guys:
