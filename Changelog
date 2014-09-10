@@ -1,3 +1,6 @@
+0.2.53
+ - yujin_init_workspace --merge added
+ - yujin_make --install-rosdeps now considers chained source workspaces
 0.2.52
  - git-big-picture script added
 0.2.51
