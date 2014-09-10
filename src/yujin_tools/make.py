@@ -138,9 +138,13 @@ def insert_yujin_make_signature(yujin_make_root, devel_path):
         setup_sh.write("export YUJIN_MAKE_ROOT=%s\n" % yujin_make_root)
 
 
-def install_rosdeps(source_path, rosdistro, no_color):
+def install_rosdeps(base_path, source_path, rosdistro, no_color):
     # -r continue even with errors
-    cmd = ['rosdep', 'install', '-r', '--from-paths', source_path, '--ignore-src', '--rosdistro', rosdistro, '-y']
+    cmd = ['rosdep', 'install', '-r']
+    underlays = config_cache.get_source_underlays_list_from_config_cmake(base_path)
+    for underlay in underlays:
+        cmd += ['--from-paths', underlay]
+    cmd += ['--from-paths', source_path, '--ignore-src', '--rosdistro', rosdistro, '-y']
     env = os.environ.copy()
     try:
         builder.print_command_banner(cmd, source_path, color=not no_color)
@@ -166,7 +170,7 @@ def make_main():
 
     # Install rosdeps if requested
     if args.install_rosdeps:
-        install_rosdeps(source_path, settings.get_default_track(), args.no_color)
+        install_rosdeps(base_path, source_path, settings.get_default_track(), args.no_color)
         return
     if args.install_rosdeps_track is not None:
         install_rosdeps(source_path, args.install_rosdeps_track, args.no_color)

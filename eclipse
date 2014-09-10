@@ -1,0 +1,4 @@
+#!/bin/bash
+
+exec eclipse -data ~/workspace/yujin_tools
+
