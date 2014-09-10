@@ -1,3 +1,13 @@
+0.2.52
+ - git-big-picture script added
+0.2.51
+ - bugfix previous arm support for nanomsg
+0.2.50
+ - arm support for nanomsg in platform configuration.
+0.2.49
+ - default track now indigo
+0.2.48
+ - use YUJIN_WORKSPACE if set to find the root
 0.2.47
  - separate build and run test options for yujin_make.
  - new buildroot toolchain for arm1176jzf-s.

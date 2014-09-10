@@ -1,0 +1,1 @@
+- git: {local-name: navigation, version: hydro-devel, uri: 'https://github.com/ros-planning/navigation.git'}

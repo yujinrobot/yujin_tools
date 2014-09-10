@@ -199,7 +199,7 @@ def generate_pkg_config_path(base_path):
 
 def get_default_paths(isolated=False):
     suffix = "_isolated" if isolated else ""
-    base_path = os.environ.get("YUJIN_MAKE_ROOT") or os.getcwd()  # Fallback if os.environ.get returns None
+    base_path = os.environ.get("YUJIN_MAKE_ROOT") or os.environ.get("YUJIN_WORKSPACE") or os.getcwd()  # Fallback if os.environ.get returns None
     build_path = os.path.join(base_path, 'build' + suffix)
     devel_path = os.path.join(base_path, 'devel' + suffix)
     source_path = os.path.join(base_path, 'src')
