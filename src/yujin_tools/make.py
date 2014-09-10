@@ -233,9 +233,9 @@ def make_main():
             env['PKG_CONFIG_PATH'] = path
 
     if args.doc_only:
-        console.pretty_println('Generates documents only',console.bold_white)
+        console.pretty_println('Generates documents only', console.bold_white)
         make_doc(source_path, doc_path, packages)
-        return 
+        return
 
     # consider calling cmake
     makefile = os.path.join(build_path, 'Makefile')
