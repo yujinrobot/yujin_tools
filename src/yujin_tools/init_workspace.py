@@ -52,6 +52,7 @@ def parse_arguments():
     parser.add_argument('dir', nargs='?', default=os.getcwd(), help='directory to use for the workspace [current working directory]')
     parser.add_argument('-s', '--simple', action='store_true', help='just create a basic single build workspace (usual ros style) [false]')
     parser.add_argument('--list-rosinstalls', action='store_true', help='list all currently available rosinstalls [false]')
+    parser.add_argument('-m', '--merge', action='store', default=None, help='merge a keyed (--list-rosinstall) rosinstall into the current workspace')
     parser.add_argument('--track', action='store', default=None, help='retrieve rosinstalls relevant to this track %s[%s]' % (settings.VALID_TRACKS, settings.DEFAULT_TRACK))
     parser.add_argument('-j', '--jobs', action='store', default=1, help='how many parallel threads to use for installing[1]')
     parser.add_argument('uri', nargs=argparse.REMAINDER, default=None, help='uri for a rosinstall file [None]')
@@ -59,17 +60,20 @@ def parse_arguments():
     return args
 
 
-def populate_worskpace(base_path, uri_list, parallel_jobs):
+def populate_workspace(base_path, uri_list, parallel_jobs, do_init=True):
     '''
-      @param base_path : location of the wstool workspace
-      @param uri : the uri for the rosinstall file
+      :param str base_path: location of the wstool workspace
+      :param uri_list: list of uri's to rosinstall files
+      :type uri_list: list of str
+      :param bool do_init: whether to initialise the workspace first or just merge
     '''
-    wstool_arguments = ['wstool',
-                        'init',
-                        '-j %s' % str(parallel_jobs),
-                        base_path,
-                        ]
-    wstool.wstool_cli.wstool_main(wstool_arguments)
+    if do_init:
+        wstool_arguments = ['wstool',
+                            'init',
+                            '-j %s' % str(parallel_jobs),
+                            base_path,
+                            ]
+        wstool.wstool_cli.wstool_main(wstool_arguments)
     for uri in uri_list:
         wstool_arguments = ['wstool',
                             'merge',
@@ -141,13 +145,53 @@ def parse_database(search_names, rosinstall_database):
     return (names, sources)
 
 
+def merge(key, track, jobs):
+    '''
+      Merge a rosinstall into the workspace. The key can either be an
+
+      - absolute path to a rosinstall file
+      - name of a rosinstall file in the current dir
+      - key in the rosinstall database
+
+      :param str key: see above
+      :param str track: the track to pull keys from (e.g. hydro, indigo)
+      :param str jobs: number of parallel download jobs to spawn via wstool
+    '''
+    if os.environ.get('YUJIN_WORKSPACE') is not None:
+        workspace_dir = os.environ.get('YUJIN_WORKSPACE')
+    elif os.path.isdir(os.path.join(os.getcwdu(), 'src')):
+        workspace_dir = os.getcwdu()
+    elif os.path.isfile(os.path.join(os.getcwdu(), '.rosinstall')):
+        workspace_dir = os.path.join(os.getcwdu(), '..')
+    else:
+        raise RuntimeError("Could not find an initialised workspace (you must be at the root below 'src', or in a setup.bash'd environment)")
+    uri_list = []
+    if os.path.isabs(key):
+        uri_list.append(key)
+    elif os.path.isfile(os.path.join(os.getcwd(), key)):
+        uri_list.append(os.path.join(os.getcwdu(), key))
+    elif urlparse.urlparse(key).scheme == "":  # not a http element, let's look up our database
+        rosinstall_database, unused_lookup_track, unused_lookup_database = get_rosinstall_database(track)
+        (unused_database_name_list, database_uri_list) = parse_database([key], rosinstall_database)
+        uri_list.extend(database_uri_list)
+    else:  # it's a http element'
+        uri_list.append(key)
+    populate_workspace(os.path.join(workspace_dir, 'src'), uri_list, jobs, do_init=False)
+
+
 def init_workspace():
+    '''
+      Process the init workspace command and return success or failure to the calling script.
+    '''
     args = parse_arguments()
     if not args.track:
         args.track = settings.get_default_track()
     if args.list_rosinstalls:
         list_rosinstalls(args.track)
-        sys.exit(0)
+        return 0
+    if args.merge is not None:
+        merge(args.merge, args.track, args.jobs)
+        return 0
     if os.path.isabs(args.dir):
         workspace_dir = args.dir
     else:
@@ -171,8 +215,9 @@ def init_workspace():
     (database_name_list, database_uri_list) = parse_database(lookup_name_list, rosinstall_database)
     lookup_name_list.extend(database_name_list)
     uri_list.extend(database_uri_list)
-    populate_worskpace(os.path.join(workspace_dir, 'src'), uri_list, args.jobs)
+    populate_workspace(os.path.join(workspace_dir, 'src'), uri_list, args.jobs)
     print_details(workspace_dir, uri_list, lookup_name_list, lookup_track, lookup_database)
+    return 0
 
 
 def print_details(workspace_dir, uri_list, lookup_name_list, lookup_track, lookup_database):
