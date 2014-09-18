@@ -94,9 +94,13 @@ def instantiate_template(filename, name, cwd):
     tmpl = read_template(os.path.join(template_dir, filename))
     contents = fill_in_template(tmpl, name, cwd)
     try:
+        print("Filename %s" % filename)
         f = open(os.path.join(cwd, filename), 'w')
+        print("  Writing")
         f.write(contents.encode('utf-8'))
+        print("  Done writing")
     finally:
+        print("  Clsoing")
         os.fchmod(f.fileno(), stat.S_IRWXU)
         f.close()
 
@@ -375,6 +379,7 @@ def init_configured_build(default_underlay, build_dir_="./", source_dir_="./src"
             raise RuntimeError("Platform %s for family %s not available." % (family, platform))
     else:
         platform_file = os.path.join(platforms_dir, 'default.cmake')
+
     if os.path.isfile(platform_file):
         f = open(platform_file, 'r')
         try:

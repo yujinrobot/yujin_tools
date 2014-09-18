@@ -14,6 +14,7 @@ ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
 ecto: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto.rosinstall'
 gopher: 'https://bitbucket.org/yujinrobot/gopher/raw/indigo-devel/gopher_meta/resources/rosinstall/gopher.rosinstall'
 gopher_navigation: [yujin_navigation]
+hello: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/hello.rosinstall'
 kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki.rosinstall'
 kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki_core.rosinstall'
 navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/navigation.rosinstall'
