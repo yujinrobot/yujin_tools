@@ -94,13 +94,9 @@ def instantiate_template(filename, name, cwd):
     tmpl = read_template(os.path.join(template_dir, filename))
     contents = fill_in_template(tmpl, name, cwd)
     try:
-        print("Filename %s" % filename)
         f = open(os.path.join(cwd, filename), 'w')
-        print("  Writing")
         f.write(contents.encode('utf-8'))
-        print("  Done writing")
     finally:
-        print("  Clsoing")
         os.fchmod(f.fileno(), stat.S_IRWXU)
         f.close()
 
