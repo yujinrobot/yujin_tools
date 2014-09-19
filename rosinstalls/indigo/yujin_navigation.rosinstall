@@ -1,3 +1,3 @@
 - git: {local-name: navigation, version: hydro-devel, uri: 'https://github.com/yujinrobot/navigation.git'}
 - git: {local-name: navigation_layers, version: indigo, uri: 'https://github.com/yujinrobot/navigation_layers.git'}
-- git: {local-name: obstacle_detection, version: indigo, uri: 'https://github.com/yujinrobot/obstacle_detection.git'}
+- git: {local-name: obstacle_detection, version: indigo, uri: 'https://bitbucket.org/yujinrobot/obstacle_detection.git'}
