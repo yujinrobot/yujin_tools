@@ -4,12 +4,16 @@
 # e.g. rosjava/android core sources, we typically build on top of so we use the release sources.
 # rocon sources on the other hand are our development, so always the devel sources.
 #
+_dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam.rosinstall'
+_dslam_bootstrap: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_bootstrap.rosinstall'
 android_complete: [android_core, android_interactions]
 android_core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/android_core.rosinstall'
 android_interactions: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/android_interactions.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
-dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam.rosinstall'
-dslam_desktop: [dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
+dslam: [_dslam, dslam_drivers, respawn]
+dslam_bootstrap: [catkin, _dslam_bootstrap]
+dslam_desktop: [_dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
+dslam_drivers: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_drivers.rosinstall'
 ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
 ecto: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto.rosinstall'
 gopher: 'https://bitbucket.org/yujinrobot/gopher/raw/indigo-devel/gopher_meta/resources/rosinstall/gopher.rosinstall'
@@ -18,10 +22,6 @@ hello: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/
 kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki.rosinstall'
 kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki_core.rosinstall'
 navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/navigation.rosinstall'
-nexell: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/nexell.rosinstall'
-nexell_drivers: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/nexell_drivers.rosinstall'
-nexell_bootstrap: [catkin, nexell]
-nexell_dslam: [dslam, nexell_drivers, respawn]
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 qt_ros: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/qt_ros.rosinstall'
 respawn: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/respawn.rosinstall'
