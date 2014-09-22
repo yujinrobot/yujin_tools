@@ -4,6 +4,13 @@ nexell-toolchain-arm-eabi:
   ubuntu: [nexell-toolchain-arm-eabi-4.3.2-glibc-2.9-yujin]
 nexell-binaries:
   ubuntu: [nexell-binaries-yujin]
-yujin-opencv:
-  ubuntu: [ros-indigo-opencv]
+arm_buildroot_linux_gnueabihf:
+  ubuntu: [arm-buildroot-linux-gnueabihf-4.8.3-glibc-2.18-yujin]
+arm_buildroot_linux_gnueabi:
+  ubuntu: [arm-buildroot-linux-gnueabi-4.8.3-glibc-2.18-yujin]
+arm_cubie_linux_gnueabihf:
+  ubuntu: [arm-cubie-linux-gnueabihf-4.8.3-glibc-2.18-yujin]
+
+#yujin-opencv:
+#  ubuntu: [ros-indigo-opencv]
 
