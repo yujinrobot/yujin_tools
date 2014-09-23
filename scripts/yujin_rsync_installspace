@@ -1,0 +1,54 @@
+#!/bin/bash
+
+##############################################################################
+# Help
+##############################################################################
+
+if [ "$1" == "--push" ]; then
+  PUSH=true
+fi
+
+if [ $# -gt 0 ]; then
+  echo ""
+  echo "Pulls the installspace from the server to /opt/yujin/indigo."
+  echo "Make sure you call this with sudo or set the correct permissions"
+  echo "on /opt/yujin."
+  echo ""
+  echo "    Options:"
+  echo "        --push : send updates instead of receiving (admin use only)"
+  echo ""
+fi
+
+##############################################################################
+# RSync
+##############################################################################
+
+export remote_url=files.yujin.com
+export local_dir=/opt/yujin  # this copies the indigo folder
+export remote_dir=${remote_url}:shared/repos/installspaces/yujin
+
+# Options
+# --delete    : files from the destination directories
+# --recursive : recurse into directories
+# --links     : copy symlinks as symlinks
+
+export OPTIONS="--delete --recursive --links --verbose"
+#EXCLUDES=(
+#  --exclude '*.pyc'
+#)
+
+if [ "$PUSH" == true ]; then
+    echo ""
+    echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
+    read answer
+    if [ "$answer" == "y" ]; then
+        rsync ${OPTIONS} ${local_dir}/indigo ${remote_dir}
+    else
+        echo "Aborting."
+    fi
+    echo ""
+else
+    rsync ${OPTIONS} ${remote_dir}/indigo ${local_dir}
+fi
+
+
