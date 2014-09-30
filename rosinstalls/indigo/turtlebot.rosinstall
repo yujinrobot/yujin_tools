@@ -12,7 +12,6 @@
 - git: {local-name: turtlebot_simulator, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_simulator.git'}
 
 # Not yet released dependencies
-- git: {local-name: joystick_drivers, version: indigo-devel, uri: 'https://github.com/ros-drivers/joystick_drivers.git'}
 - git: {local-name: map_store, version: hydro-devel, uri: 'https://github.com/ros-planning/map_store.git'}
 
 
