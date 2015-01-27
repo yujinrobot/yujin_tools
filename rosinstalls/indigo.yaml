@@ -14,6 +14,7 @@ dslam: [_dslam, dslam_drivers, respawn]
 dslam_bootstrap: [catkin, _dslam_bootstrap]
 dslam_desktop: [_dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
 dslam_drivers: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_drivers.rosinstall'
+dslam_3rdparty: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_3rdparty.rosinstall'
 ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
 ecto: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto.rosinstall'
 gopher: 'https://bitbucket.org/yujinrobot/gopher/raw/indigo-devel/gopher_meta/resources/rosinstall/gopher.rosinstall'
