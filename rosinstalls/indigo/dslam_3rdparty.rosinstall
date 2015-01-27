@@ -1,0 +1,2 @@
+# This is for external (cmake) 3rd party applications
+- git: {local-name: sophus, version: indigo, uri: 'https://github.com/stonier/sophus.git'}
