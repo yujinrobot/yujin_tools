@@ -1,4 +1,2 @@
 # This is for cross-compiled dslam installations.
 - git: {local-name: yaml_cpp, version: indigo, uri: 'https://github.com/stonier/yaml_cpp_0_3.git'}
-- git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
-- git: {local-name: nanomsg, version: indigo, uri: 'https://github.com/stonier/nanomsg.git'}

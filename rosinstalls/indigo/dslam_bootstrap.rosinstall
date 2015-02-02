@@ -1,1 +1,2 @@
 - git: {local-name: dslam_bootstrap, version: indigo, uri: 'https://bitbucket.org/yujinrobot/dslam_bootstrap.git'}
+- git: {local-name: yaml-cpp, version: indigo, uri: 'https://github.com/stonier/yaml_cpp_0_3.git'}
