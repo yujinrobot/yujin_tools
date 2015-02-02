@@ -35,4 +35,5 @@ rosjava_indigo: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstall
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/indigo/system_deb_builder.rosinstall'
 turtlebot: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/turtlebot.rosinstall'
 world_canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/world_canvas.rosinstall'
+yaml_cpp: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/yaml_cpp.rosinstall'
 yujin_navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/yujin_navigation.rosinstall'
