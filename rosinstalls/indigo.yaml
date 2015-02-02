@@ -11,7 +11,7 @@ android_core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/
 android_interactions: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/android_interactions.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
 dslam: [_dslam, dslam_drivers, respawn]
-dslam_bootstrap: [catkin, _dslam_bootstrap]
+dslam_bootstrap: [catkin, _dslam_bootstrap, yaml_cpp]
 dslam_desktop: [_dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
 dslam_drivers: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_drivers.rosinstall'
 dslam_3rdparty: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_3rdparty.rosinstall'
