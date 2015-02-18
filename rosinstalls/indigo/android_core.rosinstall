@@ -1,6 +1,0 @@
-
-[
-{'git': {'local-name': 'android_core', 'version': 'indigo', 'uri':'https://github.com/rosjava/android_core.git'}},
-{'git': {'local-name': 'android_extras', 'version': 'indigo', 'uri':'https://github.com/rosjava/android_extras.git'}},
-]
-
