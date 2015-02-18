@@ -141,7 +141,7 @@ def insert_yujin_make_signature(yujin_make_root, devel_path):
 def install_rosdeps(base_path, source_path, rosdistro, no_color):
     # -r continue even with errors
     cmd = ['rosdep', 'install', '-r']
-    underlays = config_cache.get_source_underlays_list_from_config_cmake(base_path)
+    underlays = config_cache.get_underlays_list_from_config_cmake(base_path)
     for underlay in underlays:
         cmd += ['--from-paths', underlay]
     cmd += ['--from-paths', source_path, '--ignore-src', '--rosdistro', rosdistro, '-y']
