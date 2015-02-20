@@ -32,6 +32,7 @@ rocon_rosjava: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls
 rosjava: [rosjava_indigo]
 rosjava_hydro: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
 rosjava_indigo: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava.rosinstall'
+rosjava_messages: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_messages.rosinstall'
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/indigo/system_deb_builder.rosinstall'
 turtlebot: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/turtlebot.rosinstall'
 world_canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/world_canvas.rosinstall'
