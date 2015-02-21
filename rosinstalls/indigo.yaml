@@ -28,10 +28,8 @@ qt_ros: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo
 respawn: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/respawn.rosinstall'
 rocon: [rocon_devel]
 rocon_devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
-rocon_rosjava: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/rocon_rosjava.rosinstall'
-rosjava: [rosjava_indigo]
-rosjava_hydro: 'https://raw.github.com/rosjava/rosjava/hydro/rosjava.rosinstall'
-rosjava_indigo: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava.rosinstall'
+rosjava: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava.rosinstall'
+rosjava_minimal: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_minimal.rosinstall'
 rosjava_messages: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_messages.rosinstall'
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/indigo/system_deb_builder.rosinstall'
 turtlebot: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/turtlebot.rosinstall'
