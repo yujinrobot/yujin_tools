@@ -1,5 +1,5 @@
 
-__version__ = '0.2.60'
+__version__ = '0.2.61'
 
 from .init_workspace import init_workspace
 from .init_build import init_build
