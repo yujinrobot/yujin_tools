@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "Adding ${USER} to the 'users' group."
+sudo usermod -a -G users snorri
+echo "Do you wish to make the 'users' group your primary group?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) sudo usermod -g users ${USER}; break;;
+        No ) exit;;
+    esac
+done
+
