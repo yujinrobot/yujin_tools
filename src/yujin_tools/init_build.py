@@ -97,7 +97,7 @@ def instantiate_template(filename, name, cwd):
         f = open(os.path.join(cwd, filename), 'w')
         f.write(contents.encode('utf-8'))
     finally:
-        os.fchmod(f.fileno(), stat.S_IRWXU)
+        os.fchmod(f.fileno(), stat.S_IRWXU | stat.S_IRWXG)
         f.close()
 
 
