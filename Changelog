@@ -1,3 +1,6 @@
+0.2.61
+ - relax execution permissions on scripts to permit groups
+ - add to users group helper script
 0.2.60
  - check installed space underlays when installing rosdeps
 0.2.59
