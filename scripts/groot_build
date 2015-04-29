@@ -1,0 +1,82 @@
+#!/bin/bash
+
+if [ "$1" == "--help" ]; then
+  echo ""
+  echo "This builds an already download groot workspace in /opt/groot."
+  echo ""
+  echo "    Options:"
+  echo "        --help      : this help message"
+  echo "        --pre-clean : pre-clean each workspace"
+  echo ""
+  echo "    Current sources:"
+  echo "        ecto"
+  echo "        ecl"
+  echo "        navi"
+  echo "        dslam"
+  echo "        gopher"
+  echo ""
+  exit 0
+fi
+###########################
+# Variables
+###########################
+
+GROOT=/opt/groot
+
+if [ ! -d "${GROOT}/gopher_ws" ]; then
+  echo "No groot workspace found, try 'groot_sources' to build one."
+  exit 1
+else
+  GROOT_EXISTS=1
+fi
+
+if [ ! -z "${ROS_MASTER_URI}" ]; then
+  echo "This is a ros environment, you must run this script from a non-ros environment (new shell)."
+  exit 1
+fi
+
+if [ "$1" == "--pre-clean" ]; then
+  PRECLEAN="--pre-clean"
+else
+  PRECLEAN=""
+fi
+
+REPOS=("ecto" "ecl" "navi" "dslam" "gopher")
+
+###########################
+# Functions
+###########################
+
+check_rosdeps ()
+{
+  echo "Checking for rosdeps."
+  for repo in ${REPOS[*]}; do
+    echo "  Building ${repo}."
+    cd ${GROOT}/${repo}_ws
+    yujin_make --install-rosdeps
+  done
+}
+
+
+build_sources ()
+{
+  echo "Downloading groot."
+  for repo in ${REPOS[*]}; do
+    echo "  Building ${repo}."
+    cd ${GROOT}/${repo}_ws
+    yujin_make
+  done
+}
+
+###########################
+# Work 
+###########################
+
+if [ "$1" == "--rosdeps" ]; then
+  check_rosdeps
+  exit 0
+fi
+
+# else, no options, just build
+build_sources
+
