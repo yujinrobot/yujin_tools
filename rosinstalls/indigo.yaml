@@ -23,6 +23,8 @@ hello: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/
 kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki.rosinstall'
 kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki_core.rosinstall'
 navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/navigation.rosinstall'
+# shortcut name for convenience
+navi: [yujin_navigation]
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 qt_ros: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/qt_ros.rosinstall'
 respawn: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/respawn.rosinstall'
