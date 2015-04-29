@@ -1,0 +1,148 @@
+#!/bin/bash
+
+if [ "$1" == "--help" ]; then
+  echo ""
+  echo "This downloads or updates the groot sources into /opt/groot."
+  echo ""
+  echo "    Options:"
+  echo "        --help      : this help message"
+  echo "        --delete    : delete before starting"
+  echo "        --update    : run wstool update on each workspace"
+  echo "        --status    : run wstool status on each workspace"
+  echo "        --branches  : show what branches are used in each workspace"
+  echo ""
+  echo "    Current sources:"
+  echo "        ecto"
+  echo "        ecl"
+  echo "        navi"
+  echo "        dslam"
+  echo "        gopher"
+  echo ""
+  exit 0
+fi
+###########################
+# Variables
+###########################
+
+GROOT=/opt/groot
+
+if [ -d "${GROOT}" ]; then
+  GROOT_EXISTS=1
+fi
+
+REPOS=("ecto" "ecl" "navi" "dslam" "gopher")
+REPO_KEYS=("ecto" "ecl" "yujin_navigation" "dslam_desktop" "gopher")
+
+UNDERLAYS=""
+for repo in ${REPOS[*]}; do
+  UNDERLAYS="${GROOT}/${repo}_ws/devel;${UNDERLAYS}"
+done
+
+###########################
+# Functions
+###########################
+
+download_sources ()
+{
+  echo "Downloading groot."
+  for ((i=0;i<${#REPOS[@]};++i)); do
+    repo=${REPOS[i]}
+    repo_key=${REPO_KEYS[i]}
+    cd ${GROOT}
+    echo "  Downloading ${repo}."
+    yujin_init_workspace -j5 ${repo}_ws ${repo_key}
+    cd ${GROOT}/${repo}_ws
+    echo "  Configuring ${repo}."
+    yujin_init_build --underlays="${UNDERLAYS}" .
+  done
+}
+
+update_sources ()
+{
+  echo "Updating groot."
+  for ((i=0;i<${#REPOS[@]};++i)); do
+    repo=${REPOS[i]}
+    repo_key=${REPO_KEYS[i]}
+    if [ ! -d "${GROOT}/${repo}_ws" ]; then
+      echo "${repo} not found, redownloading."
+      cd ${GROOT}
+      echo "  Downloading ${repo}."
+      yujin_init_workspace -j5 ${repo}_ws ${repo_key}
+      cd ${GROOT}/${repo}_ws
+      echo "  Configuring ${repo}."
+      yujin_init_build --underlays="${UNDERLAYS}" .
+    fi
+    cd ${GROOT}/${repo}_ws/src
+    echo "  Updating ${repo}."
+    wstool update -j5
+  done
+}
+
+show_branches ()
+{
+  echo "Showing status of repos in groot."
+  for repo in ${REPOS[*]}; do
+    cd ${GROOT}/${repo}_ws/src
+    echo "************** Branches of ${repo} **************"
+    yujin_list_git_branches
+  done
+}
+
+show_status ()
+{
+  echo "Showing status of repos in groot."
+  for repo in ${REPOS[*]}; do
+    echo "  Status of ${repo}."
+    cd ${GROOT}/${repo}_ws/src
+    wstool status
+  done
+}
+
+mkdir_groot ()
+{
+  mkdir ${GROOT}
+  if [ "$?" == "1" ]; then
+    echo "Could not create the groot directory (check permissions)."
+    exit 1
+  fi
+}
+
+###########################
+# Workers
+###########################
+
+if [ "$1" == "--delete" ]; then
+  rm -rf ${GROOT} 
+  mkdir_groot
+  download_sources
+  exit 0
+fi
+
+if [ "$1" == "--status" ]; then
+  show_status
+  exit 0
+fi
+
+if [ "$1" == "--branches" ]; then
+  show_branches
+  exit 0
+fi
+
+
+if [ "$1" == "--update" ]; then
+  if [ -z "$GROOT_EXISTS" ]; then
+    echo "No groot workspace found, run without --update first."
+    exit 1
+  fi
+  update_sources
+  exit 0
+fi
+
+# else, no options, just check and download
+if [ ! -z "${GROOT_EXISTS}" ]; then
+  echo "Groot exists, try with --delete."
+  exit 1
+fi
+mkdir_groot
+download_sources
+
