@@ -1,0 +1,60 @@
+#!/bin/bash
+
+###########################
+# Help
+###########################
+
+show_help ()
+{
+  echo ""
+  echo "Syncs your groot workspace with a gopher robot."
+  echo ""
+  echo "   1) Make sure you have the robot name (e.g. fgopher) in /etc/hosts"
+  echo "   2) You have installed unison-gtk"
+  echo ""
+  echo "    Required Arguments:"
+  echo "        name        : robot name, e.g. fgopher"
+  echo ""
+  echo "    Options:"
+  echo "        --help      : this help message"
+  echo ""
+  exit 0
+}
+
+if [ $# -lt 1 ]; then
+  show_help
+  exit 1
+fi
+
+if [ "$1" == "--help" ]; then
+  show_help
+  exit 0
+fi
+
+GROOT=/opt/groot
+
+if [ ! -d "${GROOT}" ]; then
+  echo "No groot workspace found, use 'groot_sources' and 'groot_build' to create one."
+  exit 1
+fi
+
+ROBOT=$1
+
+#grep ${ROBOT} /etc/hosts
+#if [ "$?" == "1" ]; then
+#   echo "Robot name '${ROBOT}' not found in /etc/hosts."
+#   exit 1
+#fi
+
+if [ ! -f ~/.unison/${ROBOT}.prf ]; then
+  echo ""
+  echo "Copying unison profile."
+  echo ""
+  echo "from:"
+  echo "  /opt/groot/gopher_ws/src/gopher/gopher_meta/resources/unison/${ROBOT}.prf"
+  echo "to:"
+  echo "  ~/.unison/${ROBOT}.prf."
+  echo ""
+  cp /opt/groot/gopher_ws/src/gopher/gopher_meta/resources/unison/${ROBOT}.prf ~/.unison/
+fi
+unison-gtk ${ROBOT}

@@ -1,27 +1,48 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-##############################################################################
-# Help
-##############################################################################
+###########################
+# Command Line
+###########################
 
-if [ "$1" == "--push" ]; then
-  PUSH=true
-fi
+for i in "$@"
+do
+case $i in
+    --help)
+    SHOW_HELP=1
+    shift
+    ;;
+    --push)
+    PUSH=1
+    shift
+    ;;
+    *)
+       # unknown option
+    ;;
+esac
+done
 
-if [ $# -gt 0 ]; then
+###########################
+# Functions
+###########################
+
+show_help ()
+{
   echo ""
   echo "Pulls the installspace from the server to /opt/yujin/indigo."
   echo "Make sure you call this with sudo or set the correct permissions"
   echo "on /opt/yujin."
   echo ""
-  echo "    Options:"
-  echo "        --push : send updates instead of receiving (admin use only)"
+  echo "    Usage:"
+  echo "        sudo groot_binaries"
   echo ""
-fi
-
-##############################################################################
-# RSync
-##############################################################################
+  echo "    Options:"
+  echo "        --help      : this help message"
+  echo ""
+  echo "    Admin Options:"
+  echo "        --push      : push local /opt/yujin/indigo installspace with the server"
+  echo ""
+  exit 0
+}
 
 export remote_url=files@files.yujin.com
 export local_dir=/opt/yujin  # this copies the indigo folder
@@ -37,7 +58,7 @@ export OPTIONS="--delete --recursive --links --verbose"
 #  --exclude '*.pyc'
 #)
 
-if [ "$PUSH" == true ]; then
+if [ ! -z "$PUSH" ]; then
     echo ""
     echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
     read answer
@@ -50,5 +71,4 @@ if [ "$PUSH" == true ]; then
 else
     rsync ${OPTIONS} ${remote_dir}/indigo ${local_dir}
 fi
-
 
