@@ -1,0 +1,2 @@
+- git: {local-name: dslam_bag, version: gopher, uri: 'https://bitbucket.org/yujinrobot/dslam_bag.git'}
+- git: {local-name: dslam_desktop, version: gopher, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
