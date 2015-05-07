@@ -50,7 +50,7 @@ GROOT=/opt/groot
 ALL_REPOS=("ecto" "ecl" "navi" "rocon" "dslam" "gopher")
 declare -A ALL_REPO_KEYS
 declare -A ALL_UNDERLAYS
-ALL_REPO_KEYS=( ["ecto"]="ecto" ["ecl"]="ecl" ["rocon"]="rocon" ["navi"]="yujin_navigation" ["dslam"]="dslam_desktop" ["gopher"]="gopher" )
+ALL_REPO_KEYS=( ["ecto"]="ecto" ["ecl"]="ecl" ["rocon"]="rocon" ["navi"]="yujin_navigation" ["dslam"]="gopher_dslam" ["gopher"]="gopher" )
 ALL_UNDERLAYS=( ["ecto"]="" ["ecl"]="" ["navi"]="" ["rocon"]="" ["dslam"]="${GROOT}/ecl_ws/devel;${GROOT}/ecto_ws/devel" ["gopher"]="${GROOT}/dslam_ws/devel;${GROOT}/ecl_ws/devel;${GROOT}/navi_ws/devel;${GROOT}/rocon_ws/devel;${GROOT}/ecto_ws/devel" )
 
 REPOS=()
