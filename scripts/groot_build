@@ -1,0 +1,106 @@
+#!/bin/bash
+
+#!/usr/bin/env bash
+
+###########################
+# Command Line
+###########################
+
+for i in "$@"
+do
+case $i in
+    --help)
+    SHOW_HELP=1
+    shift
+    ;;
+    --install)
+    INSTALL="--install"
+    shift
+    ;;
+    --rosdeps)
+    ROSDEPS=1
+    shift
+    ;;
+    --pre-clean)
+    PRECLEAN="--pre-clean"
+    shift
+    ;;
+    *)
+       # unknown option
+    ;;
+esac
+done
+
+###########################
+# Variables
+###########################
+
+GROOT=/opt/groot
+
+if [ ! -z "${ROS_MASTER_URI}" ]; then
+  echo "This is a ros environment, you must run this script from a non-ros environment (new shell)."
+  exit 1
+fi
+
+REPOS=("ecto" "ecl" "navi" "rocon" "dslam" "gopher")
+DISCOVERED_REPOS=()
+for repo in ${REPOS[*]}; do
+  if [ -d "${GROOT}/${repo}_ws" ]; then
+    DISCOVERED_REPOS+=(${repo})
+  fi
+done
+
+###########################
+# Functions
+###########################
+
+show_help ()
+{
+  echo ""
+  echo "This builds an all sources in /opt/groot."
+  echo ""
+  echo "    Usage:"
+  echo "        groot_build <options>"
+  echo ""
+  echo "    Options:"
+  echo "        --help      : this help message."
+  echo "        --pre-clean : pre-clean each workspace."
+  echo "        --rosdeps   : install workspace rosdeps only."
+  echo "        --install   : pass --install along with the build."
+  echo ""
+  exit 0
+}
+
+build_sources ()
+{
+  echo "Building groot."
+  for repo in ${DISCOVERED_REPOS[*]}; do
+    echo "  Building ${repo}."
+    cd ${GROOT}/${repo}_ws
+    if [ ! -z "$ROSDEPS" ]; then
+      yujin_make --install-rosdeps
+      if [ "$?" == "1" ]; then
+	echo "Error getting rosdeps for ${repo}, aborting."
+	exit 1
+      fi
+    fi
+    yujin_make ${PRECLEAN} ${INSTALL}
+    if [ "$?" == "1" ]; then
+      echo "Error building ${repo}, aborting."
+      exit 1
+    fi
+  done
+}
+
+###########################
+# Work 
+###########################
+
+if [ ! -z "$SHOW_HELP" ]; then
+  show_help
+  exit 0
+fi
+
+# else, no options, just build
+build_sources
+

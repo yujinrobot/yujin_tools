@@ -1,3 +1,14 @@
+0.2.65
+ - fix groot underlay names
+0.2.64
+ - groot_binaries
+0.2.63
+ - groot_sync
+0.2.62
+ - groot_build, groot_sources scripts
+0.2.61
+ - relax execution permissions on scripts to permit groups
+ - add to users group helper script
 0.2.60
  - check installed space underlays when installing rosdeps
 0.2.59

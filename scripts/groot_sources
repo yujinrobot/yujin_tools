@@ -1,0 +1,234 @@
+#!/usr/bin/env bash
+
+###########################
+# Command Line
+###########################
+
+for i in "$@"
+do
+case $i in
+    --help)
+    SHOW_HELP=1
+    shift
+    ;;
+    --delete)
+    DELETE=1
+    shift
+    ;;
+    --install)
+    INSTALL_STRING="--install=/opt/yujin/indigo"
+    shift
+    ;;
+    --update)
+    UPDATE=1
+    shift
+    ;;
+    --list)
+    SHOW_REPOS=1
+    shift
+    ;;
+    --status)
+    SHOW_STATUS=1
+    shift
+    ;;
+    --branches)
+    SHOW_BRANCHES=1
+    shift
+    ;;
+    *)
+       # unknown option
+    ;;
+esac
+done
+
+###########################
+# Variables
+###########################
+
+GROOT=/opt/groot
+
+ALL_REPOS=("ecto" "ecl" "navi" "rocon" "dslam" "gopher")
+declare -A ALL_REPO_KEYS
+declare -A ALL_UNDERLAYS
+ALL_REPO_KEYS=( ["ecto"]="ecto" ["ecl"]="ecl" ["rocon"]="rocon" ["navi"]="yujin_navigation" ["dslam"]="dslam_desktop" ["gopher"]="gopher" )
+ALL_UNDERLAYS=( ["ecto"]="" ["ecl"]="" ["navi"]="" ["rocon"]="" ["dslam"]="${GROOT}/ecl_ws/devel;${GROOT}/ecto_ws/devel" ["gopher"]="${GROOT}/dslam_ws/devel;${GROOT}/ecl_ws/devel;${GROOT}/navi_ws/devel;${GROOT}/rocon_ws/devel;${GROOT}/ecto_ws/devel" )
+
+REPOS=()
+
+if [ "$#" -gt 0 ]; then
+  for var in "$@"
+  do
+    REPOS+=($var)
+  done
+else
+  for repo in "${ALL_REPOS[@]}"
+  do
+    REPOS+=($repo)
+  done
+fi
+
+###########################
+# Functions
+###########################
+
+show_help ()
+{
+  echo ""
+  echo "This downloads or updates the groot sources into /opt/groot."
+  echo ""
+  echo "    Usage:"
+  echo "        groot_sources <options>"
+  echo "        groot_sources <options> <space separated list of repos>"
+  echo ""
+  echo "    Repos: ecto ecl navi rocon dslam gopher"
+  echo ""
+  echo "    Options:"
+  echo "        --help      : this help message"
+  echo "        --list      : list repo details"
+  echo "        --delete    : delete workspaces"
+  echo "        --update    : run wstool update on each workspace"
+  echo "        --status    : run wstool status on each workspace"
+  echo "        --branches  : show what branches are used in each workspace"
+  echo ""
+  echo "    Admin Options:"
+  echo "        --install   : set the install location to /opt/yujin/indigo for all workspaces"
+  echo ""
+  exit 0
+}
+
+show_repos ()
+{
+  for repo in "${ALL_REPOS[@]}"
+  do
+    echo "${repo}"
+    echo "  rosinstall key: ${ALL_REPO_KEYS[${repo}]}"
+    echo "  underlays     : ${ALL_UNDERLAYS[${repo}]};/opt/yujin/indigo"
+  done
+}
+
+download_sources ()
+{
+  echo "Downloading groot."
+  for repo in "${REPOS[@]}"; do
+  #for ((i=0;i<${#REPOS[@]};++i)); do
+    cd ${GROOT}
+    if [ -d "${GROOT}/${repo}_ws" ]; then
+      echo "  Workspace ${GROOT}/${repo}_ws already exists, skipping, remove manually or use --delete."
+    else
+      echo "  Downloading ${repo}."
+      yujin_init_workspace -j5 ${repo}_ws ${ALL_REPO_KEYS[${repo}]}
+      cd ${GROOT}/${repo}_ws
+      echo "  Configuring ${repo}."
+      yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/indigo" ${INSTALL_STRING} .
+    fi
+  done
+}
+
+update_sources ()
+{
+  echo "Updating groot."
+  for ((i=0;i<${#REPOS[@]};++i)); do
+    repo=${REPOS[i]}
+    repo_key=${REPO_KEYS[i]}
+    if [ ! -d "${GROOT}/${repo}_ws" ]; then
+      echo "${repo} not found, redownloading."
+      cd ${GROOT}
+      echo "  Downloading ${repo}."
+      yujin_init_workspace -j5 ${repo}_ws ${repo_key}
+      cd ${GROOT}/${repo}_ws
+      echo "  Configuring ${repo}."
+      yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/indigo" .
+    fi
+    cd ${GROOT}/${repo}_ws/src
+    echo "  Updating ${repo}."
+    wstool update -j5
+  done
+}
+
+show_branches ()
+{
+  echo "Showing status of repos in groot."
+  for repo in ${REPOS[*]}; do
+    cd ${GROOT}/${repo}_ws/src
+    echo "************** Branches of ${repo} **************"
+    yujin_list_git_branches
+  done
+}
+
+show_status ()
+{
+  echo "Showing status of repos in groot."
+  for repo in ${REPOS[*]}; do
+    echo "  Status of ${repo}."
+    cd ${GROOT}/${repo}_ws/src
+    wstool status
+  done
+}
+
+mkdir_groot ()
+{
+  if [ ! -d "${GROOT}" ]; then
+    mkdir ${GROOT}
+    if [ "$?" == "1" ]; then
+      echo "Could not create the groot directory (check permissions)."
+      exit 1
+    fi
+  fi
+}
+
+delete_sources ()
+{
+  echo "Deleting workspaces."
+  for repo in "${REPOS[@]}"; do
+    if [ -d "${GROOT}/${repo}_ws" ]; then
+      echo "  Deleting ${GROOT}/${repo}_ws."
+      rm -rf ${GROOT}/${repo}_ws
+    fi
+  done
+}
+
+###########################
+# Workers
+###########################
+
+if [ ! -z "$SHOW_HELP" ]; then
+  show_help
+  exit 0
+fi
+
+if [ ! -z "$SHOW_REPOS" ]; then
+  show_repos
+  exit 0
+fi
+
+if [ ! -z "$SHOW_STATUS" ]; then
+  if [ ! -d "${GROOT}" ]; then
+    echo "No groot workspaces found."
+  else
+    show_status
+  fi
+  exit 0
+fi
+
+if [ ! -z "$SHOW_BRANCHES" ]; then
+  if [ ! -d "${GROOT}" ]; then
+    echo "No groot workspaces found."
+  else
+    show_branches
+  fi
+  exit 0
+fi
+
+if [ ! -z "$DELETE" ]; then
+  delete_sources
+  exit 0
+fi
+
+if [ ! -z "${UPDATE}" ]; then
+  update_sources
+  exit 0
+fi
+
+mkdir_groot
+download_sources
+
