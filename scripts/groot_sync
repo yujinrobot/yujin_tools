@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###########################
-# Help
+# Methods
 ###########################
 
 show_help ()
@@ -9,17 +9,38 @@ show_help ()
   echo ""
   echo "Syncs your groot workspace with a gopher robot."
   echo ""
-  echo "   1) Make sure you have the robot name (e.g. fgopher) in /etc/hosts"
-  echo "   2) You have installed unison-gtk"
+  echo "   1) You have installed unison-gtk"
+  echo ""
+  echo "    Usage:"
+  echo "        groot_sync <name>"
+  echo "        groot_sync --list"
   echo ""
   echo "    Required Arguments:"
-  echo "        name        : robot name, e.g. fgopher"
+  echo "        <name>      : name of the robot (unison) profile"
   echo ""
   echo "    Options:"
   echo "        --help      : this help message"
+  echo "        --list      : list valid robot (unison) profiles."
   echo ""
   exit 0
 }
+
+list_profiles()
+{
+  DIR=/opt/groot/gopher_ws/src/gopher/gopher_meta/resources/unison/
+  echo ""
+  echo "=============="
+  echo "Robot Profiles"
+  echo "=============="
+  # http://stackoverflow.com/questions/13676108/using-ls-how-can-i-list-files-without-file-extension-the-part-after-the-dot
+  
+  ls -1 ${DIR} | sed -e 's/\..*$//' | sed 's/^/  /'
+  echo ""
+}
+
+###########################
+# Program
+###########################
 
 if [ $# -lt 1 ]; then
   show_help
@@ -36,6 +57,11 @@ GROOT=/opt/groot
 if [ ! -d "${GROOT}" ]; then
   echo "No groot workspace found, use 'groot_sources' and 'groot_build' to create one."
   exit 1
+fi
+
+if [ "$1" == "--list" ]; then
+  list_profiles
+  exit 0
 fi
 
 ROBOT=$1
