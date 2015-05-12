@@ -12,7 +12,7 @@ set(YUJIN_DOC_PREFIX "%(config_doc_prefix)s" CACHE PATH "Document root location"
 ###########################
 # CMake
 ###########################
-set(CMAKE_VERBOSE_MAKEFILE OFF CACHE BOOL "Verbosity in the makefile compilations.")
+set(CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL "Verbosity in the makefile compilations.")
 set(CMAKE_BUILD_TYPE %(config_build_type)s CACHE STRING "Build mode type.")
 set(CMAKE_INSTALL_PREFIX "%(config_install_prefix)s" CACHE PATH "Install root location.")
 set(CMAKE_PREFIX_PATH "${UNDERLAY_ROOTS}" CACHE PATH "semi-colon separated software/ros workspace paths.")
