@@ -1,4 +1,4 @@
-0.2.70
+0.2.71
  - dslam_binaries script for getting the arm binaries.
 0.2.69
  - default mode for yujin_make_isolated is to follow config.cmake, --suffixes option added.
