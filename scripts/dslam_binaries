@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+###########################
+# Command Line
+###########################
+
+for i in "$@"
+do
+case $i in
+    --help)
+    SHOW_HELP=1
+    shift
+    ;;
+    --push)
+    PUSH=1
+    shift
+    ;;
+    *)
+       # unknown option
+    ;;
+esac
+done
+
+###########################
+# Functions
+###########################
+
+show_help ()
+{
+  echo ""
+  echo "Pulls the installspace for the dslam arm build from the server to /opt/dslam/arm/indigo."
+  echo "Make sure you call this with sudo or set the correct permissions"
+  echo "on /opt/dslam."
+  echo ""
+  echo "    Usage:"
+  echo "        sudo dslam_binaries"
+  echo ""
+  echo "    Options:"
+  echo "        --help      : this help message"
+  echo ""
+  echo "    Admin Options:"
+  echo "        --push      : push local /opt/dslam/arm/indigo installspace to the server"
+  echo ""
+  exit 0
+}
+
+export remote_url=files@files.yujin.com
+export local_dir=/opt/dslam  # this copies the indigo folder
+export remote_dir=${remote_url}:shared/repos/installspaces/dslam
+
+# Options
+# --delete    : files from the destination directories
+# --recursive : recurse into directories
+# --links     : copy symlinks as symlinks
+
+export OPTIONS="--delete --recursive --links --verbose"
+#EXCLUDES=(
+#  --exclude '*.pyc'
+#)
+
+if [ ! -z "$PUSH" ]; then
+    echo ""
+    echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
+    read answer
+    if [ "$answer" == "y" ]; then
+        rsync ${OPTIONS} ${local_dir}/arm/indigo ${remote_dir}/arm
+    else
+        echo "Aborting."
+    fi
+    echo ""
+else
+    rsync ${OPTIONS} ${remote_dir}/arm/indigo ${local_dir}/arm
+fi
+
