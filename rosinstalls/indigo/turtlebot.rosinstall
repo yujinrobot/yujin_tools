@@ -8,13 +8,6 @@
 - git: {local-name: turtlebot_create, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_create.git'}
 - git: {local-name: turtlebot, version: indigo, uri: 'https://github.com/turtlebot/turtlebot.git'}
 - git: {local-name: turtlebot_apps, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_apps.git'}
-- git: {local-name: turtlebot_viz, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_viz.git'}
+- git: {local-name: turtlebot_interactions, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_interactions.git'}
 - git: {local-name: turtlebot_simulator, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_simulator.git'}
 - git: {local-name: turtlebot_create_desktop, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_create_desktop.git'}
-
-# Not yet released dependencies
-- git: {local-name: map_store, version: hydro-devel, uri: 'https://github.com/ros-planning/map_store.git'}
-
-
-# Other issues
-# - create_gazebo_plugins is, or was a dependency of turtlebot_simulator not yet in indigo
