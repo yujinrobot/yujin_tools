@@ -25,6 +25,11 @@ case $i in
     PRECLEAN="--pre-clean"
     shift
     ;;
+    -d=*|--source-directory=*)
+    USE_CUSTOM_SOURCE_DIRECTORY=1
+    CUSTOM_SOURCE_DIRECTORY="${i#*=}"
+    shift
+    ;;
     *)
        # unknown option
     ;;
@@ -35,7 +40,11 @@ done
 # Variables
 ###########################
 
-GROOT=/opt/groot
+if [ ! -z "$USE_CUSTOM_SOURCE_DIRECTORY" ]; then
+  GROOT=$CUSTOM_SOURCE_DIRECTORY
+else
+  GROOT=/opt/groot
+fi
 
 if [ ! -z "${ROS_MASTER_URI}" ]; then
   echo "This is a ros environment, you must run this script from a non-ros environment (new shell)."
@@ -63,10 +72,11 @@ show_help ()
   echo "        groot_build <options>"
   echo ""
   echo "    Options:"
-  echo "        --help      : this help message."
-  echo "        --pre-clean : pre-clean each workspace."
-  echo "        --rosdeps   : install workspace rosdeps only."
-  echo "        --install   : pass --install along with the build."
+  echo "        --help                                          : this help message."
+  echo "        --pre-clean                                     : pre-clean each workspace."
+  echo "        --rosdeps                                       : install workspace rosdeps only."
+  echo "        --install                                       : pass --install along with the build."
+  echo "        --source-directory=<directory> | -d=<directory> : specify custom source directory"
   echo ""
   exit 0
 }
