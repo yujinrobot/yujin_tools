@@ -35,6 +35,11 @@ case $i in
     SHOW_BRANCHES=1
     shift
     ;;
+    -d=*|--source-directory=*)
+    USE_CUSTOM_SOURCE_DIRECTORY=1
+    CUSTOM_SOURCE_DIRECTORY="${i#*=}"
+    shift
+    ;;
     *)
        # unknown option
     ;;
@@ -45,7 +50,11 @@ done
 # Variables
 ###########################
 
-GROOT=/opt/groot
+if [ ! -z "$USE_CUSTOM_SOURCE_DIRECTORY" ]; then
+  GROOT=$CUSTOM_SOURCE_DIRECTORY
+else
+  GROOT=/opt/groot
+fi
 
 ALL_REPOS=("ecto" "ecl" "navi" "rocon" "dslam" "gopher")
 declare -A ALL_REPO_KEYS
@@ -83,12 +92,13 @@ show_help ()
   echo "    Repos: ecto ecl navi rocon dslam gopher"
   echo ""
   echo "    Options:"
-  echo "        --help      : this help message"
-  echo "        --list      : list repo details"
-  echo "        --delete    : delete workspaces"
-  echo "        --update    : run wstool update on each workspace"
-  echo "        --status    : run wstool status on each workspace"
-  echo "        --branches  : show what branches are used in each workspace"
+  echo "        --help                                          : show this help message"
+  echo "        --list                                          : list repo details"
+  echo "        --delete                                        : delete workspaces"
+  echo "        --update                                        : run wstool update on each workspace"
+  echo "        --status                                        : run wstool status on each workspace"
+  echo "        --branches                                      : show what branches are used in each workspace"
+  echo "        --source-directory=<directory> | -d=<directory> : specify custom source directory"
   echo ""
   echo "    Admin Options:"
   echo "        --install   : set the install location to /opt/yujin/indigo for all workspaces"
