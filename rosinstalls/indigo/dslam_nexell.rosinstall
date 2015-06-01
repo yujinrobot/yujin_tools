@@ -1,0 +1,2 @@
+- git: {local-name: dslam_arm, version: nexell, uri: 'https://bitbucket.org/yujinrobot/dslam_arm.git'}
+
