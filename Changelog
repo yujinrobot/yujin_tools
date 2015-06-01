@@ -1,3 +1,5 @@
+0.2.75
+ - always take custom platforms and toolchains first.
 0.2.74
  - platform arm/cortex-a7 added.
 0.2.73
