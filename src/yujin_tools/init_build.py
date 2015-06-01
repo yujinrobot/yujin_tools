@@ -340,10 +340,10 @@ def init_configured_build(default_underlay, build_dir_="./", source_dir_="./src"
         custom_toolchains = get_toolchains_or_platforms(custom_toolchains_dir)
         if not family in toolchains and not family in custom_toolchains:
             raise RuntimeError("No toolchains available for family %s" % family)
-        if family in toolchains and toolchain_tuple in toolchains[family]:
-            toolchain_file = os.path.join(toolchains_dir, family, toolchain_tuple + ".cmake")
-        elif family in custom_toolchains and toolchain_tuple in custom_toolchains[family]:
+        if family in custom_toolchains and toolchain_tuple in custom_toolchains[family]:
             toolchain_file = os.path.join(custom_toolchains_dir, family, toolchain_tuple + ".cmake")
+        elif family in toolchains and toolchain_tuple in toolchains[family]:
+            toolchain_file = os.path.join(toolchains_dir, family, toolchain_tuple + ".cmake")
         else:
             raise RuntimeError("Platform %s for family %s not available." % (family, toolchain_tuple))
         if os.path.isfile(toolchain_file):
@@ -367,10 +367,10 @@ def init_configured_build(default_underlay, build_dir_="./", source_dir_="./src"
         custom_platforms = get_toolchains_or_platforms(custom_platforms_dir)
         if not family in platforms and not family in custom_platforms:
             raise RuntimeError("No platforms available for family %s" % family)
-        if family in platforms and platform in platforms[family]:
-            platform_file = os.path.join(platforms_dir, family, platform + ".cmake")
-        elif family in custom_platforms and platform in custom_platforms[family]:
+        if family in custom_platforms and platform in custom_platforms[family]:
             platform_file = os.path.join(custom_platforms_dir, family, platform + ".cmake")
+        elif family in platforms and platform in platforms[family]:
+            platform_file = os.path.join(platforms_dir, family, platform + ".cmake")
         else:
             raise RuntimeError("Platform %s for family %s not available." % (family, platform))
     else:
