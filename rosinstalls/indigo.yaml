@@ -6,15 +6,16 @@
 #
 _dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam.rosinstall'
 _dslam_bootstrap: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_bootstrap.rosinstall'
+_dslam_nexell: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_nexell.rosinstall'
+_dslam_cubie: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_arm.rosinstall'
 android_complete: [android_core, android_interactions]
 android_core: 'https://raw.githubusercontent.com/rosjava/rosjava/indigo/android_core.rosinstall'
 android_interactions: 'https://raw.githubusercontent.com/rosjava/rosjava/indigo/android_interactions.rosinstall'
 catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
-dslam: [_dslam, dslam_arm, respawn]
+dslam_cubie: [_dslam, _dslam_cubie, respawn]
+dslam_nexell: [_dslam, _dslam_nexell, respawn]
 dslam_bootstrap: [catkin, _dslam_bootstrap, yaml_cpp]
 dslam_desktop: [_dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
-dslam_nexell: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_nexell.rosinstall'
-dslam_arm: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_arm.rosinstall'
 dslam_3rdparty: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_3rdparty.rosinstall'
 ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
 ecto: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto.rosinstall'
