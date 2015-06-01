@@ -17,4 +17,4 @@ set(ECL_EIGEN_IS_INTERNAL_3_2_1 TRUE CACHE BOOL "Use ecls internal eigen.")
 # Nanomsg - disable it's support for gcc builtins
 set(NN_DISABLE_ATOMIC_GCC_BUILTINS TRUE CACHE BOOL "Disable atomic gcc builtins.")
 # Disable opencv debugging on the dslam repo
-set(DSLAM_ENABLE_OPENCV FALSE CACHE BOOL "Enable opencv debugging on the dslam repo.")
+set(DSLAM_ENABLE_OPENCV_DEBUGGING FALSE CACHE BOOL "Enable opencv debugging on the dslam repo.")
