@@ -50,6 +50,7 @@ setup(name='yujin_tools',
            'platforms/generic/*',
            'platforms/arm/*',
            'platforms/intel/*',
+           'data/*'
            ]},
       author = "Daniel Stonier",
       author_email = "d.stonier@gmail.com",

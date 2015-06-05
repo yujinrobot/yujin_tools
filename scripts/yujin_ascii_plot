@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+###########################
+# Command Line
+###########################
+
+for i in "$@"
+do
+case $i in
+    --help)
+    SHOW_HELP=1
+    shift
+    ;;
+    *)
+       # unknown option
+    ;;
+esac
+done
+
+
+###########################
+# Variables
+###########################
+
+FILENAME=${1}
+
+###########################
+# Functions
+###########################
+
+show_help ()
+{
+  echo ""
+  echo "This creates an ascii image plot of some numeric data in a file (one element per row)."
+  echo ""
+  echo "    Usage:"
+  echo "        yujin_ascii_plot <filename>"
+  echo ""
+  exit 0
+}
+
+show_plot ()
+{
+  while true; do
+    tail -n 1500 ${FILENAME} | gnuplot -e "set term dumb size 150,40; plot '-'"
+    sleep 1
+  done
+}
+
+###########################
+# Workers
+###########################
+
+if [ ! -z "$SHOW_HELP" ]; then
+  show_help
+  exit 0
+fi
+
+if [ -z "$FILENAME" ]; then
+  show_help
+  exit "Must provide a filename"
+else
+  show_plot
+fi
+
+
+
+
