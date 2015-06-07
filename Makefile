@@ -17,8 +17,10 @@ help:
 	@echo "  distro    : build the distribution tarball."
 	@echo "  pypi      : upload the package to PyPI."
 	@echo "Deb package"
-	@echo "  deb_distro: build the distribution tarball."
-	@echo "  ppa       : upload to the launchpad ppa."
+	@echo "  deb_deps  : install the package builder dependencies (fpm)."
+	@echo "  deb       : upload to yujin's repository."
+	@echo "  release   : make pypi package and deb release together."
+	@echo "Other"
 	@echo "  clean     : clean build/dist directories."
 
 build:
@@ -59,16 +61,19 @@ register:
 pypi: 
 	python setup.py sdist upload
 
-debianize:
-	python setup.py sdist # creates a tarball
-	@mv dist/yujin_tools-${VERSION}.tar.gz ../yujin-tools_${VERSION}.orig.tar.gz
-	python setup.py --command-packages=stdeb.command debianize
+deb_deps:
+	sudo apt-get install ruby-dev build-essential
+	sudo get install fpm
 
-# Still can't get this to work in any way - http://shallowsky.com/blog/programming/packaging-launchpad-ppas.html
-ppa:
-	dput -u ppa:d-stonier/yujin-tools deb_dist/yujin-tools_${VERSION}-1_amd64.changes	
+deb:
+	fpm -s python -t deb yujin_tools
 
-clean:  clean_dist
+clean_deb:
+	rm *.deb
+
+release: pypi deb
+
+clean:  clean_dist clean_deb
 	-sudo rm -f install.record
 	-sudo rm -rf build
 	-sudo rm -rf yujin_tools.egg-info
