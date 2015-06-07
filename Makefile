@@ -18,7 +18,8 @@ help:
 	@echo "  pypi      : upload the package to PyPI."
 	@echo "Deb package"
 	@echo "  deb_deps  : install the package builder dependencies (fpm)."
-	@echo "  deb       : upload to yujin's repository."
+	@echo "  deb       : build the deb."
+	@echo "  upload_deb: upload to yujin's repository."
 	@echo "  release   : make pypi package and deb release together."
 	@echo "Other"
 	@echo "  clean     : clean build/dist directories."
@@ -66,12 +67,15 @@ deb_deps:
 	sudo get install fpm
 
 deb:
-	fpm -s python -t deb yujin_tools
+	fpm -f -s python -t deb yujin_tools
+
+upload_deb:
+	./scripts/upload_deb
 
 clean_deb:
 	rm *.deb
 
-release: pypi deb
+release: pypi deb upload_deb
 
 clean:  clean_dist clean_deb
 	-sudo rm -f install.record
