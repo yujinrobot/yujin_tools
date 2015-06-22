@@ -64,7 +64,7 @@ pypi:
 
 deb_deps:
 	sudo apt-get install ruby-dev build-essential
-	sudo get install fpm
+	sudo gem install fpm
 
 deb:
 	fpm -f -s python -t deb yujin_tools
