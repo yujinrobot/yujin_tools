@@ -1,3 +1,5 @@
+0.2.82
+ - deprecate yujin_tools_update and git-big-picture
 0.2.81
  - add --install-rosdeps to groot_binaries
  - update rocon sources for groot_sources
