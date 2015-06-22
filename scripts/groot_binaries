@@ -11,6 +11,10 @@ case $i in
     SHOW_HELP=1
     shift
     ;;
+    --install-rosdeps)
+    INSTALL_ROSDEPS=1
+    shift
+    ;;
     --push)
     PUSH=1
     shift
@@ -36,10 +40,11 @@ show_help ()
   echo "        sudo groot_binaries"
   echo ""
   echo "    Options:"
-  echo "        --help      : this help message"
+  echo "        --help            : this help message"
+  echo "        --install-rosdeps : install all rosdeps required by the groot binary installspace"
   echo ""
   echo "    Admin Options:"
-  echo "        --push      : push local /opt/yujin/indigo installspace with the server"
+  echo "        --push            : push local /opt/yujin/indigo installspace with the server"
   echo ""
   exit 0
 }
@@ -62,6 +67,14 @@ export OPTIONS="--delete --recursive --links --verbose"
 #EXCLUDES=(
 #  --exclude '*.pyc'
 #)
+
+if [ ! -z "$INSTALL_ROSDEPS" ]; then
+    echo ""
+    echo "Installing all rosdeps required by the binaries installspace in ${local_dir}/indigo"
+    echo ""
+    rosdep install -r --from-paths ${local_dir}/indigo --ignore-src
+    exit 0   
+fi
 
 if [ ! -z "$PUSH" ]; then
     echo ""
