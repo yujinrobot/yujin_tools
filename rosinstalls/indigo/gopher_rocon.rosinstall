@@ -1,0 +1,34 @@
+# == Overview ==
+#
+# Rocon stacks forked for gopher development, focus is on rocon for the robot.
+[
+{'git': {'local-name': 'rocon_concert', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_concert.git'}},
+{'git': {'local-name': 'rocon_multimaster', 'version': 'gopher', 'uri':'https://github.com/robotics-in-concert/rocon_multimaster.git'}},
+{'git': {'local-name': 'rocon_msgs', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_msgs.git'}},
+{'git': {'local-name': 'rocon_tools', 'version': 'gopher', 'uri':'https://github.com/robotics-in-concert/rocon_tools.git'}},
+{'git': {'local-name': 'rocon_app_platform', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_app_platform.git'}},
+{'git': {'local-name': 'rocon_tutorials', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_tutorials.git'}},
+{'git': {'local-name': 'concert_services', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/concert_services.git'}},
+{'git': {'local-name': 'concert_software_farm', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/concert_software_farm.git'}},
+{'git': {'local-name': 'rocon_qt_gui', 'version': 'indigo', 'uri': 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}},
+
+{'git': {'local-name': 'concert_scheduling', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/concert_scheduling.git'}},
+
+# Experimental
+# {'git': {'local-name': 'rocon_rapps', 'version': 'indigo', 'uri': 'https://github.com/robotics-in-concert/rocon_rapps.git'}},
+
+# Unused
+# {'git': {'local-name': 'std_capabilities', 'version': 'initial_specs', 'uri': 'https://github.com/robotics-in-concert/std_capabilities.git'}},
+# {'git': {'local-name': 'rqt_capabilities', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rqt_capabilities.git'}},
+# Probably pull this in eventually
+# {'git': {'local-name': 'gopher_concert', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_concert.git'}},
+
+# WKF (World Canvas Framework)
+{'git': {'local-name': 'world_canvas', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas.git'}},
+{'git': {'local-name': 'world_canvas_libs', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas_libs.git'}},
+{'git': {'local-name': 'world_canvas_msgs', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas_msgs.git'}},
+
+# Gopher
+{'git': {'local-name': 'gopher_msgs', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}}
+
+]
