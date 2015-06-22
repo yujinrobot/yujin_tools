@@ -1,3 +1,5 @@
+0.2.80
+ - switch eclipse shortcut to /opt/yujin/eclipse/eclipse, where our binary install goes.
 0.2.78
  - yujin_ascii_plot added
 0.2.76
