@@ -1,3 +1,6 @@
+0.2.81
+ - add --install-rosdeps to groot_binaries
+ - update rocon sources for groot_sources
 0.2.80
  - switch eclipse shortcut to /opt/yujin/eclipse/eclipse, where our binary install goes.
 0.2.78
