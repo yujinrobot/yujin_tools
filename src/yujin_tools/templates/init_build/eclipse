@@ -1,6 +1,4 @@
 #!/bin/bash
-# This only needed by ubuntu karmic, otherwise comment out
-export GDK_NATIVE_WINDOWS=1
 
 export YUJIN_WORKSPACE=%(cwd)s
 if [ -d ${YUJIN_WORKSPACE}/devel ]; then
