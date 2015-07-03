@@ -1,0 +1,70 @@
+# Software for Gopher
+#
+# Make sure you have a basic ROS installation: 
+#   sudo apt-get install ros-indigo-base
+
+# Yujin
+- git:
+    local-name: gopher
+    uri: git@bitbucket.org:yujinrobot/gopher.git
+    version: indigo-devel
+- git:
+    local-name: gopher_desktop
+    uri: git@bitbucket.org:yujinrobot/gopher_desktop.git
+    version: indigo-devel
+- git:
+    local-name: gopher_msgs
+    uri: git@bitbucket.org:yujinrobot/gopher_msgs.git
+    version: indigo
+- git:
+    local-name: somanet
+    uri: git@bitbucket.org:yujinrobot/somanet_driver.git
+    version: indigo-devel
+- git: 
+    local-name: gopher_msgs
+    uri: 'git@bitbucket.org:yujinrobot/gopher_msgs.git'
+    version: indigo
+- git: 
+    local-name: delivery_manager
+    uri: 'git@bitbucket.org:yujinrobot/delivery_manager.git'
+    version: indigo-devel
+- git:
+    local-name: delivery_app
+    uri: 'git@bitbucket.org:yujinrobot/delivery_app.git'
+    version: indigo-devel
+- git:
+    local-name: gopher_calibration
+    uri: 'git@bitbucket.org:yujinrobot/gopher_calibration.git'
+    version: indigo
+
+# YOCS
+- git:
+    local-name: yujin_ocs
+    uri: https://github.com/yujinrobot/yujin_ocs.git
+    version: indigo-devel
+- git:
+    local-name: yocs_msgs
+    uri: https://github.com/yujinrobot/yocs_msgs.git
+    version: indigo-devel
+
+- git:
+    local-name: rocon_demo_msgs
+    uri: https://github.com/robotics-in-concert/rocon_demo_msgs.git
+    version: gocart_demos
+- git:
+    local-name: capabilities
+    uri: https://github.com/osrf/capabilities.git
+    version: master
+
+# Others
+# adds support for range sensors for Gazebo simulation - replace with main repo once Alex's PR is merged
+- git:
+    local-name: pal_gazebo_plugins
+    uri: https://github.com/AlexReimann/pal_gazebo_plugins.git
+    version: range_only
+# ROS driver for RPLIDAR
+- git:
+    local-name: rplidar_ros
+    uri: https://github.com/yujinrobot/rplidar_ros
+    version: master
+
