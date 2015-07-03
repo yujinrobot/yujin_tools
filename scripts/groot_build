@@ -17,7 +17,7 @@ case $i in
     INSTALL="--install"
     shift
     ;;
-    --rosdeps)
+    --install-rosdeps)
     ROSDEPS=1
     shift
     ;;
