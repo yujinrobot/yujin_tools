@@ -20,7 +20,7 @@ dslam_3rdparty: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstall
 ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
 ecto: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto.rosinstall'
 gopher: 'https://bitbucket.org/yujinrobot/gopher/raw/indigo-devel/gopher_meta/resources/rosinstall/gopher.rosinstall'
-gopher.ssh: 'https://raw,github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher.ssh.rosinstall'
+gopher.ssh: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher.ssh.rosinstall'
 gopher_concert: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert.rosinstall'
 gopher_rocon: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_rocon.rosinstall'
 gopher_navigation: [yujin_navigation]
