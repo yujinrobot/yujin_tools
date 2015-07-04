@@ -1,3 +1,6 @@
+0.2.83
+ - groot_sources use --install-rosdeps to match yujin_make
+ - groot_binaries interactive mode disabled so we can do ci.
 0.2.82
  - deprecate yujin_tools_update and git-big-picture
 0.2.81
