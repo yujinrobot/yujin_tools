@@ -78,13 +78,15 @@ fi
 
 if [ ! -z "$PUSH" ]; then
     echo ""
-    echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
-    read answer
-    if [ "$answer" == "y" ]; then
-        rsync ${OPTIONS} ${local_dir}/indigo ${remote_dir}
-    else
-        echo "Aborting."
-    fi
+    echo "Pushing changes to the file server."
+    # Need to automate this script on jenkins.
+    #echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
+    #read answer
+    #if [ "$answer" == "y" ]; then
+    #    rsync ${OPTIONS} ${local_dir}/indigo ${remote_dir}
+    #else
+    #    echo "Aborting."
+    #fi
     echo ""
 else
     rsync ${OPTIONS} ${remote_dir}/indigo ${local_dir}
