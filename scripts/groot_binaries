@@ -83,7 +83,7 @@ if [ ! -z "$PUSH" ]; then
     #echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
     #read answer
     #if [ "$answer" == "y" ]; then
-    #    rsync ${OPTIONS} ${local_dir}/indigo ${remote_dir}
+        rsync ${OPTIONS} ${local_dir}/indigo ${remote_dir}
     #else
     #    echo "Aborting."
     #fi
