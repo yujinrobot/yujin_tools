@@ -1,3 +1,5 @@
+0.2.84
+ - bugfix disabling of interactive mode, had commented the rsync.
 0.2.83
  - groot_sources use --install-rosdeps to match yujin_make
  - groot_binaries interactive mode disabled so we can do ci.
