@@ -6,7 +6,7 @@
 {'git': {'local-name': 'rocon_msgs', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_msgs.git'}},
 {'git': {'local-name': 'rocon_tools', 'version': 'gopher', 'uri':'https://github.com/robotics-in-concert/rocon_tools.git'}},
 {'git': {'local-name': 'rocon_app_platform', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_app_platform.git'}},
-{'git': {'local-name': 'rocon_qt_gui', 'version': 'indigo', 'uri': 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}},
+{'git': {'local-name': 'rocon_qt_gui', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}},
 # Experimental
 # {'git': {'local-name': 'rocon_rapps', 'version': 'indigo', 'uri': 'https://github.com/robotics-in-concert/rocon_rapps.git'}},
 
