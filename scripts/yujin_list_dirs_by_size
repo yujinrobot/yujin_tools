@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+  DIR=.
+else
+  DIR=${1}
+fi
+
+du -ah ${DIR} | grep -v "/$" | sort -rh
+
