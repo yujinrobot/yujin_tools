@@ -23,7 +23,7 @@ gopher: 'https://bitbucket.org/yujinrobot/gopher/raw/indigo-devel/gopher_meta/re
 gopher.ssh: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher.ssh.rosinstall'
 gopher_concert: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert.rosinstall'
 gopher_rocon: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_rocon.rosinstall'
-gopher_navigation: [yujin_navigation]
+gopher_navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_navigation.rosinstall'
 gopher_dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_dslam.rosinstall'
 hello: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/hello.rosinstall'
 kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki.rosinstall'
