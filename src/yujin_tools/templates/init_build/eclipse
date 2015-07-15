@@ -11,4 +11,4 @@ if [ -d ${YUJIN_WORKSPACE}/devel ]; then
   alias m5="export ROS_MASTER_URI=http://localhost:11315"
 fi
 # Add the full path if eclipse is not in PATH
-exec /opt/yujin/eclipse/eclipse -data ~/workspace/%(name)s
+exec /opt/yujin/eclipse/mars/eclipse -data ~/workspace/mars/%(name)s
