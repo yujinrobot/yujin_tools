@@ -1,3 +1,5 @@
+0.2.89
+ - groot_sync with the new unison profile structure for gophers
 0.2.88
  - bugfix groot_sources to only work in a non-ros shell
 0.2.87
