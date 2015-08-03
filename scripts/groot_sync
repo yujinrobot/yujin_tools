@@ -71,10 +71,21 @@ ROBOT=$1
 #   echo "Robot name '${ROBOT}' not found in /etc/hosts."
 #   exit 1
 #fi
+if [ ! -f ~/.unison/gopher.prf ]; then
+  echo ""
+  echo "Copying gopher unison profile."
+  echo ""
+  echo "from:"
+  echo "  /opt/groot/gopher_ws/src/gopher/gopher_meta/resources/unison/gopher.prf"
+  echo "to:"
+  echo "  ~/.unison/${ROBOT}.prf."
+  echo ""
+  cp /opt/groot/gopher_ws/src/gopher/gopher_meta/resources/unison/gopher.prf ~/.unison/
+fi
 
 if [ ! -f ~/.unison/${ROBOT}.prf ]; then
   echo ""
-  echo "Copying unison profile."
+  echo "Copying robot specific unison profile."
   echo ""
   echo "from:"
   echo "  /opt/groot/gopher_ws/src/gopher/gopher_meta/resources/unison/${ROBOT}.prf"
