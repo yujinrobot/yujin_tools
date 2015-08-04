@@ -1,3 +1,5 @@
+0.2.90
+ - set eclipse subfolder in the workspace dir.
 0.2.89
  - groot_sync with the new unison profile structure for gophers
 0.2.88
