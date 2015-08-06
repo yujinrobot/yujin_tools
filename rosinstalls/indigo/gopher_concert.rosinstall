@@ -32,7 +32,7 @@
 - 'git': {'local-name': 'gopher_crazy_hospital', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
 
 # Legacy Rocon
-
-- 'git': {'local-name': 'concert_services', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/concert_services.git'}
-- 'git': {'local-name': 'concert_software_farm', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/concert_software_farm.git'}
-- 'git': {'local-name': 'concert_scheduling', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/concert_scheduling.git'}
+#
+#- 'git': {'local-name': 'concert_services', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/concert_services.git'}
+#- 'git': {'local-name': 'concert_software_farm', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/concert_software_farm.git'}
+#- 'git': {'local-name': 'concert_scheduling', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/concert_scheduling.git'}
