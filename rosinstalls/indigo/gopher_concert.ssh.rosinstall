@@ -12,11 +12,7 @@
 - 'git': {'local-name': 'rocon_tools', 'version': 'gopher', 'uri':'https://github.com/robotics-in-concert/rocon_tools.git'}
 - 'git': {'local-name': 'rocon_app_platform', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_app_platform.git'}
 - 'git': {'local-name': 'rocon_tutorials', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_tutorials.git'}
-- 'git': {'local-name': 'concert_services', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/concert_services.git'}
-- 'git': {'local-name': 'concert_software_farm', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/concert_software_farm.git'}
 - 'git': {'local-name': 'rocon_qt_gui', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}
-
-- 'git': {'local-name': 'concert_scheduling', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/concert_scheduling.git'}
 - 'git': {'local-name': 'std_capabilities', 'version': 'initial_specs', 'uri': 'https://github.com/robotics-in-concert/std_capabilities.git'}
 - 'git': {'local-name': 'rqt_capabilities', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rqt_capabilities.git'}
 
@@ -36,3 +32,9 @@
 - 'git': {'local-name': 'somanet_msgs', 'version': 'indigo', 'uri': 'https://github.com/yujinrobot/somanet_msgs.git'}
 - 'git': {'local-name': 'flask_task_planner', 'version': 'indigo', 'uri': 'git@bitbucket.org:yujinrobot/flask-task-planner.git'}
 - 'git': {'local-name': 'gopher_crazy_hospital', 'version': 'indigo', 'uri': 'git@bitbucket.org:yujinrobot/gopher_crazy_hospital.git'}
+
+#Legacy Rocon
+#
+#- 'git': {'local-name': 'concert_scheduling', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/concert_scheduling.git'}
+#- 'git': {'local-name': 'concert_services', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/concert_services.git'}
+#- 'git': {'local-name': 'concert_software_farm', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/concert_software_farm.git'}
