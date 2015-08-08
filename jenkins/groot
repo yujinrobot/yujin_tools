@@ -1,0 +1,32 @@
+#!/bin/bash
+
+export DIR_SOURCES=`pwd`/groot
+export DIR_BINARIES=/opt/yujin/indigo
+
+echo "Removing old sources directory in ${DIR_SOURCES}."
+rm -rf ${DIR_SOURCES}
+echo "Removing old binaries directory in ${DIR_SOURCES}."
+rm -rf ${DIR_BINARIES}
+
+echo "Downloading groot sources to ${DIR_SOURCES}."
+groot_sources --install --source-directory=${DIR_SOURCES}
+
+if [ $? -ne 0 ]; then
+  echo "Failure in groot_sources"
+  exit 1
+fi
+
+echo "Building groot sources"
+groot_build --install --source-directory=${DIR_SOURCES}
+
+if [ $? -ne 0 ]; then
+  echo "Failure in groot_build"
+  exit 1
+fi
+
+rm ${DIR_BINARIES}/build-*
+touch ${DIR_BINARIES}/build-`date +%Y%m%d%H%M`
+groot_binaries --push
+
+echo "Hooray, I'm happy...you should be too."
+
