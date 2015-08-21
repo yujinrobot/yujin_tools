@@ -51,7 +51,7 @@ if [ ! -z "${ROS_MASTER_URI}" ]; then
   exit 1
 fi
 
-REPOS=("ecto" "ecl" "navi" "rocon" "dslam" "gopher")
+REPOS=("ecto" "ecl" "navi" "rocon" "dslam" "gopher" "concert")
 DISCOVERED_REPOS=()
 for repo in ${REPOS[*]}; do
   if [ -d "${GROOT}/${repo}_ws" ]; then

@@ -61,11 +61,11 @@ else
   GROOT=/opt/groot
 fi
 
-ALL_REPOS=("ecto" "ecl" "navi" "rocon" "dslam" "gopher")
+ALL_REPOS=("ecto" "ecl" "navi" "rocon" "dslam" "gopher" "concert")
 declare -A ALL_REPO_KEYS
 declare -A ALL_UNDERLAYS
-ALL_REPO_KEYS=( ["ecto"]="ecto" ["ecl"]="ecl" ["rocon"]="gopher_rocon" ["navi"]="gopher_navigation" ["dslam"]="gopher_dslam" ["gopher"]="gopher" )
-ALL_UNDERLAYS=( ["ecto"]="" ["ecl"]="" ["navi"]="" ["rocon"]="" ["dslam"]="${GROOT}/ecl_ws/devel;${GROOT}/ecto_ws/devel" ["gopher"]="${GROOT}/dslam_ws/devel;${GROOT}/ecl_ws/devel;${GROOT}/navi_ws/devel;${GROOT}/rocon_ws/devel;${GROOT}/ecto_ws/devel" )
+ALL_REPO_KEYS=( ["ecto"]="ecto" ["ecl"]="ecl" ["rocon"]="gopher_rocon" ["concert"]="gopher_concert" ["navi"]="gopher_navigation" ["dslam"]="gopher_dslam" ["gopher"]="gopher" )
+ALL_UNDERLAYS=( ["ecto"]="" ["ecl"]="" ["navi"]="" ["rocon"]="" ["concert"]="${GROOT}/rocon_ws/devel" ["dslam"]="${GROOT}/ecl_ws/devel;${GROOT}/ecto_ws/devel" ["gopher"]="${GROOT}/dslam_ws/devel;${GROOT}/ecl_ws/devel;${GROOT}/navi_ws/devel;${GROOT}/rocon_ws/devel;${GROOT}/ecto_ws/devel" )
 
 REPOS=()
 
@@ -94,7 +94,7 @@ show_help ()
   echo "        groot_sources <options>"
   echo "        groot_sources <options> <space separated list of repos>"
   echo ""
-  echo "    Repos: ecto ecl navi rocon dslam gopher"
+  echo "    Repos: ecto ecl navi rocon dslam gopher concert"
   echo ""
   echo "    Options:"
   echo "        --help                                          : show this help message"

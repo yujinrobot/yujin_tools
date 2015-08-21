@@ -1,4 +1,5 @@
 #!/bin/bash
 
-exec eclipse -data ~/workspace/yujin_tools
+exec /opt/yujin/eclipse/mars/eclipse -data ~/workspace/eclipse/mars/yujin_tools
+
 
