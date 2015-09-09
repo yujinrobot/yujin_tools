@@ -1,0 +1,28 @@
+# Software for Gopher
+#
+# Make sure you have a basic ROS installation: 
+#   sudo apt-get install ros-indigo-base
+
+[
+{'git': {'local-name': 'gopher', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/gopher.git'}},
+{'git': {'local-name': 'gopher_calibration', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_calibration.git'}},
+{'git': {'local-name': 'gopher_desktop', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}},
+{'git': {'local-name': 'gopher_msgs', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}},
+{'git': {'local-name': 'somanet_driver', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/somanet_driver.git'}},
+{'git': {'local-name': 'somanet_msgs', 'version': 'indigo', 'uri': 'https://github.com/yujinrobot/somanet_msgs.git'}},
+
+# LIDAR driver
+{'git': {'local-name': 'rplidar_ros', 'version': 'master', 'uri': 'https://github.com/yujinrobot/rplidar_ros.git'}},
+
+# Adds support for range sensors for Gazebo simulation - replace with main repo once this PR is merged: https://github.com/ros-simulation/gazebo_ros_pkgs/pull/335
+{'git': {'local-name': 'pal_gazebo_plugins', 'version': 'range_only', 'uri': 'https://github.com/AlexReimann/pal_gazebo_plugins.git'}},
+
+# modified version of the Alvar AR tracker
+{'git': {'local-name': 'ar_track_alvar', 'version': 'modifications', 'uri': 'https://github.com/yujinrobot/ar_track_alvar.git'}},
+
+# added until fixed version has been released
+{'git': {'local-name': 'audio_common', 'version': 'hydro-devel', 'uri': 'https://github.com/yujinrobot/audio_common.git'}}
+
+# Unused, but we might bring in
+# {'git': {'local-name': 'capabilities', 'version': 'master', 'uri': 'https://github.com/osrf/capabilities.git'}},
+]
