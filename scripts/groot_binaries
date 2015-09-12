@@ -54,9 +54,12 @@ if [ ! -z "$SHOW_HELP" ]; then
   exit 0
 fi
 
-export remote_url=files@files.yujin.com
 export local_dir=/opt/yujin  # this copies the indigo folder
-export remote_dir=${remote_url}:shared/repos/installspaces/yujin
+
+#export remote_url=files@files.yujin.com
+#export remote_dir=${remote_url}:shared/repos/installspaces/yujin
+export remote_url=files@files.yujinrobot.com
+export remote_dir=${remote_url}:rsync_repositories/yujin
 
 # Options
 # --delete    : files from the destination directories
