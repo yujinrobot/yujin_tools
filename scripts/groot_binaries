@@ -63,7 +63,7 @@ export remote_dir=${remote_url}:shared/repos/installspaces/yujin
 # --recursive : recurse into directories
 # --links     : copy symlinks as symlinks
 
-export OPTIONS="--delete --recursive --links --verbose"
+export OPTIONS="--delete --recursive --links --verbose --compress"
 #EXCLUDES=(
 #  --exclude '*.pyc'
 #)
