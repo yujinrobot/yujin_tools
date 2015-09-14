@@ -144,7 +144,7 @@ update_sources ()
   echo "Updating groot."
   for ((i=0;i<${#REPOS[@]};++i)); do
     repo=${REPOS[i]}
-    repo_key=${REPO_KEYS[i]}
+    repo_key=${ALL_REPO_KEYS[${repo}]}
     if [ ! -d "${GROOT}/${repo}_ws" ]; then
       echo "${repo} not found, redownloading."
       cd ${GROOT}
@@ -154,9 +154,12 @@ update_sources ()
       echo "  Configuring ${repo}."
       yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/indigo" .
     fi
-    cd ${GROOT}/${repo}_ws/src
-    echo "  Updating ${repo}."
-    wstool update -j5
+    cd ${GROOT}/${repo}_ws
+    echo "  Updating ${repo} from ${repo_key}"
+    echo ""
+    echo "       yujin_init_workspace -j5 --merge ${repo_key}"
+    echo ""
+    yujin_init_workspace -j5 --merge ${repo_key}
   done
 }
 
