@@ -78,10 +78,22 @@ if [ ! -f ~/.unison/gopher.prf ]; then
   echo "from:"
   echo "  /opt/groot/gopher_ws/src/gopher/gopher_meta/resources/unison/gopher.prf"
   echo "to:"
-  echo "  ~/.unison/${ROBOT}.prf."
+  echo "  ~/.unison/gopher.prf."
   echo ""
   cp /opt/groot/gopher_ws/src/gopher/gopher_meta/resources/unison/gopher.prf ~/.unison/
 fi
+if [ ! -f ~/.unison/ignore.prf ]; then
+  echo ""
+  echo "Copying ignore paths unison profile."
+  echo ""
+  echo "from:"
+  echo "  /opt/groot/gopher_ws/src/gopher/gopher_meta/resources/unison/ignore.prf"
+  echo "to:"
+  echo "  ~/.unison/ignore.prf."
+  echo ""
+  cp /opt/groot/gopher_ws/src/gopher/gopher_meta/resources/unison/ignore.prf ~/.unison/
+fi
+
 
 if [ ! -f ~/.unison/${ROBOT}.prf ]; then
   echo ""
