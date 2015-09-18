@@ -1,4 +1,6 @@
-0.2.96
+0.2.97
+ - catch the ignore profile with groot_sync too.
+00.2.96
  - groot sources update with --merge.
 0.2.95
  - switch groot binaries to yujinrobot, its faster for external access and not so big for internal.
