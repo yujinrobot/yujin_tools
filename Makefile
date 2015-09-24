@@ -67,7 +67,7 @@ deb_deps:
 	sudo gem install fpm
 
 deb:
-	rm *.deb
+	rm -f *.deb
 	fpm -f -s python -t deb yujin_tools
 
 upload_deb:
