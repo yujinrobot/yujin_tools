@@ -1,3 +1,5 @@
+0.2.98
+ - source environment before install rosdeps on groot_binaries.
 0.2.97
  - catch the ignore profile with groot_sync too.
 00.2.96
