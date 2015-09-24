@@ -75,6 +75,7 @@ if [ ! -z "$INSTALL_ROSDEPS" ]; then
     echo ""
     echo "Installing all rosdeps required by the binaries installspace in ${local_dir}/indigo"
     echo ""
+    source /opt/yujin/indigo/setup.bash
     rosdep install -r --default-yes --from-paths ${local_dir}/indigo --ignore-src
     exit 0   
 fi
