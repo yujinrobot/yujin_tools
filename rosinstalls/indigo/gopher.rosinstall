@@ -14,9 +14,6 @@
 # LIDAR driver
 {'git': {'local-name': 'rplidar_ros', 'version': 'master', 'uri': 'https://github.com/yujinrobot/rplidar_ros.git'}},
 
-# Adds support for range sensors for Gazebo simulation - replace with main repo once this PR is merged: https://github.com/ros-simulation/gazebo_ros_pkgs/pull/335
-{'git': {'local-name': 'pal_gazebo_plugins', 'version': 'range_only', 'uri': 'https://github.com/AlexReimann/pal_gazebo_plugins.git'}},
-
 # modified version of the Alvar AR tracker
 {'git': {'local-name': 'ar_track_alvar', 'version': 'modifications', 'uri': 'https://github.com/yujinrobot/ar_track_alvar.git'}},
 
