@@ -4,7 +4,7 @@
 - git: {local-name: obstacle_detection, version: 0.1.0, uri: 'https://bitbucket.org/yujinrobot/obstacle_detection.git'}
 - git: {local-name: gopher_navigation, version: 0.1.0, uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
 - git: {local-name: gopher_msgs, version: 0.2.0, uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
-- git: {local-name: depth_calibration, version: 0.1.0, uri: 'https://github.com/yujinrobot/depth_calibration.gi't}
+- git: {local-name: depth_calibration, version: 0.1.0, uri: 'https://github.com/yujinrobot/depth_calibration.git'}
 - git: {local-name: yujin_ocs, version: 0.7.0, uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
 - git: {local-name: yocs_msgs, version: 0.7.0, uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
 - git: {local-name: depthimage_to_laserscan, version: 4434578894417dbe3ff9b207c2608939ac8e94f5, uri: 'https://github.com/AlexReimann/depthimage_to_laserscan.git'}
