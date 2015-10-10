@@ -1,0 +1,2 @@
+- git: {local-name: ecto_ros, version: f77db2b1b39bea643d4cbdd4e536aa6e49e14d18, uri: 'https://github.com/stonier/ecto_ros.git'}
+- git: {local-name: ecto_opencv, version: a37d5552c95e12ab8ad6b2f1d05d15d597cf6f4f, uri: 'https://github.com/stonier/ecto_opencv.git'}

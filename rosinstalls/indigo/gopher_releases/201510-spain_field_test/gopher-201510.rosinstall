@@ -1,0 +1,21 @@
+# Software for Gopher
+#
+# Make sure you have a basic ROS installation: 
+#   sudo apt-get install ros-indigo-base
+
+[
+{'git': {'local-name': 'gopher', 'version': '0.3.0', 'uri': 'https://bitbucket.org/yujinrobot/gopher.git'}},
+{'git': {'local-name': 'gopher_desktop', 'version': '0.2.0', 'uri': 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}},
+{'git': {'local-name': 'gopher_msgs', 'version': '0.2.0', 'uri': 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}},
+{'git': {'local-name': 'somanet_driver', 'version': '0.0.1', 'uri': 'https://bitbucket.org/yujinrobot/somanet_driver.git'}},
+{'git': {'local-name': 'somanet_msgs', 'version': '0.1.1', 'uri': 'https://github.com/yujinrobot/somanet_msgs.git'}},
+
+# 3rd party modified - we use branches because the tags should not be updated, and the hashes might disappear
+{'git': {'local-name': 'rplidar_ros', 'version': '201510', 'uri': 'https://github.com/yujinrobot/rplidar_ros.git'}},
+{'git': {'local-name': 'ar_track_alvar', 'version': '201510', 'uri': 'https://github.com/yujinrobot/ar_track_alvar.git'}},
+{'git': {'local-name': 'audio_common', 'version': '201510', 'uri': 'https://github.com/yujinrobot/audio_common.git'}}
+
+# Unused, but we might bring in
+# {'git': {'local-name': 'capabilities', 'version': 'master', 'uri': 'https://github.com/osrf/capabilities.git'}},
+# {'git': {'local-name': 'gopher_calibration', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_calibration.git'}},
+]
