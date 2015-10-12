@@ -29,9 +29,9 @@
 
 # Rostful and Celeros
 {'git': {'local-name': 'rostful', 'version': '0.0.8', 'uri': 'https://github.com/asmodehn/rostful.git'}},
-{'git': {'local-name': 'celeros', 'version': '52f94eb5713d7290ec8cc3bf548ef7fae388d2c1', 'uri': 'https://github.com/asmodehn/celeros.git'}},
+{'git': {'local-name': 'celeros', 'version': '0.0.2', 'uri': 'https://github.com/asmodehn/celeros.git'}},
 {'git': {'local-name': 'flask-ext-catkin', 'version': 'aa60144a7276c20ebcbb08907e7adac4236d1fa6', 'uri': 'https://github.com/asmodehn/flask-ext-catkin.git'}},
-{'git': {'local-name': 'rostful-node', 'version': '1dc1eb52d96f3bb6d971e06c8debcacf2625cf33', 'uri': 'https://github.com/asmodehn/rostful-node.git'}},
+{'git': {'local-name': 'rostful-node', 'version': '0.0.7', 'uri': 'https://github.com/asmodehn/rostful-node.git'}},
 
 #Elevator Integration
 {'git': {'local-name': 'elevator_interactions', 'version': '0.1.0', 'uri': 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}},
