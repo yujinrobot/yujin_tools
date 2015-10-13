@@ -2,22 +2,28 @@
 
 # script used to release package on yujin buildbot, using yujin rosdistro
 
-if [ $# -ne 2 ]; then
+if [ $# -lt 2 ]; then
     echo "Usage : $0 <distro> <package>"
     echo "This script should always be run in an interactive shell"
     echo "It allows you to release a package in yujin private collection"
     exit 127
 fi
 
+#distribution ( and track )
 DISTRO=$1
+#package name
 PKG=$2
+#useful for --edit for example
+EXTRA=$3
 
 #Import ROS rosdep to be able to resolve public dependencies
 # AlexV - this is still magic for me
 PWD=`pwd`
 rosdep-generator/rosdep-generator --distro indigo
 echo "Executing next steps..."
+set -x
 sudo sh -c "echo \"yaml file://$PWD/ros-rosdistro-indigo.yaml indigo\" > /etc/ros/rosdep/sources.list.d/90-ros-rosdistro-$DISTRO.list"
+set +x
 rosdep update
 echo "Done."
 
@@ -25,9 +31,18 @@ echo "Done."
 export ROSDISTRO_INDEX_URL=https://raw.githubusercontent.com/yujinrobot/rosdistro/master/index.yaml
 
 #Doing the actual release
-bloom-release --rosdistro $DISTRO --track $DISTRO $PKG
+bloom-release --rosdistro $DISTRO --track $DISTRO $PKG $EXTRA
 
-#reverting rosdep changes
+#GENERATING NEW ROSDEP
+#TODO : use rosdep generator to generate a new rosdep there https://github.com/yujinrobot/rosdistro/blob/master/rosdep/yujinrobot-rosdistro-indigo.yaml
+# Maybe doing a pull request, bloom style ? https://github.com/mikepurvis/rosdep-generator/issues/1 => investigate how ros-buildfarm does it...
+
+echo "Reverting rosdep changes..."
+set -x
 sudo rm /etc/ros/rosdep/sources.list.d/90-ros-rosdistro-$DISTRO.list
+set +x
+rosdep update
+echo "Done."
+
 
 
