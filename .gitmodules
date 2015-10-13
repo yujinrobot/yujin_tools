@@ -1,0 +1,3 @@
+[submodule "scripts/rosdep-generator"]
+	path = scripts/rosdep-generator
+	url = https://github.com/mikepurvis/rosdep-generator.git

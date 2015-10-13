@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# script used to release package on yujin buildbot, using yujin rosdistro
+
+if [ $# -ne 2 ]; then
+    echo "Usage : $0 <distro> <package>"
+    echo "This script should always be run in an interactive shell"
+    echo "It allows you to release a package in yujin private collection"
+    exit 127
+fi
+
+DISTRO=$1
+PKG=$2
+
+#Import ROS rosdep to be able to resolve public dependencies
+# AlexV - this is still magic for me
+PWD=`pwd`
+rosdep-generator/rosdep-generator --distro indigo
+echo "Executing next steps..."
+sudo sh -c "echo \"yaml file://$PWD/ros-rosdistro-indigo.yaml indigo\" > /etc/ros/rosdep/sources.list.d/90-ros-rosdistro-$DISTRO.list"
+rosdep update
+echo "Done."
+
+# Specifying rosdistro
+export ROSDISTRO_INDEX_URL=https://raw.githubusercontent.com/yujinrobot/rosdistro/master/index.yaml
+
+#Doing the actual release
+bloom-release --rosdistro $DISTRO --track $DISTRO $PKG
+
+#reverting rosdep changes
+sudo rm /etc/ros/rosdep/sources.list.d/90-ros-rosdistro-$DISTRO.list
+
+
