@@ -4,3 +4,4 @@
 - git: {local-name: dslam, version: gopher, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
 - git: {local-name: dslam_msgs, version: gopher, uri: 'https://bitbucket.org/yujinrobot/dslam_msgs.git'}
 - git: {local-name: dslam_desktop, version: gopher, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
+- git: {local-name: qglv_toolkit, version: indigo, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
