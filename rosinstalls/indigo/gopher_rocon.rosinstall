@@ -32,7 +32,8 @@
 {'git': {'local-name': 'flask-ext-catkin', 'version': 'indigo-devel', 'uri': 'https://github.com/asmodehn/flask-ext-catkin.git'}},
 {'git': {'local-name': 'rostful-node', 'version': 'indigo-devel', 'uri': 'https://github.com/asmodehn/rostful-node.git'}},
 
-#Elevator Integration
+# Door and Elevator Integration
+{'git': {'local-name': 'door_interactions', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/door_interactions.git'}},
 {'git': {'local-name': 'elevator_interactions', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}},
-
+{'git': {'local-name': 'environment_interactions_msgs', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}},
 ]
