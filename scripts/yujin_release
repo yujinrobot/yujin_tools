@@ -19,7 +19,8 @@ EXTRA=$3
 #Import ROS rosdep to be able to resolve public dependencies
 # AlexV - this is still magic for me
 PWD=`pwd`
-rosdep-generator/rosdep-generator --distro indigo
+rosdep-generator --distro indigo
+
 echo "Executing next steps..."
 set -x
 sudo sh -c "echo \"yaml file://$PWD/ros-rosdistro-indigo.yaml indigo\" > /etc/ros/rosdep/sources.list.d/90-ros-rosdistro-$DISTRO.list"
