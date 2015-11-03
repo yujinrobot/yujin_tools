@@ -3,6 +3,7 @@
 - git: {local-name: downsampler, version: indigo-devel, uri: 'https://github.com/yujinrobot/downsampler.git'}
 - git: {local-name: obstacle_detection, version: indigo, uri: 'https://bitbucket.org/yujinrobot/obstacle_detection.git'}
 - git: {local-name: gopher_navigation, version: indigo-devel, uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
+- git: {local-name: dslam_msgs, version: gopher, uri: 'https://bitbucket.org/yujinrobot/dslam_msgs.git'}
 - git: {local-name: gopher_msgs, version: indigo, uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
 - git: {local-name: depth_calibration, version: indigo, uri: 'https://github.com/yujinrobot/depth_calibration.git'}
 - git: {local-name: yujin_ocs, version: indigo-devel, uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
