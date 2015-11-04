@@ -20,6 +20,7 @@
 {'git': {'local-name': 'world_canvas_msgs', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas_msgs.git'}},
 
 # Gopher
+{'git': {'local-name': 'dslam_msgs', 'version':'indigo', 'uri': 'https://bitbucket.org/yujinrobot/dslam_msgs.git'}},
 {'git': {'local-name': 'gopher_msgs', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}},
 {'git': {'local-name': 'somanet_msgs', 'version': 'indigo', 'uri': 'https://github.com/yujinrobot/somanet_msgs.git'}},
 {'git': {'local-name': 'gopher_rapps', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}},
