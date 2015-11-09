@@ -18,7 +18,14 @@
 {'git': {'local-name': 'ar_track_alvar', 'version': 'modifications', 'uri': 'https://github.com/yujinrobot/ar_track_alvar.git'}},
 
 # added until fixed version has been released
-{'git': {'local-name': 'audio_common', 'version': 'hydro-devel', 'uri': 'https://github.com/yujinrobot/audio_common.git'}}
+{'git': {'local-name': 'audio_common', 'version': 'gopher', 'uri': 'https://github.com/yujinrobot/audio_common.git'}},
+
+# until dynamic diagnostics is in and approved
+# - https://github.com/ros/diagnostics/pull/43
+# - https://github.com/ros/common_msgs/pull/80
+{'git': {'local-name': 'diagnostics', 'version': 'add_diagnostics', 'uri': 'https://github.com/heuristicus/diagnostics.git'}},
+{'git': {'local-name': 'common_msgs', 'version': 'indigo-devel', 'uri': 'https://github.com/heuristicus/common_msgs.git'}},
+
 
 # Unused, but we might bring in
 # {'git': {'local-name': 'capabilities', 'version': 'master', 'uri': 'https://github.com/osrf/capabilities.git'}},
