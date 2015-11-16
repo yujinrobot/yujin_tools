@@ -9,3 +9,5 @@
 - git: {local-name: yujin_ocs, version: indigo-devel, uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
 - git: {local-name: yocs_msgs, version: indigo-devel, uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
 - git: {local-name: depthimage_to_laserscan, version: indigo-devel, uri: 'https://github.com/AlexReimann/depthimage_to_laserscan.git'}
+- git: {local-name: somanet_msgs, version: indigo, uri: 'https://github.com/yujinrobot/somanet_msgs.git'}
+
