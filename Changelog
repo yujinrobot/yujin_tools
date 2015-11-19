@@ -1,3 +1,5 @@
+0.2.100
+ - optional internal/external server for groot binaries.
 0.2.98
  - source environment before install rosdeps on groot_binaries.
 0.2.97

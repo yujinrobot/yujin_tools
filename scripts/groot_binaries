@@ -45,6 +45,7 @@ show_help ()
   echo ""
   echo "    Options:"
   echo "        --help            : this help message"
+  echo "        --external        : use the external server instead of the internal one"
   echo "        --install-rosdeps : install all rosdeps required by the groot binary installspace"
   echo ""
   echo "    Admin Options:"
@@ -89,7 +90,7 @@ fi
 
 if [ ! -z "$PUSH" ]; then
     echo ""
-    echo "Pushing changes to the file server."
+    echo "Pushing changes to the file server '${remote_dir}'."
     # Need to automate this script on jenkins.
     #echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
     #read answer
