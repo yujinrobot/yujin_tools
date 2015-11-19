@@ -12,7 +12,7 @@
 # Tuple : arm-cubie-linux-gnueabihf
 # Sysroot : /opt/buildroot
 #               /toolchain
-#               /arm-cubie-linux-gnueabihf-4.8.3-glibc-2.18
+#               /arm-cubie-linux-gnueabihf-4.8.3-glibc-2.19
 #               /arm-cubie-linux-gnueabihf
 #               /sysroot
 ###############################################################################
@@ -20,7 +20,7 @@
 # Some useful custom variables that uniquely define this toolchain module
 set(TOOLCHAIN_FAMILY "buildroot" CACHE STRING "Convenient grouping identifier for collections of toolchains (e.g. ubuntu, nexell, buildroot, sourcery).")
 set(TOOLCHAIN_TUPLE "arm-cubie-linux-gnueabihf" CACHE STRING "Toolchain signature identifying cpu-vendor-platform-clibrary.")
-set(TOOLCHAIN_ROOT "/opt/buildroot/toolchain/arm-cubie-linux-gnueabihf-4.8.3-glibc-2.18" CACHE STRING "Root of the installed toolchain")
+set(TOOLCHAIN_ROOT "/opt/buildroot/toolchain/arm-cubie-linux-gnueabihf-4.8.3-glibc-2.19" CACHE STRING "Root of the installed toolchain")
 set(TOOLCHAIN_SYSROOT "${TOOLCHAIN_ROOT}/${TOOLCHAIN_TUPLE}/sysroot" CACHE STRING "Root of the target development environment (libraries, headers etc).")
 #set(TOOLCHAIN_INSTALL_PREFIX "${TOOLCHAIN_SYSROOT}/usr" CACHE STRING "Preferred install location when using the toolchain.")
 set(TOOLCHAIN_NAME_PREFIX "${TOOLCHAIN_ROOT}/bin/${TOOLCHAIN_TUPLE}-")
