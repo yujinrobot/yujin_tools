@@ -15,9 +15,9 @@
 # {'git': {'local-name': 'rqt_capabilities', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rqt_capabilities.git'}},
 
 # WKF (World Canvas Framework)
-{'git': {'local-name': 'world_canvas', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas.git'}},
-{'git': {'local-name': 'world_canvas_libs', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas_libs.git'}},
-{'git': {'local-name': 'world_canvas_msgs', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas_msgs.git'}},
+#{'git': {'local-name': 'world_canvas', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas.git'}},
+#{'git': {'local-name': 'world_canvas_libs', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas_libs.git'}},
+#{'git': {'local-name': 'world_canvas_msgs', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas_msgs.git'}},
 
 # Gopher
 {'git': {'local-name': 'dslam_msgs', 'version':'indigo', 'uri': 'https://bitbucket.org/yujinrobot/dslam_msgs.git'}},
