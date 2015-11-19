@@ -15,6 +15,10 @@ case $i in
     INSTALL_ROSDEPS=1
     shift
     ;;
+    --external)
+    EXTERNAL=1
+    shift
+    ;;
     --push)
     PUSH=1
     shift
@@ -56,10 +60,13 @@ fi
 
 export local_dir=/opt/yujin  # this copies the indigo folder
 
-#export remote_url=files@files.yujin.com
-#export remote_dir=${remote_url}:shared/repos/installspaces/yujin
-export remote_url=files@files.yujinrobot.com
-export remote_dir=${remote_url}:rsync_repositories/yujin
+if [ ! -z "$EXTERNAL" ]; then
+  export remote_url=files@files.yujinrobot.com
+  export remote_dir=${remote_url}:rsync_repositories/yujin
+else
+  export remote_url=files@files.yujin.com
+  export remote_dir=${remote_url}:shared/installspaces/yujin
+fi
 
 # Options
 # --delete    : files from the destination directories
