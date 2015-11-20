@@ -1,6 +1,6 @@
 # rosinstalls indexed multiply below
 _dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam.rosinstall'
-_arm_bootstrap: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/arm_bootstrap.rosinstall'
+_dslam_bootstrap: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_bootstrap.rosinstall'
 _catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
 _yujin_navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/yujin_navigation.rosinstall'
 
@@ -27,7 +27,7 @@ android_interactions: 'https://raw.githubusercontent.com/rosjava/rosjava/indigo/
 
 # arm (mostly cleaning robot)
 arm_3rdparty: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/arm_3rdparty.rosinstall'
-arm_bootstrap: [catkin, _arm_bootstrap, yaml_cpp, respawn]
+arm_bootstrap: [catkin, _dslam_bootstrap, yaml_cpp, respawn]
 arm_dslam_cubie: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/arm_dslam_cubie.rosinstall'
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 
