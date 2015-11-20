@@ -1,0 +1,5 @@
+# this is for cross compiled dslam installations
+- git: {local-name: dslam_arm, version: a20, uri: 'https://bitbucket.org/yujinrobot/dslam_arm.git'}
+- git: {local-name: dslam, version: einstein, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
+- git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
+- git: {local-name: nanomsg, version: indigo, uri: 'https://github.com/stonier/nanomsg.git'}

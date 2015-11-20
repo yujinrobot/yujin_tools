@@ -1,8 +1,6 @@
 # rosinstalls indexed multiply below
 _dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam.rosinstall'
 _arm_bootstrap: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/arm_bootstrap.rosinstall'
-_dslam_nexell: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_nexell.rosinstall'
-_dslam_cubie: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_cubie.rosinstall'
 _catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
 _yujin_navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/yujin_navigation.rosinstall'
 
@@ -28,10 +26,9 @@ android_core: 'https://raw.githubusercontent.com/rosjava/rosjava/indigo/android_
 android_interactions: 'https://raw.githubusercontent.com/rosjava/rosjava/indigo/android_interactions.rosinstall'
 
 # arm (mostly cleaning robot)
-arm_3rdparty: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_3rdparty.rosinstall'
-arm_bootstrap: [catkin, _arm_bootstrap, yaml_cpp]
-dslam_cubie: [_dslam, _dslam_cubie, respawn]
-dslam_nexell: [_dslam, _dslam_nexell, respawn]
+arm_3rdparty: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/arm_3rdparty.rosinstall'
+arm_bootstrap: [catkin, _arm_bootstrap, yaml_cpp, respawn]
+arm_dslam_cubie: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/arm_dslam_cubie.rosinstall'
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 
 # gopher
@@ -53,7 +50,3 @@ rosjava: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava.rosinstall'
 rosjava_minimal: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_minimal.rosinstall'
 rosjava_messages: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_messages.rosinstall'
 world_canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/world_canvas.rosinstall'
-
-# legacy
-dslam_bootstrap: [catkin, _arm_bootstrap, yaml_cpp]
-dslam_3rdparty: [arm_3rdparty]
