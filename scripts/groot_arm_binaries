@@ -36,12 +36,12 @@ done
 show_help ()
 {
   echo ""
-  echo "Pulls the installspace from the server to /opt/yujin/indigo."
+  echo "Pulls the installspace from the server to /opt/yujin/indigo/arm."
   echo "Make sure you call this with sudo or set the correct permissions"
   echo "on /opt/yujin."
   echo ""
   echo "    Usage:"
-  echo "        sudo groot_binaries"
+  echo "        sudo groot_arm_binaries"
   echo ""
   echo "    Options:"
   echo "        --help            : this help message"
@@ -59,15 +59,14 @@ if [ ! -z "$SHOW_HELP" ]; then
   exit 0
 fi
 
-# put the <rosdistro> folder here, should eventually move it to /opt/yujin/amd64
-export local_dir=/opt/yujin
+export local_dir=/opt/yujin/arm  # this copies the indigo folder
 
 if [ ! -z "$EXTERNAL" ]; then
   export remote_url=files@files.yujinrobot.com
-  export remote_dir=${remote_url}:rsync_repositories/yujin/amd64
+  export remote_dir=${remote_url}:rsync_repositories/yujin/arm
 else
   export remote_url=files@files.yujin.com
-  export remote_dir=${remote_url}:shared/installspaces/yujin/amd64
+  export remote_dir=${remote_url}:shared/installspaces/yujin/arm
 fi
 
 # Options
