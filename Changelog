@@ -1,3 +1,6 @@
+0.2.102
+ - add the groot_arm_binaries script
+ - shift groot_binaries rsync location to yujin/amd64/indigo
 0.2.101
  - update latest cubie toolchain now using glibc 2.19
 0.2.100
