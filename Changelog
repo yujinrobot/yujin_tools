@@ -1,3 +1,14 @@
+0.3.0
+ - shiny new release
+0.2.103
+ - eliminate old binary scripts
+0.2.102
+ - add the groot_arm_binaries script
+ - shift groot_binaries rsync location to yujin/amd64/indigo
+0.2.101
+ - update latest cubie toolchain now using glibc 2.19
+0.2.100
+ - optional internal/external server for groot binaries.
 0.2.98
  - source environment before install rosdeps on groot_binaries.
 0.2.97

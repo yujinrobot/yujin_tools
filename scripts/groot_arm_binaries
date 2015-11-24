@@ -15,6 +15,10 @@ case $i in
     INSTALL_ROSDEPS=1
     shift
     ;;
+    --external)
+    EXTERNAL=1
+    shift
+    ;;
     --push)
     PUSH=1
     shift
@@ -32,15 +36,16 @@ done
 show_help ()
 {
   echo ""
-  echo "Pulls the installspace from the server to /opt/yujin/indigo."
+  echo "Pulls the installspace from the server to /opt/yujin/indigo/arm."
   echo "Make sure you call this with sudo or set the correct permissions"
   echo "on /opt/yujin."
   echo ""
   echo "    Usage:"
-  echo "        sudo groot_binaries"
+  echo "        sudo groot_arm_binaries"
   echo ""
   echo "    Options:"
   echo "        --help            : this help message"
+  echo "        --external        : use the external server instead of the internal one"
   echo "        --install-rosdeps : install all rosdeps required by the groot binary installspace"
   echo ""
   echo "    Admin Options:"
@@ -54,16 +59,22 @@ if [ ! -z "$SHOW_HELP" ]; then
   exit 0
 fi
 
-export remote_url=files@files.yujin.com
-export local_dir=/opt/yujin  # this copies the indigo folder
-export remote_dir=${remote_url}:shared/repos/installspaces/yujin
+export local_dir=/opt/yujin/arm  # this copies the indigo folder
+
+if [ ! -z "$EXTERNAL" ]; then
+  export remote_url=files@files.yujinrobot.com
+  export remote_dir=${remote_url}:rsync_repositories/yujin/arm
+else
+  export remote_url=files@files.yujin.com
+  export remote_dir=${remote_url}:shared/installspaces/yujin/arm
+fi
 
 # Options
 # --delete    : files from the destination directories
 # --recursive : recurse into directories
 # --links     : copy symlinks as symlinks
 
-export OPTIONS="--delete --recursive --links --verbose"
+export OPTIONS="--delete --recursive --links --verbose --compress"
 #EXCLUDES=(
 #  --exclude '*.pyc'
 #)
@@ -72,13 +83,14 @@ if [ ! -z "$INSTALL_ROSDEPS" ]; then
     echo ""
     echo "Installing all rosdeps required by the binaries installspace in ${local_dir}/indigo"
     echo ""
+    source ${local_dir}/indigo/setup.bash
     rosdep install -r --default-yes --from-paths ${local_dir}/indigo --ignore-src
     exit 0   
 fi
 
 if [ ! -z "$PUSH" ]; then
     echo ""
-    echo "Pushing changes to the file server."
+    echo "Pushing changes to the file server '${remote_dir}'."
     # Need to automate this script on jenkins.
     #echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
     #read answer
