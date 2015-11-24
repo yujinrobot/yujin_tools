@@ -17,13 +17,12 @@ PKG=$2
 EXTRA=$3
 
 #Import ROS rosdep to be able to resolve public dependencies
-# AlexV - this is still magic for me
 PWD=`pwd`
-rosdep-generator --distro indigo
+rosdep-generator --distro $DISTRO
 
 echo "Executing next steps..."
 set -x
-sudo sh -c "echo \"yaml file://$PWD/ros-rosdistro-indigo.yaml indigo\" > /etc/ros/rosdep/sources.list.d/90-ros-rosdistro-$DISTRO.list"
+sudo sh -c "echo \"yaml file://$PWD/ros-rosdistro-$DISTRO.yaml $DISTRO\" > /etc/ros/rosdep/sources.list.d/90-ros-rosdistro-$DISTRO.list"
 set +x
 rosdep update
 echo "Done."
@@ -33,10 +32,6 @@ export ROSDISTRO_INDEX_URL=https://raw.githubusercontent.com/yujinrobot/rosdistr
 
 #Doing the actual release
 bloom-release --rosdistro $DISTRO --track $DISTRO $PKG $EXTRA
-
-#GENERATING NEW ROSDEP
-#TODO : use rosdep generator to generate a new rosdep there https://github.com/yujinrobot/rosdistro/blob/master/rosdep/yujinrobot-rosdistro-indigo.yaml
-# Maybe doing a pull request, bloom style ? https://github.com/mikepurvis/rosdep-generator/issues/1 => investigate how ros-buildfarm does it...
 
 echo "Reverting rosdep changes..."
 set -x

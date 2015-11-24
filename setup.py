@@ -34,7 +34,7 @@ setup(name='yujin_tools',
            'scripts/yujin_tools_settings',
            'scripts/yujin_list_dirs_by_size',
            'scripts/yujin_list_git_branches',
-           'scripts/rosdep-generator/rosdep-generator',
+           'scripts/rosdep-generator',
            'scripts/yujin_release',
       ],
       package_data = {'yujin_tools': [
