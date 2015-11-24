@@ -34,6 +34,11 @@
 #
 #    arm_bootstrap: [_catkin, _dslam_bootstrap, yaml_cpp, respawn]
 #
+# Adding Index Key-Value Pairs
+# ============================
+# 
+# Just make a pull request and poke Daniel to look at it.
+#
 ###############################################################################
 
 # rosinstalls indexed multiply below
