@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# script used to release package on yujin buildbot, using yujin rosdistro
+
+if [ $# -lt 2 ]; then
+    echo "Usage : $0 <distro> <package>"
+    echo "This script should always be run in an interactive shell"
+    echo "It allows you to release a package in yujin private collection"
+    exit 127
+fi
+
+#distribution ( and track )
+DISTRO=$1
+#package name
+PKG=$2
+#useful for --edit for example
+EXTRA=$3
+
+#Import ROS rosdep to be able to resolve public dependencies
+PWD=`pwd`
+rosdep-generator --distro $DISTRO
+
+echo "Executing next steps..."
+set -x
+sudo sh -c "echo \"yaml file://$PWD/ros-rosdistro-$DISTRO.yaml $DISTRO\" > /etc/ros/rosdep/sources.list.d/90-ros-rosdistro-$DISTRO.list"
+set +x
+rosdep update
+echo "Done."
+
+# Specifying rosdistro
+export ROSDISTRO_INDEX_URL=https://raw.githubusercontent.com/yujinrobot/rosdistro/master/index.yaml
+
+#Doing the actual release
+bloom-release --rosdistro $DISTRO --track $DISTRO $PKG $EXTRA
+
+echo "Reverting rosdep changes..."
+set -x
+sudo rm /etc/ros/rosdep/sources.list.d/90-ros-rosdistro-$DISTRO.list
+set +x
+rosdep update
+echo "Done."
+
+
+
