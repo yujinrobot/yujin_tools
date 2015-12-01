@@ -25,6 +25,8 @@
 {'git': {'local-name': 'somanet_msgs', 'version': 'indigo', 'uri': 'https://github.com/yujinrobot/somanet_msgs.git'}},
 {'git': {'local-name': 'gopher_rapps', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}},
 {'git': {'local-name': 'gopher_rocon', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_rocon.git'}},
+{'git': {'local-name': 'gopher_web_ui', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}},
+
 {'git': {'local-name': 'gopher_crazy_hospital', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}},
 
 # Rostful and Celeros
