@@ -38,10 +38,10 @@
 {'git': {'local-name': 'door_interactions', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/door_interactions.git'}},
 {'git': {'local-name': 'elevator_interactions', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}},
 {'git': {'local-name': 'environment_interactions_msgs', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}},
-]
 
 # Temporary Forks awaiting upstream pulls
 # qt_gui_core
 #  - https://github.com/ros-visualization/qt_gui_core/pull/61
 #  - https://github.com/ros-visualization/qt_gui_core/pull/60
 {'git': {'local-name': 'qt_gui_core', 'version': 'gopher', 'uri': 'https://github.com/heuristicus/qt_gui_core.git'}},
+]
