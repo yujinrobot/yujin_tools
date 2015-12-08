@@ -68,7 +68,7 @@ def _parse_args(args=sys.argv[1:]):
         options.jobs = common.good_number_of_jobs()
     options.cmake_args = cmake_args
     options.make_args = unknown_args + make_args
-    if options.install and options.strip:
+    if options.strip:
       options.target = "install/strip"
     return options
 
@@ -120,6 +120,8 @@ def make_isolated_main():
         cmake_args=args.cmake_args,
         make_args=args.make_args
     )
+    # this is a really fugly way of building a specific target after all else has been built
+    # (and rebuilt), usually this is enough as the check of already built packages is quick
     if args.target:
         env = os.environ.copy()
         cmd = ['make', args.target]
@@ -131,7 +133,13 @@ def make_isolated_main():
                 make_paths.append(os.path.join(build_path, package))
         else:
             for (unused_path, package) in topological_order_packages(packages):
-                make_paths.append(os.path.join(build_path, package.name))
+	        # 3rd party builds put make targets under an install directory
+	        # catkin package builds put make targets under the package name
+	        # why? no bloody idea, but just detect what is what here
+	        third_party_build_path = os.path.join(build_path, package.name, 'install')
+	        catkin_build_path = os.path.join(build_path, package.name)
+	        package_build_path = third_party_build_path if os.path.exists(third_party_build_path) else catkin_build_path
+                make_paths.append(package_build_path)
         for make_path in make_paths:
             builder.print_command_banner(cmd, make_path, color=not args.no_color)
             if args.no_color:
