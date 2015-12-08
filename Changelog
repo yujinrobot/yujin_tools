@@ -1,4 +1,4 @@
-0.3.3
+0.3.4
  - yujin_make_isolated gets a --strip option
 0.3.2
  - yujin_make gets a --strip option
