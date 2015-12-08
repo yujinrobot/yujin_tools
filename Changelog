@@ -1,3 +1,5 @@
+0.3.2
+ - yujin_make gets a --strip option
 0.3.1
  - yujin package release script
 0.3.0
