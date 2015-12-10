@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+
+###########################
+# Functions
+###########################
+
+function contains () {
+  local e
+  for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
+  return 1
+}
+
 ###########################
 # Command Line
 ###########################
@@ -61,16 +72,16 @@ else
   GROOT=/opt/groot
 fi
 
-ALL_REPOS=("ecto" "ecl" "dslam" "navi" "boot" "gopher" "concert" "desktop")
+ALL_REPOS=("ecto" "ecl" "dslam" "navi" "bootstrap" "gopher" "concert" "desktop")
 declare -A ALL_REPO_KEYS
 declare -A ALL_UNDERLAYS
 
-ALL_REPO_KEYS=( ["ecto"]="ecto" ["ecl"]="ecl" ["boot"]="gopher_bootstrap" ["concert"]="gopher_concert" ["navi"]="gopher_navigation" ["dslam"]="gopher_dslam" ["gopher"]="gopher" ["desktop"]="gopher_desktop" )
+ALL_REPO_KEYS=( ["ecto"]="ecto" ["ecl"]="ecl" ["bootstrap"]="gopher_bootstrap" ["concert"]="gopher_concert" ["navi"]="gopher_navigation" ["dslam"]="gopher_dslam" ["gopher"]="gopher" ["desktop"]="gopher_desktop" )
 
 E_CLOUD="${GROOT}/ecl_ws/devel;${GROOT}/ecto_ws/devel"
 DSLAM_CLOUD="${GROOT}/dslam_ws/devel;${E_CLOUD}"
 NAVI_CLOUD="${GROOT}/navi_ws/devel;${DSLAM_CLOUD}"
-BOOTSTRAP_CLOUD="${GROOT}/boot_ws/devel;${NAVI_CLOUD}"
+BOOTSTRAP_CLOUD="${GROOT}/bootstrap_ws/devel;${NAVI_CLOUD}"
 SOFTWARE_CLOUD="${GROOT}/concert_ws/devel;${BOOTSTRAP_CLOUD}"
 
 ALL_UNDERLAYS=( ["ecto"]="" ["ecl"]="" ["dslam"]="${E_CLOUD}" ["navi"]="${DSLAM_CLOUD}" ["bootstrap"]="${NAVI_CLOUD}" ["concert"]="${BOOTSTRAP_CLOUD}" ["gopher"]="${BOOTSTRAP_CLOUD}" ["desktop"]="${SOFTWARE_CLOUD}")
@@ -135,14 +146,21 @@ download_sources ()
   for repo in "${REPOS[@]}"; do
   #for ((i=0;i<${#REPOS[@]};++i)); do
     cd ${GROOT}
-    if [ -d "${GROOT}/${repo}_ws" ]; then
-      echo "  Workspace ${GROOT}/${repo}_ws already exists, skipping, remove manually or use --delete."
+    if contains ${repo} ${ALL_REPOS[@]}; then
+      if [ -d "${GROOT}/${repo}_ws" ]; then
+	echo "  Workspace ${GROOT}/${repo}_ws already exists, skipping, remove manually or use --delete."
+      else
+	echo "  Downloading ${repo}."
+	yujin_init_workspace -j5 ${repo}_ws ${ALL_REPO_KEYS[${repo}]}
+	cd ${GROOT}/${repo}_ws
+	echo "  Configuring ${repo}."
+	yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/indigo" ${INSTALL_STRING} .
+      fi
     else
-      echo "  Downloading ${repo}."
-      yujin_init_workspace -j5 ${repo}_ws ${ALL_REPO_KEYS[${repo}]}
-      cd ${GROOT}/${repo}_ws
-      echo "  Configuring ${repo}."
-      yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/indigo" ${INSTALL_STRING} .
+      echo ""
+      echo "ERROR : ${repo} is not a valid workspace, choose from"
+      echo "      :   [${ALL_REPOS[@]}]"
+      echo ""
     fi
   done
 }
@@ -153,21 +171,28 @@ update_sources ()
   for ((i=0;i<${#REPOS[@]};++i)); do
     repo=${REPOS[i]}
     repo_key=${ALL_REPO_KEYS[${repo}]}
-    if [ ! -d "${GROOT}/${repo}_ws" ]; then
-      echo "${repo} not found, redownloading."
-      cd ${GROOT}
-      echo "  Downloading ${repo}."
-      yujin_init_workspace -j5 ${repo}_ws ${repo_key}
+    if contains ${repo} ${ALL_REPOS[@]}; then
+      if [ ! -d "${GROOT}/${repo}_ws" ]; then
+	echo "${repo} not found, redownloading."
+	cd ${GROOT}
+	echo "  Downloading ${repo}."
+	yujin_init_workspace -j5 ${repo}_ws ${repo_key}
+	cd ${GROOT}/${repo}_ws
+	echo "  Configuring ${repo}."
+	yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/indigo" .
+      fi
       cd ${GROOT}/${repo}_ws
-      echo "  Configuring ${repo}."
-      yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/indigo" .
+      echo "  Updating ${repo} from ${repo_key}"
+      echo ""
+      echo "       yujin_init_workspace -j5 --merge ${repo_key}"
+      echo ""
+      yujin_init_workspace -j5 --merge ${repo_key}
+    else
+      echo ""
+      echo "ERROR : ${repo} is not a valid workspace, choose from"
+      echo "      :   [${ALL_REPOS[@]}]"
+      echo ""
     fi
-    cd ${GROOT}/${repo}_ws
-    echo "  Updating ${repo} from ${repo_key}"
-    echo ""
-    echo "       yujin_init_workspace -j5 --merge ${repo_key}"
-    echo ""
-    yujin_init_workspace -j5 --merge ${repo_key}
   done
 }
 
