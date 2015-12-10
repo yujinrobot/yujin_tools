@@ -1,47 +1,54 @@
 # == Overview ==
 #
-# Rocon stacks forked for gopher development, focus is on rocon for the robot.
+# Software for gopheri (robot, simulation and testing) development, no direct hardware dependencies here!
 [
 {'git': {'local-name': 'rocon_multimaster', 'version': 'gopher', 'uri':'https://github.com/robotics-in-concert/rocon_multimaster.git'}},
 {'git': {'local-name': 'rocon_msgs', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_msgs.git'}},
 {'git': {'local-name': 'rocon_tools', 'version': 'gopher', 'uri':'https://github.com/robotics-in-concert/rocon_tools.git'}},
 {'git': {'local-name': 'rocon_app_platform', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_app_platform.git'}},
 {'git': {'local-name': 'rocon_qt_gui', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}},
-# Experimental
-# {'git': {'local-name': 'rocon_rapps', 'version': 'indigo', 'uri': 'https://github.com/robotics-in-concert/rocon_rapps.git'}},
 
-# Unused
-# {'git': {'local-name': 'std_capabilities', 'version': 'initial_specs', 'uri': 'https://github.com/robotics-in-concert/std_capabilities.git'}},
-# {'git': {'local-name': 'rqt_capabilities', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rqt_capabilities.git'}},
-
-# WKF (World Canvas Framework)
-#{'git': {'local-name': 'world_canvas', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas.git'}},
-#{'git': {'local-name': 'world_canvas_libs', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas_libs.git'}},
-#{'git': {'local-name': 'world_canvas_msgs', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas_msgs.git'}},
-
-# Gopher
+# Messages
 {'git': {'local-name': 'dslam_msgs', 'version':'indigo', 'uri': 'https://bitbucket.org/yujinrobot/dslam_msgs.git'}},
 {'git': {'local-name': 'gopher_msgs', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}},
 {'git': {'local-name': 'somanet_msgs', 'version': 'indigo', 'uri': 'https://github.com/yujinrobot/somanet_msgs.git'}},
-{'git': {'local-name': 'gopher_rapps', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}},
-{'git': {'local-name': 'gopher_rocon', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_rocon.git'}},
-{'git': {'local-name': 'gopher_web_ui', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}},
+{'git': {'local-name': 'environment_interactions_msgs', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}},
 
+# Gopher
+{'git': {'local-name': 'gopher_rapps', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}},
+{'git': {'local-name': 'gopher_common', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_rocon.git'}},
+{'git': {'local-name': 'gopher_web_ui', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}},
 {'git': {'local-name': 'gopher_crazy_hospital', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}},
+{'git': {'local-name': 'gopher_desktop', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}},
 
 # Rostful and Celeros
 {'git': {'local-name': 'rostful', 'version': 'indigo-devel', 'uri': 'https://github.com/asmodehn/rostful.git'}},
 {'git': {'local-name': 'celeros', 'version': 'indigo-devel', 'uri': 'https://github.com/asmodehn/celeros.git'}},
 {'git': {'local-name': 'pyros', 'version': 'indigo-devel', 'uri': 'https://github.com/asmodehn/pyros.git'}},
 
-# Door and Elevator Integration
-{'git': {'local-name': 'door_interactions', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/door_interactions.git'}},
+# Environment Integrations
 {'git': {'local-name': 'elevator_interactions', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}},
-{'git': {'local-name': 'environment_interactions_msgs', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}},
 
-# Temporary Forks awaiting upstream pulls
+# Upstream Modifications
 # qt_gui_core
 #  - https://github.com/ros-visualization/qt_gui_core/pull/61
 #  - https://github.com/ros-visualization/qt_gui_core/pull/60
 {'git': {'local-name': 'qt_gui_core', 'version': 'gopher', 'uri': 'https://github.com/heuristicus/qt_gui_core.git'}},
+# until fixed version of audio has been released
+{'git': {'local-name': 'audio_common', 'version': 'gopher', 'uri': 'https://github.com/yujinrobot/audio_common.git'}},
+{'git': {'local-name': 'gopher_desktop', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}},
+# until dynamic diagnostics is in and approved
+# - https://github.com/ros/diagnostics/pull/43
+# - https://github.com/ros/common_msgs/pull/80
+{'git': {'local-name': 'diagnostics', 'version': 'add_diagnostics', 'uri': 'https://github.com/heuristicus/diagnostics.git'}},
 ]
+
+# Unused
+# {'git': {'local-name': 'std_capabilities', 'version': 'initial_specs', 'uri': 'https://github.com/robotics-in-concert/std_capabilities.git'}},
+# {'git': {'local-name': 'rqt_capabilities', 'version': 'master', 'uri': 'https://github.com/robotics-in-concert/rqt_capabilities.git'}},
+# {'git': {'local-name': 'door_interactions', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/door_interactions.git'}},
+# {'git': {'local-name': 'world_canvas', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas.git'}},
+# {'git': {'local-name': 'world_canvas_libs', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas_libs.git'}},
+# {'git': {'local-name': 'world_canvas_msgs', 'version': 'master', 'uri': 'https://github.com/corot/world_canvas_msgs.git'}},
+
+
