@@ -61,11 +61,19 @@ else
   GROOT=/opt/groot
 fi
 
-ALL_REPOS=("ecto" "ecl" "navi" "rocon" "dslam" "gopher" "concert")
+ALL_REPOS=("ecto" "ecl" "dslam" "navi" "boot" "gopher" "concert" "desktop")
 declare -A ALL_REPO_KEYS
 declare -A ALL_UNDERLAYS
-ALL_REPO_KEYS=( ["ecto"]="ecto" ["ecl"]="ecl" ["rocon"]="gopher_rocon" ["concert"]="gopher_concert" ["navi"]="gopher_navigation" ["dslam"]="gopher_dslam" ["gopher"]="gopher" )
-ALL_UNDERLAYS=( ["ecto"]="" ["ecl"]="" ["navi"]="${GROOT}/ecl_ws/devel;${GROOT}/rocon_ws/devel" ["rocon"]="" ["concert"]="${GROOT}/rocon_ws/devel" ["dslam"]="${GROOT}/ecl_ws/devel;${GROOT}/ecto_ws/devel" ["gopher"]="${GROOT}/dslam_ws/devel;${GROOT}/ecl_ws/devel;${GROOT}/navi_ws/devel;${GROOT}/rocon_ws/devel;${GROOT}/ecto_ws/devel" )
+
+ALL_REPO_KEYS=( ["ecto"]="ecto" ["ecl"]="ecl" ["boot"]="gopher_bootstrap" ["concert"]="gopher_concert" ["navi"]="gopher_navigation" ["dslam"]="gopher_dslam" ["gopher"]="gopher" ["desktop"]="gopher_desktop" )
+
+E_CLOUD="${GROOT}/ecl_ws/devel;${GROOT}/ecto_ws/devel"
+DSLAM_CLOUD="${GROOT}/dslam_ws/devel;${E_CLOUD}"
+NAVI_CLOUD="${GROOT}/navi_ws/devel;${DSLAM_CLOUD}"
+BOOTSTRAP_CLOUD="${GROOT}/boot_ws/devel;${NAVI_CLOUD}"
+SOFTWARE_CLOUD="${GROOT}/concert_ws/devel;${BOOTSTRAP_CLOUD}"
+
+ALL_UNDERLAYS=( ["ecto"]="" ["ecl"]="" ["dslam"]="${E_CLOUD}" ["navi"]="${DSLAM_CLOUD}" ["bootstrap"]="${NAVI_CLOUD}" ["concert"]="${BOOTSTRAP_CLOUD}" ["gopher"]="${BOOTSTRAP_CLOUD}" ["desktop"]="${SOFTWARE_CLOUD}")
 
 REPOS=()
 
@@ -94,7 +102,7 @@ show_help ()
   echo "        groot_sources <options>"
   echo "        groot_sources <options> <space separated list of repos>"
   echo ""
-  echo "    Repos: ecto ecl navi rocon dslam gopher concert"
+  echo "    Repos: ecto ecl dslam navi bootstrap gopher concert desktop"
   echo ""
   echo "    Options:"
   echo "        --help                                          : show this help message"

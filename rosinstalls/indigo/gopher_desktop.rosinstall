@@ -1,0 +1,8 @@
+# == Overview ==
+#
+# Software for testing, simulation, bootstrapping robot/simulation/concert/desktop software, no direct hardware dependencies here!
+#
+# Bundling everything in gopher_desktop for now, but this could be split up.
+[
+{'git': {'local-name': 'gopher_desktop', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}},
+]

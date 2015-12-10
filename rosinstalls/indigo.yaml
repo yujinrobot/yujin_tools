@@ -77,7 +77,8 @@ pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 # gopher
 gopher: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher.rosinstall'
 gopher_concert: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert.rosinstall'
-gopher_rocon: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_rocon.rosinstall'
+gopher_bootstrap: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_bootstrap.rosinstall'
+gopher_desktop: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_desktop.rosinstall'
 gopher_navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_navigation.rosinstall'
 gopher_dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_dslam.rosinstall'
 
