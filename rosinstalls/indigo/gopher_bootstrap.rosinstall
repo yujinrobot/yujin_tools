@@ -46,6 +46,7 @@
 # - https://github.com/ros/diagnostics/pull/43
 # - https://github.com/ros/common_msgs/pull/80
 {'git': {'local-name': 'diagnostics', 'version': 'add_diagnostics', 'uri': 'https://github.com/heuristicus/diagnostics.git'}},
+{'git': {'local-name': 'common_msgs', 'version': 'indigo-devel', 'uri': 'https://github.com/heuristicus/common_msgs.git'}},
 ]
 
 # Unused
