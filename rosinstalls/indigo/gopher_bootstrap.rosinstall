@@ -10,7 +10,6 @@
 [
 
 # Messages
-{'git': {'local-name': 'dslam_msgs', 'version':'indigo', 'uri': 'https://bitbucket.org/yujinrobot/dslam_msgs.git'}},
 {'git': {'local-name': 'gopher_msgs', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}},
 {'git': {'local-name': 'rocon_msgs', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_msgs.git'}},
 {'git': {'local-name': 'somanet_msgs', 'version': 'indigo', 'uri': 'https://github.com/yujinrobot/somanet_msgs.git'}},
