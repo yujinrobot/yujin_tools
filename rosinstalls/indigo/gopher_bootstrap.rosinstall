@@ -22,7 +22,7 @@
 
 # Gopher
 {'git': {'local-name': 'gopher_rapps', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}},
-{'git': {'local-name': 'gopher_bootstrap', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_bootstrap.git'}},
+{'git': {'local-name': 'gopher_common', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_common.git'}},
 {'git': {'local-name': 'gopher_web_ui', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}},
 {'git': {'local-name': 'gopher_crazy_hospital', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}},
 
