@@ -144,7 +144,8 @@ def install_rosdeps(base_path, source_path, rosdistro, no_color):
     cmd = ['rosdep', 'install', '-r']
     underlays = config_cache.get_underlays_list_from_config_cmake(base_path)
     for underlay in underlays:
-        cmd += ['--from-paths', underlay]
+        if os.path.isdir(underlay):
+            cmd += ['--from-paths', underlay]
     cmd += ['--from-paths', source_path, '--ignore-src', '--rosdistro', rosdistro, '-y']
     env = os.environ.copy()
     try:
