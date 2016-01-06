@@ -1,3 +1,6 @@
+0.3.8
+ - groot_sync fix for gopher_meta -> gopher_robot
+ - dont bork when yujin_make installs rosdeps for non existant underlays
 0.3.7
  - groot_build fix for the new workspaces
 0.3.6

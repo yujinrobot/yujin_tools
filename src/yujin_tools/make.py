@@ -146,6 +146,8 @@ def install_rosdeps(base_path, source_path, rosdistro, no_color):
     for underlay in underlays:
         if os.path.isdir(underlay):
             cmd += ['--from-paths', underlay]
+        else:
+	    print("Not adding underlay '%s' to the rosdep search path [not found]" % underlay)
     cmd += ['--from-paths', source_path, '--ignore-src', '--rosdistro', rosdistro, '-y']
     env = os.environ.copy()
     try:
