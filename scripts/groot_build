@@ -51,7 +51,7 @@ if [ ! -z "${ROS_MASTER_URI}" ]; then
   exit 1
 fi
 
-REPOS=("ecto" "ecl" "navi" "rocon" "dslam" "gopher" "concert")
+REPOS=("ecto" "ecl" "dslam" "navi" "bootstrap" "gopher" "concert" "desktop")
 DISCOVERED_REPOS=()
 for repo in ${REPOS[*]}; do
   if [ -d "${GROOT}/${repo}_ws" ]; then
@@ -74,7 +74,7 @@ show_help ()
   echo "    Options:"
   echo "        --help                                          : this help message."
   echo "        --pre-clean                                     : pre-clean each workspace."
-  echo "        --rosdeps                                       : install workspace rosdeps only."
+  echo "        --install-rosdeps                               : install workspace rosdeps only."
   echo "        --install                                       : pass --install along with the build."
   echo "        --source-directory=<directory> | -d=<directory> : specify custom source directory"
   echo ""
