@@ -6,4 +6,7 @@
 [
 {'git': {'local-name': 'gopher_desktop', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}},
 {'git': {'local-name': 'rocon_qt_gui', 'version': 'gopher', 'uri': 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}},
+
+# Pending upstream pull request: https://github.com/ros/ros_comm/pull/722/files
+{'git': {'local-name': 'ros_comm', 'version': 'indigo-devel', 'uri': 'https://github.com/heuristicus/ros_comm.git'}},
 ]
