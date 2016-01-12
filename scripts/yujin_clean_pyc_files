@@ -1,4 +1,9 @@
 #!/bin/bash
+
+###########################
+# Help
+###########################
+
 usage()
 {
 cat <<EOF
@@ -8,32 +13,45 @@ Clean .pyc files from subdirectories. If no argument is given, cleans the
 current directory and all its subdirectories.
 
 Options:
-  -h Show this information
-  -n Dry run - show which files will be deleted by the command
+  --help    Show this information
+  --dry-run Show which files will be deleted by the command
+
+Example:
+  $0 /opt/groot/bootstrap_ws --dry-run
 
 EOF
 }
 
+###########################
+# Variable Defaults
+###########################
+
 END="-delete"
-while getopts "hn" arg; do
-    case "${arg}" in
-        h)
-            usage
-            exit
-            ;;
-        n)
-            END="" # if got the dry run arg, don't delete
-            shift
-            ;;
-        ?)
-            usage
-            exit
-            ;;
-    esac
-done
+DIR="."
+
+###########################
+# Command Line
+###########################
 
 if [ $# -eq 0 ]; then
-    find . -type f -regex .*.pyc $END
-else
-    find $1 -type f -regex .*.pyc $END
+    usage
+    exit 1
 fi
+
+for i in "$@"
+do
+case $i in
+    --help)
+    usage
+    exit 0
+    ;;
+    --dry-run)
+    END="" # if got the dry run arg, don't delete
+    ;;
+    *)
+    DIR=$i
+    ;;
+esac
+done
+
+find $DIR -type f -regex .*.pyc $END
