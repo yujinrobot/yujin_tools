@@ -1,0 +1,39 @@
+#!/bin/bash
+usage()
+{
+cat <<EOF
+usage $0 [options] [dir]
+
+Clean .pyc files from subdirectories. If no argument is given, cleans the
+current directory and all its subdirectories.
+
+Options:
+  -h Show this information
+  -n Dry run - show which files will be deleted by the command
+
+EOF
+}
+
+END="-delete"
+while getopts "hn" arg; do
+    case "${arg}" in
+        h)
+            usage
+            exit
+            ;;
+        n)
+            END="" # if got the dry run arg, don't delete
+            shift
+            ;;
+        ?)
+            usage
+            exit
+            ;;
+    esac
+done
+
+if [ $# -eq 0 ]; then
+    find . -type f -regex .*.pyc $END
+else
+    find $1 -type f -regex .*.pyc $END
+fi
