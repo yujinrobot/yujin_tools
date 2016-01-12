@@ -12,10 +12,4 @@
 
 # LIDAR driver
 {'git': {'local-name': 'rplidar_ros', 'version': 'master', 'uri': 'https://github.com/yujinrobot/rplidar_ros.git'}},
-
-# modified version of the Alvar AR tracker
-{'git': {'local-name': 'ar_track_alvar', 'version': 'modifications', 'uri': 'https://github.com/yujinrobot/ar_track_alvar.git'}},
-
-# Unused, but we might bring in
-# {'git': {'local-name': 'capabilities', 'version': 'master', 'uri': 'https://github.com/osrf/capabilities.git'}},
 ]
