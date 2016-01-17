@@ -9,7 +9,7 @@ ecl:
  - ecl_converters_lite
  - ecl_errors
  - ecl_io
- - ecl_sigslots-lite
+ - ecl_sigslots_lite
  - ecl_time_lite
  - ecl_command_line
  - ecl_concepts
