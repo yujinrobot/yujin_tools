@@ -1,6 +1,6 @@
 dslam:
  - dslam_bag
- - dslam-planner
+ - dslam_planner
 ecl:
  - ecl_build
  - ecl_license
