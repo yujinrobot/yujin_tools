@@ -1,0 +1,57 @@
+dslam:
+ - dslam_bag
+ - dslam-planner
+ecl:
+ - ecl_build
+ - ecl_license
+ - ecl_tools
+ - ecl_config
+ - ecl_console
+ - ecl_converters_lite
+ - ecl_errors
+ - ecl_io
+ - ecl_lite
+ - ecl_sigslots-lite
+ - ecl_time_lite
+ - ecl_command_line
+ - ecl_concepts
+ - ecl_containers
+ - ecl_converters
+ - ecl_core
+ - ecl_core_apps
+ - ecl_devices
+ - ecl_eigen
+ - ecl_exceptions
+ - ecl_filesystem
+ - ecl_formatters
+ - ecl_geometry
+ - ecl_ipc
+ - ecl_linear_algebra
+ - ecl_math
+ - ecl_mpl
+ - ecl_sigslots
+ - ecl_statistics
+ - ecl_streams
+ - ecl_threads
+ - ecl_time
+ - ecl_type_traits
+ - ecl_utilities
+ - ecl_manipulation
+ - ecl_manipulators
+ - ecl_mobile_robot
+ - ecl_navigation
+ - ecl
+desktop:
+ - gopher_desktop
+ - gopher_desktop_utilities
+ - gopher_stage
+ - gopher_gazebo
+bootstrap:
+ - gopher_diagnostics
+ - gopher_bootstrap
+ - gopher_configuration
+ - py_trees
+ - rocon_python_comms
+ - rocon_python_utils
+ - rocon_uri
+    
