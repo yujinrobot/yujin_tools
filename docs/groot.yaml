@@ -38,8 +38,8 @@ ecl:
 desktop:
  - gopher_desktop
  - gopher_desktop_utilities
- - gopher_stage
- - gopher_gazebo
+# - gopher_stage
+# - gopher_gazebo
 bootstrap:
  - gopher_diagnostics
  - gopher_bootstrap
