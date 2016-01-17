@@ -1,0 +1,77 @@
+#!/usr/bin/env python
+#
+# License: Unspecified
+#
+##############################################################################
+# Documentation
+##############################################################################
+
+"""
+    Building documentation for groot packages.
+"""
+
+##############################################################################
+# Imports
+##############################################################################
+
+import argparse
+import os
+import subprocess
+import sys
+import urllib2
+import urlparse
+import yaml
+
+##############################################################################
+# Methods
+##############################################################################
+
+def get_docs_database_uri():
+    return 'https://raw.github.com/yujinrobot/yujin_tools/master/docs/groot.yaml'
+
+##############################################################################
+# Classes
+##############################################################################
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Build documentation for groot packages.')
+    parser.add_argument('-w', '--workspace', action='store', required=False, default="bootstrap", help='workspace to build docs for')
+    parser.add_argument('-p', '--package', action='store', required=False, default=None, help='package to build docs for (ignores workspace setting)')
+    parser.add_argument('-u', '--upload',  action='store_true', required=False, help='upload packages to the server')
+    args = parser.parse_args()
+    print("")
+    print("*******************************************************************************")
+    print("                     Documenting the Shit")
+    print("*******************************************************************************")
+    print("* Arguments:")
+    print("*  - workspace : %s" % args.workspace)
+    print("*  - package   : %s" % args.package)
+    print("*******************************************************************************")
+    print("")
+    response = urllib2.urlopen('%s' % get_docs_database_uri())
+    doc_package_groups = yaml.load(response.read())
+    print("Workspace List : %s" % doc_package_groups.keys())
+    
+    if args.package is None:
+      try:
+	package_list = doc_package_groups[args.workspace]
+	print("Package List for '%s': %s" % (args.workspace, package_list))
+      except KeyError:
+	print("No packages to build for workspace '%s'" % args.workspace)
+    else:
+        workspace = None
+        for group, package_list in doc_package_groups.iteritems():
+	    if args.package in package_list:
+	        found = True
+	        workspace = group
+                break
+        if workspace is None:
+	    print("Package '%s' not in the docs database" % args.package)
+	    sys.exit(1)
+	command = "cd `rospack find %s`; rosdoc_lite ." % args.package
+	print("Command: %s" % command)
+	proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True, env=os.environ.copy())
+	proc_stdout = proc.communicate()[0].strip()
+	print("Output: %s" % proc_stdout)
+        #subprocess.call(["roscd", "ecl_lite"])
+      
