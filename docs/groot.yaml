@@ -41,6 +41,7 @@ desktop:
 # - gopher_stage
 # - gopher_gazebo
 bootstrap:
+ - elevator_operator
  - gopher_diagnostics
  - gopher_bootstrap
  - gopher_configuration
@@ -48,4 +49,6 @@ bootstrap:
  - rocon_python_comms
  - rocon_python_utils
  - rocon_uri
+gopher:
+ - gopher_robot
     
