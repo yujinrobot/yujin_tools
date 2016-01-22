@@ -51,4 +51,5 @@ bootstrap:
  - rocon_uri
 gopher:
  - gopher_robot
-    
+ - somanet_node
+ 
