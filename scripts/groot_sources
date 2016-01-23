@@ -76,7 +76,7 @@ ALL_REPOS=("ecto" "ecl" "dslam" "navi" "bootstrap" "gopher" "concert" "desktop")
 declare -A ALL_REPO_KEYS
 declare -A ALL_UNDERLAYS
 
-ALL_REPO_KEYS=( ["ecto"]="ecto" ["ecl"]="ecl" ["bootstrap"]="gopher_bootstrap" ["concert"]="gopher_concert" ["navi"]="gopher_navigation" ["dslam"]="gopher_dslam" ["gopher"]="gopher" ["desktop"]="gopher_desktop" )
+ALL_REPO_KEYS=( ["ecto"]="ecto-devel" ["ecl"]="ecl-devel" ["bootstrap"]="gopher_bootstrap-devel" ["concert"]="gopher_concert-devel" ["navi"]="gopher_navigation-devel" ["dslam"]="gopher_dslam-devel" ["gopher"]="gopher-devel" ["desktop"]="gopher_desktop-devel" )
 
 E_CLOUD="${GROOT}/ecl_ws/devel;${GROOT}/ecto_ws/devel"
 DSLAM_CLOUD="${GROOT}/dslam_ws/devel;${E_CLOUD}"
