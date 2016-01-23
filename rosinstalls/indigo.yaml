@@ -49,7 +49,8 @@ _yujin_navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinst
 
 # ros core
 catkin: [_catkin]
-ecto: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto.rosinstall'
+ecto-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto-devel.rosinstall'
+ecto-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto-stable.rosinstall'
 navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/navigation.rosinstall'
 yaml_cpp: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/yaml_cpp.rosinstall'
 
@@ -94,3 +95,6 @@ rosjava: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava.rosinstall'
 rosjava_minimal: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_minimal.rosinstall'
 rosjava_messages: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_messages.rosinstall'
 world_canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/world_canvas.rosinstall'
+
+# graveyarding
+ecto: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto-devel.rosinstall'
