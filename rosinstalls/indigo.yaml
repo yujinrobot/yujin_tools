@@ -56,7 +56,9 @@ yaml_cpp: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indi
 
 # yujin general
 dslam_desktop: [_dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
-ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
+ecl: [ecl-devel]
+ecl-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecl-devel.rosinstall'
+ecl-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecl-stable.rosinstall'
 hello: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/hello.rosinstall'
 navi: [_yujin_navigation]
 qt_ros: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/qt_ros.rosinstall'
@@ -97,4 +99,4 @@ rosjava_messages: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_message
 world_canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/world_canvas.rosinstall'
 
 # graveyarding
-ecto: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto-devel.rosinstall'
+ecto: [ecto-devel]
