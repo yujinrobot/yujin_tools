@@ -1,1 +1,1 @@
-- git: {local-name: navigation, version: hydro-devel, uri: 'https://github.com/ros-planning/navigation.git'}
+- git: {local-name: navigation, version: indigo-devel, uri: 'https://github.com/ros-planning/navigation.git'}

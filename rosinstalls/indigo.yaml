@@ -45,13 +45,11 @@
 _dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam.rosinstall'
 _dslam_bootstrap: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_bootstrap.rosinstall'
 _catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
-_yujin_navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/yujin_navigation.rosinstall'
 
 # ros core
 catkin: [_catkin]
 ecto-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto-devel.rosinstall'
 ecto-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto-stable.rosinstall'
-navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/navigation.rosinstall'
 yaml_cpp: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/yaml_cpp.rosinstall'
 
 # yujin general
@@ -60,11 +58,9 @@ ecl: [ecl-devel]
 ecl-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecl-devel.rosinstall'
 ecl-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecl-stable.rosinstall'
 hello: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/hello.rosinstall'
-navi: [_yujin_navigation]
 qt_ros: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/qt_ros.rosinstall'
 respawn: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/respawn.rosinstall'
 system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/indigo/system_deb_builder.rosinstall'
-yujin_navigation: [_yujin_navigation]
 
 # android
 android_complete: [android_core, android_interactions]
@@ -82,7 +78,8 @@ gopher: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo
 gopher_concert: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert.rosinstall'
 gopher_bootstrap: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_bootstrap.rosinstall'
 gopher_desktop: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_desktop.rosinstall'
-gopher_navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_navigation.rosinstall'
+gopher_navigation-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_navigation-devel.rosinstall'
+gopher_navigation-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_navigation-stable.rosinstall'
 gopher_dslam-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_dslam-devel.rosinstall'
 gopher_dslam-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_dslam-stable.rosinstall'
 
@@ -102,3 +99,4 @@ world_canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/
 # graveyarding
 ecto: [ecto-devel]
 gopher_dslam: [gopher_dslam-devel]
+gopher_navigation: [gopher_navigation-devel]
