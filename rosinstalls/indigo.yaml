@@ -83,7 +83,8 @@ gopher_concert: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstall
 gopher_bootstrap: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_bootstrap.rosinstall'
 gopher_desktop: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_desktop.rosinstall'
 gopher_navigation: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_navigation.rosinstall'
-gopher_dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_dslam.rosinstall'
+gopher_dslam-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_dslam-devel.rosinstall'
+gopher_dslam-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_dslam-stable.rosinstall'
 
 # kobuki/turtlebot
 kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki.rosinstall'
@@ -100,3 +101,4 @@ world_canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/
 
 # graveyarding
 ecto: [ecto-devel]
+gopher_dslam: [gopher_dslam-devel]

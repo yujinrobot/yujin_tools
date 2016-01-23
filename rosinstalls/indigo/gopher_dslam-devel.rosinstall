@@ -1,0 +1,10 @@
+- git: {local-name: dslam_bag, version: indigo-devel, uri: 'https://bitbucket.org/yujinrobot/dslam_bag.git'}
+- git: {local-name: dslam_msgs, version: indigo-devel, uri: 'https://bitbucket.org/yujinrobot/dslam_msgs.git'}
+- git: {local-name: dslam, version: gopher, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
+- git: {local-name: dslam_desktop, version: gopher, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
+- git: {local-name: qglv_toolkit, version: indigo-devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
+
+# open source releases, pretty stable
+# - git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
+# - git: {local-name: nanomsg, version: indigo, uri: 'https://github.com/stonier/nanomsg.git'}
+
