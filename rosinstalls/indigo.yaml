@@ -76,7 +76,8 @@ pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 # gopher
 gopher-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher-devel.rosinstall'
 gopher-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher-stable.rosinstall'
-gopher_concert: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert.rosinstall'
+gopher_concert-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert-devel.rosinstall'
+gopher_concert-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert-stable.rosinstall'
 gopher_bootstrap-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_bootstrap-devel.rosinstall'
 gopher_bootstrap-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_bootstrap-stable.rosinstall'
 gopher_desktop: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_desktop.rosinstall'
@@ -102,3 +103,7 @@ world_canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/
 ecto: [ecto-devel]
 gopher_dslam: [gopher_dslam-devel]
 gopher_navigation: [gopher_navigation-devel]
+gopher_bootstrap: [gopher_bootstrap-devel]
+gopher: [gopher-devel]
+gopher_concert: [gopher_concert-devel]
+gopher_desktop: [gopher_desktop-devel]
