@@ -1,4 +1,4 @@
 # This is for cross-compiled dslam installations.
-- git: {local-name: dslam, version: indigo, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
+- git: {local-name: dslam, version: indigo-devel, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
 - git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
 - git: {local-name: nanomsg, version: indigo, uri: 'https://github.com/stonier/nanomsg.git'}
