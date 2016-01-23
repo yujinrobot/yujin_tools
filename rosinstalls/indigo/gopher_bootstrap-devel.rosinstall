@@ -32,7 +32,7 @@
 {'git': {'local-name': 'pyros', 'version': 'indigo-devel', 'uri': 'https://github.com/asmodehn/pyros.git'}},
 
 # Environment Integrations
-{'git': {'local-name': 'elevator_interactions', 'version': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}},
+{'git': {'local-name': 'elevator_interactions', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}},
 
 # Upstream Modifications - for gopher_crazy_hospital. The rqt package really ought to be in gopher_desktop workspace!
 # qt_gui_core
