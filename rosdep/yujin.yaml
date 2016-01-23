@@ -16,8 +16,6 @@ plantuml:
   ubuntu: plantuml-yujin
 python-anyconfig:
   ubuntu: [python-anyconfig]
-python-sphinxcontrib-plantuml:
-  ubuntu: [python-sphinxcontrib-plantuml]
 python-transitions:
   ubuntu: [python-transitions]
 udev-rules-yujin:
