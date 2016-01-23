@@ -24,7 +24,7 @@
 {'git': {'local-name': 'gopher_rapps', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}},
 {'git': {'local-name': 'gopher_common', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/gopher_common.git'}},
 {'git': {'local-name': 'gopher_web_ui', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}},
-{'git': {'local-name': 'gopher_crazy_hospital', 'version-devel': 'indigo', 'uri': 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}},
+{'git': {'local-name': 'gopher_crazy_hospital', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}},
 
 # Rostful and Celeros
 {'git': {'local-name': 'rostful', 'version': 'indigo-devel', 'uri': 'https://github.com/asmodehn/rostful.git'}},
