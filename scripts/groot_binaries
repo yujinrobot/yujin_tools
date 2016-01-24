@@ -19,6 +19,14 @@ case $i in
     EXTERNAL=1
     shift
     ;;
+    --stable)
+    STABLE=1
+    shift
+    ;;
+    --devel)
+    DEVEL=1
+    shift
+    ;;
     --push)
     PUSH=1
     shift
@@ -47,6 +55,8 @@ show_help ()
   echo "        --help            : this help message"
   echo "        --external        : use the external server instead of the internal one"
   echo "        --install-rosdeps : install all rosdeps required by the groot binary installspace"
+  echo "        --stable          : work with the stable binaries"
+  echo "        --devel           : work with the devel binaries"
   echo ""
   echo "    Admin Options:"
   echo "        --push            : push local /opt/yujin/indigo installspace with the server"
@@ -54,13 +64,34 @@ show_help ()
   exit 0
 }
 
+###########################
+# Aborts
+###########################
+
+if [ -z "$STABLE" ] && [ -z "$DEVEL" ]; then
+  echo ""
+  echo "ERROR : you must set one of either --stable or --devel"
+  echo ""
+  exit 1
+fi
+
 if [ ! -z "$SHOW_HELP" ]; then
   show_help
   exit 0
 fi
 
+###########################
+# Variables
+###########################
+
+if [ ! -z "$STABLE" ]; then
+  RELEASE="stable"
+else
+  RELEASE="devel"
+fi
+
 # put the <rosdistro> folder here, should eventually move it to /opt/yujin/amd64
-export local_dir=/opt/yujin
+export local_dir=/opt/yujin/amd64
 
 if [ ! -z "$EXTERNAL" ]; then
   export remote_url=files@files.yujinrobot.com
@@ -82,10 +113,10 @@ export OPTIONS="--delete --recursive --links --verbose --compress"
 
 if [ ! -z "$INSTALL_ROSDEPS" ]; then
     echo ""
-    echo "Installing all rosdeps required by the binaries installspace in ${local_dir}/indigo"
+    echo "Installing all rosdeps required by the binaries installspace in ${local_dir}/indigo-${RELEASE}"
     echo ""
     source ${local_dir}/indigo/setup.bash
-    rosdep install -r --default-yes --from-paths ${local_dir}/indigo --ignore-src
+    rosdep install -r --default-yes --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src
     exit 0   
 fi
 
@@ -96,12 +127,12 @@ if [ ! -z "$PUSH" ]; then
     #echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
     #read answer
     #if [ "$answer" == "y" ]; then
-        rsync ${OPTIONS} ${local_dir}/indigo ${remote_dir}
+        rsync ${OPTIONS} ${local_dir}/indigo-${RELEASE} ${remote_dir}
     #else
     #    echo "Aborting."
     #fi
     echo ""
 else
-    rsync ${OPTIONS} ${remote_dir}/indigo ${local_dir}
+    rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir}
 fi
 
