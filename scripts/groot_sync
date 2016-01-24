@@ -25,16 +25,24 @@ show_help ()
   exit 0
 }
 
+if [ -d "/opt/groot/gopher_ws/src/gopher/gopher_robot/unison/" ]; then
+  PROFILES_DIR=/opt/groot/gopher_ws/src/gopher/gopher_robot/unison/
+elif [ -d "/opt/groot/gopher_stable_ws/src/gopher/gopher_robot/unison/" ]; then
+  PROFILES_DIR=/opt/groot/gopher_stable_ws/src/gopher/gopher_robot/unison/
+elif [ -d "/opt/yujin/amd64/indigo-devel/share/gopher_robot/unison/" ]; then
+  PROFILES_DIR=/opt/yujin/amd64/indigo-devel/share/gopher_robot/unison/
+elif [ -d "/opt/yujin/amd64/indigo-stable/share/gopher_robot/unison/" ]; then
+  PROFILES_DIR=/opt/yujin/amd64/indigo-stable/share/gopher_robot/unison/
+fi
+
 list_profiles()
 {
-  DIR=/opt/groot/gopher_ws/src/gopher/gopher_robot/unison/
   echo ""
-  echo "=============="
-  echo "Robot Profiles"
-  echo "=============="
+  echo "============================"
+  echo "      Robot Profiles"
+  echo "============================"
   # http://stackoverflow.com/questions/13676108/using-ls-how-can-i-list-files-without-file-extension-the-part-after-the-dot
-  
-  ls -1 ${DIR} | sed -e 's/\..*$//' | sed 's/^/  /'
+  ls -1 ${PROFILES_DIR} | sed -e 's/\..*$//' | sed 's/^/  /'
   echo ""
 }
 
@@ -55,7 +63,7 @@ fi
 GROOT=/opt/groot
 
 if [ ! -d "${GROOT}" ]; then
-  echo "No groot workspace found, use 'groot_sources' and 'groot_build' to create one."
+  echo "No groot workspace found, use 'groot_sources' to create one."
   exit 1
 fi
 
@@ -76,22 +84,22 @@ if [ ! -f ~/.unison/gopher.prf ]; then
   echo "Copying gopher unison profile."
   echo ""
   echo "from:"
-  echo "  /opt/groot/gopher_ws/src/gopher/gopher_robot/unison/gopher.prf"
+  echo "  ${PROFILES_DIR}/gopher.prf"
   echo "to:"
   echo "  ~/.unison/gopher.prf."
   echo ""
-  cp /opt/groot/gopher_ws/src/gopher/gopher_robot/unison/gopher.prf ~/.unison/
+  cp ${PROFILES_DIR}/gopher.prf ~/.unison/
 fi
 if [ ! -f ~/.unison/ignore.prf ]; then
   echo ""
   echo "Copying ignore paths unison profile."
   echo ""
   echo "from:"
-  echo "  /opt/groot/gopher_ws/src/gopher/gopher_robot/unison/ignore.prf"
+  echo "  ${PROFILES_DIR}/ignore.prf"
   echo "to:"
   echo "  ~/.unison/ignore.prf."
   echo ""
-  cp /opt/groot/gopher_ws/src/gopher/gopher_robot/unison/ignore.prf ~/.unison/
+  cp ${PROFILES_DIR}/ignore.prf ~/.unison/
 fi
 
 
@@ -100,10 +108,10 @@ if [ ! -f ~/.unison/${ROBOT}.prf ]; then
   echo "Copying robot specific unison profile."
   echo ""
   echo "from:"
-  echo "  /opt/groot/gopher_ws/src/gopher/gopher_robot/unison/${ROBOT}.prf"
+  echo "  ${PROFILES_DIR}/${ROBOT}.prf"
   echo "to:"
   echo "  ~/.unison/${ROBOT}.prf."
   echo ""
-  cp /opt/groot/gopher_ws/src/gopher/gopher_robot/unison/${ROBOT}.prf ~/.unison/
+  cp ${PROFILES_DIR}/${ROBOT}.prf ~/.unison/
 fi
 unison-gtk ${ROBOT}
