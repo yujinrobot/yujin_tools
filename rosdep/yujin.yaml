@@ -10,6 +10,8 @@ arm_buildroot_linux_gnueabi_yujin:
   ubuntu: [arm-buildroot-linux-gnueabi-4.8.3-glibc-2.18-yujin]
 arm_cubie_linux_gnueabihf_yujin:
   ubuntu: [arm-cubie-linux-gnueabihf-4.8.3-glibc-2.19-yujin]
+icons_yujin:
+  ubuntu: [icons-yujin]
 kernel_sources_2_6_32_13_yujin:
   ubuntu: [kernel-sources-2.6.32.13-yujin]
 plantuml:
