@@ -25,14 +25,14 @@ show_help ()
   exit 0
 }
 
-if [ -d "/opt/groot/gopher_ws/src/gopher/gopher_robot/unison/" ]; then
-  PROFILES_DIR=/opt/groot/gopher_ws/src/gopher/gopher_robot/unison/
-elif [ -d "/opt/groot/gopher_stable_ws/src/gopher/gopher_robot/unison/" ]; then
-  PROFILES_DIR=/opt/groot/gopher_stable_ws/src/gopher/gopher_robot/unison/
-elif [ -d "/opt/yujin/amd64/indigo-devel/share/gopher_robot/unison/" ]; then
-  PROFILES_DIR=/opt/yujin/amd64/indigo-devel/share/gopher_robot/unison/
-elif [ -d "/opt/yujin/amd64/indigo-stable/share/gopher_robot/unison/" ]; then
-  PROFILES_DIR=/opt/yujin/amd64/indigo-stable/share/gopher_robot/unison/
+if [ -d "/opt/groot/gopher_ws/src/gopher/gopher_robot/unison" ]; then
+  PROFILES_DIR=/opt/groot/gopher_ws/src/gopher/gopher_robot/unison
+elif [ -d "/opt/groot/gopher_stable_ws/src/gopher/gopher_robot/unison" ]; then
+  PROFILES_DIR=/opt/groot/gopher_stable_ws/src/gopher/gopher_robot/unison
+elif [ -d "/opt/yujin/amd64/indigo-devel/share/gopher_robot/unison" ]; then
+  PROFILES_DIR=/opt/yujin/amd64/indigo-devel/share/gopher_robot/unison
+elif [ -d "/opt/yujin/amd64/indigo-stable/share/gopher_robot/unison" ]; then
+  PROFILES_DIR=/opt/yujin/amd64/indigo-stable/share/gopher_robot/unison
 fi
 
 list_profiles()
