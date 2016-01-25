@@ -1,3 +1,5 @@
+0.4.3
+ - fix help, required option conflict in groot_binaries
 0.4.2
  - rosdep across underlay sources, not devels
 0.4.1
