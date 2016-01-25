@@ -1,3 +1,5 @@
+0.4.0
+ - groot scripts updated to handle stable/devel releases
 0.3.11
  - bugfix paths for groot_sync unison resources.
 0.3.10
