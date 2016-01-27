@@ -1,3 +1,5 @@
+0.4.7
+ - get yujin_make --install-rosdeps to reflect rosdep errors
 0.4.6
  - bugfix path in groot_binaries script
 0.4.5
