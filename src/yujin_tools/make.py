@@ -141,7 +141,7 @@ def insert_yujin_make_signature(yujin_make_root, devel_path):
 
 def install_rosdeps(base_path, source_path, rosdistro, no_color):
     # -r continue even with errors
-    cmd = ['rosdep', 'install', '-r']
+    cmd = ['rosdep', 'install']  # if you want it to continue installing despite errors, '-r']
     underlays = config_cache.get_underlays_list_from_config_cmake(base_path)
     for underlay in underlays:
         underlay_path = underlay
@@ -161,7 +161,8 @@ def install_rosdeps(base_path, source_path, rosdistro, no_color):
         else:
             builder.run_command_colorized(cmd, source_path, env=env)
     except subprocess.CalledProcessError:
-        return fmt('@{rf}Invoking @{boldon}"rosdep install failed')
+        return 1  # rosdep will already have provided its own error message, no need to regurgitate
+    return 0
 
 
 def make_main():
@@ -178,11 +179,10 @@ def make_main():
 
     # Install rosdeps if requested
     if args.install_rosdeps:
-        install_rosdeps(base_path, source_path, settings.get_default_track(), args.no_color)
-        return
+        return install_rosdeps(base_path, source_path, settings.get_default_track(), args.no_color)
     if args.install_rosdeps_track is not None:
-        install_rosdeps(source_path, args.install_rosdeps_track, args.no_color)
-        return
+        return install_rosdeps(source_path, args.install_rosdeps_track, args.no_color)
+        
 
     # Clear out previous temporaries if requested
     if args.pre_clean:
