@@ -28,18 +28,25 @@ show_help ()
   echo ""
   echo "    Options:"
   echo "        --help                                          : show this help message"
+  echo "        --jobs=<n>                                      : parallelise downloads (default is 5)"
   echo "        --list                                          : list repo details"
   echo "        --delete                                        : delete workspaces"
   echo "        --update                                        : run wstool update on each workspace"
   echo "        --status                                        : run wstool status on each workspace"
   echo "        --branches                                      : show what branches are used in each workspace"
-  echo "        --source-directory=<directory> | -d=<directory> : specify custom source directory"
+  echo "        -d, --source-directory=<directory>              : specify custom source directory"
   echo ""
   echo "    Admin Options:"
-  echo "        --install   : set the install location to /opt/yujin/indigo for all workspaces"
+  echo "        --install                                       : set the install location to /opt/yujin/amd64/xxx for all workspaces"
   echo ""
   exit 0
 }
+
+###########################
+# PreConfigured Defaults
+###########################
+
+JOBS=5
 
 ###########################
 # Command Line
@@ -82,6 +89,10 @@ case $i in
     ;;
     --devel)
     DEVEL=1
+    shift
+    ;;
+    -j=*|--jobs=*)
+    JOBS="${i#*=}"
     shift
     ;;
     -d=*|--source-directory=*)
@@ -188,7 +199,7 @@ download_sources ()
 	echo "  Workspace ${GROOT}/${repo}_${WS} already exists, skipping, remove manually or use --delete."
       else
 	echo "  Downloading ${repo}."
-	yujin_init_workspace -j5 ${repo}_${WS} ${ALL_REPO_KEYS[${repo}]}
+	yujin_init_workspace -j${JOBS} ${repo}_${WS} ${ALL_REPO_KEYS[${repo}]}
 	cd ${GROOT}/${repo}_${WS}
 	echo "  Configuring ${repo}."
 	yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/amd64/indigo-${RELEASE}" ${INSTALL_STRING} .
@@ -213,7 +224,7 @@ update_sources ()
 	echo "${repo} not found, redownloading."
 	cd ${GROOT}
 	echo "  Downloading ${repo}."
-	yujin_init_workspace -j5 ${repo}_${WS} ${repo_key}
+	yujin_init_workspace -j${JOBS} ${repo}_${WS} ${repo_key}
 	cd ${GROOT}/${repo}_${WS}
 	echo "  Configuring ${repo}."
 	yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/amd64/indigo-${RELEASE}" .
@@ -221,9 +232,9 @@ update_sources ()
       cd ${GROOT}/${repo}_${WS}
       echo "  Updating ${repo} from ${repo_key}"
       echo ""
-      echo "       yujin_init_workspace -j5 --merge ${repo_key}"
+      echo "       yujin_init_workspace -j${JOBS} --merge ${repo_key}"
       echo ""
-      yujin_init_workspace -j5 --merge ${repo_key}
+      yujin_init_workspace -j${JOBS} --merge ${repo_key}
     else
       echo ""
       echo "ERROR : ${repo} is not a valid workspace, choose from"
