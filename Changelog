@@ -1,3 +1,6 @@
+0.4.8
+ - parallelised job option for groot_sources
+ - show found underlays when running yujin_make --install-rosdeps
 0.4.7
  - get yujin_make --install-rosdeps to reflect rosdep errors
 0.4.6
