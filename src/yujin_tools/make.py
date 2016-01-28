@@ -143,6 +143,7 @@ def install_rosdeps(base_path, source_path, rosdistro, no_color):
     # -r continue even with errors
     cmd = ['rosdep', 'install']  # if you want it to continue installing despite errors, '-r']
     underlays = config_cache.get_underlays_list_from_config_cmake(base_path)
+    print("Rosdep Search Paths")
     for underlay in underlays:
         underlay_path = underlay
         underlay_source_path = os.path.abspath(os.path.join(underlay, os.pardir, "src"))
@@ -150,8 +151,9 @@ def install_rosdeps(base_path, source_path, rosdistro, no_color):
 	    underlay_path = underlay_source_path
         if os.path.isdir(underlay_path):
             cmd += ['--from-paths', underlay_path]
+	    print(" - adding underlay '%s'" % underlay_path)
         else:
-	    print("Not adding underlay '%s' to the rosdep search path [not found]" % underlay_path)
+	    print(" - not adding underlay '%s' [not found]" % underlay_path)
     cmd += ['--from-paths', source_path, '--ignore-src', '--rosdistro', rosdistro, '-y']
     env = os.environ.copy()
     try:
