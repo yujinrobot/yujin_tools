@@ -42,6 +42,7 @@ desktop:
  - gopher_gazebo
 bootstrap:
  - elevator_operator
+ - gopher_customisation
  - gopher_diagnostics
  - gopher_bootstrap
  - gopher_configuration

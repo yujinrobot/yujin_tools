@@ -25,6 +25,8 @@
 {'git': {'local-name': 'gopher_common', 'version': 'indigo-stable', 'uri': 'https://bitbucket.org/yujinrobot/gopher_common.git'}},
 {'git': {'local-name': 'gopher_web_ui', 'version': 'indigo-stable', 'uri': 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}},
 {'git': {'local-name': 'gopher_crazy_hospital', 'version': 'indigo-stable', 'uri': 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}},
+# Gopher - to be added in the next stable release
+# {'git': {'local-name': 'gopher_configuration', 'version': 'indigo-devel', 'uri': 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}},
 
 # Rostful and Celeros
 {'git': {'local-name': 'rostful', 'version': 'indigo', 'uri': 'https://github.com/asmodehn/rostful.git'}},

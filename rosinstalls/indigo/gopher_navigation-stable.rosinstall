@@ -1,13 +1,17 @@
-- git: {local-name: navigation, version: indigo-stable, uri: 'https://github.com/yujinrobot/navigation.git'}
-- git: {local-name: navigation_layers, version: indigo-stable, uri: 'https://github.com/yujinrobot/navigation_layers.git'}
-- git: {local-name: downsampler, version: indigo-stable, uri: 'https://github.com/yujinrobot/downsampler.git'}
-- git: {local-name: obstacle_detection, version: indigo-stable, uri: 'https://bitbucket.org/yujinrobot/obstacle_detection.git'}
-- git: {local-name: gopher_navigation, version: indigo-stable, uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
-- git: {local-name: gopher_msgs, version: indigo-stable, uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
-- git: {local-name: depth_calibration, version: indigo-stable, uri: 'https://github.com/yujinrobot/depth_calibration.git'}
-- git: {local-name: yujin_ocs, version: gopher-stable, uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
-- git: {local-name: yocs_msgs, version: gopher-stable, uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
-- git: {local-name: depthimage_to_laserscan, version: indigo-stable, uri: 'https://github.com/yujinrobot/depthimage_to_laserscan.git'}
-- git: {local-name: somanet_msgs, version: indigo-stable, uri: 'https://github.com/yujinrobot/somanet_msgs.git'}
-- git: {local-name: ar_track_alvar, version: indigo-stable, uri: 'https://github.com/yujinrobot/ar_track_alvar.git'}
+# Software for gopher navigation.
 
+- git: {local-name: 'navigation',              version: 'indigo-stable', uri: 'https://github.com/yujinrobot/navigation.git'}
+- git: {local-name: 'navigation_layers',       version: 'indigo-stable', uri: 'https://github.com/yujinrobot/navigation_layers.git'}
+- git: {local-name: 'downsampler',             version: 'indigo-stable', uri: 'https://github.com/yujinrobot/downsampler.git'}
+- git: {local-name: 'obstacle_detection',      version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/obstacle_detection.git'}
+- git: {local-name: 'gopher_navigation',       version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
+- git: {local-name: 'gopher_msgs',             version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
+- git: {local-name: 'depth_calibration',       version: 'indigo-stable', uri: 'https://github.com/yujinrobot/depth_calibration.git'}
+- git: {local-name: 'yujin_ocs',               version: 'gopher-stable', uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
+- git: {local-name: 'yocs_msgs',               version: 'gopher-stable', uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
+- git: {local-name: 'depthimage_to_laserscan', version: 'indigo-stable', uri: 'https://github.com/yujinrobot/depthimage_to_laserscan.git'}
+- git: {local-name: 'somanet_msgs',            version: 'indigo-stable', uri: 'https://github.com/yujinrobot/somanet_msgs.git'}
+- git: {local-name: 'ar_track_alvar',          version: 'indigo-stable', uri: 'https://github.com/yujinrobot/ar_track_alvar.git'}
+
+# to be added in the next stable release cycle
+#- git: {local-name: 'gopher_configuration',    version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}
