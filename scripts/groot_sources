@@ -211,6 +211,9 @@ download_sources ()
       echo ""
     fi
   done
+  echo ""
+  echo "You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies."
+  echo ""
 }
 
 update_sources ()
@@ -242,6 +245,9 @@ update_sources ()
       echo ""
     fi
   done
+  echo ""
+  echo "You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies."
+  echo ""
 }
 
 show_branches ()

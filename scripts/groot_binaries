@@ -136,5 +136,8 @@ if [ ! -z "$PUSH" ]; then
     echo ""
 else
     rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir}
+    echo ""
+    echo "You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies."
+    echo ""
 fi
 
