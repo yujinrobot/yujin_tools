@@ -1,3 +1,5 @@
+0.4.9
+ - friendly reminder at the end of groot_sources and groot_binaries about rosdeps
 0.4.8
  - parallelised job option for groot_sources
  - show found underlays when running yujin_make --install-rosdeps
