@@ -15,4 +15,5 @@
 - git: {local-name: 'gopher_configuration',    version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}
 - git: {local-name: 'sophus_ros_toolkit',      version: 'indigo-devel', uri: 'https://github.com/stonier/sophus_ros_toolkit.git'}
 - git: {local-name: 'cost_map',                version: 'indigo-devel', uri: 'https://github.com/stonier/cost_map.git'}
+- git: {local-name: 'grid_map',                version: 'indigo-devel', uri: 'https://github.com/yujinrobot/grid_map.git'}
 
