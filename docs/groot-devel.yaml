@@ -1,6 +1,20 @@
+bootstrap:
+ - elevator_operator
+ - gopher_customisation
+ - gopher_diagnostics
+ - gopher_bootstrap
+ - gopher_configuration
+ - py_trees
+ - rocon_python_comms
+ - rocon_python_utils
+ - rocon_uri
+desktop:
+ - gopher_desktop
+ - gopher_desktop_utilities
+ - gopher_stage
+ - gopher_gazebo
 dslam:
  - dslam_bag
- - dslam_planner
 ecl:
  - ecl_build
  - ecl_license
@@ -35,22 +49,8 @@ ecl:
  - ecl_utilities
  - ecl_manipulators
  - ecl_mobile_robot
-desktop:
- - gopher_desktop
- - gopher_desktop_utilities
- - gopher_stage
- - gopher_gazebo
-bootstrap:
- - elevator_operator
- - gopher_customisation
- - gopher_diagnostics
- - gopher_bootstrap
- - gopher_configuration
- - py_trees
- - rocon_python_comms
- - rocon_python_utils
- - rocon_uri
 gopher:
  - gopher_robot
  - somanet_node
- 
+navigation:
+ - dslam_planner
