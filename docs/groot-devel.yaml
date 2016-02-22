@@ -1,9 +1,11 @@
 bootstrap:
  - elevator_operator
- - gopher_customisation
- - gopher_diagnostics
+ - gopher_behaviours
  - gopher_bootstrap
  - gopher_configuration
+ - gopher_customisation
+ - gopher_diagnostics
+ - gopher_semantics
  - py_trees
  - rocon_python_comms
  - rocon_python_utils
