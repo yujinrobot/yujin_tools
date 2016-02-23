@@ -5,12 +5,10 @@
 # Rocon stacks forked for gopher development, focus is on rocon for the robot. Focus is on concert for the concert.
 #
 
-- 'git': {'local-name': 'rocon_concert', 'version': 'gopher-stable', 'uri': 'https://github.com/robotics-in-concert/rocon_concert.git'}
-- 'git': {'local-name': 'rocon_tutorials', 'version': 'gopher-stable', 'uri': 'https://github.com/robotics-in-concert/rocon_tutorials.git'}
+- git: { local-name: 'rocon_concert',      version: 'gopher-stable', uri: 'https://github.com/robotics-in-concert/rocon_concert.git'}
+- git: { local-name: 'rocon_tutorials',    version: 'gopher-stable', uri: 'https://github.com/robotics-in-concert/rocon_tutorials.git'}
 
 # Gopher
 
-- 'git': {'local-name': 'gopher_concert', 'version': 'indigo-stable', 'uri': 'https://bitbucket.org/yujinrobot/gopher_concert.git'}
-- 'git': {'local-name': 'flask_task_planner', 'version': 'indigo-stable', 'uri': 'https://bitbucket.org/yujinrobot/flask-task-planner.git'}
-
-
+- git: { local-name: 'gopher_concert',     version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_concert.git'}
+- git: { local-name: 'flask_task_planner', version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/flask-task-planner.git'}
