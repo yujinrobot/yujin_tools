@@ -8,4 +8,5 @@
 
 # 3rd party
 - git: { local-name: 'rplidar_ros',        version: 'indigo-devel', uri: 'https://github.com/yujinrobot/rplidar_ros.git'}
+- git: { local-name: 'nodelet_core',       version: 'indigo-devel', uri: 'https://github.com/yujinrobot/nodelet_core.git'}
 
