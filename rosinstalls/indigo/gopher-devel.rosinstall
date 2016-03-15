@@ -6,6 +6,9 @@
 - git: { local-name: 'somanet_driver',     version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/somanet_driver.git'}
 - git: { local-name: 'somanet_msgs',       version: 'indigo-devel', uri: 'https://github.com/yujinrobot/somanet_msgs.git'}
 
+# Pending
+#  - https://github.com/ros/nodelet_core/pull/39
+#  - https://github.com/ros/nodelet_core/pull/40
 - git: { local-name: 'nodelet_core',       version: 'indigo-devel', uri: 'https://github.com/yujinrobot/nodelet_core.git'}
 
 # 3rd party
