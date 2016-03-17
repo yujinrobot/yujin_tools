@@ -54,5 +54,6 @@ ecl:
 gopher:
  - gopher_robot
  - somanet_node
+ - gopher_laserscan_processing
 navigation:
  - dslam_planner
