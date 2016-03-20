@@ -1,5 +1,4 @@
 - git: {local-name: dslam_bag, version: indigo-devel, uri: 'https://bitbucket.org/yujinrobot/dslam_bag.git'}
-- git: {local-name: dslam_msgs, version: indigo-devel, uri: 'https://bitbucket.org/yujinrobot/dslam_msgs.git'}
 - git: {local-name: gopher_msgs, version: indigo-devel, uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
 - git: {local-name: dslam, version: indigo-devel, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
 - git: {local-name: dslam_desktop, version: indigo-devel, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
