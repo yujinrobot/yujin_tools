@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+###########################
+# Functions
+###########################
+
+show_help ()
+{
+  echo ""
+  echo "Starts the gopher robot"
+  echo ""
+  echo "    Usage:"
+  echo "        sudo $0 <required-options> <options>"
+  echo ""
+  echo "    Required Option (one of):"
+  echo "        --stable          : work with the stable binaries"
+  echo "        --devel           : work with the devel binaries"
+  echo ""
+  echo "    Options:"
+  echo "        --sim             : starts a simulation of the robot"
+  echo "" 
+  exit 0
+}
+
+
+for i in "$@"
+do
+case $i in
+    --help)
+    SHOW_HELP=1
+    shift
+    ;;
+    --sim)
+    SIMULATED=1
+    shift
+    ;;
+    --stable)
+    STABLE=1
+    shift
+    ;;
+    --devel)
+    DEVEL=1
+    shift
+    ;;
+    *)
+       # unknown option
+    ;;
+esac
+done
+
+###########################
+# Aborts
+###########################
+
+if [ ! -z "$SHOW_HELP" ]; then
+  show_help
+  exit 0
+fi
+
+if [ -z "$STABLE" ] && [ -z "$DEVEL" ]; then
+  echo ""
+  echo "ERROR : you must set one of either --stable or --devel"
+  echo ""
+  exit 1
+fi
+
+###########################
+# Variables
+###########################
+
+if [ ! -z "$STABLE" ]; then
+  RELEASE="stable"
+else
+  RELEASE="devel"
+fi
+
+export local_dir=/opt/yujin/amd64
+
+if [ ! -z "$SIMULATED" ]; then
+  echo ""
+  echo "Starting Gopher Simulated Robot in ${local_dir}/indigo-${RELEASE}"
+  echo ""
+  source ${local_dir}/indigo-${RELEASE}/share/gopher_desktop_utilities/scripts/setup.bash && \
+  exec roslaunch gopher_desktop gocart_sim.launch zeroconf:=false --screen
+else
+  echo ""
+  echo "Starting Gopher Robot in ${local_dir}/indigo-${RELEASE}"
+  echo ""
+  source ${local_dir}/indigo-${RELEASE}/lib/gopher_remote_utilities/setup.bash && \
+  exec roslaunch gopher_robot concert_gocart.launch auto_start_pairing:=Delivery minimal:=true --screen
+fi
+

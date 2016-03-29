@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+###########################
+# Functions
+###########################
+
+show_help ()
+{
+  echo ""
+  echo "Starts the gopher concert."
+  echo ""
+  echo "    Usage:"
+  echo "        sudo $0 <required-options>"
+  echo ""
+  echo "    Required Option (one of):"
+  echo "        --stable          : work with the stable binaries"
+  echo "        --devel           : work with the devel binaries"
+  echo ""
+  exit 0
+}
+
+
+for i in "$@"
+do
+case $i in
+    --help)
+    SHOW_HELP=1
+    shift
+    ;;
+    --stable)
+    STABLE=1
+    shift
+    ;;
+    --devel)
+    DEVEL=1
+    shift
+    ;;
+    *)
+       # unknown option
+    ;;
+esac
+done
+
+###########################
+# Aborts
+###########################
+
+if [ ! -z "$SHOW_HELP" ]; then
+  show_help
+  exit 0
+fi
+
+if [ -z "$STABLE" ] && [ -z "$DEVEL" ]; then
+  echo ""
+  echo "ERROR : you must set one of either --stable or --devel"
+  echo ""
+  exit 1
+fi
+
+###########################
+# Variables
+###########################
+
+if [ ! -z "$STABLE" ]; then
+  RELEASE="stable"
+else
+  RELEASE="devel"
+fi
+
+export local_dir=/opt/yujin/amd64
+
+echo ""
+echo "Starting Gopher Concert in ${local_dir}/indigo-${RELEASE}"
+echo ""
+source ${local_dir}/indigo-${RELEASE}/lib/gocart_concert/setup.bash && \
+exec roslaunch gocart_concert concert.launch zeroconf:=false --screen
+
