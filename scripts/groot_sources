@@ -231,6 +231,9 @@ update_sources ()
 	cd ${GROOT}/${repo}_${WS}
 	echo "  Configuring ${repo}."
 	yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/amd64/indigo-${RELEASE}" .
+      else
+        echo "  Cleaning *.pyc files from ${GROOT}/${repo}_${WS}"
+        find ${GROOT}/${repo}_${WS} -name \*.pyc -delete
       fi
       cd ${GROOT}/${repo}_${WS}
       echo "  Updating ${repo} from ${repo_key}"
