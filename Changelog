@@ -1,3 +1,5 @@
+0.4.11
+ - clean *.pyc from groot source and binary workspaces
 0.4.10
  - groot_start_concert and groot_start_robot
 0.4.9
