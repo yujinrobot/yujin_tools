@@ -135,8 +135,10 @@ if [ ! -z "$PUSH" ]; then
     #fi
     echo ""
 else
-    find /opt/yujin/amd64/indigo-${RELEASE} -name \*.pyc -delete
     rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir}
+    echo ""
+    echo "Clearing *.pyc files from /opt/yujin/amd64/indigo-${RELEASE}"
+    find /opt/yujin/amd64/indigo-${RELEASE} -name \*.pyc -delete
     echo ""
     echo "You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies."
     echo ""
