@@ -11,7 +11,7 @@ bootstrap:
  - rocon_python_utils
  - rocon_uri
 desktop:
- - gopher_desktop
+ - gopher_podium
  - gopher_desktop_utilities
  - gopher_stage
  - gopher_gazebo
@@ -54,6 +54,6 @@ ecl:
 gopher:
  - gopher_robot
  - somanet_node
- - gopher_laserscan_processing
 navigation:
+ - gopher_laserscan_processing
  - dslam_planner
