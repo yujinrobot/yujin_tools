@@ -1,4 +1,4 @@
-0.4.12
+0.4.13
  - updated groot_start_robot
 0.4.11
  - clean *.pyc from groot source and binary workspaces
