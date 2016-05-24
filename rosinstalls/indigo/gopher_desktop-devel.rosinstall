@@ -7,7 +7,3 @@
 - git: { local-name: 'gopher_desktop', version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}
 - git: { local-name: 'rocon_qt_gui',   version: 'gopher-devel', uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}
 - git: { local-name: 'rqt_wrapper',    version: 'indigo-devel', uri: 'https://github.com/stonier/rqt_wrapper.git'}
-
-# Pending upstream pull request: https://github.com/ros/ros_comm/pull/722/files
-# Merged, expecting in ros-indigo-ros 1.11.12
-- git: { local-name: 'ros_comm',       version: 'indigo-devel', uri: 'https://github.com/yujinrobot/ros_comm.git'}
