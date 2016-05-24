@@ -41,15 +41,15 @@
 - git: { local-name: 'qt_gui_core',                   version: 'gopher',       uri: 'https://github.com/heuristicus/qt_gui_core.git'}
 # until fixed version of audio has been released
 - git: { local-name: 'audio_common',                  version: 'gopher',       uri: 'https://github.com/yujinrobot/audio_common.git'}
-# until dynamic diagnostics is in and approved
-# - https://github.com/ros/diagnostics/pull/43
-# - https://github.com/ros/common_msgs/pull/80
-- git: { local-name: 'diagnostics',                   version: 'add_diagnostics', uri: 'https://github.com/heuristicus/diagnostics.git'}
-- git: { local-name: 'common_msgs',                   version: 'indigo-devel', uri: 'https://github.com/ros/common_msgs.git'}
 
 # Unused
-# - git: { local-name: 'std_capabilities', version: 'initial_specs', uri: 'https://github.com/robotics-in-concert/std_capabilities.git'}
-# - git: { local-name: 'rqt_capabilities', version: 'master', uri: 'https://github.com/robotics-in-concert/rqt_capabilities.git'}
+
+# until dynamic diagnostics is in and approved - it's in, and now we're testing
+# - https://github.com/ros/diagnostics/pull/43
+# - https://github.com/ros/common_msgs/pull/80
+#- git: { local-name: 'diagnostics',                   version: 'add_diagnostics', uri: 'https://github.com/heuristicus/diagnostics.git'}
+#- git: { local-name: 'common_msgs',                   version: 'indigo-devel', uri: 'https://github.com/ros/common_msgs.git'}
+
 # - git: { local-name: 'door_interactions', version: 'indigo', uri: 'https://bitbucket.org/yujinrobot/door_interactions.git'}
 # - git: { local-name: 'world_canvas', version: 'master', uri: 'https://github.com/corot/world_canvas.git'}
 # - git: { local-name: 'world_canvas_libs', version: 'master', uri: 'https://github.com/corot/world_canvas_libs.git'}
