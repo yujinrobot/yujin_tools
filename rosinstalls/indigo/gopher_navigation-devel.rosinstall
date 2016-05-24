@@ -9,7 +9,6 @@
 - git: {local-name: 'yujin_ocs',               version: 'gopher-devel', uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
 - git: {local-name: 'depthimage_to_laserscan', version: 'indigo-devel', uri: 'https://github.com/yujinrobot/depthimage_to_laserscan.git'}
 - git: {local-name: 'ar_track_alvar',          version: 'indigo-devel', uri: 'https://github.com/yujinrobot/ar_track_alvar.git'}
-- git: {local-name: 'gopher_configuration',    version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}
 - git: {local-name: 'sophus_ros_toolkit',      version: 'indigo-devel', uri: 'https://github.com/stonier/sophus_ros_toolkit.git'}
 - git: {local-name: 'cost_map',                version: 'indigo-devel', uri: 'https://github.com/stonier/cost_map.git'}
 - git: {local-name: 'grid_map',                version: 'indigo-devel', uri: 'https://github.com/yujinrobot/grid_map.git'}

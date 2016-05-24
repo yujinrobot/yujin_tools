@@ -21,7 +21,6 @@
 
 # Gopher
 - git: { local-name: 'gopher_rapps',                  version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}
-- git: { local-name: 'gopher_configuration',          version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}
 - git: { local-name: 'gopher_common',                 version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 - git: { local-name: 'gopher_web_ui',                 version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
 - git: { local-name: 'gopher_crazy_hospital',         version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
