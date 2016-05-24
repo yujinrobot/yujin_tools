@@ -20,7 +20,7 @@ show_help ()
   echo "        groot_sources <required-options> <options>"
   echo "        groot_sources <required-options> <options> <space separated list of repos>"
   echo ""
-  echo "    Repos: ecto ecl dslam navi bootstrap gopher concert desktop"
+  echo "    Repos: ecto ecl messages dslam navi bootstrap gopher concert desktop"
   echo ""
   echo "    Required Option (one of):"
   echo "        --stable                                        : work with the stable sources/binaries"
@@ -146,19 +146,22 @@ else
   GROOT=/opt/groot
 fi
 
-ALL_REPOS=("ecto" "ecl" "dslam" "navi" "bootstrap" "gopher" "concert" "desktop")
+ALL_REPOS=("ecto" "ecl" "messages" "dslam" "navi" "bootstrap" "gopher" "concert" "desktop")
 declare -A ALL_REPO_KEYS
 declare -A ALL_UNDERLAYS
 
-ALL_REPO_KEYS=( ["ecto"]="ecto-${RELEASE}" ["ecl"]="ecl-${RELEASE}" ["bootstrap"]="gopher_bootstrap-${RELEASE}" ["concert"]="gopher_concert-${RELEASE}" ["navi"]="gopher_navigation-${RELEASE}" ["dslam"]="gopher_dslam-${RELEASE}" ["gopher"]="gopher-${RELEASE}" ["desktop"]="gopher_desktop-${RELEASE}" )
+ALL_REPO_KEYS=( ["ecto"]="ecto-${RELEASE}" ["ecl"]="ecl-${RELEASE}" ["messages"]="gopher_messages-${RELEASE}" ["bootstrap"]="gopher_bootstrap-${RELEASE}" ["concert"]="gopher_concert-${RELEASE}" ["navi"]="gopher_navigation-${RELEASE}" ["dslam"]="gopher_dslam-${RELEASE}" ["gopher"]="gopher-${RELEASE}" ["desktop"]="gopher_desktop-${RELEASE}" )
 
+YUJIN_BINARIES=/opt/yujin/amd64/indigo-${RELEASE}
+
+MSG_CLOUD="${GROOT}/messages_${WS}/devel"
 E_CLOUD="${GROOT}/ecl_${WS}/devel;${GROOT}/ecto_${WS}/devel"
-DSLAM_CLOUD="${GROOT}/dslam_${WS}/devel;${E_CLOUD}"
+DSLAM_CLOUD="${GROOT}/dslam_${WS}/devel;${E_CLOUD};${MSG_CLOUD}"
 NAVI_CLOUD="${GROOT}/navi_${WS}/devel;${DSLAM_CLOUD}"
 BOOTSTRAP_CLOUD="${GROOT}/bootstrap_${WS}/devel;${NAVI_CLOUD}"
 SOFTWARE_CLOUD="${GROOT}/concert_${WS}/devel;${BOOTSTRAP_CLOUD}"
 
-ALL_UNDERLAYS=( ["ecto"]="" ["ecl"]="" ["dslam"]="${E_CLOUD}" ["navi"]="${DSLAM_CLOUD}" ["bootstrap"]="${NAVI_CLOUD}" ["concert"]="${BOOTSTRAP_CLOUD}" ["gopher"]="${BOOTSTRAP_CLOUD}" ["desktop"]="${SOFTWARE_CLOUD}")
+ALL_UNDERLAYS=( ["ecto"]="${YUJIN_BINARIES}" ["ecl"]="${YUJIN_BINARIES}" ["messages"]="${YUJIN_BINARIES}" ["dslam"]="${E_CLOUD};${MSG_CLOUD};${YUJIN_BINARIES}" ["navi"]="${DSLAM_CLOUD};${YUJIN_BINARIES}" ["bootstrap"]="${NAVI_CLOUD};${YUJIN_BINARIES}" ["concert"]="${BOOTSTRAP_CLOUD};${YUJIN_BINARIES}" ["gopher"]="${BOOTSTRAP_CLOUD};${YUJIN_BINARIES}" ["desktop"]="${SOFTWARE_CLOUD};${YUJIN_BINARIES}")
 
 REPOS=()
 
@@ -184,7 +187,7 @@ show_repos ()
   do
     echo "${repo}"
     echo "  rosinstall key: ${ALL_REPO_KEYS[${repo}]}"
-    echo "  underlays     : ${ALL_UNDERLAYS[${repo}]};/opt/yujin/indigo"
+    echo "  underlays     : ${ALL_UNDERLAYS[${repo}]}"
   done
 }
 
@@ -202,7 +205,7 @@ download_sources ()
 	yujin_init_workspace -j${JOBS} ${repo}_${WS} ${ALL_REPO_KEYS[${repo}]}
 	cd ${GROOT}/${repo}_${WS}
 	echo "  Configuring ${repo}."
-	yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/amd64/indigo-${RELEASE}" ${INSTALL_STRING} .
+	yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]}" ${INSTALL_STRING} .
       fi
     else
       echo ""
@@ -230,7 +233,7 @@ update_sources ()
 	yujin_init_workspace -j${JOBS} ${repo}_${WS} ${repo_key}
 	cd ${GROOT}/${repo}_${WS}
 	echo "  Configuring ${repo}."
-	yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]};/opt/yujin/amd64/indigo-${RELEASE}" .
+	yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]}" .
       else
         echo "  Cleaning *.pyc files from ${GROOT}/${repo}_${WS}"
         find ${GROOT}/${repo}_${WS} -name \*.pyc -delete

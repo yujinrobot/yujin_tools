@@ -42,10 +42,4 @@
 # until fixed version of audio has been released
 - git: { local-name: 'audio_common',                  version: 'gopher',       uri: 'https://github.com/yujinrobot/audio_common.git'}
 
-# Unused
-# - git: { local-name: 'door_interactions', version: 'indigo', uri: 'https://bitbucket.org/yujinrobot/door_interactions.git'}
-# - git: { local-name: 'world_canvas', version: 'master', uri: 'https://github.com/corot/world_canvas.git'}
-# - git: { local-name: 'world_canvas_libs', version: 'master', uri: 'https://github.com/corot/world_canvas_libs.git'}
-# - git: { local-name: 'world_canvas_msgs', version: 'master', uri: 'https://github.com/corot/world_canvas_msgs.git'}
-
 

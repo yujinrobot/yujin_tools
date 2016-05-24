@@ -2,9 +2,7 @@
 
 - git: { local-name: 'gopher',             version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher.git'}
 - git: { local-name: 'gopher_calibration', version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_calibration.git'}
-- git: { local-name: 'gopher_msgs',        version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
 - git: { local-name: 'somanet_driver',     version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/somanet_driver.git'}
-- git: { local-name: 'somanet_msgs',       version: 'indigo-devel', uri: 'https://github.com/yujinrobot/somanet_msgs.git'}
 
 # Pending
 #  - https://github.com/ros/nodelet_core/pull/39
