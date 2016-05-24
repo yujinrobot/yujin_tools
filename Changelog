@@ -1,3 +1,7 @@
+0.4.15
+ - groot_binaries does a rosdep update when installing rosdeps
+ - messages workspace for groot
+ - dropping ros_comm, diagnostics, common_msgs from groot workspaces, all now upstream
 0.4.14
  - clear pyc files after syncing
 0.4.13
