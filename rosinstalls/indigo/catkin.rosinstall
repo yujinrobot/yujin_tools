@@ -4,5 +4,5 @@
 [
 {'git': {'local-name': 'catkin', 'version': 'indigo-devel', 'uri':'https://github.com/ros/catkin.git'}},
 {'git': {'local-name': 'cmake_modules', 'version': '0.3-devel', 'uri':'https://github.com/ros/cmake_modules.git'}},
-{'svn': {'local-name': 'gtest', 'uri': 'http://googletest.googlecode.com/svn/tags/release-1.6.0'}}
+{'git': {'local-name': 'gtest', 'version': 'release-1.6.0', 'uri': 'https://github.com/google/googletest'}}
 ]
