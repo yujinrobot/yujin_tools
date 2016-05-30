@@ -27,11 +27,6 @@
 # Environment Integrations
 - git: { local-name: 'elevator_interactions',         version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
 
-# Upstream Modifications - for gopher_crazy_hospital. The rqt package really ought to be in gopher_desktop workspace!
-# qt_gui_core
-#  - https://github.com/ros-visualization/qt_gui_core/pull/61
-#  - https://github.com/ros-visualization/qt_gui_core/pull/60
-- git: { local-name: 'qt_gui_core',                   version: 'gopher',       uri: 'https://github.com/heuristicus/qt_gui_core.git'}
 # until fixed version of audio has been released
 - git: { local-name: 'audio_common',                  version: 'gopher',       uri: 'https://github.com/yujinrobot/audio_common.git'}
 
