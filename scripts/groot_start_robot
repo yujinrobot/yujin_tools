@@ -80,13 +80,11 @@ if [ ! -z "$SIMULATED" ]; then
   echo ""
   echo "Starting Gopher Simulated Robot in ${local_dir}/indigo-${RELEASE}"
   echo ""
-  source ${local_dir}/indigo-${RELEASE}/share/gopher_desktop_utilities/scripts/setup.bash && \
-  exec roslaunch gopher_podium concert_gocart.launch zeroconf:=false --screen
+  exec ${local_dir}/indigo-${RELEASE}/share/gopher_desktop_utilities/scripts/podium_concert_gocart
 else
   echo ""
   echo "Starting Gopher Robot in ${local_dir}/indigo-${RELEASE}"
   echo ""
-  source ${local_dir}/indigo-${RELEASE}/lib/gopher_remote_utilities/setup.bash && \
-  exec roslaunch gopher_robot concert_gocart.launch auto_start_pairing:=Delivery minimal:=true --screen
+  exec ${local_dir}/indigo-${RELEASE}/lib/gopher_remote_utilities/start_concert_gocart.bash
 fi
 
