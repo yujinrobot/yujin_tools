@@ -72,5 +72,5 @@ export local_dir=/opt/yujin/amd64
 echo ""
 echo "Starting Gopher Concert in ${local_dir}/indigo-${RELEASE}"
 echo ""
-exec ${local_dir}/indigo-${RELEASE}/share/gocart_concert/scripts/concert_server
+exec ${local_dir}/indigo-${RELEASE}/share/gopher_desktop_utilities/scripts/concert_server
 
