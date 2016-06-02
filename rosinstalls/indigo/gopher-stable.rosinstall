@@ -4,7 +4,7 @@
 - git: { local-name: 'gopher_calibration', version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_calibration.git'}
 - git: { local-name: 'gopher_msgs',        version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
 - git: { local-name: 'somanet_driver',     version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/somanet_driver.git'}
-- git: { local-name: 'somanet_msgs',       version: 'indigo-stable', uri: 'https://github.com/yujinrobot/somanet_msgs.git'}
+- git: { local-name: 'somanet_msgs',       version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/somanet_msgs.git'}
 
 # 3rd party
 - git: { local-name: 'rplidar_ros',        version: 'indigo-stable', uri: 'https://github.com/yujinrobot/rplidar_ros.git'}
