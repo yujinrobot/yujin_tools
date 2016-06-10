@@ -1,8 +1,9 @@
+messages:
+ - gopher_configuration
 bootstrap:
  - elevator_operator
  - gopher_behaviours
  - gopher_bootstrap
- - gopher_configuration
  - gopher_customisation
  - gopher_diagnostics
  - gopher_networking
