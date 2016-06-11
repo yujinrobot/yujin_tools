@@ -154,14 +154,14 @@ ALL_REPO_KEYS=( ["ecto"]="ecto-${RELEASE}" ["ecl"]="ecl-${RELEASE}" ["messages"]
 
 YUJIN_BINARIES=/opt/yujin/amd64/indigo-${RELEASE}
 
-MSG_CLOUD="${GROOT}/messages_${WS}/devel"
-E_CLOUD="${GROOT}/ecl_${WS}/devel;${GROOT}/ecto_${WS}/devel"
-DSLAM_CLOUD="${GROOT}/dslam_${WS}/devel;${E_CLOUD};${MSG_CLOUD}"
+MSG_CLOUD="${GROOT}/messages_${WS}/devel;${GROOT}/ecl_${WS}/devel"
+ECTO_CLOUD="${GROOT}/ecl_${WS}/devel;${GROOT}/ecto_${WS}/devel"
+DSLAM_CLOUD="${GROOT}/dslam_${WS}/devel;${MSG_CLOUD};${ECTO_CLOUD}"
 NAVI_CLOUD="${GROOT}/navi_${WS}/devel;${DSLAM_CLOUD}"
 BOOTSTRAP_CLOUD="${GROOT}/bootstrap_${WS}/devel;${NAVI_CLOUD}"
 SOFTWARE_CLOUD="${GROOT}/concert_${WS}/devel;${BOOTSTRAP_CLOUD}"
 
-ALL_UNDERLAYS=( ["ecto"]="${YUJIN_BINARIES}" ["ecl"]="${YUJIN_BINARIES}" ["messages"]="${YUJIN_BINARIES}" ["dslam"]="${E_CLOUD};${MSG_CLOUD};${YUJIN_BINARIES}" ["navi"]="${DSLAM_CLOUD};${YUJIN_BINARIES}" ["bootstrap"]="${NAVI_CLOUD};${YUJIN_BINARIES}" ["concert"]="${BOOTSTRAP_CLOUD};${YUJIN_BINARIES}" ["gopher"]="${BOOTSTRAP_CLOUD};${YUJIN_BINARIES}" ["desktop"]="${SOFTWARE_CLOUD};${YUJIN_BINARIES}")
+ALL_UNDERLAYS=( ["ecto"]="${YUJIN_BINARIES}" ["ecl"]="${YUJIN_BINARIES}" ["messages"]="${YUJIN_BINARIES}" ["dslam"]="${ECTO_CLOUD};${MSG_CLOUD};${YUJIN_BINARIES}" ["navi"]="${DSLAM_CLOUD};${YUJIN_BINARIES}" ["bootstrap"]="${NAVI_CLOUD};${YUJIN_BINARIES}" ["concert"]="${BOOTSTRAP_CLOUD};${YUJIN_BINARIES}" ["gopher"]="${BOOTSTRAP_CLOUD};${YUJIN_BINARIES}" ["desktop"]="${SOFTWARE_CLOUD};${YUJIN_BINARIES}")
 
 REPOS=()
 
