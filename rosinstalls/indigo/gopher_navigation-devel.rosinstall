@@ -13,3 +13,6 @@
 - git: {local-name: 'cost_map',                version: 'indigo-devel', uri: 'https://github.com/stonier/cost_map.git'}
 - git: {local-name: 'grid_map',                version: 'indigo-devel', uri: 'https://github.com/yujinrobot/grid_map.git'}
 
+# Binary Repos
+- git: {local-name: 'kuns',                    version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
+
