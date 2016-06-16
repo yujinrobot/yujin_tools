@@ -4,7 +4,7 @@
 - git: {local-name: qglv_toolkit, version: indigo-devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
 - git: {local-name: elf, version: indigo-devel, uri: 'https://bitbucket.org/yujinrobot/elf.git'}
 
-# until v0.2.3 is released with a bugfix
+# until v0.2.4 is released
 - git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
 
 # open source releases, pretty stable
