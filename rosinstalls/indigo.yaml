@@ -83,6 +83,7 @@ gopher_bootstrap-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/r
 gopher_desktop-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_desktop-devel.rosinstall'
 gopher_desktop-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_desktop-stable.rosinstall'
 gopher_messages-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_messages-devel.rosinstall'
+gopher_messages-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_messages-stable.rosinstall'
 gopher_navigation-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_navigation-devel.rosinstall'
 gopher_navigation-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_navigation-stable.rosinstall'
 gopher_dslam-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_dslam-devel.rosinstall'
