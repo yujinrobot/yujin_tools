@@ -1,3 +1,4 @@
+# A list of packages we build docs from gopher devel sw for deployment on our internal server.
 messages:
  - gopher_configuration
 bootstrap:
