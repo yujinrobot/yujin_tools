@@ -1,2 +1,4 @@
 # This is a stub for when we split up devel/stable api docs.
-
+desktop:
+ - gopher_podium
+ - gopher_desktop_utilities
