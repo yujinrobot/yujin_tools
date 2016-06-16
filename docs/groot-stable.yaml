@@ -1,4 +1,4 @@
-# This is a stub for when we split up devel/stable api docs.
+# A list of packages we build docs from gopher stable sw for deployment on our public server.
 desktop:
  - gopher_podium
  - gopher_desktop_utilities
