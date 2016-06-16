@@ -12,6 +12,7 @@
 - git: { local-name: 'somanet_msgs',                  version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/somanet_msgs.git'}
 - git: { local-name: 'environment_interactions_msgs', version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}
 - git: { local-name: 'yocs_msgs',                     version: 'gopher-devel', uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
+- git: { local-name: 'dslam_msgs',                    version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/dslam_msgs.git'}
 
 # Base
 - git: { local-name: 'gopher_configuration',          version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}
