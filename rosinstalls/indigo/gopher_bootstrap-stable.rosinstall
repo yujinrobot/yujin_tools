@@ -1,18 +1,6 @@
 # == Overview ==
 #
 # Software for bootstrapping robot/simulation/concert/desktop software, no direct hardware dependencies here!
-#
-# Things that should move out if we split the desktop workspace from here
-#
-# - gopher_desktop
-# - gopher_crazy_hospital/rqt_pytrees
-# - qt_gui-core
-
-# Messages
-- git: { local-name: 'gopher_msgs',                   version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
-- git: { local-name: 'rocon_msgs',                    version: 'gopher-stable', uri: 'https://github.com/robotics-in-concert/rocon_msgs.git'}
-- git: { local-name: 'somanet_msgs',                  version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/somanet_msgs.git'}
-- git: { local-name: 'environment_interactions_msgs', version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}
 
 # Rocon
 - git: { local-name: 'rocon_multimaster',             version: 'gopher-stable', uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
@@ -21,11 +9,10 @@
 
 # Gopher
 - git: { local-name: 'gopher_rapps',                  version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}
-- git: { local-name: 'gopher_configuration',          version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}
 - git: { local-name: 'gopher_common',                 version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 - git: { local-name: 'gopher_web_ui',                 version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
 - git: { local-name: 'gopher_crazy_hospital',         version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
-
+- git: { local-name: 'py_trees_suite',                version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/py_trees_suite.git'}
 
 # Rostful and Celeros
 - git: { local-name: 'rostful',                       version: 'indigo',        uri: 'https://github.com/asmodehn/rostful.git'}
@@ -35,18 +22,8 @@
 # Environment Integrations
 - git: { local-name: 'elevator_interactions',         version: 'indigo-stable', uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
 
-# Upstream Modifications - for gopher_crazy_hospital. The rqt package really ought to be in gopher_desktop workspace!
-# qt_gui_core
-#  - https://github.com/ros-visualization/qt_gui_core/pull/61
-#  - https://github.com/ros-visualization/qt_gui_core/pull/60
-- git: { local-name: 'qt_gui_core',                   version: 'gopher',       uri: 'https://github.com/heuristicus/qt_gui_core.git'}
 # until fixed version of audio has been released
 - git: { local-name: 'audio_common',                  version: 'gopher',       uri: 'https://github.com/yujinrobot/audio_common.git'}
-# until dynamic diagnostics is in and approved
-# - https://github.com/ros/diagnostics/pull/43
-# - https://github.com/ros/common_msgs/pull/80
-- git: { local-name: 'diagnostics',                   version: 'add_diagnostics', uri: 'https://github.com/heuristicus/diagnostics.git'}
-- git: { local-name: 'common_msgs',                   version: 'indigo-devel', uri: 'https://github.com/ros/common_msgs.git'}
 
 
 
