@@ -1,4 +1,9 @@
 # A list of packages we build docs from gopher stable sw for deployment on our public server.
+messages:
+ - gopher_std_msgs
+ - gopher_core_msgs
+ - gopher_navi_msgs
+ - gopher_networking_msgs
 desktop:
  - gopher_podium
  - gopher_desktop_utilities
