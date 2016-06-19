@@ -4,7 +4,7 @@ messages:
  - gopher_core_msgs
  - gopher_navi_msgs
  - gopher_networking_msgs
-common:
+bootstrap:
  - gopher_networking
 desktop:
  - gopher_podium
