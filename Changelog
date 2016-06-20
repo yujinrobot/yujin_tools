@@ -1,3 +1,5 @@
+0.4.19
+ - groot_binaries push to external server moved
 0.4.18
  - bugfix messages_ws dependency on ecl
 0.4.16
