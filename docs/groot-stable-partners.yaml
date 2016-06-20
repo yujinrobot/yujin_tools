@@ -1,0 +1,20 @@
+# A list of packages we build docs from gopher stable sw for deployment on our public server.
+messages:
+ - dslam_msgs
+ - elf_msgs
+ - gopher_configuration
+ - gopher_core_msgs
+ - gopher_delivery_msgs
+ - gopher_ghost_msgs
+ - gopher_navi_msgs
+ - gopher_networking_msgs
+ - gopher_semantic_msgs
+ - gopher_sim_msgs
+ - gopher_std_msgs
+ - py_trees_msgs
+ - yocs_msgs
+bootstrap:
+ - gopher_networking
+desktop:
+ - gopher_podium
+ - gopher_desktop_utilities
