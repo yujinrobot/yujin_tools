@@ -21,6 +21,7 @@ show_help ()
   echo "    Options:"
   echo "        --help            : this help message"
   echo "        --external        : use the external server instead of the internal one"
+  echo "        --partners        : use the server for partners (stable only)"
   echo "        --install-rosdeps : install all rosdeps required by the groot binary installspace"
   echo ""
   echo "    Admin Options:"
@@ -45,6 +46,10 @@ case $i in
     shift
     ;;
     --external)
+    EXTERNAL=1
+    shift
+    ;;
+    --partners)
     EXTERNAL=1
     shift
     ;;
@@ -90,6 +95,12 @@ if [ ! -z "$STABLE" ]; then
   RELEASE="stable"
 else
   RELEASE="devel"
+  if [ ! -z "$PARTNERS" ]; then
+    echo ""
+    echo "ERROR : partners only have access to stable"
+    echo ""
+    exit 1
+  fi
 fi
 
 # put the <rosdistro> folder here, should eventually move it to /opt/yujin/amd64
@@ -98,6 +109,9 @@ export local_dir=/opt/yujin/amd64
 if [ ! -z "$EXTERNAL" ]; then
   export remote_url=files@files.yujinrobot.com
   export remote_dir=${remote_url}:/data/file_server/rsync_repositories/yujin/amd64
+elif [ ! -z "$PARTNERS" ]; then
+  export remote_url=groot@groot.yujinrobot.com
+  export remote_dir=${remote_url}:/data/file_server/rsync_partner_repositories/yujin/amd64
 else
   export remote_url=files@files.yujin.com
   export remote_dir=${remote_url}:shared/installspaces/yujin/amd64
