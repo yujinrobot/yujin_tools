@@ -49,8 +49,12 @@ case $i in
     EXTERNAL=1
     shift
     ;;
+    --partner)
+    PARTNERS=1
+    shift
+    ;;
     --partners)
-    EXTERNAL=1
+    PARTNERS=1
     shift
     ;;
     --stable)
@@ -97,7 +101,7 @@ else
   RELEASE="devel"
   if [ ! -z "$PARTNERS" ]; then
     echo ""
-    echo "ERROR : partners only have access to stable"
+    echo "ERROR : partners may only access to stable"
     echo ""
     exit 1
   fi
@@ -110,7 +114,7 @@ if [ ! -z "$EXTERNAL" ]; then
   export remote_url=files@files.yujinrobot.com
   export remote_dir=${remote_url}:/data/file_server/rsync_repositories/yujin/amd64
 elif [ ! -z "$PARTNERS" ]; then
-  export remote_url=groot@groot.yujinrobot.com
+  export remote_url=groot@files.yujinrobot.com
   export remote_dir=${remote_url}:/data/file_server/rsync_partner_repositories/yujin/amd64
 else
   export remote_url=files@files.yujin.com
