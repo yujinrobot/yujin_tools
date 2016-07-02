@@ -1,3 +1,5 @@
+0.4.23
+ - groot_binaries gets a list-rosdeps option
 0.4.22
  - groot_binaries now works with partners
 0.4.20
