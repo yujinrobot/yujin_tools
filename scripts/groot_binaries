@@ -22,6 +22,7 @@ show_help ()
   echo "        --help            : this help message"
   echo "        --external        : use the external server instead of the internal one"
   echo "        --partners        : use the server for partners (stable only)"
+  echo "        --list-rosdeps    : list all rosdep keys required by the groot binary installspace"
   echo "        --install-rosdeps : install all rosdeps required by the groot binary installspace"
   echo ""
   echo "    Admin Options:"
@@ -39,6 +40,10 @@ do
 case $i in
     --help)
     SHOW_HELP=1
+    shift
+    ;;
+    --list-rosdeps)
+    LIST_ROSDEPS=1
     shift
     ;;
     --install-rosdeps)
@@ -139,8 +144,27 @@ if [ ! -z "$INSTALL_ROSDEPS" ]; then
     echo ""
     echo "Installing all rosdeps required by the binaries installspace in ${local_dir}/indigo-${RELEASE}"
     echo ""
+    echo "  Executing:"
+    echo ""
+    echo "    source ${local_dir}/indigo-${RELEASE}/setup.bash"
+    echo "    rosdep install -r --default-yes --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src"
+    echo ""
     source ${local_dir}/indigo-${RELEASE}/setup.bash
     rosdep install -r --default-yes --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src
+    exit 0   
+fi
+
+if [ ! -z "$LIST_ROSDEPS" ]; then
+    echo ""
+    echo "Listing all rosdep keys required by the binaries installspace in ${local_dir}/indigo-${RELEASE}"
+    echo ""
+    echo "  Executing:"
+    echo ""
+    echo "    source ${local_dir}/indigo-${RELEASE}/setup.bash"
+    echo "    rosdep keys -r --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src"
+    echo ""
+    source ${local_dir}/indigo-${RELEASE}/setup.bash
+    rosdep keys -r --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src
     exit 0   
 fi
 
