@@ -6,6 +6,7 @@
 - git: {local-name: 'obstacle_detection',      version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/obstacle_detection.git'}
 - git: {local-name: 'gopher_navigation',       version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
 - git: {local-name: 'gopher_motion_control',   version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_motion_control.git'}
+- git: {local-name: 'gopher_controllers',      version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_controllers.git'}
 - git: {local-name: 'depth_calibration',       version: 'indigo-devel', uri: 'https://github.com/yujinrobot/depth_calibration.git'}
 - git: {local-name: 'yujin_ocs',               version: 'gopher-devel', uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
 - git: {local-name: 'depthimage_to_laserscan', version: 'indigo-devel', uri: 'https://github.com/yujinrobot/depthimage_to_laserscan.git'}
