@@ -1,3 +1,5 @@
+0.4.24
+ - groot_binaries --list-rosdeps gets a sort feature
 0.4.23
  - groot_binaries gets a list-rosdeps option
 0.4.22
