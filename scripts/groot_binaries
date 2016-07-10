@@ -161,10 +161,10 @@ if [ ! -z "$LIST_ROSDEPS" ]; then
     echo "  Executing:"
     echo ""
     echo "    source ${local_dir}/indigo-${RELEASE}/setup.bash"
-    echo "    rosdep keys -r --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src"
+    echo "    rosdep keys -r --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src | sort"
     echo ""
     source ${local_dir}/indigo-${RELEASE}/setup.bash
-    rosdep keys -r --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src
+    rosdep keys -r --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src | sort 
     exit 0   
 fi
 
