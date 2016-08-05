@@ -18,3 +18,5 @@ bootstrap:
 desktop:
  - gopher_podium
  - gopher_desktop_utilities
+dslam:
+ - dslam_bag
