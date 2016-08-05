@@ -20,3 +20,5 @@ desktop:
  - gopher_desktop_utilities
 dslam:
  - dslam_bag
+navigation:
+ - dslam_planner
