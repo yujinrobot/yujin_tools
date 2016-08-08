@@ -1,0 +1,129 @@
+#!/usr/bin/env bash
+
+###########################
+# Colours
+###########################
+
+BOLD="\e[1m"
+GREEN="\e[32m"
+RED="\e[31m"
+RESET="\e[0m"
+
+###########################
+# Functions
+###########################
+
+show_help ()
+{
+  echo ""
+  echo "Bootstraps a pc or embedded system for a minimal setup to gain"
+  echo "access to yujin package repositories. It will ask you for"
+  echo "sudo permissions to run."
+  echo ""
+  echo "    Usage:"
+  echo "        yujin_ansible_bootstrap"
+  echo ""
+  echo "    Options:"
+  echo "        --help            : this help message"
+  exit 0
+}
+
+pretty_print ()
+{
+  echo -e "${GREEN}${1}${RESET}"
+}
+
+pretty_error ()
+{
+  echo -e "${RED}${1}${RESET}"
+}
+
+pretty_headr ()
+{
+  echo -e "${BOLD}${1}${RESET}"
+}
+
+install_package ()
+{
+  PACKAGE_NAME=$1
+  sudo apt-get -q install ${PACKAGE_NAME}
+  if [ $? -ne 0 ]; then
+    pretty_error "  ${PACKAGE_NAME}............failed"
+    exit 0
+  fi
+  pretty_print "  ${PACKAGE_NAME}............ok"
+}
+
+###########################
+# Command Line
+###########################
+
+for i in "$@"
+do
+case $i in
+    --help)
+    SHOW_HELP=1
+    shift
+    ;;
+    *)
+       # pass through
+    ;;
+esac
+done
+
+###########################
+# Aborts
+###########################
+
+if [ ! -z "$SHOW_HELP" ]; then
+  show_help
+  exit 0
+fi
+
+###########################
+# Execute!
+###########################
+
+# actually, this is ubuntu only, but we don't support
+# anything else yet.
+. /etc/lsb-release
+
+echo ""
+pretty_headr "Ubuntu Release Details"
+pretty_print "  Release: ${DISTRIB_RELEASE}"
+pretty_print "  Codename: ${DISTRIB_CODENAME}"
+echo ""
+
+pretty_headr "Repositories"
+if [ "${DISTRIB_CODENAME}" == "trusty" ]; then
+  # stuck with having to use a future ansible, drop this need asap if we can
+  # as it is likely to cause us integration headaches with modules needing non
+  # system supported dependencies
+  pretty_print "  ansible................ppa:ansible/ansible"
+  if [ ! -f /etc/apt/sources.list.d/ansible-ansible-trusty.list ]; then
+    sudo apt-add-repository ppa:ansible/ansible
+  fi
+else
+  pretty_print "  ansible................system"
+fi
+
+pretty_print "  python-yujin-tools.....packages.yujinrobot.com"
+if [ ! -f /etc/apt/sources.list.d/yujin.list ]; then
+  echo "deb http://packages.yujinrobot.com/yujin/ubuntu ${DISTRIB_CODENAME} main" > /tmp/yujin.list
+  sudo mv /tmp/yujin.list /etc/apt/sources.list.d/yujin.list
+  wget http://packages.yujinrobot.com/yujin.key -O - | sudo apt-key add -
+fi
+echo ""
+
+pretty_headr "Apt-Get Update"
+sudo apt-get update > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+  pretty_error "  update.................failed"
+  exit 0
+fi
+pretty_print "  update.................ok"
+echo ""
+
+pretty_headr "Installing"
+install_package ansible
+install_package python-yujin-tools
