@@ -5,10 +5,10 @@
 import argparse
 import subprocess
 import sys
-import termcolor
 
 from . import ansible_common
 from . import ansible_pc
+from . import ansible_podium
 
 ##############################################################################
 # Methods
@@ -22,12 +22,10 @@ def _update():
     """
     # should perhaps try and find some way of checking that ansible is already
     # setup by yujin_ansible_bootstrap
-    termcolor.cprint("********************************************************************************", "green")
-    termcolor.cprint("               Updating Yujin's ansible playbooks and scripts", "green")
-    termcolor.cprint("********************************************************************************\n", "green")
     cmd = "ansible-playbook pc-ansible.yml -K -i localhost, -c local"
-    print("{0}: {1}\n".format(termcolor.colored("Command", "cyan"),
-                              termcolor.colored(cmd, "yellow")))
+    ansible_common.pretty_print_banner("Updating Yujin's ansible playbooks and scripts")
+    ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd})
+    print("")
     subprocess.call(cmd, cwd=ansible_common.ansible_playbooks_home(), shell=True)
 
 
@@ -53,5 +51,6 @@ def main(args=sys.argv[1:]):
                                        help='name of an existing playbook',
                                        metavar="<playbook>")
     ansible_pc.add_subparser(subparsers)
+    ansible_podium.add_subparser(subparsers)
     options, unused_unknown_args = parser.parse_known_args(args)
     options.func(options)  # relay arg parsing to the subparser configured `set_defaults` function callback

@@ -4,7 +4,6 @@
 
 import argparse
 import subprocess
-import termcolor
 
 from . import ansible_common
 
@@ -17,16 +16,11 @@ def parse_ros_args(args):
     """
     Parses args and launches playbooks depending on the arg parsing functionality.
     """
-    termcolor.cprint("********************************************************************************", "green")
-    print("             {0}{1}{2}".format(termcolor.colored("This is the ", "green"),
-                                          termcolor.colored("'pc-ros'", "white", attrs=["bold"]),
-                                          termcolor.colored(" ansible playbook", "green")))
-    termcolor.cprint("********************************************************************************\n", "green")
+    ansible_common.pretty_print_banner("This is the 'pc-ros' play.")
     cmd = "ansible-playbook pc-ros.yml -K -i localhost, -c local"
     if args.verbose:
         cmd += " -vvv"
-    print("{0}: {1}\n".format(termcolor.colored("Command", "cyan"),
-                              termcolor.colored(cmd, "yellow")))
+    ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)
     subprocess.call(cmd, cwd=args.home, shell=True)
     # print("  x: {0}".format(args.x))
 
@@ -39,7 +33,7 @@ def add_subparser(subparsers):
     """
     ros_parser = subparsers.add_parser("pc-ros",
                                        description="Install, configure or update an existing ros distro.",  # this shows in the help for this command
-                                       help="install/update a ros distro",  # this shows in the parent parser
+                                       help="ros distro on an ubuntu machine",  # this shows in the parent parser
                                        formatter_class=argparse.ArgumentDefaultsHelpFormatter
                                        )
     ansible_common.add_ansible_arguments(ros_parser)
