@@ -127,3 +127,7 @@ echo ""
 pretty_headr "Installing"
 install_package ansible
 install_package python-yujin-tools
+
+echo ""
+echo -e "${GREEN}To continue setting up your environment, run ${RESET}${BOLD}'yujin_ansible --help'${RESET}${GREEN}.${RESET}"
+echo ""

@@ -3,13 +3,32 @@
 ##############################################################################
 
 import argparse
+import subprocess
 import sys
+import termcolor
 
+from . import ansible_common
 from . import ansible_pc
 
 ##############################################################################
 # Methods
 ##############################################################################
+
+
+def _update():
+    """
+    Updates both ansible and the playbook package that are installed on the
+    system.
+    """
+    # should perhaps try and find some way of checking that ansible is already
+    # setup by yujin_ansible_bootstrap
+    termcolor.cprint("********************************************************************************", "green")
+    termcolor.cprint("               Updating Yujin's ansible playbooks and scripts", "green")
+    termcolor.cprint("********************************************************************************\n", "green")
+    cmd = "ansible-playbook pc-ansible.yml -K -i localhost, -c local"
+    print("{0}: {1}\n".format(termcolor.colored("Command", "cyan"),
+                              termcolor.colored(cmd, "yellow")))
+    subprocess.call(cmd, cwd=ansible_common.ansible_playbooks_home(), shell=True)
 
 
 def main(args=sys.argv[1:]):
@@ -18,7 +37,7 @@ def main(args=sys.argv[1:]):
         print("Version: TODO")
         return
     if len(sys.argv) == 2 and sys.argv[1] == "--update":
-        print("Update: TODO")
+        _update()
         return
 
     # TODO check that yujin_ansible_bootstrap has already been executed, and if not - execute and exit with a friendly message
