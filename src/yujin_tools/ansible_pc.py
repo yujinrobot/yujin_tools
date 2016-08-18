@@ -14,15 +14,28 @@ from . import ansible_common
 
 def parse_ros_args(args):
     """
-    Parses args and launches playbooks depending on the arg parsing functionality.
+    Launches the playbooks for managing the ros software environment on a pc.
     """
-    ansible_common.pretty_print_banner("This is the 'pc-ros' play.")
+    ansible_common.pretty_print_banner("'pc-ros'")
     cmd = "ansible-playbook pc-ros.yml -K -i localhost, -c local"
     if args.verbose:
         cmd += " -vvv"
     ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)
+    print("")
     subprocess.call(cmd, cwd=args.home, shell=True)
-    # print("  x: {0}".format(args.x))
+
+
+def parse_gopher_args(args):
+    """
+    Launches the playbooks for managing the gopher software environment on a pc.
+    """
+    ansible_common.pretty_print_banner("'pc-gopher_software_environment'")
+    cmd = "ansible-playbook pc-gopher_software.yml -K -i localhost, -c local -e yujin_internal=true -e yujin_stream=devel"
+    if args.verbose:
+        cmd += " -vvv"
+    ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)
+    print("")
+    subprocess.call(cmd, cwd=args.home, shell=True)
 
 
 def add_subparser(subparsers):
@@ -38,6 +51,14 @@ def add_subparser(subparsers):
                                        )
     ansible_common.add_ansible_arguments(ros_parser)
     ros_parser.set_defaults(func=parse_ros_args)
+
+    gopher_parser = subparsers.add_parser("pc-gopher_software_environment",
+                                          description="Setup and maintain the complete environment for gopher software development",  # this shows in the help for this command
+                                          help="the complete gopher software development environment",  # this shows in the parent parser
+                                          formatter_class=argparse.ArgumentDefaultsHelpFormatter
+                                          )
+    ansible_common.add_ansible_arguments(gopher_parser)
+    gopher_parser.set_defaults(func=parse_gopher_args)
 
 #     parser = argparse.ArgumentParser(description='Executor for ansible playbooks on a pc.',
 #                                      epilog=show_epilog(),
