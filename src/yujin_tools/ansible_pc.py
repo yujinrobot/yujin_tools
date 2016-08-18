@@ -39,7 +39,7 @@ def add_subparser(subparsers):
     """
     ros_parser = subparsers.add_parser("pc-ros",
                                        description="Install, configure or update an existing ros distro.",  # this shows in the help for this command
-                                       help="install/update a ros installation",  # this shows in the parent parser
+                                       help="install/update a ros distro",  # this shows in the parent parser
                                        formatter_class=argparse.ArgumentDefaultsHelpFormatter
                                        )
     ansible_common.add_ansible_arguments(ros_parser)
