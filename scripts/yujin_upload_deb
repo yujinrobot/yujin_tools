@@ -1,14 +1,19 @@
 #!/bin/bash
 
+if (( $# != 1 )); then
+   echo "Usage: $0 <package_name>"
+fi
+
+CPACK_PACKAGE_NAME= $1
+DEBIAN_FILENAME=`ls ${CPACK_PACKAGE_NAME}*.deb`
+
 PACKAGES_URI="packages.yujinrobot.com"
 PACKAGES_URL="http://${PACKAGES_URI}"
 PACKAGES_SSH="files@${PACKAGES_URI}"
 PACKAGES_SCRIPTS_DIR="/data/repos/scripts"
 UBUNTU_ARCH=amd64
 UBUNTU_VERSION_string="trusty"
-CPACK_PACKAGE_NAME="python-yujin-tools"
 COMPONENT_NAME=""
-DEBIAN_FILENAME=`ls python-yujin-tools*.deb`
 
 ssh ${PACKAGES_SSH} "rm -f ~/${DEBIAN_FILENAME}"
 echo " -- ssh ${PACKAGES_SSH} -t '/data/repos/scripts/rem_deb ${UBUNTU_VERSION_string} ${CPACK_PACKAGE_NAME}'"
