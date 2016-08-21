@@ -29,8 +29,9 @@ def parse_gopher_args(args):
     Launches the playbooks for managing the gopher software environment on a pc.
     """
     ansible_common.pretty_print_banner("'pc-gopher'")
-    cmd = "ansible-playbook pc-gopher_software.yml -K -i localhost, -c local -e yujin_internal=true -e yujin_stream=devel"
+    cmd = "ansible-playbook pc-gopher_software.yml -K -i localhost, -c local -e repository=internal -e stream=devel"
     cmd = ansible_common.append_verbosity_argument(cmd, args.verbose)
+    ansible_common.pretty_print_key_value_pairs("Parameters", {"Repository": args.repository, "Stream": args.stream}, 10)
     ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)
     print("")
     subprocess.call(cmd, cwd=args.home, shell=True)

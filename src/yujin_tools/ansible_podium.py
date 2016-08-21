@@ -31,9 +31,9 @@ def parse_docker_args(args, docker_name):
     """
     ansible_common.pretty_print_banner("This is the 'podium-docker' play.")
     tags = ""
-    cmd = "ansible-playbook concert-docker_{0}.yml --ask-become-pass --ask-vault-pass -i localhost, -c local -e yujin_stream=devel {1}".format(docker_name, tags)
+    cmd = "ansible-playbook concert-{0}_docker.yml --ask-become-pass --ask-vault-pass -i localhost, -c local -e yujin_stream=devel {1}".format(docker_name, tags)
     cmd = ansible_common.append_verbosity_argument(cmd, args.verbose)
-    ansible_common.pretty_print_key_value_pairs("Parameters", {"Stream": "devel"}, 10)
+    ansible_common.pretty_print_key_value_pairs("Parameters", {"Stream": args.stream}, 10)
     ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)
     print("")
     subprocess.call(cmd, cwd=args.home, shell=True)
@@ -51,7 +51,7 @@ def parse_ros_args(args):
     ansible_common.pretty_print_banner("This is the 'podium-ros' play.")
     cmd = "ansible-playbook concert-ros_concert.yml  --ask-become-pass -i localhost, -c local -e yujin_internal=true -e yujin_stream=devel"
     cmd = ansible_common.append_verbosity_argument(cmd, args.verbose)
-    ansible_common.pretty_print_key_value_pairs("Parameters", {"Location": "internal", "Stream": "devel"}, 10)
+    ansible_common.pretty_print_key_value_pairs("Parameters", {"Repository": args.repository, "Stream": args.stream}, 10)
     ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)
     print("")
     subprocess.call(cmd, cwd=args.home, shell=True)

@@ -68,7 +68,8 @@ def add_gopher_software_arguments(parser):
 
     :param argparse.ArgumentParser parser:
     """
-    group = parser.add_argument_group(title="ros arguments")
+    group = parser.add_argument_group(title="gopher software arguments")
+    group.add_argument('--repository', default='internal', action='store', choices=['internal', 'external', 'partners'], help='only upgrade the gopher software binaries')
     group.add_argument('--only-upgrade', action='store_true', help='only upgrade the gopher software binaries')
     group.add_argument('--only-rosdeps', action='store_true', help='only do the --install-rosdeps step')
     group.add_argument('--skip-rosdeps', action='store_true', help='skip the --install-rosdeps step')
