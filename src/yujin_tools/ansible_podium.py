@@ -50,7 +50,7 @@ def parse_ros_args(args):
     @todo parameterise internal/external and devel/stable
     """
     ansible_common.pretty_print_banner("This is the 'podium-ros' play.")
-    cmd = "ansible-playbook concert-ros_concert.yml  --ask-become-pass -i localhost, -c local -e yujin_internal=true -e yujin_stream=devel"
+    cmd = "ansible-playbook concert-ros_concert.yml  --ask-become-pass -i localhost, -c local -e yujin_repository={0} -e yujin_stream={1}".format(args.repository, args.stream)
     cmd = ansible_common.append_verbosity_argument(cmd, args.verbose)
     ansible_common.pretty_print_key_value_pairs("Parameters", {"Repository": args.repository, "Stream": args.stream}, 10)
     ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)

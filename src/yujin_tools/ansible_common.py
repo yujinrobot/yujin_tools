@@ -2,7 +2,6 @@
 # Imports
 ##############################################################################
 
-import argparse
 import os
 import termcolor
 import yujin_ansible_playbooks
@@ -68,8 +67,13 @@ def add_gopher_software_arguments(parser):
 
     :param argparse.ArgumentParser parser:
     """
+    repositories_group = parser.add_argument_group(title="repository arguments")
+    repositories_exclusive_group = repositories_group.add_mutually_exclusive_group(required=False)
+    repositories_exclusive_group.add_argument('--internal', action='store_const', const='internal', dest='repository', default='internal', help='internal devel & stable repositories')
+    repositories_exclusive_group.add_argument('--external', action='store_const', const='external', dest='repository', default='internal', help='external devel & stable repositories')
+    repositories_exclusive_group.add_argument('--partners', action='store_const', const='partners', dest='repository', default='internal', help='partners stable repositories')
+
     group = parser.add_argument_group(title="gopher software arguments")
-    group.add_argument('--repository', default='internal', action='store', choices=['internal', 'external', 'partners'], help='only upgrade the gopher software binaries')
     group.add_argument('--only-upgrade', action='store_true', help='only upgrade the gopher software binaries')
     group.add_argument('--only-rosdeps', action='store_true', help='only do the --install-rosdeps step')
     group.add_argument('--skip-rosdeps', action='store_true', help='skip the --install-rosdeps step')
