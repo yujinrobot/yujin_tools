@@ -3,6 +3,7 @@
 ##############################################################################
 
 import argparse
+import functools
 import subprocess
 
 from . import ansible_common
@@ -12,18 +13,25 @@ from . import ansible_common
 ##############################################################################
 
 
-def parse_docker_args(args):
+def parse_all_args(args):
     """
-    Starts the docker play for podiums.
+    Run all playbooks required to completely setup robot/concert podium
+    simulations.
+    """
+    pass
 
-    @todo parameterise internal/external and devel/stable
+
+def parse_docker_args(args, docker_name):
+    """
+    Runs the playbook for the specified docker.
+
+    :param argparse.ArgumentParser args: args from a python argument parser
+    :param str docker_name: name of the docker playbook to run.
+
     """
     ansible_common.pretty_print_banner("This is the 'podium-docker' play.")
-    if args.containers:
-        tags = "--tags concert-containers"
-    else:
-        tags = "--tags concert-dockers"
-    cmd = "ansible-playbook concert.yml --ask-become-pass --ask-vault-pass -i localhost, -c local -e yujin_stream=devel {0}".format(tags)
+    tags = ""
+    cmd = "ansible-playbook concert-docker_{0}.yml --ask-become-pass --ask-vault-pass -i localhost, -c local -e yujin_stream=devel {1}".format(docker_name, tags)
     cmd = ansible_common.append_verbosity_argument(cmd, args.verbose)
     ansible_common.pretty_print_key_value_pairs("Parameters", {"Stream": "devel"}, 10)
     ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)
@@ -55,19 +63,33 @@ def add_subparser(subparsers):
 
     :param subparsers: the subparsers factory from the parent argparser.
     """
-    ros_parser = subparsers.add_parser("podium-ros",
-                                       description="Install/update ros software for podium simulations. Note that the requirements for the robot is subsumed by that of the concert, so this installs and updates the needs for both robot and concert.",  # this shows in the help for this command
-                                       help="ros software for podium simulations (robot & concert)",  # this shows in the parent parser
-                                       formatter_class=argparse.ArgumentDefaultsHelpFormatter
-                                       )
-    ansible_common.add_ansible_arguments(ros_parser)
-    ros_parser.set_defaults(func=parse_ros_args)
+    parsers = {}
+    parsers['all'] = subparsers.add_parser("podium-all",
+                                           description="Install/update everything for podium robot/concert simulations.",  # this shows in the help for this command
+                                           help="run all playbooks required by podium simulations",  # this shows in the parent parser
+                                           formatter_class=argparse.ArgumentDefaultsHelpFormatter
+                                           )
+    ansible_common.add_devel_stable_arguments(parsers['all'])
+    parsers['all'].set_defaults(func=parse_all_args)
 
-    docker_parser = subparsers.add_parser("podium-docker",
-                                          description="Install/update concert dockers for podium simulations.",  # this shows in the help for this command
-                                          help="concert dockers for the podium simulations",  # this shows in the parent parser
-                                          formatter_class=argparse.ArgumentDefaultsHelpFormatter
-                                          )
-    ansible_common.add_ansible_arguments(docker_parser)
-    docker_parser.add_argument('--containers', action='store_true', help='only download/update the containers')
-    docker_parser.set_defaults(func=parse_docker_args)
+    parsers['ros'] = subparsers.add_parser("podium-ros",
+                                           description="Install/update ros software for podium simulations. Note that the requirements for the robot is subsumed by that of the concert, so this installs and updates the needs for both robot and concert.",  # this shows in the help for this command
+                                           help="ros software for podium simulations (robot & concert)",  # this shows in the parent parser
+                                           formatter_class=argparse.ArgumentDefaultsHelpFormatter
+                                           )
+    ansible_common.add_devel_stable_arguments(parsers['ros'])
+    ansible_common.add_gopher_software_arguments(parsers['ros'])
+    parsers['ros'].set_defaults(func=parse_ros_args)
+
+    for name in ['balcony', 'gateway', 'static']:
+        parsers[name] = subparsers.add_parser("podium-{0}".format(name),
+                                              description="Install/update the {0} docker for podium concrt simulations.".format(name),  # this shows in the help for this command
+                                              help="{0} docker for podium concert simulations".format(name),  # this shows in the parent parser
+                                              formatter_class=argparse.ArgumentDefaultsHelpFormatter
+                                              )
+        ansible_common.add_devel_stable_arguments(parsers[name])
+        ansible_common.add_docker_arguments(parsers[name])
+        parsers[name].set_defaults(func=functools.partial(parse_docker_args, docker_name=name))
+
+    for parser in parsers.values():
+        ansible_common.add_ansible_arguments(parser)

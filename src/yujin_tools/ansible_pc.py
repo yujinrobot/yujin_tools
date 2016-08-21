@@ -28,7 +28,7 @@ def parse_gopher_args(args):
     """
     Launches the playbooks for managing the gopher software environment on a pc.
     """
-    ansible_common.pretty_print_banner("'pc-gopher_software_environment'")
+    ansible_common.pretty_print_banner("'pc-gopher'")
     cmd = "ansible-playbook pc-gopher_software.yml -K -i localhost, -c local -e yujin_internal=true -e yujin_stream=devel"
     cmd = ansible_common.append_verbosity_argument(cmd, args.verbose)
     ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)
@@ -42,21 +42,30 @@ def add_subparser(subparsers):
 
     :param subparsers: the subparsers factory from the parent argparser.
     """
-    ros_parser = subparsers.add_parser("pc-ros",
-                                       description="Install, configure or update an existing ros distro.",  # this shows in the help for this command
-                                       help="ros distro on an ubuntu machine",  # this shows in the parent parser
-                                       formatter_class=argparse.ArgumentDefaultsHelpFormatter
-                                       )
-    ansible_common.add_ansible_arguments(ros_parser)
-    ros_parser.set_defaults(func=parse_ros_args)
+    parsers = {}
+    parsers['ros'] = subparsers.add_parser("pc-ros",
+                                           description="Install, configure or update an existing ros distro.",  # this shows in the help for this command
+                                           help="ros distro on an ubuntu machine",  # this shows in the parent parser
+                                           formatter_class=argparse.ArgumentDefaultsHelpFormatter
+                                           )
+    ansible_common.add_ros_arguments(parsers['ros'])
+    parsers['ros'].set_defaults(func=parse_ros_args)
 
-    gopher_parser = subparsers.add_parser("pc-gopher_software_environment",
-                                          description="Setup and maintain the complete environment for gopher software development",  # this shows in the help for this command
-                                          help="the complete gopher software development environment",  # this shows in the parent parser
-                                          formatter_class=argparse.ArgumentDefaultsHelpFormatter
-                                          )
-    ansible_common.add_ansible_arguments(gopher_parser)
-    gopher_parser.set_defaults(func=parse_gopher_args)
+    parsers['gopher'] = subparsers.add_parser("pc-gopher",
+                                              description="""
+                                              Setup and maintain the complete development/runtime environment for
+                                              gopher software development. This includes the underlying ros system,
+                                              yujin apt repos, and the gopher software itself.
+                                              """,  # this shows in the help for this command
+                                              help="dev/runtime environment for the gopher software stack",  # this shows in the parent parser
+                                              formatter_class=argparse.ArgumentDefaultsHelpFormatter
+                                              )
+    ansible_common.add_devel_stable_arguments(parsers['gopher'])
+    ansible_common.add_gopher_software_arguments(parsers['gopher'])
+    parsers['gopher'].set_defaults(func=parse_gopher_args)
+
+    for parser in parsers.values():
+        ansible_common.add_ansible_arguments(parser)
 
 #     parser = argparse.ArgumentParser(description='Executor for ansible playbooks on a pc.',
 #                                      epilog=show_epilog(),
