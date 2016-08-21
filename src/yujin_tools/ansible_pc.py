@@ -28,8 +28,20 @@ def parse_gopher_args(args):
     """
     Launches the playbooks for managing the gopher software environment on a pc.
     """
+    tags_to_run_list = []
+    tags_to_skip_list = []
+    if args.only_upgrade:
+        tags_to_run_list.append('gopher-software-binaries')
+    if args.only_rosdeps:
+        tags_to_run_list.append('gopher-software-install-rosdeps')
+    if args.skip_rosdeps:
+        tags_to_skip_list.append('gopher-software-install-rosdeps')
+
+    tags = "--tags {0}".format(','.join(tags_to_run_list)) if tags_to_run_list else ""
+    skip_tags = "--skip-tags {0}".format(','.join(tags_to_skip_list)) if tags_to_skip_list else ""
+
     ansible_common.pretty_print_banner("'pc-gopher'")
-    cmd = "ansible-playbook pc-gopher_software.yml -K -i localhost, -c local -e yujin_repository={0} -e yujin_stream={1}".format(args.repository, args.stream)
+    cmd = "ansible-playbook pc-gopher_software.yml -K -i localhost, -c local {0} {1} -e yujin_repository={2} -e yujin_stream={3}".format(tags, skip_tags, args.repository, args.stream)
     cmd = ansible_common.append_verbosity_argument(cmd, args.verbose)
     ansible_common.pretty_print_key_value_pairs("Parameters", {"Repository": args.repository, "Stream": args.stream}, 10)
     ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)

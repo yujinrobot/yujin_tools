@@ -46,11 +46,20 @@ def parse_ros_args(args):
     the devel branch from the internal server. Since the requirements for
     the robot are subsumed by those for the concert, we only worry about
     runnign the concert playbook.
-
-    @todo parameterise internal/external and devel/stable
     """
+    tags_to_run_list = []
+    tags_to_skip_list = []
+    if args.only_upgrade:
+        tags_to_run_list.append('gopher-software-binaries')
+    if args.only_rosdeps:
+        tags_to_run_list.append('gopher-software-install-rosdeps')
+    if args.skip_rosdeps:
+        tags_to_skip_list.append('gopher-software-install-rosdeps')
+
+    tags = "--tags {0}".format(','.join(tags_to_run_list)) if tags_to_run_list else ""
+    skip_tags = "--skip-tags {0}".format(','.join(tags_to_skip_list)) if tags_to_skip_list else ""
     ansible_common.pretty_print_banner("This is the 'podium-ros' play.")
-    cmd = "ansible-playbook concert-ros_concert.yml  --ask-become-pass -i localhost, -c local -e yujin_repository={0} -e yujin_stream={1}".format(args.repository, args.stream)
+    cmd = "ansible-playbook concert-ros_concert.yml  --ask-become-pass -i localhost, -c local {0} {1} -e yujin_repository={2} -e yujin_stream={3}".format(tags, skip_tags, args.repository, args.stream)
     cmd = ansible_common.append_verbosity_argument(cmd, args.verbose)
     ansible_common.pretty_print_key_value_pairs("Parameters", {"Repository": args.repository, "Stream": args.stream}, 10)
     ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)
