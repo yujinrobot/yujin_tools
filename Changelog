@@ -1,3 +1,5 @@
+0.4.28
+ - groot_binaries - checks timestamps to skip now, faster than rsync checks
 0.4.27
  - yujin_ansible - pc-ros playbook
 0.4.25
