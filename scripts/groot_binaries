@@ -117,14 +117,15 @@ export local_dir=/opt/yujin/amd64
 
 if [ ! -z "$EXTERNAL" ]; then
   export remote_url=files@files.yujinrobot.com
-  export remote_dir=${remote_url}:/data/file_server/rsync_repositories/yujin/amd64
+  export remote_path=/data/file_server/rsync_repositories/yujin/amd64
 elif [ ! -z "$PARTNERS" ]; then
   export remote_url=groot@files.yujinrobot.com
-  export remote_dir=${remote_url}:/data/file_server/rsync_partner_repositories/yujin/amd64
+  export remote_path=/data/file_server/rsync_partner_repositories/yujin/amd64
 else
   export remote_url=files@files.yujin.com
-  export remote_dir=${remote_url}:shared/installspaces/yujin/amd64
+  export remote_path=shared/installspaces/yujin/amd64
 fi
+export remote_dir=${remote_url}:${remote_path}
 
 # Options
 # --delete    : files from the destination directories
@@ -181,6 +182,12 @@ if [ ! -z "$PUSH" ]; then
     #fi
     echo ""
 else
+    export remote_timestamp=`ssh ${remote_url} ls ${remote_path}/indigo-${RELEASE}/build-* | sed 's/.*\\///'`
+    export local_timestamp=`ls ${local_dir}/indigo-${RELEASE}/build-* | sed 's/.*\\///'`
+    if [ "${remote_timestamp}" == "${local_timestamp}" ]; then
+      echo "Nothing to do: remote and local builds have the same timestamps."
+      exit 0
+    fi
     rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir}
     echo ""
     echo "Clearing *.pyc files from /opt/yujin/amd64/indigo-${RELEASE}"
