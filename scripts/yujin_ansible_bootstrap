@@ -5,8 +5,12 @@
 ###########################
 
 BOLD="\e[1m"
+
+CYAN="\e[36m"
 GREEN="\e[32m"
 RED="\e[31m"
+YELLOW="\e[33m"
+
 RESET="\e[0m"
 
 ###########################
@@ -46,12 +50,24 @@ pretty_headr ()
 install_package ()
 {
   PACKAGE_NAME=$1
-  sudo apt-get -q install ${PACKAGE_NAME}
+  sudo apt-get -q install ${PACKAGE_NAME} > /dev/null
   if [ $? -ne 0 ]; then
     pretty_error "  ${PACKAGE_NAME}............failed"
     exit 0
   fi
   pretty_print "  ${PACKAGE_NAME}............ok"
+}
+
+
+added_user()
+{
+  local stdout=$1
+  if [[ $stdout == *"already a member"* ]]
+  then
+    echo "ok"
+  else
+    echo "added"
+  fi
 }
 
 ###########################
@@ -127,7 +143,28 @@ echo ""
 pretty_headr "Installing"
 install_package ansible
 install_package python-yujin-tools
+echo ""
+
+pretty_headr "Groups"
+sudo groupadd dialout 2>/dev/null
+sudo groupadd docker 2>/dev/null
+sudo groupadd users 2>/dev/null
+
+dialout_added=$( added_user "`sudo adduser ${USER} dialout`")
+pretty_print "  dialout................$dialout_added"
+docker_added=$( added_user "`sudo adduser ${USER} docker`")
+pretty_print "  docker.................$docker_added"
+users_added=$( added_user "`sudo adduser ${USER} users`")
+pretty_print "  users..................$users_added"
+echo ""
+
+pretty_headr "Summary"
 
 echo ""
-echo -e "${GREEN}To continue setting up your environment, run ${RESET}${BOLD}'yujin_ansible --help'${RESET}${GREEN}.${RESET}"
+if [ "$dialout_added" == "added" ] || [ "$docker_added" == "added" ] || [ "$users_added" == "added" ]
+then
+  echo -e "${RED}  Group configurations have changed, you must ${RESET}${BOLD}login${RESET}${RED} again before continuing.${RESET}"
+fi
+
+echo -e "${CYAN}  To continue setting up your environment, run ${RESET}${YELLOW}'yujin_ansible --help'${RESET}${CYAN}.${RESET}"
 echo ""
