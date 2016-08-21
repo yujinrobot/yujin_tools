@@ -18,8 +18,7 @@ def parse_ros_args(args):
     """
     ansible_common.pretty_print_banner("'pc-ros'")
     cmd = "ansible-playbook pc-ros.yml -K -i localhost, -c local"
-    if args.verbose:
-        cmd += " -vvv"
+    cmd = ansible_common.append_verbosity_argument(cmd, args.verbose)
     ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)
     print("")
     subprocess.call(cmd, cwd=args.home, shell=True)
@@ -31,8 +30,7 @@ def parse_gopher_args(args):
     """
     ansible_common.pretty_print_banner("'pc-gopher_software_environment'")
     cmd = "ansible-playbook pc-gopher_software.yml -K -i localhost, -c local -e yujin_internal=true -e yujin_stream=devel"
-    if args.verbose:
-        cmd += " -vvv"
+    cmd = ansible_common.append_verbosity_argument(cmd, args.verbose)
     ansible_common.pretty_print_key_value_pairs("Ansible", {"Command": cmd}, 10)
     print("")
     subprocess.call(cmd, cwd=args.home, shell=True)

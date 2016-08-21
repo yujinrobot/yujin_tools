@@ -49,6 +49,13 @@ def pretty_print_key_value_pairs(title, key_value_strings, width=None):
         print("  " + k + ": " + v)
 
 
+def append_verbosity_argument(cmd, verbosity):
+    """
+    Just in case we want to modify how many v's we use, centralise this here.
+    """
+    return cmd + " -vvvv" if verbosity else cmd
+
+
 def pretty_print_banner(title):
     width = 80
     print("")
