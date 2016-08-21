@@ -189,10 +189,7 @@ else
       echo "Nothing to do: remote and local builds have the same timestamps."
       exit 0
     fi
-    # if we have rsync 3.1.1 we can use --chown=${USER}:users, but alas, not yet...
     rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir}
-    # conveniently set this to the user's permissions
-    chown -R ${USER}:users ${local_dir}
     echo ""
     echo "Clearing *.pyc files from /opt/yujin/amd64/indigo-${RELEASE}"
     find /opt/yujin/amd64/indigo-${RELEASE} -name \*.pyc -delete
