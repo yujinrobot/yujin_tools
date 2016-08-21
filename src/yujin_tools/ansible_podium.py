@@ -30,7 +30,8 @@ def parse_docker_args(args, docker_name):
 
     """
     ansible_common.pretty_print_banner("This is the 'podium-docker' play.")
-    tags = ""
+
+    tags = "--tags docker-image" if args.only_image else ""
     cmd = "ansible-playbook concert-{0}_docker.yml --ask-become-pass --ask-vault-pass -i localhost, -c local -e yujin_stream=devel {1}".format(docker_name, tags)
     cmd = ansible_common.append_verbosity_argument(cmd, args.verbose)
     ansible_common.pretty_print_key_value_pairs("Parameters", {"Stream": args.stream}, 10)
