@@ -133,6 +133,7 @@ export remote_dir=${remote_url}:${remote_path}
 # --links     : copy symlinks as symlinks
 
 export OPTIONS="--delete --recursive --links --verbose --compress"
+
 #EXCLUDES=(
 #  --exclude '*.pyc'
 #)
@@ -152,7 +153,7 @@ if [ ! -z "$INSTALL_ROSDEPS" ]; then
     echo ""
     source ${local_dir}/indigo-${RELEASE}/setup.bash
     rosdep install -r --default-yes --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src
-    exit 0   
+    exit 0
 fi
 
 if [ ! -z "$LIST_ROSDEPS" ]; then
@@ -165,8 +166,8 @@ if [ ! -z "$LIST_ROSDEPS" ]; then
     echo "    rosdep keys -r --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src | sort"
     echo ""
     source ${local_dir}/indigo-${RELEASE}/setup.bash
-    rosdep keys -r --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src | sort 
-    exit 0   
+    rosdep keys -r --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src | sort
+    exit 0
 fi
 
 if [ ! -z "$PUSH" ]; then
@@ -183,12 +184,15 @@ if [ ! -z "$PUSH" ]; then
     echo ""
 else
     export remote_timestamp=`ssh ${remote_url} ls ${remote_path}/indigo-${RELEASE}/build-* | sed 's/.*\\///'`
-    export local_timestamp=`ls ${local_dir}/indigo-${RELEASE}/build-* | sed 's/.*\\///'`
+    export local_timestamp=`ls ${local_dir}/indigo-${RELEASE}/build-* 2>/dev/null| sed 's/.*\\///'`
     if [ "${remote_timestamp}" == "${local_timestamp}" ]; then
       echo "Nothing to do: remote and local builds have the same timestamps."
       exit 0
     fi
+    # if we have rsync 3.1.1 we can use --chown=${USER}:users, but alas, not yet...
     rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir}
+    # conveniently set this to the user's permissions
+    chown -R ${USER}:users ${local_dir}
     echo ""
     echo "Clearing *.pyc files from /opt/yujin/amd64/indigo-${RELEASE}"
     find /opt/yujin/amd64/indigo-${RELEASE} -name \*.pyc -delete
