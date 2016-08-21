@@ -9,6 +9,8 @@ import sys
 from . import ansible_common
 from . import ansible_pc
 from . import ansible_podium
+from . import ansible_concert
+from . import ansible_robot
 
 ##############################################################################
 # Methods
@@ -50,7 +52,9 @@ def main(args=sys.argv[1:]):
                                        help='name of an existing playbook',
                                        metavar="<playbook>")
     ansible_pc.add_subparser(subparsers)
+    ansible_robot.add_subparser(subparsers)
     ansible_podium.add_subparser(subparsers)
+    ansible_concert.add_subparser(subparsers)
     options, unused_unknown_args = parser.parse_known_args(args)
 
     options.func(options)  # relay arg parsing to the subparser configured `set_defaults` function callback

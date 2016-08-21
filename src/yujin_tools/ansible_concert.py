@@ -15,10 +15,10 @@ from . import ansible_common
 
 def parse_all_args(args):
     """
-    Run all playbooks required to completely setup robot/concert podium
-    simulations.
+    Run all playbooks required to completely setup a concert.
     """
-    pass
+    ansible_common.pretty_print_banner("This is the 'concert-all' play.")
+    print("Coming soon...")
 
 
 def parse_docker_args(args, docker_name):
@@ -42,10 +42,10 @@ def parse_docker_args(args, docker_name):
 
 def parse_ros_args(args):
     """
-    Starts the ros play for podiums. Currently this is hardcoded to install
-    the devel branch from the internal server. Since the requirements for
-    the robot are subsumed by those for the concert, we only worry about
-    runnign the concert playbook.
+    Starts the ros/gopher software plays. This is actually currently identical to the podium ros installation.
+
+    @too does it need to be different? yes, probably...the apport problem is a good example
+    @todo collapse ansible_podium.parse_ros_args and ansible_concert.parse_ros_args as much as possible
     """
     tags_to_run_list = []
     tags_to_skip_list = []
@@ -74,17 +74,17 @@ def add_subparser(subparsers):
     :param subparsers: the subparsers factory from the parent argparser.
     """
     parsers = {}
-    parsers['all'] = subparsers.add_parser("podium-all",
-                                           description="Install/update everything for podium robot/concert simulations.",  # this shows in the help for this command
-                                           help="run all playbooks required by podium simulations",  # this shows in the parent parser
+    parsers['all'] = subparsers.add_parser("concert-all",
+                                           description="Install/update everything for a concert server.",  # this shows in the help for this command
+                                           help="run all playbooks required by a concert server",  # this shows in the parent parser
                                            formatter_class=argparse.ArgumentDefaultsHelpFormatter
                                            )
     ansible_common.add_devel_stable_arguments(parsers['all'])
     parsers['all'].set_defaults(func=parse_all_args)
 
-    parsers['ros'] = subparsers.add_parser("podium-ros",
-                                           description="Install/update ros software for podium simulations. Note that the requirements for the robot is subsumed by that of the concert, so this installs and updates the needs for both robot and concert.",  # this shows in the help for this command
-                                           help="ros software for podium simulations (robot & concert)",  # this shows in the parent parser
+    parsers['ros'] = subparsers.add_parser("concert-ros",
+                                           description="Install/update ros software for a concert server.",  # this shows in the help for this command
+                                           help="ros software for a concert server",  # this shows in the parent parser
                                            formatter_class=argparse.ArgumentDefaultsHelpFormatter
                                            )
     ansible_common.add_devel_stable_arguments(parsers['ros'])
@@ -92,9 +92,9 @@ def add_subparser(subparsers):
     parsers['ros'].set_defaults(func=parse_ros_args)
 
     for name in ['balcony', 'gateway', 'static']:
-        parsers[name] = subparsers.add_parser("podium-{0}".format(name),
-                                              description="Install/update the {0} docker for podium concert simulations.".format(name),  # this shows in the help for this command
-                                              help="{0} docker for podium concert simulations".format(name),  # this shows in the parent parser
+        parsers[name] = subparsers.add_parser("concert-{0}".format(name),
+                                              description="Install/update the {0} docker for a concert server.".format(name),  # this shows in the help for this command
+                                              help="{0} docker for a concert server".format(name),  # this shows in the parent parser
                                               formatter_class=argparse.ArgumentDefaultsHelpFormatter
                                               )
         ansible_common.add_devel_stable_arguments(parsers[name])
