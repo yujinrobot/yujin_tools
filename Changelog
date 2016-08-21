@@ -1,7 +1,10 @@
+0.4.29
+ - groot_binaries - bugfix missing timestamp lookup
+ - yujin_ansible - pc-* and podium-* frontends ready for usage
 0.4.28
  - groot_binaries - checks timestamps to skip now, faster than rsync checks
 0.4.27
- - yujin_ansible - pc-ros playbook
+ - yujin_ansible - pc-ros playbook started
 0.4.25
  - yujin_ansible_bootstrap
 0.4.24
