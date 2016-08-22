@@ -20,7 +20,7 @@ help:
 	@echo "  deb_deps  : install the package builder dependencies (fpm)."
 	@echo "  deb       : build the deb."
 	@echo "  upload_deb: upload to yujin's repository."
-	@echo "  release   : make pypi package and deb release together."
+	@echo "  release   : make pypi (if open), deb and upload together."
 	@echo "Other"
 	@echo "  clean     : clean build/dist directories."
 
@@ -68,7 +68,10 @@ deb_deps:
 
 deb:
 	rm -f *.deb
+	# from pypi
 	fpm -f -s python -t deb yujin_tools
+	# from setup.py
+	# fpm -f -s python -t deb setup.py
 
 upload_deb:
 	./scripts/yujin_upload_deb python-yujin-tools
