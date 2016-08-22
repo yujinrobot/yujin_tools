@@ -143,6 +143,8 @@ echo ""
 pretty_headr "Installing"
 install_package ansible
 install_package python-yujin-tools
+# uncomment when its ready
+# install_package yujin_ansible_playbooks
 echo ""
 
 pretty_headr "Groups"
