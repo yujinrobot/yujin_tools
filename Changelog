@@ -1,3 +1,5 @@
+0.4.32
+ - yujin_ansible_bootstrap - bootstrap python-yujin-ansible-playbooks
 0.4.31
  - yujin_upload_deb - now available to other users as well
 0.4.30
