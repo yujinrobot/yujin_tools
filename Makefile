@@ -71,7 +71,7 @@ deb:
 	fpm -f -s python -t deb yujin_tools
 
 upload_deb:
-	./scripts/upload_deb
+	./scripts/yujin_upload_deb python-yujin-tools
 
 clean_deb:
 	rm *.deb
