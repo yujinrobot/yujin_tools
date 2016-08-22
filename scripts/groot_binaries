@@ -203,6 +203,12 @@ else
       exit 0
     fi
     rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir}
+    if [ $? -ne 0 ]; then
+      echo -e ""
+      echo -e "${RED}ERROR: failed to connect to${RESET} ${BOLD}'$remote_url'${RESET}${RED}.\n     : are you on the network?\n     : do you have the DNS settings correct?${RESET}"
+      echo -e ""
+      exit 1
+    fi
     echo ""
     echo "Clearing *.pyc files from /opt/yujin/amd64/indigo-${RELEASE}"
     find /opt/yujin/amd64/indigo-${RELEASE} -name \*.pyc -delete
