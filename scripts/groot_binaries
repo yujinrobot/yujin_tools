@@ -1,6 +1,19 @@
 #!/usr/bin/env bash
 
 ###########################
+# Colours
+###########################
+
+export BOLD="\e[1m"
+
+export CYAN="\e[36m"
+export GREEN="\e[32m"
+export YELLOW="\e[33m"
+export RED="\e[31m"
+
+export RESET="\e[0m"
+
+###########################
 # Functions
 ###########################
 

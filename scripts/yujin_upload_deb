@@ -1,11 +1,21 @@
 #!/bin/bash
 
-if (( $# != 1 )); then
-   echo "Usage: $0 <package_name>"
-fi
+###########################
+# Colours
+###########################
 
-CPACK_PACKAGE_NAME= $1
-DEBIAN_FILENAME=`ls ${CPACK_PACKAGE_NAME}*.deb`
+export BOLD="\e[1m"
+
+export CYAN="\e[36m"
+export GREEN="\e[32m"
+export YELLOW="\e[33m"
+export RED="\e[31m"
+
+export RESET="\e[0m"
+
+###########################
+# Constants
+###########################
 
 PACKAGES_URI="packages.yujinrobot.com"
 PACKAGES_URL="http://${PACKAGES_URI}"
@@ -14,6 +24,72 @@ PACKAGES_SCRIPTS_DIR="/data/repos/scripts"
 UBUNTU_ARCH=amd64
 UBUNTU_VERSION_string="trusty"
 COMPONENT_NAME=""
+
+###########################
+# Help
+###########################
+
+show_help ()
+{
+  echo -e ""
+  echo -e "${BOLD}Help${REST}"
+  echo -e ""
+  echo -e "    ${BOLD}Description${RESET}"
+  echo -e "        ${GREEN}Upload a deb to the${RESET} ${YELLOW}${PACKAGES_URI}${RESET} ${GREEN}apt repository.${RESET}"
+  echo -e ""
+  echo -e "    ${BOLD}Usage${RESET}"
+  echo -e "        ${GREEN}$0${RESET} <deb name>"
+  echo -e ""
+  echo -e "    ${BOLD}Example${RESET}"
+  echo -e "        ${GREEN}$0${RESET} python-yujin-tools"
+  echo -e ""
+}
+
+###########################
+# Command Line
+###########################
+
+for i in "$@"
+do
+case $i in
+    --help)
+    SHOW_HELP=1
+    shift
+    ;;
+    *)
+    if [ -z ${CPACK_PACKAGE_NAME+x} ]; then CPACK_PACKAGE_NAME=$i; shift; fi
+    ;;
+esac
+done
+
+###########################
+# Show Help
+###########################
+
+if [ ! -z "$SHOW_HELP" ]; then
+  show_help
+  exit 0
+fi
+
+if [ -z ${CPACK_PACKAGE_NAME+x} ]; then
+  echo -e ""
+  echo -e "${RED}ERROR: package name, but none was provided.${RESET}"
+  show_help
+  exit 0
+fi
+
+###########################
+# Go
+###########################
+
+DEBIAN_FILENAME=`ls ${CPACK_PACKAGE_NAME}*.deb 2>/dev/null`
+
+if [[ $? != 0 ]]; then
+  echo -e ""
+  echo -e "${RED}ERROR: deb for${RESET} ${BOLD}'${CPACK_PACKAGE_NAME}'${RESET} ${RED}not found.${RESET}"
+  echo -e ""
+  exit 0
+fi
 
 ssh ${PACKAGES_SSH} "rm -f ~/${DEBIAN_FILENAME}"
 echo " -- ssh ${PACKAGES_SSH} -t '/data/repos/scripts/rem_deb ${UBUNTU_VERSION_string} ${CPACK_PACKAGE_NAME}'"
