@@ -115,15 +115,16 @@ if [ "${DISTRIB_CODENAME}" == "trusty" ]; then
   # stuck with having to use a future ansible, drop this need asap if we can
   # as it is likely to cause us integration headaches with modules needing non
   # system supported dependencies
-  pretty_print "  ansible................ppa:ansible/ansible"
+  pretty_print "  ansible........................ppa:ansible/ansible"
   if [ ! -f /etc/apt/sources.list.d/ansible-ansible-trusty.list ]; then
     sudo apt-add-repository ppa:ansible/ansible
   fi
 else
-  pretty_print "  ansible................system"
+  pretty_print "  ansible........................system"
 fi
 
-pretty_print "  python-yujin-tools.....packages.yujinrobot.com"
+pretty_print "  python-yujin-tools.............packages.yujinrobot.com"
+pretty_print "  python-yujin-ansible-tools.....packages.yujinrobot.com"
 if [ ! -f /etc/apt/sources.list.d/yujin.list ]; then
   echo "deb http://packages.yujinrobot.com/yujin/ubuntu ${DISTRIB_CODENAME} main" > /tmp/yujin.list
   sudo mv /tmp/yujin.list /etc/apt/sources.list.d/yujin.list
@@ -134,10 +135,10 @@ echo ""
 pretty_headr "Apt-Get Update"
 sudo apt-get update > /dev/null 2>&1
 if [ $? -ne 0 ]; then
-  pretty_error "  update.................failed"
+  pretty_error "  update.........................failed"
   exit 0
 fi
-pretty_print "  update.................ok"
+pretty_print "  update.........................ok"
 echo ""
 
 pretty_headr "Installing"
@@ -153,11 +154,11 @@ sudo groupadd docker 2>/dev/null
 sudo groupadd users 2>/dev/null
 
 dialout_added=$( added_user "`sudo adduser ${USER} dialout`")
-pretty_print "  dialout................$dialout_added"
+pretty_print "  dialout........................$dialout_added"
 docker_added=$( added_user "`sudo adduser ${USER} docker`")
-pretty_print "  docker.................$docker_added"
+pretty_print "  docker.........................$docker_added"
 users_added=$( added_user "`sudo adduser ${USER} users`")
-pretty_print "  users..................$users_added"
+pretty_print "  users..........................$users_added"
 echo ""
 
 pretty_headr "Summary"
