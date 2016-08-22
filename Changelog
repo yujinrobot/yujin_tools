@@ -1,3 +1,5 @@
+0.4.31
+ - yujin_upload_deb - now available to other users as well
 0.4.30
  - yujin_ansible - migrated to yujin_ansible_playbooks
  - groot_binaries - bugfix missing timestamp lookup
