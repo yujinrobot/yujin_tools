@@ -50,7 +50,7 @@ pretty_headr ()
 install_package ()
 {
   PACKAGE_NAME=$1
-  sudo apt-get -q install ${PACKAGE_NAME} > /dev/null
+  sudo apt-get -q -y install ${PACKAGE_NAME} > /dev/null
   if [ $? -ne 0 ]; then
     pretty_error "  ${PACKAGE_NAME}............failed"
     exit 0
