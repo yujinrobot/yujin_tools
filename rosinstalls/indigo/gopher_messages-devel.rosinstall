@@ -6,11 +6,11 @@
 # - parameters
 #
 # Messages
-- git: { local-name: 'gopher_msgs',                   version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
-- git: { local-name: 'rocon_msgs',                    version: 'gopher-devel', uri: 'https://github.com/robotics-in-concert/rocon_msgs.git'}
-- git: { local-name: 'py_trees_msgs',                 version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/py_trees_msgs.git'}
-- git: { local-name: 'somanet_msgs',                  version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/somanet_msgs.git'}
-- git: { local-name: 'environment_interactions_msgs', version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}
+- git: { local-name: 'environment_interactions_msgs', version: 'devel', uri: 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}
+- git: { local-name: 'gopher_msgs',                   version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
+- git: { local-name: 'py_trees_msgs',                 version: 'devel', uri: 'https://bitbucket.org/yujinrobot/py_trees_msgs.git'}
+- git: { local-name: 'rocon_msgs',                    version: 'devel', uri: 'https://github.com/robotics-in-concert/rocon_msgs.git'}
+- git: { local-name: 'somanet_msgs',                  version: 'devel', uri: 'https://bitbucket.org/yujinrobot/somanet_msgs.git'}
 - git: { local-name: 'yocs_msgs',                     version: 'gopher-devel', uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
 
 # Base
