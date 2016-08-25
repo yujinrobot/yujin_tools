@@ -1,5 +1,0 @@
-- git: {local-name: message_multiplexing, version: 0.2.2, uri: 'https://github.com/stonier/message_multiplexing.git'}
-- git: {local-name: nanomsg, version: 0.4.1, uri: 'https://github.com/stonier/nanomsg.git'}
-- git: {local-name: dslam_bag, version: 0.3.1, uri: 'https://bitbucket.org/yujinrobot/graveyard_dslam_bag.git'}
-- git: {local-name: dslam, version: 0.4.0, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
-- git: {local-name: dslam_desktop, version: 0.4.0, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
