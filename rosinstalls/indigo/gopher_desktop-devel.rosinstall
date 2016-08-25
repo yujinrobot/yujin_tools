@@ -4,7 +4,7 @@
 #
 # Bundling everything in gopher_desktop for now, but this could be split up.
 
-- git: { local-name: 'gopher_desktop', version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}
-- git: { local-name: 'rocon_qt_gui',   version: 'gopher-devel', uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}
-- git: { local-name: 'rqt_wrapper',    version: 'indigo-devel', uri: 'https://github.com/stonier/rqt_wrapper.git'}
-- git: { local-name: 'rqt_py_trees',   version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/rqt_py_trees.git'}
+- git: { local-name: 'gopher_desktop', version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}
+- git: { local-name: 'rocon_qt_gui',   version: 'devel', uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}
+- git: { local-name: 'rqt_wrapper',    version: 'devel', uri: 'https://github.com/stonier/rqt_wrapper.git'}
+- git: { local-name: 'rqt_py_trees',   version: 'devel', uri: 'https://bitbucket.org/yujinrobot/rqt_py_trees.git'}
