@@ -3,27 +3,27 @@
 # Software for bootstrapping robot/simulation/concert/desktop software, no direct hardware dependencies here!
 
 # Rocon
-- git: { local-name: 'rocon_multimaster',             version: 'gopher-devel', uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
-- git: { local-name: 'rocon_tools',                   version: 'gopher-devel', uri: 'https://github.com/robotics-in-concert/rocon_tools.git'}
-- git: { local-name: 'rocon_app_platform',            version: 'gopher-devel', uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git'}
+- git: { local-name: 'rocon_multimaster',     version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
+- git: { local-name: 'rocon_tools',           version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_tools.git'}
+- git: { local-name: 'rocon_app_platform',    version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git'}
 
 # Gopher
-- git: { local-name: 'gopher_rapps',                  version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}
-- git: { local-name: 'gopher_common',                 version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
-- git: { local-name: 'gopher_web_ui',                 version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
-- git: { local-name: 'gopher_crazy_hospital',         version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
-- git: { local-name: 'py_trees_suite',                version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/py_trees_suite.git'}
+- git: { local-name: 'gopher_rapps',          version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}
+- git: { local-name: 'gopher_common',         version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
+- git: { local-name: 'gopher_web_ui',         version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
+- git: { local-name: 'gopher_crazy_hospital', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
+- git: { local-name: 'py_trees_suite',        version: 'devel',        uri: 'https://github.com/stonier/py_trees_suite'}
 
 # Rostful and Celeros
-- git: { local-name: 'rostful',                       version: 'gopher-devel', uri: 'https://github.com/asmodehn/rostful.git'}
-- git: { local-name: 'celeros',                       version: 'gopher-devel', uri: 'https://github.com/asmodehn/celeros.git'}
-- git: { local-name: 'pyros',                         version: 'gopher-devel', uri: 'https://github.com/asmodehn/pyros.git'}
+- git: { local-name: 'rostful',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/rostful.git'}
+- git: { local-name: 'celeros',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/celeros.git'}
+- git: { local-name: 'pyros',                 version: 'gopher-devel', uri: 'https://github.com/asmodehn/pyros.git'}
 
 # Environment Integrations
-- git: { local-name: 'elevator_interactions',         version: 'indigo-devel', uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
+- git: { local-name: 'elevator_interactions', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
 
 # until fixed version of audio has been released
-- git: { local-name: 'audio_common',                  version: 'gopher',       uri: 'https://github.com/yujinrobot/audio_common.git'}
+- git: { local-name: 'audio_common',          version: 'gopher',       uri: 'https://github.com/yujinrobot/audio_common.git'}
 # until I know why the 1.8.10 deb version doesn't properly unload while the 1.8.10 source version does (debug vs release?)
-- git: { local-name: 'diagnostics',                   version: 'indigo-devel', uri: 'https://github.com/ros/diagnostics.git'}
+- git: { local-name: 'diagnostics',           version: 'indigo-devel', uri: 'https://github.com/ros/diagnostics.git'}
 
