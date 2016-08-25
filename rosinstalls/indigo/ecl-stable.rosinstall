@@ -1,7 +1,7 @@
 [
-{'git': {'local-name': 'ecl_tools', 'version': 'indigo-stable', 'uri':'https://github.com/stonier/ecl_tools.git'}},
-{'git': {'local-name': 'ecl_lite', 'version': 'indigo-stable', 'uri':'https://github.com/stonier/ecl_lite.git'}},
-{'git': {'local-name': 'ecl_core', 'version': 'indigo-stable', 'uri':'https://github.com/stonier/ecl_core.git'}},
-{'git': {'local-name': 'ecl_navigation', 'version': 'indigo-stable', 'uri':'https://github.com/stonier/ecl_navigation.git'}},
-{'git': {'local-name': 'ecl_manipulation', 'version': 'indigo-stable', 'uri':'https://github.com/stonier/ecl_manipulation.git'}},
+{'git': {'local-name': 'ecl_tools',        'version': 'release/0.61-indigo-kinetic', 'uri':'https://github.com/stonier/ecl_tools.git'}},
+{'git': {'local-name': 'ecl_lite',         'version': 'release/0.61-indigo-kinetic', 'uri':'https://github.com/stonier/ecl_lite.git'}},
+{'git': {'local-name': 'ecl_core',         'version': 'release/0.61-indigo-kinetic', 'uri':'https://github.com/stonier/ecl_core.git'}},
+{'git': {'local-name': 'ecl_navigation',   'version': 'release/0.60-indigo-kinetic', 'uri':'https://github.com/stonier/ecl_navigation.git'}},
+{'git': {'local-name': 'ecl_manipulation', 'version': 'release/0.60-indigo-kinetic', 'uri':'https://github.com/stonier/ecl_manipulation.git'}},
 ]
