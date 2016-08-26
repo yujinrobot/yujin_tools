@@ -1,3 +1,5 @@
+0.4.34
+ - yujin_ansible_bootstrap : succeed, even if apt-get tries to be interactive
 0.4.33
  - groot_binaries : reflect error when rsync fails
  - yujin_upload_deb : more robust deb handling
