@@ -196,8 +196,15 @@ if [ ! -z "$PUSH" ]; then
     #fi
     echo ""
 else
-    export remote_timestamp=`ssh ${remote_url} ls ${remote_path}/indigo-${RELEASE}/build-* | sed 's/.*\\///'`
-    export local_timestamp=`ls ${local_dir}/indigo-${RELEASE}/build-* 2>/dev/null| sed 's/.*\\///'`
+    remote_listing=`ssh ${remote_url} ls ${remote_path}/indigo-${RELEASE}/build-*`
+    if [ $? -ne 0 ]; then
+      echo -e ""
+      echo -e "${RED}ERROR: could not connect to${RESET} ${BOLD}'$remote_url'${RESET}${RED}.\n     : are you on the network?\n     : do you have the DNS settings correct?${RESET}"
+      echo -e ""
+      exit 1
+    fi
+    export remote_timestamp=`echo ${remote_listing} | sed 's/.*\\///'`
+    export local_timestamp=`ls ${local_dir}/indigo-${RELEASE}/build-* 2>/dev/null | sed 's/.*\\///'`
     if [ "${remote_timestamp}" == "${local_timestamp}" ]; then
       echo "Nothing to do: remote and local builds have the same timestamps."
       exit 0
@@ -205,7 +212,7 @@ else
     rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir}
     if [ $? -ne 0 ]; then
       echo -e ""
-      echo -e "${RED}ERROR: failed to connect to${RESET} ${BOLD}'$remote_url'${RESET}${RED}.\n     : are you on the network?\n     : do you have the DNS settings correct?${RESET}"
+      echo -e "${RED}ERROR: failed to sync with${RESET} ${BOLD}'$remote_url'${RESET}${RED}.\n     : are you on the network?\n     : do you have the DNS settings correct?${RESET}"
       echo -e ""
       exit 1
     fi
