@@ -11,7 +11,7 @@
 - git: {local-name: 'navigation',              version: 'release/1.12-indigo-yujin-modified', uri: 'https://github.com/yujinrobot/navigation.git'}
 - git: {local-name: 'navigation_layers',       version: 'release/0.2-indigo-yujin-modified',  uri: 'https://github.com/yujinrobot/navigation_layers.git'}
 - git: {local-name: 'obstacle_detection',      version: 'release/0.1-indigo',                 uri: 'https://bitbucket.org/yujinrobot/obstacle_detection.git'}
-- git: {local-name: 'sophus_ros_toolkit',      version: 'release/0.1-indigo',                 uri: 'https://github.com/stonier/sophus_ros_toolkit.git'}
+- git: {local-name: 'sophus_ros_toolkit',      version: 'release/0.1-indigo-kinetic',         uri: 'https://github.com/stonier/sophus_ros_toolkit.git'}
 - git: {local-name: 'yujin_ocs',               version: 'release/0.9-indigo-gopher',          uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
 
 # Binary Repos
