@@ -4,6 +4,9 @@
 - git: {local-name: qglv_toolkit,           version: devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
 - git: {local-name: elf,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/elf.git'}
 
+# open source releases, changing alot
+- git: {local-name: 'sophus_ros_toolkit',      version: 'devel', uri: 'https://github.com/stonier/sophus_ros_toolkit.git'}
+
 # open source releases, pretty stable
 # - git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
 # - git: {local-name: nanomsg, version: indigo, uri: 'https://github.com/stonier/nanomsg.git'}
