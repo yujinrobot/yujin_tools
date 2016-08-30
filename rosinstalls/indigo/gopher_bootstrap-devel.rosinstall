@@ -23,7 +23,7 @@
 - git: { local-name: 'elevator_interactions', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
 
 # until fixed version of audio has been released
-- git: { local-name: 'audio_common',          version: 'gopher',       uri: 'https://github.com/yujinrobot/audio_common.git'}
+# - git: { local-name: 'audio_common',          version: 'gopher',       uri: 'https://github.com/yujinrobot/audio_common.git'}
 # until I know why the 1.8.10 deb version doesn't properly unload while the 1.8.10 source version does (debug vs release?)
 - git: { local-name: 'diagnostics',           version: 'indigo-devel', uri: 'https://github.com/ros/diagnostics.git'}
 
