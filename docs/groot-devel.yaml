@@ -55,6 +55,7 @@ ecl:
  - ecl_manipulators
  - ecl_mobile_robot
 gopher:
+ - gopher_3d_extrinsics
  - gopher_robot
  - somanet_node
 navigation:
