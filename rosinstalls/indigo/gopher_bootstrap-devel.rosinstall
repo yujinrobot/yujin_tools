@@ -21,6 +21,7 @@
 - git: { local-name: 'rostful',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/rostful.git'}
 - git: { local-name: 'celeros',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/celeros.git'}
 - git: { local-name: 'pyros',                 version: 'gopher-devel', uri: 'https://github.com/asmodehn/pyros.git'}
+- git: { local-name: 'pyros-config',                 version: 'release/indigo/pyros_config', uri: 'https://github.com/asmodehn/pyros-config-rosrelease.git'}
 
 # Environment Integrations
 - git: { local-name: 'elevator_interactions', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
