@@ -3,6 +3,7 @@ messages:
  - gopher_configuration
 bootstrap:
  - elevator_operator
+ - feed_the_troll
  - gopher_behaviours
  - gopher_bootstrap
  - gopher_customisation
