@@ -16,6 +16,5 @@
 
 # Base
 - git: { local-name: 'gopher_configuration',          version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}
-- git: { local-name: 'feed_the_troll',        version: 'devel',        uri: 'https://github.com/stonier/feed_the_troll.git'}
 
 
