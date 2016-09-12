@@ -15,6 +15,8 @@ bootstrap:
  - rocon_python_comms
  - rocon_python_utils
  - rocon_uri
+concert:
+ - gopher_concert_restful
 desktop:
  - gopher_podium
  - gopher_desktop_utilities
