@@ -11,6 +11,7 @@ bootstrap:
  - gopher_networking
  - gopher_robot_restful
  - gopher_semantics
+ - gopher_version
  - py_trees
  - rocon_python_comms
  - rocon_python_utils
