@@ -9,11 +9,15 @@ bootstrap:
  - gopher_customisation
  - gopher_diagnostics
  - gopher_networking
+ - gopher_robot_restful
  - gopher_semantics
+ - gopher_version
  - py_trees
  - rocon_python_comms
  - rocon_python_utils
  - rocon_uri
+concert:
+ - gopher_concert_restful
 desktop:
  - gopher_podium
  - gopher_desktop_utilities
