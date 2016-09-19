@@ -34,6 +34,6 @@
 - git: { local-name: 'rosdoc_lite',           version: 'master',       uri: 'https://github.com/stonier/rosdoc_lite.git'}
 # Until we've moved off of indigo (our upstream changes are in, but not in indigo release)
 - git: { local-name: 'audio_common',          version: 'gopher',       uri: 'https://github.com/yujinrobot/audio_common.git'}
-# until I know why the 1.8.10 deb version doesn't properly unload while the 1.8.10 source version does (debug vs release?)
-- git: { local-name: 'diagnostics',           version: 'indigo-devel', uri: 'https://github.com/ros/diagnostics.git'}
+# until we have fixes for the service unloading problem - https://github.com/ros/diagnostics/issues/50 
+- git: { local-name: 'diagnostics',           version: 'handling_unloading_properly', uri: 'https://github.com/yujinrobot/diagnostics.git'}
 
