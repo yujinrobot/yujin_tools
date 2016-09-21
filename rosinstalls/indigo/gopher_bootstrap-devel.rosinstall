@@ -27,6 +27,7 @@
 - git: { local-name: 'gopher_robot_restful',  version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_robot_restful'}
 
 # Environment Integrations
+- git: { local-name: 'door_interactions',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/door_interactions.git'}
 - git: { local-name: 'elevator_interactions', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
 
 # Until https://github.com/ros-infrastructure/rosdoc_lite/pull/70 is in

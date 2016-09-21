@@ -2,6 +2,7 @@
 messages:
  - gopher_configuration
 bootstrap:
+ - door_operator
  - elevator_operator
  - feed_the_troll
  - gopher_behaviours
