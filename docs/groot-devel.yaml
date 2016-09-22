@@ -2,7 +2,6 @@
 messages:
  - gopher_configuration
 bootstrap:
- - ansible_playbooks
  - door_operator
  - elevator_operator
  - feed_the_troll
