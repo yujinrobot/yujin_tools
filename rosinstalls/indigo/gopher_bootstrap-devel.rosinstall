@@ -27,7 +27,7 @@
 - git: { local-name: 'gopher_robot_restful',  version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_robot_restful'}
 
 # Deployment
-- git: { local-name: 'ansible_playbooks',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/ansible_playbooks'}
+- git: { local-name: 'yujin_ansible',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
 
 # Environment Integrations
 - git: { local-name: 'door_interactions',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/door_interactions.git'}
