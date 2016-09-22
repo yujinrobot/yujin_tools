@@ -17,6 +17,7 @@ bootstrap:
  - rocon_python_comms
  - rocon_python_utils
  - rocon_uri
+ - yujin_ansible
 concert:
  - gopher_concert_restful
 desktop:
