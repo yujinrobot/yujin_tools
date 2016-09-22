@@ -1,6 +1,7 @@
 - git: {local-name: dslam_bag,              version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam_bag.git'}
 - git: {local-name: dslam,                  version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
 - git: {local-name: dslam_desktop,          version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
+- git: {local-name: imu,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/imu.git'}
 - git: {local-name: qglv_toolkit,           version: devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
 - git: {local-name: elf,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/elf.git'}
 
