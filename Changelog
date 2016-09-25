@@ -1,3 +1,5 @@
+0.4.38
+ - groot_binaries : do checksum on files the same size (ignore the timestamps)
 0.4.37
  - groot_binaries : pre-clean pyc files before pushing to the server
 0.4.36
