@@ -1,3 +1,5 @@
+0.4.37
+ - groot_binaries : pre-clean pyc files before pushing to the server
 0.4.36
  - groot_binaries : critical bugfix to preserve times so it doesnt seem new and need copying over
 0.4.35

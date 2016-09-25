@@ -191,6 +191,9 @@ fi
 
 if [ ! -z "$PUSH" ]; then
     echo ""
+    echo "Pre-clearing *.pyc files from /opt/yujin/amd64/indigo-${RELEASE}"
+    find ${local_dir}/indigo-${RELEASE} -name \*.pyc -delete
+    echo ""
     echo "Pushing changes to the file server '${remote_dir}'."
     # Need to automate this script on jenkins.
     #echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
