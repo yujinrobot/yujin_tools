@@ -140,13 +140,19 @@ else
 fi
 export remote_dir=${remote_url}:${remote_path}
 
-# Options
+# Options - you basically want to mostly replicate the -a option (good set of defaults), but we don't want owner transferred
+# 
 # --delete    : files from the destination directories
-# --recursive : recurse into directories
-# --links     : copy symlinks as symlinks
+#
+# -a options we like:
+#   --recursive : recurse into directories
+#   --links     : copy symlinks as symlinks
+#   --perms     : preserve permissions
+#   --times     : preserve times (dont do this and it will always recopy)
 
-export OPTIONS="--delete --recursive --links --verbose --compress"
+export OPTIONS="--delete --recursive --links --compress --times --perms --verbose"
 
+# not necessary now - it is the server's responsibility to not have these
 #EXCLUDES=(
 #  --exclude '*.pyc'
 #)
