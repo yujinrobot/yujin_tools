@@ -140,9 +140,11 @@ else
 fi
 export remote_dir=${remote_url}:${remote_path}
 
+
 # Options - you basically want to mostly replicate the -a option (good set of defaults), but we don't want owner transferred
 # 
-# --delete    : files from the destination directories
+# --delete   : files from the destination directories
+# --checksum : if files are the same size (but different timestamps), do a checksum on them to see whether to transfer or not 
 #
 # -a options we like:
 #   --recursive : recurse into directories
@@ -150,7 +152,7 @@ export remote_dir=${remote_url}:${remote_path}
 #   --perms     : preserve permissions
 #   --times     : preserve times (dont do this and it will always recopy)
 
-export OPTIONS="--delete --recursive --links --compress --times --perms --verbose"
+export OPTIONS="--delete --recursive --links --compress --times --perms --checksum --verbose"
 
 # not necessary now - it is the server's responsibility to not have these
 #EXCLUDES=(
