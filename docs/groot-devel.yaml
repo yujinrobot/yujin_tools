@@ -2,6 +2,7 @@
 messages:
  - gopher_configuration
 bootstrap:
+ - door_operator
  - elevator_operator
  - feed_the_troll
  - gopher_behaviours
@@ -16,6 +17,7 @@ bootstrap:
  - rocon_python_comms
  - rocon_python_utils
  - rocon_uri
+ - yujin_ansible
 concert:
  - gopher_concert_restful
 desktop:

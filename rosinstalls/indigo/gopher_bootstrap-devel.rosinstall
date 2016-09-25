@@ -25,15 +25,18 @@
 
 # Web
 - git: { local-name: 'gopher_robot_restful',  version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_robot_restful'}
-- git: { local-name: 'gopher_swagger_ui',     version: 'devel',       uri: 'https://bitbucket.org/yujinrobot/gopher_swagger_ui'}
+
+# Deployment
+- git: { local-name: 'yujin_ansible',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
 
 # Environment Integrations
+- git: { local-name: 'door_interactions',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/door_interactions.git'}
 - git: { local-name: 'elevator_interactions', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
 
 # Until https://github.com/ros-infrastructure/rosdoc_lite/pull/70 is in
 - git: { local-name: 'rosdoc_lite',           version: 'master',       uri: 'https://github.com/stonier/rosdoc_lite.git'}
 # Until we've moved off of indigo (our upstream changes are in, but not in indigo release)
 - git: { local-name: 'audio_common',          version: 'gopher',       uri: 'https://github.com/yujinrobot/audio_common.git'}
-# until I know why the 1.8.10 deb version doesn't properly unload while the 1.8.10 source version does (debug vs release?)
-- git: { local-name: 'diagnostics',           version: 'indigo-devel', uri: 'https://github.com/ros/diagnostics.git'}
+# until we have fixes for the service unloading problem - https://github.com/ros/diagnostics/issues/50 
+- git: { local-name: 'diagnostics',           version: 'handling_unloading_properly', uri: 'https://github.com/yujinrobot/diagnostics.git'}
 
