@@ -1,3 +1,5 @@
+0.4.36
+ - groot_binaries : critical bugfix to preserve times so it doesnt seem new and need copying over
 0.4.35
  - groot_binaries : proper return code when build timestamp connection fails
 0.4.34
