@@ -1,3 +1,5 @@
+0.4.39
+ - groot_binaries : hide directory only updates
 0.4.38
  - groot_binaries : do checksum on files the same size (ignore the timestamps)
 0.4.37
