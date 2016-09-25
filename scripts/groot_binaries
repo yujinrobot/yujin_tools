@@ -201,7 +201,7 @@ if [ ! -z "$PUSH" ]; then
     #echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
     #read answer
     #if [ "$answer" == "y" ]; then
-        rsync ${OPTIONS} ${local_dir}/indigo-${RELEASE} ${remote_dir}
+        rsync ${OPTIONS} ${local_dir}/indigo-${RELEASE} ${remote_dir} | grep -E '^deleting|[^/]$'  # the grep is to remove directory only output to stdout (e.g. indigo-devel/share/rocon_concert/)
     #else
     #    echo "Aborting."
     #fi
@@ -220,7 +220,7 @@ else
       echo "Nothing to do: remote and local builds have the same timestamps."
       exit 0
     fi
-    rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir}
+    rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir} | grep -E '^deleting|[^/]$'  # the grep is to remove directory only output to stdout (e.g. indigo-devel/share/rocon_concert/)
     if [ $? -ne 0 ]; then
       echo -e ""
       echo -e "${RED}ERROR: failed to sync with${RESET} ${BOLD}'$remote_url'${RESET}${RED}.\n     : are you on the network?\n     : do you have the DNS settings correct?${RESET}"
