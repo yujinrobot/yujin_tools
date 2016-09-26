@@ -220,6 +220,10 @@ else
       echo "Nothing to do: remote and local builds have the same timestamps."
       exit 0
     fi
+    echo ""
+    echo "Clearing *.pyc files from /opt/yujin/amd64/indigo-${RELEASE}"
+    find /opt/yujin/amd64/indigo-${RELEASE} -name \*.pyc -delete
+    echo ""
     rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir} | grep -E '^deleting|[^/]$'  # the grep is to remove directory only output to stdout (e.g. indigo-devel/share/rocon_concert/)
     if [ $? -ne 0 ]; then
       echo -e ""
@@ -227,8 +231,7 @@ else
       echo -e ""
       exit 1
     fi
-    echo ""
-    echo "Clearing *.pyc files from /opt/yujin/amd64/indigo-${RELEASE}"
+    # just in case the server misbehaved and sent us pyc files, clear them!
     find /opt/yujin/amd64/indigo-${RELEASE} -name \*.pyc -delete
     echo ""
     echo "You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies."
