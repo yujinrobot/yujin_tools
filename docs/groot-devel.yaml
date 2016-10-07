@@ -2,7 +2,7 @@
 messages:
  - gopher_configuration
 bootstrap:
- - door_operator
+# - door_operator     not a currently used package, but we sometimes build the docs to make available for medicart
  - elevator_operator
  - feed_the_troll
  - gopher_behaviours
