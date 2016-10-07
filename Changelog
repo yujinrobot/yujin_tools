@@ -1,3 +1,5 @@
+0.4.41
+ - groot_binaries : skip the buildstamp check now rsync is working
 0.4.40
  - groot_binaries : pre-clear pyc files before sync
 0.4.39
