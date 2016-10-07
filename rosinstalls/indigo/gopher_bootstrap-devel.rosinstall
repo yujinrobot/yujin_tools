@@ -30,7 +30,8 @@
 - git: { local-name: 'yujin_ansible',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
 
 # Environment Integrations
-- git: { local-name: 'door_interactions',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/door_interactions.git'}
+# doors is only for documentation builds for now...its along way out of date and we dont use it
+# - git: { local-name: 'door_interactions',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/door_interactions.git'}
 - git: { local-name: 'elevator_interactions', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
 
 # Until https://github.com/ros-infrastructure/rosdoc_lite/pull/70 is in
