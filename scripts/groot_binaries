@@ -207,19 +207,20 @@ if [ ! -z "$PUSH" ]; then
     #fi
     echo ""
 else
-    remote_listing=`ssh ${remote_url} ls ${remote_path}/indigo-${RELEASE}/build-*`
-    if [ $? -ne 0 ]; then
-      echo -e ""
-      echo -e "${RED}ERROR: could not connect to${RESET} ${BOLD}'$remote_url'${RESET}${RED}.\n     : are you on the network?\n     : do you have the DNS settings correct?${RESET}"
-      echo -e ""
-      exit 1
-    fi
-    export remote_timestamp=`echo ${remote_listing} | sed 's/.*\\///'`
-    export local_timestamp=`ls ${local_dir}/indigo-${RELEASE}/build-* 2>/dev/null | sed 's/.*\\///'`
-    if [ "${remote_timestamp}" == "${local_timestamp}" ]; then
-      echo "Nothing to do: remote and local builds have the same timestamps."
-      exit 0
-    fi
+    # SKIP - now we have rsync working properly, this is not entirely necessary
+    # remote_listing=`ssh ${remote_url} ls ${remote_path}/indigo-${RELEASE}/build-*`
+    # if [ $? -ne 0 ]; then
+    #   echo -e ""
+    #   echo -e "${RED}ERROR: could not connect to${RESET} ${BOLD}'$remote_url'${RESET}${RED}.\n     : are you on the network?\n     : do you have the DNS settings correct?${RESET}"
+    #   echo -e ""
+    #   exit 1
+    # fi
+    # export remote_timestamp=`echo ${remote_listing} | sed 's/.*\\///'`
+    # export local_timestamp=`ls ${local_dir}/indigo-${RELEASE}/build-* 2>/dev/null | sed 's/.*\\///'`
+    # if [ "${remote_timestamp}" == "${local_timestamp}" ]; then
+    #   echo "Nothing to do: remote and local builds have the same timestamps."
+    #   exit 0
+    # fi
     echo ""
     echo "Clearing *.pyc files from /opt/yujin/amd64/indigo-${RELEASE}"
     find /opt/yujin/amd64/indigo-${RELEASE} -name \*.pyc -delete
