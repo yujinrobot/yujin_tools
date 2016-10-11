@@ -25,6 +25,7 @@
 
 # Web
 - git: { local-name: 'gopher_robot_restful',  version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_robot_restful'}
+- git: { local-name: 'gopher_web_releases',   version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_releases'}
 
 # Deployment
 - git: { local-name: 'yujin_ansible',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
