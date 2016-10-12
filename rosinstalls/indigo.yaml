@@ -95,8 +95,8 @@ kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/i
 turtlebot: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/turtlebot.rosinstall'
 
 # rocon
-rocon: [rocon_devel]
-rocon_devel: 'https://raw.github.com/robotics-in-concert/rocon/indigo/rocon.rosinstall'
+rocon: 'https://raw.github.com/robotics-in-concert/rocon/release/indigo/rocon.rosinstall'
+rocon_devel: 'https://raw.github.com/robotics-in-concert/rocon/release/indigo/rocon.rosinstall'
 rosjava: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava.rosinstall'
 rosjava_minimal: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_minimal.rosinstall'
 rosjava_messages: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_messages.rosinstall'
