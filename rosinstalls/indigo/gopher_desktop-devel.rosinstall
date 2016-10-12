@@ -8,3 +8,6 @@
 - git: { local-name: 'rocon_qt_gui',   version: 'devel', uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}
 - git: { local-name: 'rqt_wrapper',    version: 'devel', uri: 'https://github.com/stonier/rqt_wrapper.git'}
 - git: { local-name: 'rqt_py_trees',   version: 'devel', uri: 'https://github.com/stonier/rqt_py_trees.git'}
+
+# Awaiting https://github.com/ethz-asl/rqt_multiplot_plugin/pull/10
+- git: { local-name: 'rqt_multiplot_plugin',   version: 'master', uri: 'https://github.com/yujinrobot/rqt_multiplot_plugin.git'}
