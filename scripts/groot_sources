@@ -33,6 +33,7 @@ show_help ()
   echo "        --delete                                        : delete workspaces"
   echo "        --update                                        : run wstool update on each workspace"
   echo "        --status                                        : run wstool status on each workspace"
+  echo "        --make                                          : run yujin_make on each workspace"
   echo "        --branches                                      : show what branches are used in each workspace"
   echo "        -d, --source-directory=<directory>              : specify custom source directory"
   echo ""
@@ -69,6 +70,10 @@ case $i in
     ;;
     --update)
     UPDATE=1
+    shift
+    ;;
+    --make)
+    MAKE=1
     shift
     ;;
     --list)
@@ -228,13 +233,13 @@ update_sources ()
     repo_key=${ALL_REPO_KEYS[${repo}]}
     if contains ${repo} ${ALL_REPOS[@]}; then
       if [ ! -d "${GROOT}/${repo}_${WS}" ]; then
-	echo "${repo} not found, redownloading."
-	cd ${GROOT}
-	echo "  Downloading ${repo}."
-	yujin_init_workspace -j${JOBS} ${repo}_${WS} ${repo_key}
-	cd ${GROOT}/${repo}_${WS}
-	echo "  Configuring ${repo}."
-	yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]}" .
+        echo "${repo} not found, redownloading."
+        cd ${GROOT}
+        echo "  Downloading ${repo}."
+        yujin_init_workspace -j${JOBS} ${repo}_${WS} ${repo_key}
+        cd ${GROOT}/${repo}_${WS}
+        echo "  Configuring ${repo}."
+        yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]}" .
       else
         echo "  Cleaning *.pyc files from ${GROOT}/${repo}_${WS}"
         find ${GROOT}/${repo}_${WS} -name \*.pyc -delete
@@ -245,6 +250,32 @@ update_sources ()
       echo "       yujin_init_workspace -j${JOBS} --merge ${repo_key}"
       echo ""
       yujin_init_workspace -j${JOBS} --merge ${repo_key}
+    else
+      echo ""
+      echo "ERROR : ${repo} is not a valid workspace, choose from"
+      echo "      :   [${ALL_REPOS[@]}]"
+      echo ""
+    fi
+  done
+  echo ""
+  echo "You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies."
+  echo ""
+}
+
+make_sources ()
+{
+  echo "Building groot."
+  for ((i=0;i<${#REPOS[@]};++i)); do
+    repo=${REPOS[i]}
+    repo_key=${ALL_REPO_KEYS[${repo}]}
+    if contains ${repo} ${ALL_REPOS[@]}; then
+      if [ ! -d "${GROOT}/${repo}_${WS}" ]; then
+        echo "${repo} not found, skipping."
+      else
+        echo "  Building ${repo}"
+        cd ${GROOT}/${repo}_${WS}
+        yujin_make
+      fi
     else
       echo ""
       echo "ERROR : ${repo} is not a valid workspace, choose from"
@@ -341,6 +372,14 @@ fi
 
 if [ ! -z "${UPDATE}" ]; then
   update_sources
+  if [ ! -z "${MAKE}" ]; then
+    make_sources
+  fi
+  exit 0
+fi
+
+if [ ! -z "${MAKE}" ]; then
+  make_sources
   exit 0
 fi
 
