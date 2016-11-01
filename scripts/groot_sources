@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+###########################
+# Colours
+###########################
+
+export BOLD="\e[1m"
+
+export CYAN="\e[36m"
+export GREEN="\e[32m"
+export YELLOW="\e[33m"
+export RED="\e[31m"
+
+export RESET="\e[0m"
 
 ###########################
 # Global Functions
@@ -126,10 +138,10 @@ if [ ! -z "${ROS_MASTER_URI}" ]; then
 fi
 
 if [ -z "$STABLE" ] && [ -z "$DEVEL" ]; then
-  echo ""
-  echo "    You must set one of either --stable or --devel."
-  echo "        Run with --help for more information."
-  echo ""
+  echo -e ""
+  echo -e "${RED}    You must set one of either --stable or --devel.${RESET}"
+  echo -e "${RED}        Run with --help for more information.${RESET}"
+  echo -e ""
   exit 1
 fi
 
@@ -187,14 +199,21 @@ fi
 # Functions
 ###########################
 
+echo_invalid_workspace()
+{
+  echo -e "${RED}[error] skipping '${1}', it is not a valid workspace [${ALL_REPOS[@]}]${RESET}"
+}
+
 show_repos ()
 {
+  echo ""
   for repo in "${ALL_REPOS[@]}"
   do
-    echo "${repo}"
-    echo "  rosinstall key: ${ALL_REPO_KEYS[${repo}]}"
-    echo "  underlays     : ${ALL_UNDERLAYS[${repo}]}"
+    echo -e "${BOLD}${repo}${RESET}"
+    echo -e "${CYAN}  rosinstall key:${RESET}${YELLOW} ${ALL_REPO_KEYS[${repo}]}${RESET}"
+    echo -e "${CYAN}  underlays     :${RESET}${YELLOW} ${ALL_UNDERLAYS[${repo}]}${RESET}"
   done
+  echo ""
 }
 
 download_sources ()
@@ -214,77 +233,61 @@ download_sources ()
 	yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]}" ${INSTALL_STRING} .
       fi
     else
-      echo ""
-      echo "ERROR : ${repo} is not a valid workspace, choose from"
-      echo "      :   [${ALL_REPOS[@]}]"
-      echo ""
+      echo_invalid_workspace ${repo}
     fi
   done
   echo ""
-  echo "You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies."
+  echo -e "${BOLD}You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies.${RESET}"
   echo ""
 }
 
 update_sources ()
 {
-  echo "Updating groot."
   for ((i=0;i<${#REPOS[@]};++i)); do
     repo=${REPOS[i]}
     repo_key=${ALL_REPO_KEYS[${repo}]}
     if contains ${repo} ${ALL_REPOS[@]}; then
       if [ ! -d "${GROOT}/${repo}_${WS}" ]; then
-        echo "${repo} not found, redownloading."
-        cd ${GROOT}
-        echo "  Downloading ${repo}."
-        yujin_init_workspace -j${JOBS} ${repo}_${WS} ${repo_key}
-        cd ${GROOT}/${repo}_${WS}
-        echo "  Configuring ${repo}."
-        yujin_init_build --underlays="${ALL_UNDERLAYS[${repo}]}" .
+        echo -e "${YELLOW}[ warn] skipping ${GROOT}/${repo}_${WS}, not found${RESET}"
       else
+        echo -e "${GREEN}[ info] updating ${GROOT}/${repo}_${WS}${RESET}"
         echo "  Cleaning *.pyc files from ${GROOT}/${repo}_${WS}"
         find ${GROOT}/${repo}_${WS} -name \*.pyc -delete
+        cd ${GROOT}/${repo}_${WS}
+        echo "  Updating ${repo} from ${repo_key}"
+        echo ""
+        echo "       yujin_init_workspace -j${JOBS} --merge ${repo_key}"
+        echo ""
+        yujin_init_workspace -j${JOBS} --merge ${repo_key}
       fi
-      cd ${GROOT}/${repo}_${WS}
-      echo "  Updating ${repo} from ${repo_key}"
-      echo ""
-      echo "       yujin_init_workspace -j${JOBS} --merge ${repo_key}"
-      echo ""
-      yujin_init_workspace -j${JOBS} --merge ${repo_key}
     else
-      echo ""
-      echo "ERROR : ${repo} is not a valid workspace, choose from"
-      echo "      :   [${ALL_REPOS[@]}]"
-      echo ""
+      echo_invalid_workspace ${repo}
     fi
   done
   echo ""
-  echo "You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies."
+  echo -e "${BOLD}You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies.${RESET}"
   echo ""
 }
 
 make_sources ()
 {
-  echo "Building groot."
   for ((i=0;i<${#REPOS[@]};++i)); do
     repo=${REPOS[i]}
     repo_key=${ALL_REPO_KEYS[${repo}]}
     if contains ${repo} ${ALL_REPOS[@]}; then
       if [ ! -d "${GROOT}/${repo}_${WS}" ]; then
-        echo "${repo} not found, skipping."
+        echo -e "${YELLOW}[ warn] skipping ${GROOT}/${repo}_${WS}, not found${RESET}"
       else
-        echo "  Building ${repo}"
+        echo -e "${GREEN}[ info] building ${GROOT}/${repo}_${WS}${RESET}"
         cd ${GROOT}/${repo}_${WS}
         yujin_make
       fi
     else
-      echo ""
-      echo "ERROR : ${repo} is not a valid workspace, choose from"
-      echo "      :   [${ALL_REPOS[@]}]"
-      echo ""
+      echo_invalid_workspace ${repo}
     fi
   done
   echo ""
-  echo "You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies."
+  echo -e "${BOLD}You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies.${RESET}"
   echo ""
 }
 
@@ -371,6 +374,7 @@ if [ ! -z "$DELETE" ]; then
 fi
 
 if [ ! -z "${UPDATE}" ]; then
+  echo ""
   update_sources
   if [ ! -z "${MAKE}" ]; then
     make_sources
@@ -379,6 +383,7 @@ if [ ! -z "${UPDATE}" ]; then
 fi
 
 if [ ! -z "${MAKE}" ]; then
+  echo ""
   make_sources
   exit 0
 fi
