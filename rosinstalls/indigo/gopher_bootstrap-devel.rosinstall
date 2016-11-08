@@ -21,7 +21,8 @@
 - git: { local-name: 'rostful',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/rostful.git'}
 - git: { local-name: 'celeros',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/celeros.git'}
 - git: { local-name: 'pyros',                 version: 'gopher-devel', uri: 'https://github.com/asmodehn/pyros.git'}
-- git: { local-name: 'pyros_config',          version: 'release/indigo/pyros_config', uri: 'https://github.com/asmodehn/pyros-config-rosrelease.git'}
+# Only in case of testing before package release
+# - git: { local-name: 'pyros_config',          version: 'release/indigo/pyros_config', uri: 'https://github.com/asmodehn/pyros-config-rosrelease.git'}
 
 # Web
 - git: { local-name: 'gopher_robot_restful',  version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_robot_restful'}
