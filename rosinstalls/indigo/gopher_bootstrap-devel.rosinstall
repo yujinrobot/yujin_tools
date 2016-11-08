@@ -57,3 +57,6 @@
 # until we have fixes for the service unloading problem - https://github.com/ros/diagnostics/issues/50 
 - git: { local-name: 'diagnostics',           version: 'handling_unloading_properly', uri: 'https://github.com/yujinrobot/diagnostics.git'}
 
+# Documentation about the groot workspaces
+- git: { local-name: 'groot_workspaces', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/groot_workspaces.git'}
+
