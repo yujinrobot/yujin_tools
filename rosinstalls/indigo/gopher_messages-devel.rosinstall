@@ -5,7 +5,8 @@
 # - messages
 # - parameters
 #
-# Messages
+# Messages - generally dump most things into gopher_msgs unless it needs to be open sourced OR has a necessary reason to be
+# split off.
 - git: { local-name: 'environment_interactions_msgs', version: 'devel', uri: 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}
 - git: { local-name: 'gopher_msgs',                   version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
 - git: { local-name: 'py_trees_msgs',                 version: 'devel', uri: 'https://github.com/stonier/py_trees_msgs.git'}
@@ -14,7 +15,8 @@
 - git: { local-name: 'yocs_msgs',                     version: 'devel', uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
 - git: { local-name: 'feed_the_troll_msgs',           version: 'devel', uri: 'https://github.com/stonier/feed_the_troll_msgs.git'}
 
-# Base
+# A convenient library that helps us centralise the gargantuan number of parameterisations and remaps we do
+# Very heavily used by the gopher behaviour trees.
 - git: { local-name: 'gopher_configuration',          version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}
 
 
