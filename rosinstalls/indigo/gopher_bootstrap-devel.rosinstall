@@ -2,31 +2,45 @@
 #
 # Software for bootstrapping robot/simulation/concert/desktop software, no direct hardware dependencies here!
 
-# Rocon
-- git: { local-name: 'rocon_multimaster',     version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
-- git: { local-name: 'rocon_tools',           version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_tools.git'}
-- git: { local-name: 'rocon_app_platform',    version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git'}
-
-# Gopher
-- git: { local-name: 'gopher_version',        version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_version.git'}
-- git: { local-name: 'gopher_rapps',          version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}
-- git: { local-name: 'gopher_common',         version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
-- git: { local-name: 'gopher_web_ui',         version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
-- git: { local-name: 'gopher_crazy_hospital', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
-- git: { local-name: 'py_trees_suite',        version: 'devel',        uri: 'https://github.com/stonier/py_trees_suite'}
+# Dynamic reconfiguration host for dynamic reconfigure servers that need to be shared across the whole system
+# A bit like the generic ros param server, but for dynamic reconfigurable parameters
 - git: { local-name: 'feed_the_troll',        version: 'devel',        uri: 'https://github.com/stonier/feed_the_troll.git'}
 
-# Rostful and Celeros
+# The application and interactions framework
+# Tools many useful python modules used pretty much everywhere, bit like the ecl of python for us
+- git: { local-name: 'rocon_tools',           version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_tools.git'}
+- git: { local-name: 'rocon_app_platform',    version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git'}
+- git: { local-name: 'gopher_rapps',          version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}
+
+# Version and changelog for the gopher sdk
+- git: { local-name: 'gopher_version',        version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_version.git'}
+
+# Has the very important gopher_bootstrap which includes common parameterisations and launchers for gopher robots
+# and gopher simulations.
+- git: { local-name: 'gopher_common',         version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
+
+# The robot web application
+- git: { local-name: 'gopher_web_ui',         version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
+- git: { local-name: 'gopher_robot_restful',  version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_robot_restful'}
+- git: { local-name: 'gopher_web_releases',   version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_releases'}
+
+# Out gopher behaviours and behaviour trees
+- git: { local-name: 'gopher_crazy_hospital', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
+# The fundamental behaviour trees modules
+- git: { local-name: 'py_trees_suite',        version: 'devel',        uri: 'https://github.com/stonier/py_trees_suite'}
+
+# Ros 2 Rest
 - git: { local-name: 'catkin_pip',            version: 'gopher-devel', uri: 'https://github.com/asmodehn/catkin_pip.git'}
 - git: { local-name: 'rostful',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/rostful.git'}
-- git: { local-name: 'celeros',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/celeros.git'}
 - git: { local-name: 'pyros',                 version: 'gopher-devel', uri: 'https://github.com/asmodehn/pyros.git'}
 # Only in case of testing before package release
 # - git: { local-name: 'pyros_config',          version: 'release/indigo/pyros_config', uri: 'https://github.com/asmodehn/pyros-config-rosrelease.git'}
 
-# Web
-- git: { local-name: 'gopher_robot_restful',  version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_robot_restful'}
-- git: { local-name: 'gopher_web_releases',   version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_releases'}
+# Ros 2 Concert communications (hopefully deprecating sometime)
+- git: { local-name: 'rocon_multimaster',     version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
+
+# Scheduling and Jobs
+- git: { local-name: 'celeros',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/celeros.git'}
 
 # Deployment
 - git: { local-name: 'yujin_ansible',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
