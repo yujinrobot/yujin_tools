@@ -1,6 +1,10 @@
 # == Overview ==
 #
-# Software for simulations and remote/visual interactions with gopher robots
+# Software for simulations and remote/visual interactions with gopher robots. We all share in the development and maintenance
+# these packages.
+#
+#   Permissions: open to all gopher developers - it's all dev/admin tools and no rocket science here
+#
 
 # Gopher podium/stage/gazebo simulations and rviz, rqt plugins
 - git: { local-name: 'gopher_desktop', version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}
