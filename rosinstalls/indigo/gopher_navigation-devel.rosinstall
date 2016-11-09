@@ -1,4 +1,7 @@
-# Software for the gopher navigation stack
+# Software for the gopher navigation workspace.
+#
+#   Permissions: closed - navi experts only (currently Alex and Daniel), key packages are in gopher_navigation.
+#
 
 # Fork of the open source release for ar markers
 - git: {local-name: 'ar_track_alvar',          version: 'devel', uri: 'https://github.com/yujinrobot/ar_track_alvar.git'}
