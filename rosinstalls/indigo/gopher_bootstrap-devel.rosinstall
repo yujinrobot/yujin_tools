@@ -1,7 +1,7 @@
-# == Overview ==
-#
 # Software for bootstrapping robot/simulation/concert/desktop software, no direct hardware dependencies here!
-
+#
+#   Permissions: open to all gopher developers - primarily so they all have access to gopher_bootstrap (launchers and params)
+#
 # Dynamic reconfiguration host for dynamic reconfigure servers that need to be shared across the whole system
 # A bit like the generic ros param server, but for dynamic reconfigurable parameters
 - git: { local-name: 'feed_the_troll',        version: 'devel',        uri: 'https://github.com/stonier/feed_the_troll.git'}
