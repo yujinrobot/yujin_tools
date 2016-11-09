@@ -1,3 +1,7 @@
+# Localisation related sources.
+#
+#   Permissions: closed - localisation team only since this contains the sensitive dslam IP
+#
 
 # Bags and scripts to run dslam mapping/navigation experiments
 - git: {local-name: dslam_bag,              version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam_bag.git'}
