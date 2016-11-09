@@ -5,8 +5,12 @@
 # - messages
 # - parameters
 #
-# Messages - generally dump most things into gopher_msgs unless it needs to be open sourced OR has a necessary reason to be
-# split off.
+# A tip about where to put .msg, .srv and .cfg types - generally dump most things into gopher_msgs unless
+# it needs to be open sourced OR has a necessary reason to be split off.
+#
+#   Permissions: open to all gopher developers, these represent the api we all share
+#
+
 - git: { local-name: 'environment_interactions_msgs', version: 'devel', uri: 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}
 - git: { local-name: 'gopher_msgs',                   version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
 - git: { local-name: 'py_trees_msgs',                 version: 'devel', uri: 'https://github.com/stonier/py_trees_msgs.git'}
