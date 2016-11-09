@@ -1,8 +1,7 @@
-
-
-# == Overview ==
+# Gopher specific concert development (note there are alot of libraries in bootstrap that are used by the robot and
+# concert).
 #
-# Rocon stacks forked for gopher development, focus is on rocon for the robot. Focus is on concert for the concert.
+#   Permissions: open to all gopher developers - no rocket science here yet, but usually just the concert developers.
 #
 
 # Supporting tools from old Rocon
