@@ -68,3 +68,4 @@ gopher:
 navigation:
  - gopher_laserscan_processing
  - dslam_planner
+ - gopher_trajectory_controller
