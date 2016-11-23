@@ -144,7 +144,7 @@ echo ""
 pretty_headr "Installing"
 install_package ansible
 install_package python-yujin-tools
-install_package python-yujin-ansible-playbooks
+install_package python-yujin-ansible
 echo ""
 
 pretty_headr "Groups"
