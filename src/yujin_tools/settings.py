@@ -22,7 +22,7 @@ import console
 ##############################################################################
 
 DEFAULT_TRACK = "indigo"
-VALID_TRACKS = ["groovy", "hydro", "indigo", "jade"]
+VALID_TRACKS = ["groovy", "hydro", "indigo", "jade", "kinetic"]
 DEFAULT_ROSINSTALL_DATABASE = 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls'
 
 ##############################################################################
