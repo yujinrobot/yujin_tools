@@ -6,7 +6,7 @@
 
 # Kobuki / Yujin stacks
 
-- git: {local-name: yocs_msgs, version: indigo, uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
+- git: {local-name: yocs_msgs, version: release/0.6-indigo, uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
 - git: {local-name: yujin_ocs, version: indigo, uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
 - git: {local-name: kobuki_msgs, version: indigo, uri: 'https://github.com/yujinrobot/kobuki_msgs.git'}
 - git: {local-name: kobuki_core, version: indigo, uri: 'https://github.com/yujinrobot/kobuki_core.git'}
