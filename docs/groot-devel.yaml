@@ -66,6 +66,7 @@ gopher:
  - gopher_robot
  - somanet_node
 navigation:
+ - cost_map_ros
  - gopher_laserscan_processing
  - dslam_planner
  - gopher_trajectory_controller
