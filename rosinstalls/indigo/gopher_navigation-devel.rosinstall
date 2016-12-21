@@ -6,7 +6,7 @@
 # Fork of the open source release for ar markers
 - git: {local-name: 'ar_track_alvar',          version: 'devel', uri: 'https://github.com/yujinrobot/ar_track_alvar.git'}
 # Our own costmap equivalent of the very nice swiss grid map library
-- git: {local-name: 'cost_map',                version: 'devel', uri: 'https://github.com/stonier/cost_map.git'}
+- git: {local-name: 'cost_map',                version: 'devel', uri: 'https://github.com/yujinrobot/cost_map.git'}
 # Fork of the very nice swiss grid maps
 - git: {local-name: 'grid_map',                version: 'devel', uri: 'https://github.com/yujinrobot/grid_map.git'}
 
