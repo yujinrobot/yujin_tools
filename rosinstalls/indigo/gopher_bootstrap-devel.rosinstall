@@ -53,10 +53,9 @@
 # Until https://github.com/ros-infrastructure/rosdoc_lite/pull/70 is in
 - git: { local-name: 'rosdoc_lite',           version: 'master',       uri: 'https://github.com/stonier/rosdoc_lite.git'}
 # Until we've moved off of indigo (our upstream changes are in, but not in indigo release)
-- git: { local-name: 'audio_common',          version: 'gopher',       uri: 'https://github.com/yujinrobot/audio_common.git'}
-# until we have fixes for the service unloading problem - https://github.com/ros/diagnostics/issues/50 
+- git: { local-name: 'audio_common',          version: 'master',       uri: 'https://github.com/yujinrobot/audio_common.git'}
+# until we have fixes for the service unloading problem - https://github.com/ros/diagnostics/issues/50
 - git: { local-name: 'diagnostics',           version: 'handling_unloading_properly', uri: 'https://github.com/yujinrobot/diagnostics.git'}
 
 # Documentation about the groot workspaces
 - git: { local-name: 'groot_workspaces', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/groot_workspaces.git'}
-
