@@ -3,7 +3,14 @@
 #import sys
 
 # Setuptools' sdist does not respect package_data
-#from setuptools import setup, find_packages
+# from setuptools import setup, find_packages
+# Distutils however, does not respect install_requires
+# Distutils is in python, setuptools is outside
+# Setuptools is now the defacto default though
+#try:
+#    from setuptools import setup
+#except ImportError:
+#    from distutils.core import setup
 from distutils.core import setup
 
 import sys
@@ -69,11 +76,13 @@ setup(name='yujin_tools',
         "License :: OSI Approved :: BSD License" ],
       description = "Utilities for yujin's development environment",
       long_description = "Refer to the documentation at https://github.com/yujinrobot/yujin_tools.",
-      license = "BSD"
-#      install_requires=[
-#        'argparse',
-        #'python-catkin-pkg',
-#    ],
+      license = "BSD",
+      # not picked up by distutils, need to install setuptools above
+      # but even then I'm not getting much happening
+      # install_requires = [
+      #     'pyyaml',
+      #     'python-catkin-pkg',
+      # ],
       )
 
 # This no longer works...it has to be a special parsable syntax of pypi's.
