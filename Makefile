@@ -46,7 +46,7 @@ clean_dist:
 	-rm -rf deb_dist
 	-rm -rf debian
 	-rm -rf ../*.build
-	-rm -rf ../*.gz
+	-rm -rf *.tar.gz
 
 source_package:
 	python setup.py sdist
