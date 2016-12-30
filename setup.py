@@ -16,7 +16,7 @@ from distutils.core import setup
 import sys
 sys.path.insert(0, 'src')
 
-from yujin_tools import __version__
+from yujin_tools.version import __version__
 
 setup(name='yujin_tools',
       version= __version__,
