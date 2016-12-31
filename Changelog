@@ -1,4 +1,4 @@
-0.4.50
+0.4.51
  - yujin_tools : drop yujin_tools module dependency from setup.py
 0.4.45
  - yujin_tools : updates for debian packaging
