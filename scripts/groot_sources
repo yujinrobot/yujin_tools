@@ -314,7 +314,7 @@ show_status ()
     if [ -d "${GROOT}/${repo}_${WS}/src" ]; then
       echo "  Status of ${repo}:"
       cd ${GROOT}/${repo}_${WS}/src
-      wstool status
+      wstool status --untracked
     fi
   done
 }
