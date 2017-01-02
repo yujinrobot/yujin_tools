@@ -17,7 +17,8 @@ help:
 	@echo "  distro    : build the distribution tarball."
 	@echo "  pypi      : upload the package to PyPI."
 	@echo "Deb package"
-	@echo "  deb_deps  : install the package builder dependencies (fpm)."
+	@echo "  deb_deps  : install the package builder dependencies (stdeb)."
+	@echo "  source_deb: source packaging (for ppas)"
 	@echo "  deb       : build the deb."
 	@echo "  upload_deb: upload to yujin's repository."
 	@echo "  release   : make pypi (if open), deb and upload together."
@@ -35,8 +36,9 @@ install: distro
 uninstall:
 	sudo rm -f ${UNINSTALL_FILES}
 
-setup:
-	echo "building version ${VERSION}"
+deb_deps:
+	echo "Downloading dependencies"
+	sudo apt-get install python-stdeb
 
 clean_dist:
 	-rm -f MANIFEST
@@ -44,17 +46,18 @@ clean_dist:
 	-rm -rf deb_dist
 	-rm -rf debian
 	-rm -rf ../*.build
-	-rm -rf ../*.gz
+	-rm -rf *.tar.gz
 
-distro:
+source_package:
 	python setup.py sdist
 
-# the following needs stddeb installed
 source_deb:
+	rm -rf dist deb_dist
 	python setup.py --command-packages=stdeb.command sdist_dsc
 
-deb_distro:
-	python setup.py --command-packages=stdeb.command sdist_dsc bdist_deb
+deb:
+	rm -rf dist deb_dist
+	python setup.py --command-packages=stdeb.command bdist_deb
 
 register:
 	python setup.py register
@@ -62,26 +65,12 @@ register:
 pypi: 
 	python setup.py sdist upload
 
-deb_deps:
-	sudo apt-get install ruby-dev build-essential
-	sudo gem install fpm
-
-deb:
-	rm -f *.deb
-	# from pypi
-	fpm -f -s python -t deb yujin_tools
-	# from setup.py
-	# fpm -f -s python -t deb setup.py
-
 upload_deb:
-	./scripts/yujin_upload_deb python-yujin-tools
-
-clean_deb:
-	rm *.deb
+	cd deb_dist; ../scripts/yujin_upload_deb python-yujin-tools
 
 release: pypi deb upload_deb
 
-clean:  clean_dist clean_deb
+clean:  clean_dist
 	-sudo rm -f install.record
 	-sudo rm -rf build
 	-sudo rm -rf yujin_tools.egg-info

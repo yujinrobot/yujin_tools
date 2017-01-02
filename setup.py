@@ -16,7 +16,11 @@ from distutils.core import setup
 import sys
 sys.path.insert(0, 'src')
 
-from yujin_tools import __version__
+# better to have this in the module somehow, but tricky
+# to get that here *and* there and we don't exactly use
+# the module version anywhere, so keep it simple...
+# just here for now.
+__version__ = '0.4.51'
 
 setup(name='yujin_tools',
       version= __version__,
