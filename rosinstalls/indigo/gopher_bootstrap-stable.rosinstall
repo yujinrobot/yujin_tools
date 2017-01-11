@@ -1,29 +1,62 @@
 # == Overview ==
-#
 # Software for bootstrapping robot/simulation/concert/desktop software, no direct hardware dependencies here!
+#
+#   Permissions: open to all gopher developers - primarily so they all have access to gopher_bootstrap (launchers and params)
+#
+# Dynamic reconfiguration host for dynamic reconfigure servers that need to be shared across the whole system
+# A bit like the generic ros param server, but for dynamic reconfigurable parameters
+- git: { local-name: 'feed_the_troll',        version: 'release/0.1-indigo',        uri: 'https://github.com/stonier/feed_the_troll.git'}
 
-# Rocon
-- git: { local-name: 'rocon_multimaster',     version: 'release/0.8-indigo-gopher', uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
-- git: { local-name: 'rocon_tools',           version: 'release/0.4-indigo-gopher', uri: 'https://github.com/robotics-in-concert/rocon_tools.git'}
-- git: { local-name: 'rocon_app_platform',    version: 'release/0.9-indigo-gopher ', uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git'}
+# The application and interactions framework
+# Tools many useful python modules used pretty much everywhere, bit like the ecl of python for us
+- git: { local-name: 'rocon_tools',           version: 'release/0.6-indigo-gopher',        uri: 'https://github.com/robotics-in-concert/rocon_tools.git'}
+- git: { local-name: 'rocon_app_platform',    version: 'release/0.10-indigo-gopher',        uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git'}
+- git: { local-name: 'gopher_rapps',          version: 'release/0.2-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}
 
-# Gopher
-- git: { local-name: 'gopher_rapps',          version: 'release/0.2-indigo', uri: 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}
-- git: { local-name: 'gopher_common',         version: 'release/0.5-indigo', uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
-- git: { local-name: 'gopher_web_ui',         version: '0.3.0',              uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
-- git: { local-name: 'gopher_crazy_hospital', version: 'release/0.2-indigo', uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
-- git: { local-name: 'py_trees_suite',        version: 'release/0.3-indigo', uri: 'https://github.com/stonier/py_trees_suite'}
+# Version and changelog for the gopher sdk
+- git: { local-name: 'gopher_version',        version: 'release/1.8-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_version.git'}
 
-# Rostful and Celeros
-- git: { local-name: 'rostful',               version: '0.0.10',             uri: 'https://github.com/asmodehn/rostful.git'}
-- git: { local-name: 'celeros',               version: '0.0.4',              uri: 'https://github.com/asmodehn/celeros.git'}
-- git: { local-name: 'pyros',                 version: '0.0.9',              uri: 'https://github.com/asmodehn/pyros.git'}
+# Has the very important gopher_bootstrap which includes common parameterisations and launchers for gopher robots
+# and gopher simulations.
+- git: { local-name: 'gopher_common',         version: 'release/0.6-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
+
+# The robot web application
+- git: { local-name: 'gopher_web_ui',         version: '0.4.0',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
+- git: { local-name: 'gopher_robot_restful',  version: '0.3.0',        uri: 'https://bitbucket.org/yujinrobot/gopher_robot_restful'}
+- git: { local-name: 'gopher_web_releases',   version: '0.1.0',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_releases'}
+
+# Out gopher behaviours and behaviour trees
+- git: { local-name: 'gopher_crazy_hospital', version: 'release/0.3-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
+# The fundamental behaviour trees modules
+- git: { local-name: 'py_trees_suite',        version: 'release/0.4-indigo',        uri: 'https://github.com/stonier/py_trees_suite'}
+
+# Ros 2 Rest
+- git: { local-name: 'catkin_pip',            version: '0.1.17', uri: 'https://github.com/asmodehn/catkin_pip.git'}
+- git: { local-name: 'rostful',               version: '0.0.11', uri: 'https://github.com/asmodehn/rostful.git'}
+- git: { local-name: 'pyros',                 version: '0.3.0', uri: 'https://github.com/asmodehn/pyros.git'}
+# Only in case of testing before package release
+# - git: { local-name: 'pyros_config',          version: 'release/indigo/pyros_config', uri: 'https://github.com/asmodehn/pyros-config-rosrelease.git'}
+
+# Ros 2 Concert communications (hopefully deprecating sometime)
+- git: { local-name: 'rocon_multimaster',     version: 'release/0.9-indigo-gopher',        uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
+
+# Scheduling and Jobs
+- git: { local-name: 'celeros',               version: '0.0.5', uri: 'https://github.com/asmodehn/celeros.git'}
+
+# Deployment
+- git: { local-name: 'yujin_ansible',     version: '0.1.12',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
 
 # Environment Integrations
-- git: { local-name: 'elevator_interactions', version: 'release/0.2-indigo', uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
+# doors is only for documentation builds for now...its along way out of date and we dont use it
+# - git: { local-name: 'door_interactions',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/door_interactions.git'}
+- git: { local-name: 'elevator_interactions', version: 'release/0.3-indigo',        uri: 'https://bitbucket.org/yujinrobot/elevator_interactions.git'}
 
-# until fixed version of audio has been released
-- git: { local-name: 'audio_common',          version: 'aab0edb3',           uri: 'https://github.com/yujinrobot/audio_common.git'}
-# until I know why the 1.8.10 deb version doesn't properly unload while the 1.8.10 source version does (debug vs release?)
-- git: { local-name: 'diagnostics',           version: '1.8.10',             uri: 'https://github.com/ros/diagnostics.git'}
+# Until https://github.com/ros-infrastructure/rosdoc_lite/pull/70 is in
+- git: { local-name: 'rosdoc_lite',           version: 'master',       uri: 'https://github.com/yujinrobot/rosdoc_lite.git'}
+# Until we've moved off of indigo (our upstream changes are in, but not in indigo release)
+- git: { local-name: 'audio_common',          version: 'master',       uri: 'https://github.com/yujinrobot/audio_common.git'}
+# until we have fixes for the service unloading problem - https://github.com/ros/diagnostics/issues/50
+- git: { local-name: 'diagnostics',           version: 'handling_unloading_properly', uri: 'https://github.com/yujinrobot/diagnostics.git'}
 
+# Documentation about the groot workspaces
+- git: { local-name: 'groot_workspaces', version: 'release/0.1-indigo',        uri: 'https://bitbucket.org/yujinrobot/groot_workspaces.git'}
