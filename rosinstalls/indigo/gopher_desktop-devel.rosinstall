@@ -17,7 +17,3 @@
 
 # Visualisation for behaviour trees
 - git: { local-name: 'rqt_py_trees',   version: 'devel', uri: 'https://github.com/stonier/rqt_py_trees.git'}
-
-# A really nice plotting tool!
-# Awaiting https://github.com/ethz-asl/rqt_multiplot_plugin/pull/10
-- git: { local-name: 'rqt_multiplot_plugin',   version: 'devel', uri: 'https://github.com/yujinrobot/rqt_multiplot_plugin.git'}
