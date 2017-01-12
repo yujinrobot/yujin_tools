@@ -21,9 +21,9 @@
 - git: { local-name: 'gopher_common',         version: 'release/0.6-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 
 # The robot web application
-- git: { local-name: 'gopher_web_ui',         version: '0.4.0',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
-- git: { local-name: 'gopher_robot_restful',  version: '0.3.0',        uri: 'https://bitbucket.org/yujinrobot/gopher_robot_restful'}
-- git: { local-name: 'gopher_web_releases',   version: '0.1.0',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_releases'}
+- git: { local-name: 'gopher_web_ui',         version: 'release/0.4',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
+- git: { local-name: 'gopher_robot_restful',  version: 'release/0.3',        uri: 'https://bitbucket.org/yujinrobot/gopher_robot_restful'}
+- git: { local-name: 'gopher_web_releases',   version: 'release/0.1',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_releases'}
 
 # Out gopher behaviours and behaviour trees
 - git: { local-name: 'gopher_crazy_hospital', version: 'release/0.3-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
@@ -31,9 +31,9 @@
 - git: { local-name: 'py_trees_suite',        version: 'release/0.4-indigo',        uri: 'https://github.com/stonier/py_trees_suite'}
 
 # Ros 2 Rest
-- git: { local-name: 'catkin_pip',            version: '0.1.17', uri: 'https://github.com/asmodehn/catkin_pip.git'}
-- git: { local-name: 'rostful',               version: '0.0.11', uri: 'https://github.com/asmodehn/rostful.git'}
-- git: { local-name: 'pyros',                 version: '0.3.0', uri: 'https://github.com/asmodehn/pyros.git'}
+- git: { local-name: 'catkin_pip',            version: 'release/0.2', uri: 'https://github.com/asmodehn/catkin_pip.git'}
+- git: { local-name: 'rostful',               version: 'release/0.1', uri: 'https://github.com/asmodehn/rostful.git'}
+- git: { local-name: 'pyros',                 version: 'release/0.4', uri: 'https://github.com/asmodehn/pyros.git'}
 # Only in case of testing before package release
 # - git: { local-name: 'pyros_config',          version: 'release/indigo/pyros_config', uri: 'https://github.com/asmodehn/pyros-config-rosrelease.git'}
 
@@ -41,10 +41,10 @@
 - git: { local-name: 'rocon_multimaster',     version: 'release/0.9-indigo-gopher',        uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
 
 # Scheduling and Jobs
-- git: { local-name: 'celeros',               version: '0.0.5', uri: 'https://github.com/asmodehn/celeros.git'}
+- git: { local-name: 'celeros',               version: 'release/0.1', uri: 'https://github.com/asmodehn/celeros.git'}
 
 # Deployment
-- git: { local-name: 'yujin_ansible',     version: '0.1.12',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
+- git: { local-name: 'yujin_ansible',     version: 'release/0.1',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
 
 # Environment Integrations
 # doors is only for documentation builds for now...its along way out of date and we dont use it
