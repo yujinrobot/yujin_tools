@@ -1,9 +1,21 @@
-# Software for Gopher
+# Description
+#
+# Software that specifically runs on a gopher robot. This software is not intended and typically unusable on the desktop.
+#
+#   Permissions: open to all gopher developers - primarily so they all have access to gopher_robot (launchers and params)
+#
 
-- git: { local-name: 'gopher',             version: 'release/0.5-indigo', uri: 'https://bitbucket.org/yujinrobot/gopher.git'}
-- git: { local-name: 'gopher_calibration', version: 'release/0.2-indigo', uri: 'https://bitbucket.org/yujinrobot/gopher_calibration.git'}
-- git: { local-name: 'somanet_driver',     version: 'release/0.1-indigo', uri: 'https://bitbucket.org/yujinrobot/somanet_driver.git'}
+# Mostly for gopher_robot which contains all launchers and parameterisations for bringing up a gopher robot.
+# Also includes a few other essentials such as the remote gopher utilities.
+- git: { local-name: 'gopher',             version: 'release/0.6-indigo',         uri: 'https://bitbucket.org/yujinrobot/gopher.git'}
 
-# 3rd party
-- git: { local-name: 'rplidar_ros',        version: 'release/1.0-indigo-yujin-modified', uri: 'https://github.com/yujinrobot/rplidar_ros.git'}
+# Calibration software (mostly for the 2d/3d sensors)
+- git: { local-name: 'gopher_calibration', version: 'release/0.3-indigo',         uri: 'https://bitbucket.org/yujinrobot/gopher_calibration.git'}
 
+# Drivers
+- git: { local-name: 'somanet_driver',     version: 'release/0.2-indigo',         uri: 'https://bitbucket.org/yujinrobot/somanet_driver.git'}
+- git: { local-name: 'rplidar_ros',        version: 'release/1.6-indigo',         uri: 'https://github.com/yujinrobot/rplidar_ros.git'}
+- git: { local-name: 'rplidar_extras',     version: 'release/1.1-indigo',         uri: 'https://github.com/yujinrobot/rplidar_extras.git'}
+
+# Used to enable retrieval of the 'recommended' firmware version that should be run with this gopher sdk
+- git: { local-name: 'somanet_firmware',   version: 'version/0.3-gopher', uri: 'https://bitbucket.org/yujinrobot/somanet_firmware.git'}
