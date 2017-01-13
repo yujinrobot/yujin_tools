@@ -13,10 +13,10 @@
 - git: { local-name: 'rocon_qt_gui',   version: 'release/0.10-indigo-gopher', uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}
 
 # Enabling library that keeps rqt gui's open even if the robot goes up and down
-- git: { local-name: 'rqt_wrapper',    version: 'release/0.2-indigo', uri: 'https://github.com/stonier/rqt_wrapper.git'}
+- git: { local-name: 'rqt_wrapper',    version: 'release/0.1-indigo', uri: 'https://github.com/stonier/rqt_wrapper.git'}
 
 # Visualisation for behaviour trees
-- git: { local-name: 'rqt_py_trees',   version: 'release/0.2-indigo', uri: 'https://github.com/stonier/rqt_py_trees.git'}
+- git: { local-name: 'rqt_py_trees',   version: 'release/0.2-indigo-kinetic', uri: 'https://github.com/stonier/rqt_py_trees.git'}
 
 # A really nice plotting tool!
 # Awaiting https://github.com/ethz-asl/rqt_multiplot_plugin/pull/10
