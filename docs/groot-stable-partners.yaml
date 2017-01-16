@@ -15,6 +15,7 @@ messages:
  - yocs_msgs
 bootstrap:
  - gopher_networking
+ - gopher_version
 desktop:
  - gopher_podium
  - gopher_desktop_utilities
