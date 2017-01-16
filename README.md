@@ -81,7 +81,6 @@ For the yujin guys:
 
 Finally, upload
 
-    > make build
-    > make upload
+    > make release
 
 See Daniel if you need permissions for uploading.
