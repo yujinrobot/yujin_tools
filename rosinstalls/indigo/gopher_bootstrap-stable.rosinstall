@@ -39,10 +39,10 @@
 - git: { local-name: 'rocon_multimaster',     version: 'release/0.9-indigo-gopher',        uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
 
 # Scheduling and Jobs
-- git: { local-name: 'celeros',               version: 'release/0.1', uri: 'https://github.com/asmodehn/celeros.git'}
+- git: { local-name: 'celeros',               version: '0.1.0', uri: 'https://github.com/asmodehn/celeros.git'}
 
 # Deployment
-- git: { local-name: 'yujin_ansible',     version: 'release/0.1',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
+- git: { local-name: 'yujin_ansible',     version: '0.1.14',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
 
 # Environment Integrations
 # doors is only for documentation builds for now...its along way out of date and we dont use it
