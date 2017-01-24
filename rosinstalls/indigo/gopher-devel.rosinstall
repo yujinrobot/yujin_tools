@@ -16,7 +16,7 @@
 - git: { local-name: 'somanet_driver',     version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/somanet_driver.git'}
 - git: { local-name: 'rplidar_ros',        version: 'devel',         uri: 'https://github.com/yujinrobot/rplidar_ros.git'}
 - git: { local-name: 'rplidar_extras',     version: 'devel',         uri: 'https://github.com/yujinrobot/rplidar_extras.git'}
-- git: { local-name: 'ros_astra_camera',   version: 'filterlibrary', uri: 'https://github.com/orbbec/ros_astra_camera.git'}
+- git: { local-name: 'astra_camera',       version: 'filter_library_frozen', uri: 'https://github.com/yujinrobot/ros_astra_camera.git'}
 
 # Used to enable retrieval of the 'recommended' firmware version that should be run with this gopher sdk
 - git: { local-name: 'somanet_firmware',   version: 'version/devel', uri: 'https://bitbucket.org/yujinrobot/somanet_firmware.git'}
