@@ -34,6 +34,8 @@
 - git: { local-name: 'rostful',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/rostful.git'}
 - git: { local-name: 'pyros',                 version: 'gopher-devel', uri: 'https://github.com/asmodehn/pyros.git'}
 # Only in case of testing before package release
+- git: { local-name: 'pyros_schemas'          version: 'master', uri: 'https://github.com/asmodehn/pyros-schemas.git'}
+- git: { local-name: 'pyros_msgs'             version: 'master', uri: 'https://github.com/asmodehn/pyros-msgs.git'}
 # - git: { local-name: 'pyros_config',          version: 'release/indigo/pyros_config', uri: 'https://github.com/asmodehn/pyros-config-rosrelease.git'}
 
 # Ros 2 Concert communications (hopefully deprecating sometime)
