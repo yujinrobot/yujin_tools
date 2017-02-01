@@ -18,4 +18,4 @@
 - git: { local-name: 'rplidar_extras',     version: 'release/1.1-indigo',         uri: 'https://github.com/yujinrobot/rplidar_extras.git'}
 
 # Used to enable retrieval of the 'recommended' firmware version that should be run with this gopher sdk
-- git: { local-name: 'somanet_firmware',   version: 'version/0.3-gopher', uri: 'https://bitbucket.org/yujinrobot/somanet_firmware.git'}
+- git: { local-name: 'somanet_firmware',   version: '0.3.0, 0.3.0-DC1K, 0.3.0-srb', uri: 'https://bitbucket.org/yujinrobot/somanet_firmware.git'}
