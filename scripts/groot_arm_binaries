@@ -63,7 +63,7 @@ export local_dir=/opt/yujin/arm  # this copies the indigo folder
 
 if [ ! -z "$EXTERNAL" ]; then
   export remote_url=files@files.yujinrobot.com
-  export remote_dir=${remote_url}:rsync_repositories/yujin/arm
+  export remote_dir=${remote_url}:/data/file_server/rsync_repositories/yujin/arm
 else
   export remote_url=files@files.yujin.com
   export remote_dir=${remote_url}:shared/installspaces/yujin/arm
