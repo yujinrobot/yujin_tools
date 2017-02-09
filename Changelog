@@ -1,3 +1,5 @@
+0.4.54
+ - groot_arm_binaries : fix external server rsynch path
 0.4.53
  - yujin_tools : dropped dependencies to packages from ROS repositories
 0.4.52
