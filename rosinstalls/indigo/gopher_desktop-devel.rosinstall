@@ -16,4 +16,4 @@
 - git: { local-name: 'rqt_wrapper',    version: 'devel', uri: 'https://github.com/stonier/rqt_wrapper.git'}
 
 # Visualisation for behaviour trees
-- git: { local-name: 'rqt_py_trees',   version: 'devel', uri: 'https://github.com/stonier/rqt_py_trees.git'}
+- git: { local-name: 'rqt_py_trees',   version: 'devel', uri: 'https://github.com/yujinrobot/rqt_py_trees.git'}
