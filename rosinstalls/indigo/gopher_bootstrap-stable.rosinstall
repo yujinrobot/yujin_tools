@@ -34,6 +34,9 @@
 - git: { local-name: 'catkin_pip',            version: '0.1.17', uri: 'https://github.com/asmodehn/catkin_pip.git'}
 - git: { local-name: 'rostful',               version: '0.1.0', uri: 'https://github.com/asmodehn/rostful.git'}
 - git: { local-name: 'pyros',                 version: 'ros-0.3.1', uri: 'https://github.com/asmodehn/pyros.git'}
+# Only in case of testing before package release
+- git: { local-name: 'pyros_schemas',         version: '9e3debe4289eaddb84562d0cdc9f431f8d929685', uri: 'https://github.com/asmodehn/pyros-schemas.git'}
+- git: { local-name: 'pyros_msgs',            version: '2e0fe0e07867a8b3a77ed9647d5a4017975aff09', uri: 'https://github.com/asmodehn/pyros-msgs.git'}
 
 # Ros 2 Concert communications (hopefully deprecating sometime)
 - git: { local-name: 'rocon_multimaster',     version: 'release/0.9-indigo-gopher',        uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
