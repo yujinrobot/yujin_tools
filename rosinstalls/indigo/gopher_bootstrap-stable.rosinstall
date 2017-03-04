@@ -18,7 +18,7 @@
 
 # Has the very important gopher_bootstrap which includes common parameterisations and launchers for gopher robots
 # and gopher simulations.
-- git: { local-name: 'gopher_common',         version: 'release/0.6-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
+- git: { local-name: 'gopher_common',         version: 'release/0.7-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 
 # The robot web application
 - git: { local-name: 'gopher_web_ui',         version: 'release/0.4',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
@@ -26,12 +26,12 @@
 - git: { local-name: 'gopher_web_releases',   version: 'release/0.1',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_releases'}
 
 # Out gopher behaviours and behaviour trees
-- git: { local-name: 'gopher_crazy_hospital', version: 'release/0.3-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
+- git: { local-name: 'gopher_crazy_hospital', version: 'release/0.4-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
 # The fundamental behaviour trees modules
 - git: { local-name: 'py_trees_suite',        version: 'release/0.4-indigo-kinetic',        uri: 'https://github.com/stonier/py_trees_suite'}
 
 # Ros 2 Rest
-- git: { local-name: 'catkin_pip',            version: '0.1.17', uri: 'https://github.com/asmodehn/catkin_pip.git'}
+- git: { local-name: 'catkin_pip',            version: '0.1.18', uri: 'https://github.com/asmodehn/catkin_pip.git'}
 - git: { local-name: 'rostful',               version: '0.1.0', uri: 'https://github.com/asmodehn/rostful.git'}
 - git: { local-name: 'pyros',                 version: 'ros-0.3.1', uri: 'https://github.com/asmodehn/pyros.git'}
 # Only in case of testing before package release
@@ -45,7 +45,7 @@
 - git: { local-name: 'celeros',               version: '0.1.0', uri: 'https://github.com/asmodehn/celeros.git'}
 
 # Deployment
-- git: { local-name: 'yujin_ansible',     version: '0.1.14',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
+- git: { local-name: 'yujin_ansible',     version: '0.1.15',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
 
 # Environment Integrations
 # doors is only for documentation builds for now...its along way out of date and we dont use it
