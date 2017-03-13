@@ -32,7 +32,7 @@
 # Ros 2 Rest
 - git: { local-name: 'catkin_pip',            version: '0.1.18', uri: 'https://github.com/asmodehn/catkin_pip.git'}
 - git: { local-name: 'rostful',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/rostful.git'}
-- git: { local-name: 'pyros',                 version: 'gopher-devel', uri: 'https://github.com/asmodehn/pyros.git'}
+- git: { local-name: 'pyros',                 version: 'master', uri: 'https://github.com/asmodehn/pyros.git'}
 # Only in case of testing before package release
 - git: { local-name: 'pyros_schemas',         version: 'master', uri: 'https://github.com/asmodehn/pyros-schemas.git'}
 - git: { local-name: 'pyros_msgs',            version: 'master', uri: 'https://github.com/asmodehn/pyros-msgs.git'}
