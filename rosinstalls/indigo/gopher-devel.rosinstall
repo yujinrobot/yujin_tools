@@ -19,6 +19,6 @@
 - git: { local-name: 'astra_camera',       version: 'filter_library_frozen', uri: 'https://github.com/yujinrobot/ros_astra_camera.git'}
 
 # Used to enable retrieval of the 'recommended' firmware version that should be run with this gopher sdk
-- git: { local-name: 'somanet_firmware',   version: 'version/devel', uri: 'https://bitbucket.org/yujinrobot/somanet_firmware.git'}
+- git: { local-name: 'somanet_firmware',   version: 'devel', uri: 'https://bitbucket.org/yujinrobot/somanet_firmware.git'}
 
 
