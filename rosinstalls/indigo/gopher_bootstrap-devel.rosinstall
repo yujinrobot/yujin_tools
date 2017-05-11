@@ -35,12 +35,12 @@
 # Ros 2 Rest
 - git: { local-name: 'rostful',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/rostful.git'}
 # Only in case of testing before package release
-- git: { local-name: 'catkin_pip',            version: 'gopher-devel', uri: 'https://github.com/asmodehn/catkin_pip.git'}
-- git: { local-name: 'pyros',                 version: 'gopher-devel', uri: 'https://github.com/asmodehn/pyros.git'}
-# - git: { local-name: 'pyros_interfaces_ros',  version: 'master', uri: 'https://github.com/asmodehn/pyros-ros.git'}
-# - git: { local-name: 'pyros_common',          version: 'master', uri: 'https://github.com/asmodehn/pyros-common.git'}
+- git: { local-name: 'catkin_pip',            version: 'devel', uri: 'https://github.com/asmodehn/catkin_pip.git'}
+- git: { local-name: 'pyros_interfaces_ros',  version: 'master', uri: 'https://github.com/asmodehn/pyros-rosinterface.git'}
 - git: { local-name: 'pyros_schemas',         version: 'master', uri: 'https://github.com/asmodehn/pyros-schemas.git'}
 - git: { local-name: 'pyros_msgs',            version: 'master', uri: 'https://github.com/asmodehn/pyros-msgs.git'}
+# for python packages, we need the patches from the rosrelease repo, but we should report fixes upstream...
+- git: { local-name: 'pyros',                 version: 'release/indigo/pyros', uri: 'https://github.com/asmodehn/pyros-rosrelease.git'}
 # - git: { local-name: 'pyros_config',        version: 'release/indigo/pyros_config', uri: 'https://github.com/asmodehn/pyros-config-rosrelease.git'}
 
 # Ros 2 Concert communications (hopefully deprecating sometime)
