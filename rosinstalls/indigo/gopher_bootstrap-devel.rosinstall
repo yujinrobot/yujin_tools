@@ -63,5 +63,9 @@
 # until we have fixes for the service unloading problem - https://github.com/ros/diagnostics/issues/50
 - git: { local-name: 'diagnostics',           version: 'handling_unloading_properly', uri: 'https://github.com/yujinrobot/diagnostics.git'}
 
+# until indigo has not been newly released
+- git: { local-name: 'python-watchdog',          version: 'release/indigo/python-watchdog',       uri: 'https://github.com/yotabits/python-watchdog-release'}
+- git: { local-name: 'python-pathtools',          version: 'release/indigo/python-pathtools',       uri: 'https://github.com/yotabits/python-pathtools-release'}
+
 # Documentation about the groot workspaces
 - git: { local-name: 'groot_workspaces', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/groot_workspaces.git'}
