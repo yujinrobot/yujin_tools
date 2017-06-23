@@ -19,8 +19,9 @@
 # and gopher simulations.
 - git: { local-name: 'gopher_common',         version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 
-# Jobbroker package
+# ROSWeb client nodes
 - git: { local-name: 'gopher_jobbroker',      version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_jobbroker.git'}
+- git: { local-name: 'gopher_iot_webclient',  version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_iot_webclient.git'}
 
 # The robot web application
 - git: { local-name: 'gopher_web_ui',         version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
