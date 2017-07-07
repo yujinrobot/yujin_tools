@@ -1,25 +1,72 @@
-# A list of packages we build docs from gopher stable sw for deployment on our public server.
+# A list of packages we build docs from gopher devel sw for deployment on our internal server.
 messages:
- - dslam_msgs
- - elf_msgs
  - gopher_configuration
- - gopher_core_msgs
- - gopher_delivery_msgs
- - gopher_ghost_msgs
- - gopher_navi_msgs
- - gopher_networking_msgs
- - gopher_semantic_msgs
- - gopher_sim_msgs
- - gopher_std_msgs
- - py_trees_msgs
- - yocs_msgs
 bootstrap:
+# - door_operator     not a currently used package, but we sometimes build the docs to make available for medicart
+ - elevator_operator
+ - feed_the_troll
+ - gopher_behaviours
+ - gopher_bootstrap
+ - gopher_customisation
+ - gopher_diagnostics
  - gopher_networking
+ - gopher_robot_restful
+ - gopher_semantics
  - gopher_version
+ - py_trees
+ - rocon_python_comms
+ - rocon_python_utils
+ - rocon_uri
+ - yujin_ansible
+concert:
+ - gopher_concert_restful
 desktop:
  - gopher_podium
  - gopher_desktop_utilities
+ - gopher_stage
+ - gopher_gazebo
 dslam:
  - dslam_bag
+ecl:
+ - ecl_build
+ - ecl_license
+ - ecl_config
+ - ecl_console
+ - ecl_converters_lite
+ - ecl_errors
+ - ecl_io
+ - ecl_sigslots_lite
+ - ecl_time_lite
+ - ecl_command_line
+ - ecl_concepts
+ - ecl_containers
+ - ecl_converters
+ - ecl_core_apps
+ - ecl_devices
+ - ecl_eigen
+ - ecl_exceptions
+ - ecl_filesystem
+ - ecl_formatters
+ - ecl_geometry
+ - ecl_ipc
+ - ecl_linear_algebra
+ - ecl_math
+ - ecl_mpl
+ - ecl_sigslots
+ - ecl_statistics
+ - ecl_streams
+ - ecl_threads
+ - ecl_time
+ - ecl_type_traits
+ - ecl_utilities
+ - ecl_manipulators
+ - ecl_mobile_robot
+gopher:
+ - gopher_3d_extrinsics
+ - gopher_robot
+ - somanet_node
 navigation:
+ - cost_map_ros
+ - gopher_laserscan_processing
  - dslam_planner
+ - gopher_trajectory_controller
