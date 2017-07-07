@@ -1,0 +1,16 @@
+# Gopher specific concert development (note there are alot of libraries in bootstrap that are used by the robot and
+# concert).
+#
+#   Permissions: open to all gopher developers - no rocket science here yet, but usually just the concert developers.
+#
+
+# Supporting tools from old Rocon
+- git: { local-name: 'rocon_concert',          version: 'release/0.9-indigo-gopher', uri: 'https://github.com/robotics-in-concert/rocon_concert.git'}
+- git: { local-name: 'rocon_tutorials',        version: 'release/0.8-indigo-gopher', uri: 'https://github.com/robotics-in-concert/rocon_tutorials.git'}
+
+# Gopher specific requirements
+- git: { local-name: 'gopher_concert',         version: 'release/0.4', uri: 'https://bitbucket.org/yujinrobot/gopher_concert.git'}
+- git: { local-name: 'flask_task_planner',     version: 'release/0.3', uri: 'https://bitbucket.org/yujinrobot/flask-task-planner.git'}
+
+# REST API specification for the gopher concert
+- git: { local-name: 'gopher_concert_restful', version: 'release/0.3', uri: 'https://bitbucket.org/yujinrobot/gopher_concert_restful'}

@@ -1,0 +1,27 @@
+# Localisation related sources.
+#
+#   Permissions: closed - localisation team only since this contains the sensitive dslam IP
+#
+
+# Bags and scripts to run dslam mapping/navigation experiments
+- git: {local-name: dslam_bag,                 version: release/0.5-indigo, uri: 'https://bitbucket.org/yujinrobot/dslam_bag.git'}
+
+# The core dslam library (no gui needed)
+- git: {local-name: dslam,                     version: release/0.7-indigo, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
+# Ecto pipeline, map utilities and viewers for dslam
+- git: {local-name: dslam_desktop,             version: release/0.7-indigo, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
+# Map version information only
+- git: {local-name: dslam_map_version,         version: release/0.5-indigo, uri: 'https://bitbucket.org/yujinrobot/dslam_map_version.git'}
+# Library to filter the raw data from the new bosch gyro
+- git: {local-name: imu,                       version: release/0.1-indigo, uri: 'https://bitbucket.org/yujinrobot/imu.git'}
+# Supporting qglv widgets and algorithms to create dslam viewers
+- git: {local-name: qglv_toolkit,              version: release/0.1-indigo, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
+# Localisation framework, includes initialisation methods with AR markers
+- git: {local-name: elf,                       version: release/0.5-indigo, uri: 'https://bitbucket.org/yujinrobot/elf.git'}
+# Open source releases that are often changing 
+# support library for mixing ros and sophus
+- git: {local-name: 'sophus_ros_toolkit',      version: release/0.1-indigo, uri: 'https://github.com/stonier/sophus_ros_toolkit.git'}
+
+# communication libraries between the gopher sbc and the dslam boards
+# - git: {local-name: message_multiplexing,    version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
+# - git: {local-name: nanomsg,                 version: indigo, uri: 'https://github.com/stonier/nanomsg.git'}
