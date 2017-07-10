@@ -1,0 +1,54 @@
+from __future__ import division
+import os
+import psutil
+import shutil
+from os.path import expanduser
+
+minimum_free_space  = 10
+b_togb = 1073741824
+
+
+def get_free_space():
+    """
+
+    :return: return numbers of free Gbytes on harddrive
+    """
+    stat = psutil.disk_usage('/')
+    return stat.free / b_togb
+
+
+def get_log_folder_list(log_path):
+    """
+
+    :return: return the list of folders containing log
+    """
+    dirs = [d for d in os.listdir(log_path) if os.path.isdir(os.path.join(log_path, d))]
+    return dirs
+
+def delete_latest(folder_list, log_path):
+    to_delete = folder_list[0]
+    try:
+        shutil.rmtree(log_path + to_delete)
+        print ("Log %s has been deleted" % (to_delete))
+    except Exception as msg:
+        print to_delete + " Exception raised:" + msg
+
+
+
+
+def main():
+    home = expanduser("~")
+    log_path = home + '/.ros/log/'
+
+    free_space = get_free_space()
+    folder_list = get_log_folder_list(log_path)
+    folder_list.sort()
+
+    while(free_space < minimum_free_space and len(folder_list) > 1):
+        delete_latest(folder_list, log_path)
+        free_space = get_free_space()
+        folder_list.pop(0)
+    return 0
+
+main()
+print ("free disk from log script run.")
