@@ -1,4 +1,22 @@
 0.4.54
+ - Use a yujinrobot for for pytrees_suite, rqt_py_trees,py_trees_msgs
+ - Stable docs list update
+ - New stable release(1.9.2) for singapore
+ - Removed celeros
+ - Fix somanet_firmware version
+ - Add jobbroker package in gopher_bootstrap
+ - Audio_common package is using volumn_fix_branch
+ - Astra 3d sensor is using filter_library_custom branch
+ - Removed flask_task_planner
+ - Rosinstall update for pyros
+ - Gopher rosinstall : Attempting rostful hotfix 
+ - Add plane_calibration package
+ - Add iot web client
+ - Add pathtools and watchdog
+ - Naming fix for ansible script(python-yujin-ansible)
+ - New Stable release(1.10): Daring
+ - Add yujin_clean_logs script
+0.4.54
  - groot_arm_binaries : fix external server rsynch path
 0.4.53
  - yujin_tools : dropped dependencies to packages from ROS repositories
