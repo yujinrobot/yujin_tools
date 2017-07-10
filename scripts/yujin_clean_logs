@@ -1,17 +1,18 @@
+#!/usr/bin/python
 from __future__ import division
 import os
 import psutil
 import shutil
 from os.path import expanduser
 
-minimum_free_space  = 10
+minimum_free_space = 10
 b_togb = 1073741824
 
 
 def get_free_space():
     """
 
-    :return: return numbers of free Gbytes on harddrive
+    :return: return numbers of free Gbytes on hardrive
     """
     stat = psutil.disk_usage('/')
     return stat.free / b_togb
@@ -33,10 +34,8 @@ def delete_latest(folder_list, log_path):
     except Exception as msg:
         print to_delete + " Exception raised:" + msg
 
+if __name__ == "__main__":
 
-
-
-def main():
     home = expanduser("~")
     log_path = home + '/.ros/log/'
 
@@ -48,7 +47,4 @@ def main():
         delete_latest(folder_list, log_path)
         free_space = get_free_space()
         folder_list.pop(0)
-    return 0
-
-main()
-print ("free disk from log script run.")
+    print ("free disk from log script run.")
