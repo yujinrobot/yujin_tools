@@ -14,7 +14,7 @@
 
 # Drivers
 - git: { local-name: 'somanet_driver',     version: 'release/0.4-indigo',         uri: 'https://bitbucket.org/yujinrobot/somanet_driver.git'}
-- git: { local-name: 'rplidar_ros',        version: 'release/1.6-indigo',         uri: 'https://github.com/yujinrobot/rplidar_ros.git'}
+- git: { local-name: 'rplidar_ros',        version: 'release-1.6-indigo-yujin_bug_fix',         uri: 'https://github.com/yujinrobot/rplidar_ros.git'}
 - git: { local-name: 'rplidar_extras',     version: 'release/1.1-indigo',         uri: 'https://github.com/yujinrobot/rplidar_extras.git'}
 - git: { local-name: 'astra_camera',       version: 'filter_library_frozen', uri: 'https://github.com/yujinrobot/ros_astra_camera.git'}
 
