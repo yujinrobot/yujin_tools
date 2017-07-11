@@ -71,7 +71,7 @@ You can also make a git alias for it:
 ## Developing & Packaging
 
 For the yujin guys:
-
+    > sudo apt-get install python-stdeb
     > git clone https://github.com/yujinrobot/yujin_tools.git
     > cd yujin_tools
 
