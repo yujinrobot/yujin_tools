@@ -20,7 +20,7 @@ sys.path.insert(0, 'src')
 # to get that here *and* there and we don't exactly use
 # the module version anywhere, so keep it simple...
 # just here for now.
-__version__ = '0.4.55'
+__version__ = '0.4.56'
 
 setup(name='yujin_tools',
       version= __version__,
