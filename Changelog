@@ -1,4 +1,6 @@
-0.4.54
+0.4.56
+ - version bump for release
+0.4.55
  - Stable docs list update
  - New stable release(1.9.2) for singapore
  - Naming fix for ansible script(python-yujin-ansible)
