@@ -21,8 +21,8 @@ PACKAGES_URI="packages.yujinrobot.com"
 PACKAGES_URL="http://${PACKAGES_URI}"
 PACKAGES_SSH="files@${PACKAGES_URI}"
 PACKAGES_SCRIPTS_DIR="/data/repos/scripts"
-UBUNTU_ARCH=amd64
-UBUNTU_VERSION_string="trusty"
+UBUNTU_ARCH="$(dpkg --print-architecture)"   # get current machine architecture
+UBUNTU_VERSION_string="$(lsb_release -cs)"  # get current release codename
 COMPONENT_NAME=""
 
 ###########################
