@@ -1,0 +1,111 @@
+###############################################################################
+# Yujin's Rosinstall Index
+###############################################################################
+#
+# Why
+# ===
+#
+# We have rosinstalls everywhere...easy to forget/lose track of them.
+#
+# Quick Start
+# ===========
+#
+# At it's simplest, this is just a key to a url where a rosinstall can be
+# found. You can then install the sources into a catkin environment.
+#
+# e.g. for the ecl key-value pair
+#
+#     ecl: 'https://raw.github.com/stonier/ecl_core/indigo/ecl.rosinstall'
+#
+# e.g. to download and compile ecl from key-value pair
+#
+#     yujin_init_workspace ~/ecl ecl
+#     cd ~/ecl
+#     yujin_init_build .
+#     yujin_make
+#
+# Mixins
+# ======
+#
+# When you use a key-value pair multiply, combine them in a list to form new workspaces.
+# Downloading and compiling works in the same way.
+#
+# e.g. arm_bootstrap:
+#
+#    arm_bootstrap: [_catkin, _dslam_bootstrap, yaml_cpp, respawn]
+#
+# Adding Index Key-Value Pairs
+# ============================
+# 
+# Just make a pull request and poke Daniel to look at it.
+#
+###############################################################################
+
+# rosinstalls indexed multiply below
+_dslam: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam.rosinstall'
+_dslam_bootstrap: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_bootstrap.rosinstall'
+_catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/catkin.rosinstall'
+
+# ros core
+catkin: [_catkin]
+ecto-devel: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/ecto-devel.rosinstall'
+ecto-stable: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/ecto-stable.rosinstall'
+yaml_cpp: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/yaml_cpp.rosinstall'
+
+# yujin general
+dslam_desktop: [_dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
+ecl: [ecl-devel]
+ecl-devel: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/ecl-devel.rosinstall'
+ecl-stable: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/ecl-stable.rosinstall'
+hello: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/hello.rosinstall'
+qt_ros: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/qt_ros.rosinstall'
+respawn: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/respawn.rosinstall'
+system_deb_builder: 'https://bitbucket.org/yujinrobot/system_deb_builder/raw/kinetic/system_deb_builder.rosinstall'
+
+# android
+android_complete: [android_core, android_interactions]
+android_core: 'https://raw.githubusercontent.com/rosjava/rosjava/indigo/android_core.rosinstall'
+android_interactions: 'https://raw.githubusercontent.com/rosjava/rosjava/indigo/android_interactions.rosinstall'
+
+# arm (mostly cleaning robot)
+arm_3rdparty: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/arm_3rdparty.rosinstall'
+arm_bootstrap: [_catkin, _dslam_bootstrap, yaml_cpp, respawn]
+arm_dslam_cubie: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/arm_dslam_cubie.rosinstall'
+pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
+
+# gopher
+gopher-devel: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher-devel.rosinstall'
+gopher-stable: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher-stable.rosinstall'
+gopher_concert-devel: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_concert-devel.rosinstall'
+gopher_concert-stable: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_concert-stable.rosinstall'
+gopher_bootstrap-devel: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_bootstrap-devel.rosinstall'
+gopher_bootstrap-stable: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_bootstrap-stable.rosinstall'
+gopher_desktop-devel: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_desktop-devel.rosinstall'
+gopher_desktop-stable: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_desktop-stable.rosinstall'
+gopher_messages-devel: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_messages-devel.rosinstall'
+gopher_messages-stable: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_messages-stable.rosinstall'
+gopher_navigation-devel: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_navigation-devel.rosinstall'
+gopher_navigation-stable: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_navigation-stable.rosinstall'
+gopher_dslam-devel: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_dslam-devel.rosinstall'
+gopher_dslam-stable: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_dslam-stable.rosinstall'
+
+# kobuki/turtlebot
+kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki.rosinstall'
+kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki_core.rosinstall'
+turtlebot: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/turtlebot.rosinstall'
+
+# graveyarding
+ecto: [ecto-devel]
+gopher_dslam: [gopher_dslam-devel]
+gopher_navigation: [gopher_navigation-devel]
+gopher_bootstrap: [gopher_bootstrap-devel]
+gopher: [gopher-devel]
+gopher_concert: [gopher_concert-devel]
+gopher_desktop: [gopher_desktop-devel]
+rocon: 'https://raw.github.com/robotics-in-concert/rocon/release/indigo/rocon.rosinstall'
+rocon_devel: 'https://raw.github.com/robotics-in-concert/rocon/release/indigo/rocon.rosinstall'
+rosjava: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava.rosinstall'
+rosjava_minimal: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_minimal.rosinstall'
+rosjava_messages: 'https://raw.github.com/rosjava/rosjava/indigo/rosjava_messages.rosinstall'
+world_canvas: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/world_canvas.rosinstall'
+

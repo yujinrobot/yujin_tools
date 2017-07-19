@@ -1,0 +1,34 @@
+# Software for the gopher navigation workspace.
+#
+#   Permissions: closed - navi experts only (currently Alex and Daniel), key packages are in gopher_navigation.
+#
+
+# Fork of the open source release for ar markers
+- git: {local-name: 'ar_track_alvar',          version: 'devel', uri: 'https://github.com/yujinrobot/ar_track_alvar.git'}
+# Our own costmap equivalent of the very nice swiss grid map library, forked to yujinrobot from stonier to protect against changes
+- git: {local-name: 'cost_map',                version: 'devel', uri: 'https://github.com/yujinrobot/cost_map.git'}
+# Fork of the very nice swiss grid maps
+- git: {local-name: 'grid_map',                version: 'devel', uri: 'https://github.com/yujinrobot/grid_map.git'}
+
+# Can probably drop this one now - we have not used this for a long time
+- git: {local-name: 'depthimage_to_laserscan', version: 'devel', uri: 'https://github.com/yujinrobot/depthimage_to_laserscan.git'}
+
+# Supporting library for calibrating the depth sensors
+- git: {local-name: 'depth_calibration',       version: 'devel', uri: 'https://github.com/yujinrobot/depth_calibration.git'}
+# Customised down sampling package
+- git: {local-name: 'downsampler',             version: 'devel', uri: 'https://github.com/yujinrobot/downsampler.git'}
+# Any important (especially IP sensitive) navigation code in here, especially local and global planning packages.
+- git: {local-name: 'gopher_navigation',       version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
+# Any not so important navigation packages - docking, elevators, simple motions, etc.
+- git: {local-name: 'gopher_motion_control',   version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_motion_control.git'}
+# Forks of the open source ROS navistack
+- git: {local-name: 'navigation',              version: 'devel', uri: 'https://github.com/yujinrobot/navigation.git'}
+- git: {local-name: 'navigation_layers',       version: 'devel', uri: 'https://github.com/yujinrobot/navigation_layers.git'}
+# Can't remember what is in here
+- git: {local-name: 'obstacle_detection',      version: 'devel', uri: 'https://bitbucket.org/yujinrobot/obstacle_detection.git'}
+# Various useful tools, e.g. the command velocity mux, smoothers and teleop packages.
+- git: {local-name: 'yujin_ocs',               version: 'devel', uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
+
+# Binary Repos - from our collaboration with KoDae on the medi cart project, they are working on elevators
+- git: {local-name: 'kuns',                    version: 'devel', uri: 'https://bitbucket.org/yujinrobot/kuns.git'}
+

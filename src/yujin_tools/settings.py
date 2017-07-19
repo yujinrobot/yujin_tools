@@ -10,6 +10,8 @@ import argparse
 from argparse import RawTextHelpFormatter
 #import shutil
 
+import lsb_release
+
 ##############################################################################
 # Local imports
 ##############################################################################
@@ -21,9 +23,9 @@ import console
 # Constants
 ##############################################################################
 
-DEFAULT_TRACK = "indigo"
+DEFAULT_TRACK = "kinetic"
 VALID_TRACKS = ["groovy", "hydro", "indigo", "jade", "kinetic"]
-DEFAULT_ROSINSTALL_DATABASE = 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls'
+DEFAULT_ROSINSTALL_DATABASE = 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls'
 
 ##############################################################################
 # Methods
@@ -45,13 +47,33 @@ def yujin_tools_home():
     return home_dir
 
 
+def get_proper_track():
+    try:
+        osinfo = lsb_release.get_lsb_information()
+    except:
+        print "Warning: ROS track is presumed to %s" % DEFAULT_TRACK
+        return DEFAULT_TRACK
+    if osinfo['ID'] != 'Ubuntu':
+        print "Your OS is %s. Only Ubuntu is supported. Exit..." % osinfo['ID']
+        sys.exit(1)
+    if osinfo['CODENAME'] == 'xenial':
+        track = 'kinetic'
+    elif osinfo['CODENAME'] == 'trusty':
+        track = 'indigo'
+    else:
+        print "Only Ubuntu Trusty and Xenial are supported. Exit..."
+        sys.exit(1)
+    return track
+    
+        
 def get_default_track():
     filename = os.path.join(yujin_tools_home(), "track")
     try:
         f = open(filename, 'r')
     except IOError:
-        set_default_track()
-        return DEFAULT_TRACK
+        track = get_proper_track()
+        set_default_track(track)
+        return track
     track = f.read()
     f.close()
     return track
@@ -96,7 +118,6 @@ def set_rosinstall_database_uri(rosinstall_database=DEFAULT_ROSINSTALL_DATABASE)
 ##############################################################################
 # Utility Settings Script Functionality
 ##############################################################################
-
 
 def help_string():
     overview = '\nThis is a convenience script for configuring yujin tools settings.\n\n'

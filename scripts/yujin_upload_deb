@@ -56,6 +56,10 @@ case $i in
     SHOW_HELP=1
     shift
     ;;
+    --legacy)
+    UBUNTU_VERSION_string="trusty"
+    shift
+    ;;
     *)
     if [ -z ${CPACK_PACKAGE_NAME+x} ]; then CPACK_PACKAGE_NAME=$i; shift; fi
     ;;
@@ -101,4 +105,3 @@ echo " -- ssh ${PACKAGES_SSH} '/data/repos/scripts/add_deb ${UBUNTU_ARCH} ${UBUN
 ssh ${PACKAGES_SSH} -t "/data/repos/scripts/add_deb ${UBUNTU_ARCH} ${UBUNTU_VERSION_string} ${DEBIAN_FILENAME}"
 echo " -- ssh ${PACKAGES_SSH} 'rm -f ~/${DEBIAN_FILENAME}'"
 ssh ${PACKAGES_SSH} "rm -f ~/${DEBIAN_FILENAME}"
-

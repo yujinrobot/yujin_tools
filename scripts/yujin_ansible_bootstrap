@@ -111,12 +111,12 @@ pretty_print "  Codename: ${DISTRIB_CODENAME}"
 echo ""
 
 pretty_headr "Repositories"
-if [ "${DISTRIB_CODENAME}" == "trusty" ]; then
+if [ "${DISTRIB_CODENAME}" == "trusty" ] || [ "${DISTRIB_CODENAME}" == "xenial" ] ; then
   # stuck with having to use a future ansible, drop this need asap if we can
   # as it is likely to cause us integration headaches with modules needing non
   # system supported dependencies
   pretty_print "  ansible........................ppa:ansible/ansible"
-  if [ ! -f /etc/apt/sources.list.d/ansible-ansible-trusty.list ]; then
+  if [ ! -f /etc/apt/sources.list.d/ansible-ansible-${DISTRIB_CODENAME}.list ]; then
     sudo apt-add-repository ppa:ansible/ansible
   fi
 else
@@ -124,7 +124,7 @@ else
 fi
 
 pretty_print "  python-yujin-tools.............packages.yujinrobot.com"
-pretty_print "  python-yujin-ansible...........packages.yujinrobot.com"
+pretty_print "  python-yujin-ansible-tools.....packages.yujinrobot.com"
 if [ ! -f /etc/apt/sources.list.d/yujin.list ]; then
   echo "deb http://packages.yujinrobot.com/yujin/ubuntu ${DISTRIB_CODENAME} main" > /tmp/yujin.list
   sudo mv /tmp/yujin.list /etc/apt/sources.list.d/yujin.list

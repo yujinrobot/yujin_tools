@@ -20,7 +20,7 @@ export RESET="\e[0m"
 show_help ()
 {
   echo ""
-  echo "Pulls the installspace from the server to /opt/yujin/indigo."
+  echo "Pulls the installspace from the server to /opt/yujin/<ros-track>."
   echo "Make sure you call this with sudo or set the correct permissions"
   echo "on /opt/yujin."
   echo ""
@@ -37,12 +37,28 @@ show_help ()
   echo "        --partners        : use the server for partners (stable only)"
   echo "        --list-rosdeps    : list all rosdep keys required by the groot binary installspace"
   echo "        --install-rosdeps : install all rosdeps required by the groot binary installspace"
+  echo "        --track=<track>   : specify ROS track (example: --track=kinetic, default is kinetic)"
   echo ""
   echo "    Admin Options:"
-  echo "        --push            : push local /opt/yujin/indigo installspace with the server"
+  echo "        --push            : push local /opt/yujin/<ros-track> installspace with the server"
   echo ""
   exit 0
 }
+
+###########################
+# PreConfigured Defaults
+###########################
+
+. /etc/lsb-release
+
+if [ "${DISTRIB_CODENAME}" == "trusty" ]; then
+  TRACK="indigo"
+elif [ "${DISTRIB_CODENAME}" == "xenial" ]; then
+  TRACK="kinetic"
+else
+  echo "Only Ubuntu Trusty and Xenial are supported. Exit..."
+  exit 1
+fi
 
 ###########################
 # Command Line
@@ -85,6 +101,10 @@ case $i in
     ;;
     --push)
     PUSH=1
+    shift
+    ;;
+    --track=*)
+    TRACK="${i#*=}"
     shift
     ;;
     *)
@@ -142,7 +162,7 @@ export remote_dir=${remote_url}:${remote_path}
 
 
 # Options - you basically want to mostly replicate the -a option (good set of defaults), but we don't want owner transferred
-# 
+#
 # --delete   : files from the destination directories
 # --checksum : if files are the same size (but different timestamps), do a checksum on them to see whether to transfer or not 
 #
@@ -165,50 +185,50 @@ if [ ! -z "$INSTALL_ROSDEPS" ]; then
     echo ""
     rosdep update
     echo ""
-    echo "Installing all rosdeps required by the binaries installspace in ${local_dir}/indigo-${RELEASE}"
+    echo "Installing all rosdeps required by the binaries installspace in ${local_dir}/${TRACK}-${RELEASE}"
     echo ""
     echo "  Executing:"
     echo ""
-    echo "    source ${local_dir}/indigo-${RELEASE}/setup.bash"
-    echo "    rosdep install -r --default-yes --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src"
+    echo "    source ${local_dir}/${TRACK}-${RELEASE}/setup.bash"
+    echo "    rosdep install -r --default-yes --from-paths ${local_dir}/${TRACK}-${RELEASE} --ignore-src"
     echo ""
-    source ${local_dir}/indigo-${RELEASE}/setup.bash
-    rosdep install -r --default-yes --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src
+    source ${local_dir}/${TRACK}-${RELEASE}/setup.bash
+    rosdep install -r --default-yes --from-paths ${local_dir}/${TRACK}-${RELEASE} --ignore-src
     exit 0
 fi
 
 if [ ! -z "$LIST_ROSDEPS" ]; then
     echo ""
-    echo "Listing all rosdep keys required by the binaries installspace in ${local_dir}/indigo-${RELEASE}"
+    echo "Listing all rosdep keys required by the binaries installspace in ${local_dir}/${TRACK}-${RELEASE}"
     echo ""
     echo "  Executing:"
     echo ""
-    echo "    source ${local_dir}/indigo-${RELEASE}/setup.bash"
-    echo "    rosdep keys -r --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src | sort"
+    echo "    source ${local_dir}/${TRACK}-${RELEASE}/setup.bash"
+    echo "    rosdep keys -r --from-paths ${local_dir}/${TRACK}-${RELEASE} --ignore-src | sort"
     echo ""
-    source ${local_dir}/indigo-${RELEASE}/setup.bash
-    rosdep keys -r --from-paths ${local_dir}/indigo-${RELEASE} --ignore-src | sort
+    source ${local_dir}/${TRACK}-${RELEASE}/setup.bash
+    rosdep keys -r --from-paths ${local_dir}/${TRACK}-${RELEASE} --ignore-src | sort
     exit 0
 fi
 
 if [ ! -z "$PUSH" ]; then
     echo ""
-    echo "Pre-clearing *.pyc files from /opt/yujin/amd64/indigo-${RELEASE}"
-    find ${local_dir}/indigo-${RELEASE} -name \*.pyc -delete
+    echo "Pre-clearing *.pyc files from /opt/yujin/amd64/${TRACK}-${RELEASE}"
+    find ${local_dir}/${TRACK}-${RELEASE} -name \*.pyc -delete
     echo ""
     echo "Pushing changes to the file server '${remote_dir}'."
     # Need to automate this script on jenkins.
     #echo "Do you really want to push changes (if you aren't sure, you definitely do not)?[y/N]:"
     #read answer
     #if [ "$answer" == "y" ]; then
-        rsync ${OPTIONS} ${local_dir}/indigo-${RELEASE} ${remote_dir} | grep -E '^deleting|[^/]$'  # the grep is to remove directory only output to stdout (e.g. indigo-devel/share/rocon_concert/)
+        rsync ${OPTIONS} ${local_dir}/${TRACK}-${RELEASE} ${remote_dir} | grep -E '^deleting|[^/]$'  # the grep is to remove directory only output to stdout (e.g. ${TRACK}-devel/share/rocon_concert/)
     #else
     #    echo "Aborting."
     #fi
     echo ""
 else
     # SKIP - now we have rsync working properly, this is not entirely necessary
-    # remote_listing=`ssh ${remote_url} ls ${remote_path}/indigo-${RELEASE}/build-*`
+    # remote_listing=`ssh ${remote_url} ls ${remote_path}/${TRACK}-${RELEASE}/build-*`
     # if [ $? -ne 0 ]; then
     #   echo -e ""
     #   echo -e "${RED}ERROR: could not connect to${RESET} ${BOLD}'$remote_url'${RESET}${RED}.\n     : are you on the network?\n     : do you have the DNS settings correct?${RESET}"
@@ -216,16 +236,16 @@ else
     #   exit 1
     # fi
     # export remote_timestamp=`echo ${remote_listing} | sed 's/.*\\///'`
-    # export local_timestamp=`ls ${local_dir}/indigo-${RELEASE}/build-* 2>/dev/null | sed 's/.*\\///'`
+    # export local_timestamp=`ls ${local_dir}/${TRACK}-${RELEASE}/build-* 2>/dev/null | sed 's/.*\\///'`
     # if [ "${remote_timestamp}" == "${local_timestamp}" ]; then
     #   echo "Nothing to do: remote and local builds have the same timestamps."
     #   exit 0
     # fi
     echo ""
-    echo "Clearing *.pyc files from /opt/yujin/amd64/indigo-${RELEASE}"
-    find /opt/yujin/amd64/indigo-${RELEASE} -name \*.pyc -delete
+    echo "Clearing *.pyc files from /opt/yujin/amd64/${TRACK}-${RELEASE}"
+    find /opt/yujin/amd64/${TRACK}-${RELEASE} -name \*.pyc -delete
     echo ""
-    rsync ${OPTIONS} ${remote_dir}/indigo-${RELEASE} ${local_dir} | grep -E '^deleting|[^/]$'  # the grep is to remove directory only output to stdout (e.g. indigo-devel/share/rocon_concert/)
+    rsync ${OPTIONS} ${remote_dir}/${TRACK}-${RELEASE} ${local_dir} | grep -E '^deleting|[^/]$'  # the grep is to remove directory only output to stdout (e.g. ${TRACK}-devel/share/rocon_concert/)
     if [ $? -ne 0 ]; then
       echo -e ""
       echo -e "${RED}ERROR: failed to sync with${RESET} ${BOLD}'$remote_url'${RESET}${RED}.\n     : are you on the network?\n     : do you have the DNS settings correct?${RESET}"
@@ -233,9 +253,8 @@ else
       exit 1
     fi
     # just in case the server misbehaved and sent us pyc files, clear them!
-    find /opt/yujin/amd64/indigo-${RELEASE} -name \*.pyc -delete
+    find /opt/yujin/amd64/${TRACK}-${RELEASE} -name \*.pyc -delete
     echo ""
     echo "You may need an additional 'groot_binaries --${RELEASE} --install-rosdeps' if there are new dependencies."
     echo ""
 fi
-

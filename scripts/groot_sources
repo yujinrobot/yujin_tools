@@ -48,9 +48,10 @@ show_help ()
   echo "        --make                                          : run yujin_make on each workspace"
   echo "        --branches                                      : show what branches are used in each workspace"
   echo "        -d, --source-directory=<directory>              : specify custom source directory"
+  echo "        --track=<track>                                 : specify ROS track (example: --track=kinetic, default is kinetic)"
   echo ""
   echo "    Admin Options:"
-  echo "        --install                                       : set the install location to /opt/yujin/amd64/xxx for all workspaces"
+  echo "        --install=<directory>                           : set the install location to given directory(example: --install=/opt/yujin/kinetic)"
   echo ""
   exit 0
 }
@@ -60,6 +61,17 @@ show_help ()
 ###########################
 
 JOBS=5
+
+. /etc/lsb-release
+
+if [ "${DISTRIB_CODENAME}" == "trusty" ]; then
+  TRACK="indigo"
+elif [ "${DISTRIB_CODENAME}" == "xenial" ]; then
+  TRACK="kinetic"
+else
+  echo "Only Ubuntu Trusty and Xenial are supported. Exit..."
+  exit 1
+fi
 
 ###########################
 # Command Line
@@ -76,8 +88,8 @@ case $i in
     DELETE=1
     shift
     ;;
-    --install)
-    INSTALL_STRING="--install=/opt/yujin/indigo"
+    --install=*)
+    INSTALL_STRING="${i#*=}"
     shift
     ;;
     --update)
@@ -115,6 +127,10 @@ case $i in
     -d=*|--source-directory=*)
     USE_CUSTOM_SOURCE_DIRECTORY=1
     CUSTOM_SOURCE_DIRECTORY="${i#*=}"
+    shift
+    ;;
+    --track=*)
+    TRACK="${i#*=}"
     shift
     ;;
     *)
@@ -168,8 +184,7 @@ declare -A ALL_REPO_KEYS
 declare -A ALL_UNDERLAYS
 
 ALL_REPO_KEYS=( ["ecto"]="ecto-${RELEASE}" ["ecl"]="ecl-${RELEASE}" ["messages"]="gopher_messages-${RELEASE}" ["bootstrap"]="gopher_bootstrap-${RELEASE}" ["concert"]="gopher_concert-${RELEASE}" ["navi"]="gopher_navigation-${RELEASE}" ["dslam"]="gopher_dslam-${RELEASE}" ["gopher"]="gopher-${RELEASE}" ["desktop"]="gopher_desktop-${RELEASE}" )
-
-YUJIN_BINARIES=/opt/yujin/amd64/indigo-${RELEASE}
+YUJIN_BINARIES=/opt/yujin/amd64/${TRACK}-${RELEASE}
 
 ECL_CLOUD="${GROOT}/ecl_${WS}/devel"
 MSG_CLOUD="${GROOT}/messages_${WS}/devel;${ECL_CLOUD}"
@@ -390,4 +405,3 @@ fi
 
 mkdir_groot
 download_sources
-

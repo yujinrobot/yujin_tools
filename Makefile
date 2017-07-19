@@ -5,7 +5,7 @@ ifeq ($(strip $(FILE_EXISTS)),)
 else
     UNINSTALL_FILES:=$(shell cat install.record)
 endif
- 
+
 
 help:
 	@echo "Local Build"
@@ -74,4 +74,3 @@ clean:  clean_dist
 	-sudo rm -f install.record
 	-sudo rm -rf build
 	-sudo rm -rf yujin_tools.egg-info
-

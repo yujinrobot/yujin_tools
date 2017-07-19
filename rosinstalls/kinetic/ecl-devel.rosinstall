@@ -1,0 +1,12 @@
+# The ecl is our open source and fundamental c++ library supporting all of our other software
+# This includes things like timers, statistics, wrappers for Eigen and Sophus, serial devices, etc etc.
+#
+#   Permissions: open to all - these are open source third party forks.
+#
+[
+{'git': {'local-name': 'ecl_tools',        'version': 'devel', 'uri':'https://github.com/stonier/ecl_tools.git'}},
+{'git': {'local-name': 'ecl_lite',         'version': 'devel', 'uri':'https://github.com/stonier/ecl_lite.git'}},
+{'git': {'local-name': 'ecl_core',         'version': 'devel', 'uri':'https://github.com/stonier/ecl_core.git'}},
+{'git': {'local-name': 'ecl_navigation',   'version': 'devel', 'uri':'https://github.com/stonier/ecl_navigation.git'}},
+{'git': {'local-name': 'ecl_manipulation', 'version': 'devel', 'uri':'https://github.com/stonier/ecl_manipulation.git'}},
+]

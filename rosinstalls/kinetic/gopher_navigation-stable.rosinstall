@@ -1,0 +1,19 @@
+# Software for the gopher navigation stack
+
+- git: {local-name: 'ar_track_alvar',          version: 'release/0.5-indigo-yujin-modified',     uri: 'https://github.com/yujinrobot/ar_track_alvar.git'}
+- git: {local-name: 'cost_map',                version: 'release/0.3-indigo-beta',               uri: 'https://github.com/yujinrobot/cost_map.git'}
+- git: {local-name: 'depthimage_to_laserscan', version: 'release/1.0-indigo-yujin-modified',     uri: 'https://github.com/yujinrobot/depthimage_to_laserscan.git'}
+- git: {local-name: 'depth_calibration',       version: 'release/0.4-indigo',                    uri: 'https://github.com/yujinrobot/depth_calibration.git'}
+- git: {local-name: 'downsampler',             version: 'release/0.2-indigo',                    uri: 'https://github.com/yujinrobot/downsampler.git'}
+- git: {local-name: 'gopher_navigation',       version: 'release/0.6-indigo',                    uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
+- git: {local-name: 'gopher_motion_control',   version: 'release/0.6-indigo',                    uri: 'https://bitbucket.org/yujinrobot/gopher_motion_control.git'}
+- git: {local-name: 'grid_map',                version: 'release/1.1-indigo',                    uri: 'https://github.com/yujinrobot/grid_map.git'}
+- git: {local-name: 'navigation',              version: 'release/1.12.13-indigo-yujin-modified', uri: 'https://github.com/yujinrobot/navigation.git'}
+- git: {local-name: 'navigation_layers',       version: 'release/0.2-indigo-yujin-modified',     uri: 'https://github.com/yujinrobot/navigation_layers.git'}
+- git: {local-name: 'obstacle_detection',      version: 'release/0.1-indigo',                    uri: 'https://bitbucket.org/yujinrobot/obstacle_detection.git'}
+- git: {local-name: 'sophus_ros_toolkit',      version: 'release/0.1-indigo-kinetic',            uri: 'https://github.com/stonier/sophus_ros_toolkit.git'}
+- git: {local-name: 'yujin_ocs',               version: 'kinetic',                               uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
+
+# Binary Repos
+- git: {local-name: 'kuns',                    version: 'release/0.1-indigo',                 uri: 'https://bitbucket.org/yujinrobot/kuns.git'}
+

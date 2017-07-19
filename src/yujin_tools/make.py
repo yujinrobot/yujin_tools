@@ -183,7 +183,7 @@ def make_main():
     if args.install_rosdeps:
         return install_rosdeps(base_path, source_path, settings.get_default_track(), args.no_color)
     if args.install_rosdeps_track is not None:
-        return install_rosdeps(source_path, args.install_rosdeps_track, args.no_color)
+        return install_rosdeps(base_path, source_path, args.install_rosdeps_track, args.no_color)
 
 
     # Clear out previous temporaries if requested
