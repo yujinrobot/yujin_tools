@@ -155,8 +155,13 @@ elif [ ! -z "$PARTNERS" ]; then
   export remote_url=groot@files.yujinrobot.com
   export remote_path=/data/file_server/rsync_partner_repositories/yujin/amd64
 else
-  export remote_url=files@files.yujin.com
-  export remote_path=shared/installspaces/yujin/amd64
+  if [ "${DISTRIB_CODENAME}" == "xenial" ]; then
+    export remote_url=files@files.gopher.com
+    export remote_path=data/yujin/amd64
+  else
+    export remote_url=files@files.yujin.com
+    export remote_path=shared/installspaces/yujin/amd64
+  fi
 fi
 export remote_dir=${remote_url}:${remote_path}
 

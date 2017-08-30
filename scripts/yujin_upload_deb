@@ -17,13 +17,20 @@ export RESET="\e[0m"
 # Constants
 ###########################
 
-PACKAGES_URI="packages.yujinrobot.com"
-PACKAGES_URL="http://${PACKAGES_URI}"
-PACKAGES_SSH="files@${PACKAGES_URI}"
-PACKAGES_SCRIPTS_DIR="/data/repos/scripts"
 UBUNTU_ARCH="$(dpkg --print-architecture)"   # get current machine architecture
 UBUNTU_VERSION_string="$(lsb_release -cs)"  # get current release codename
 COMPONENT_NAME=""
+
+if [ "${UBUNTU_VERSION_string}" == "xenial" ]; then
+  PACKAGES_URI="packages.gopher.com"
+  PACKAGES_SCRIPTS_DIR="/opt/system_deb_builder/yujin_deb_tools/scripts"
+else
+  PACKAGES_URI="packages.yujinrobot.com"
+  PACKAGES_SCRIPTS_DIR="/data/repos/scripts"
+fi
+
+PACKAGES_URL="http://${PACKAGES_URI}"
+PACKAGES_SSH="files@${PACKAGES_URI}"
 
 ###########################
 # Help
@@ -96,12 +103,12 @@ if [[ $? != 0 ]]; then
 fi
 
 ssh ${PACKAGES_SSH} "rm -f ~/${DEBIAN_FILENAME}"
-echo " -- ssh ${PACKAGES_SSH} -t '/data/repos/scripts/rem_deb ${UBUNTU_VERSION_string} ${CPACK_PACKAGE_NAME}'"
-ssh ${PACKAGES_SSH} -t "/data/repos/scripts/rem_deb ${UBUNTU_VERSION_string} ${CPACK_PACKAGE_NAME}"
+echo " -- ssh ${PACKAGES_SSH} -t '${PACKAGES_SCRIPTS_DIR}/rem_deb ${UBUNTU_VERSION_string} ${CPACK_PACKAGE_NAME}'"
+ssh ${PACKAGES_SSH} -t "${PACKAGES_SCRIPTS_DIR}/rem_deb ${UBUNTU_VERSION_string} ${CPACK_PACKAGE_NAME}"
 #ssh ${PACKAGES_SSH} -t '/data/repos/scripts/rem_deb ${UBUNTU_VERSION_string} ${CPACK_PACKAGE_NAME}-${COMPONENT_NAME}'
 echo " -- scp ${DEBIAN_FILENAME} ${PACKAGES_SSH}:"
 scp ${DEBIAN_FILENAME} ${PACKAGES_SSH}:
-echo " -- ssh ${PACKAGES_SSH} '/data/repos/scripts/add_deb ${UBUNTU_ARCH} ${UBUNTU_VERSION_string} ${DEBIAN_FILENAME}'"
-ssh ${PACKAGES_SSH} -t "/data/repos/scripts/add_deb ${UBUNTU_ARCH} ${UBUNTU_VERSION_string} ${DEBIAN_FILENAME}"
+echo " -- ssh ${PACKAGES_SSH} '${PACKAGES_SCRIPTS_DIR}/add_deb ${UBUNTU_ARCH} ${UBUNTU_VERSION_string} ${DEBIAN_FILENAME}'"
+ssh ${PACKAGES_SSH} -t "${PACKAGES_SCRIPTS_DIR}/add_deb ${UBUNTU_ARCH} ${UBUNTU_VERSION_string} ${DEBIAN_FILENAME}"
 echo " -- ssh ${PACKAGES_SSH} 'rm -f ~/${DEBIAN_FILENAME}'"
 ssh ${PACKAGES_SSH} "rm -f ~/${DEBIAN_FILENAME}"
