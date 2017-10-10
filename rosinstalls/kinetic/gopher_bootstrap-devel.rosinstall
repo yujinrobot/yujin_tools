@@ -17,7 +17,7 @@
 
 # Has the very important gopher_bootstrap which includes common parameterisations and launchers for gopher robots
 # and gopher simulations.
-- git: { local-name: 'gopher_common',         version: 'kinetic-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
+- git: { local-name: 'gopher_common',         version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 
 # Jobbroker package
 - git: { local-name: 'gopher_jobbroker',      version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_jobbroker.git'}

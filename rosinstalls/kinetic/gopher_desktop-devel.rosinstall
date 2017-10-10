@@ -7,7 +7,7 @@
 #
 
 # Gopher podium/stage/gazebo simulations and rviz, rqt plugins
-- git: { local-name: 'gopher_desktop', version: 'kinetic-devel', uri: 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}
+- git: { local-name: 'gopher_desktop', version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}
 
 # Has the rocon remocon
 - git: { local-name: 'rocon_qt_gui',   version: 'devel', uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}
