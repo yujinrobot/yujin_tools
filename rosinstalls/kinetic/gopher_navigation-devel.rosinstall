@@ -17,6 +17,7 @@
 - git: {local-name: 'depth_calibration',       version: 'devel', uri: 'https://github.com/yujinrobot/depth_calibration.git'}
 # Customised down sampling package
 - git: {local-name: 'downsampler',             version: 'devel', uri: 'https://github.com/yujinrobot/downsampler.git'}
+- git: {local-name: 'plane_calibration',       version: 'devel', uri: 'https://github.com/yujinrobot/plane_calibration.git'}
 # Any important (especially IP sensitive) navigation code in here, especially local and global planning packages.
 - git: {local-name: 'gopher_navigation',       version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
 # Any not so important navigation packages - docking, elevators, simple motions, etc.
