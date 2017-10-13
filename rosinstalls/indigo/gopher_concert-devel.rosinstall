@@ -5,7 +5,7 @@
 #
 
 # Supporting tools from old Rocon
-- git: { local-name: 'rocon_concert',          version: 'devel', uri: 'https://github.com/robotics-in-concert/rocon_concert.git'}
+#- git: { local-name: 'rocon_concert',          version: 'devel', uri: 'https://github.com/robotics-in-concert/rocon_concert.git'}
 #- git: { local-name: 'rocon_tutorials',        version: 'devel', uri: 'https://github.com/robotics-in-concert/rocon_tutorials.git'}
 
 # Gopher specific requirements
