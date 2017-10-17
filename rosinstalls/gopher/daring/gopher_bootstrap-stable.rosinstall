@@ -37,10 +37,12 @@
 # Ros 2 Rest
 - git: { local-name: 'rostful',               version: '9d01ef5f23cf5f6facdef9150fdeea4fe3f192b0', uri: 'https://github.com/asmodehn/rostful.git'}
 # Only in case of testing before package release
-- git: { local-name: 'catkin_pip',            version: 'devel', uri: 'https://github.com/pyros-dev/catkin_pip.git'}
 - git: { local-name: 'pyros_interfaces_ros',  version: '3b0077c5fe5e69252b9566cad9328da743e5ef0a', uri: 'https://github.com/asmodehn/pyros-rosinterface.git'}
 - git: { local-name: 'pyros_schemas',         version: '9e3debe4289eaddb84562d0cdc9f431f8d929685', uri: 'https://github.com/asmodehn/pyros-schemas.git'}
 - git: { local-name: 'pyros_msgs',            version: '2e0fe0e07867a8b3a77ed9647d5a4017975aff09', uri: 'https://github.com/asmodehn/pyros-msgs.git'}
+
+# Ros 2 Concert communications (hopefully deprecating sometime)
+- git: { local-name: 'rocon_multimaster',     version: 'release/0.10-indigo-gopher',        uri: 'https://github.com/robotics-in-concert/rocon_multimaster.git'}
 
 # Deployment
 - git: { local-name: 'yujin_ansible',     version: 'release/0.2',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
@@ -56,6 +58,10 @@
 - git: { local-name: 'audio_common',          version: 'volume_fix_branch',       uri: 'https://github.com/yujinrobot/audio_common.git'}
 # until we have fixes for the service unloading problem - https://github.com/ros/diagnostics/issues/50
 - git: { local-name: 'diagnostics',           version: 'handling_unloading_properly', uri: 'https://github.com/yujinrobot/diagnostics.git'}
+
+# until indigo has not been newly released
+- git: { local-name: 'python-watchdog',          version: 'release/indigo/python-watchdog',       uri: 'https://github.com/yotabits/python-watchdog-release'}
+- git: { local-name: 'python-pathtools',          version: 'release/indigo/python-pathtools',       uri: 'https://github.com/yotabits/python-pathtools-release'}
 
 # Documentation about the groot workspaces
 - git: { local-name: 'groot_workspaces', version: 'release/0.1-indigo',        uri: 'https://bitbucket.org/yujinrobot/groot_workspaces.git'}
