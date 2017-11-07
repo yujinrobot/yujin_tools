@@ -1,0 +1,17 @@
+##############################################################################
+#
+# If no debs, overlay on top of the rocon and ecl rosinstallers.
+#
+##############################################################################
+
+# Kobuki / Yujin stacks
+
+- git: {local-name: yocs_msgs, version: release/0.6-kinetic, uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
+- git: {local-name: yujin_ocs, version: kinetic, uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
+- git: {local-name: kobuki_msgs, version: kinetic, uri: 'https://github.com/yujinrobot/kobuki_msgs.git'}
+- git: {local-name: kobuki_core, version: kinetic, uri: 'https://github.com/yujinrobot/kobuki_core.git'}
+- git: {local-name: kobuki, version: kinetic, uri: 'https://github.com/yujinrobot/kobuki.git'}
+- git: {local-name: kobuki_desktop, version: kinetic, uri: 'https://github.com/yujinrobot/kobuki_desktop.git'}
+
+#- git: {local-name: capabilities, version: master, uri: 'https://github.com/osrf/capabilities.git'}
+#- git: {local-name: std_capabilities, version: master, uri: 'https://github.com/osrf/std_capabilities.git'}

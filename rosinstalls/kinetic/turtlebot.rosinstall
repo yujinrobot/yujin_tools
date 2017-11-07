@@ -1,0 +1,13 @@
+##############################################################################
+#
+# If no debs, overlay on top of the kobuki, rocon and ecl rosinstallers.
+#
+##############################################################################
+
+- git: {local-name: turtlebot_msgs, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_msgs.git'}
+- git: {local-name: turtlebot_create, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_create.git'}
+- git: {local-name: turtlebot, version: kinetic, uri: 'https://github.com/turtlebot/turtlebot.git'}
+- git: {local-name: turtlebot_apps, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_apps.git'}
+- git: {local-name: turtlebot_interactions, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_interactions.git'}
+- git: {local-name: turtlebot_simulator, version: indigo, uri: 'https://github.com/turtlebot/turtlebot_simulator.git'}
+- git: {local-name: turtlebot_create_desktop, version: kinetic, uri: 'https://github.com/turtlebot/turtlebot_create_desktop.git'}

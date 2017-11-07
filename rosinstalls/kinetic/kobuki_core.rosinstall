@@ -1,0 +1,14 @@
+##############################################################################
+#
+# This is a fully self contained rosinstaller (useful for win/cross compiles)
+#
+##############################################################################
+
+- git: {local-name: catkin,         version: kinetic-devel,  uri: 'https://github.com/ros/catkin.git'}
+- git: {local-name: cmake_modules,  version: 0.4-devel,     uri: 'https://github.com/ros/cmake_modules.git'}
+- git: {local-name: ecl_tool,       version: release/0.61-indigo-kinetic, uri: 'https://github.com/stonier/ecl_tools.git'}
+- git: {local-name: ecl_lite,       version: release/0.61-indigo-kinetic, uri: 'https://github.com/stonier/ecl_lite.git'}
+- git: {local-name: ecl_core,       version: release/0.61-indigo-kinetic, uri: 'https://github.com/stonier/ecl_core.git'}
+- git: {local-name: ecl_navigation, version: release/0.60-indigo-kinetic, uri: 'https://github.com/stonier/ecl_navigation.git'}
+- git: {local-name: kobuki_core,    version: kinetic, uri: 'https://github.com/yujinrobot/kobuki_core.git'}
+

@@ -90,9 +90,9 @@ gopher_dslam-devel: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel
 gopher_dslam-stable: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/gopher_dslam-stable.rosinstall'
 
 # kobuki/turtlebot
-kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki.rosinstall'
-kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/kobuki_core.rosinstall'
-turtlebot: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/turtlebot.rosinstall'
+kobuki: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/kobuki.rosinstall'
+kobuki-core: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/kobuki_core.rosinstall'
+turtlebot: 'https://raw.github.com/yujinrobot/yujin_tools/kinetic-devel/rosinstalls/kinetic/turtlebot.rosinstall'
 
 # graveyarding
 ecto: [ecto-devel]
