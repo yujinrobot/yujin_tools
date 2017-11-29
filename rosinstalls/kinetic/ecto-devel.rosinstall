@@ -4,8 +4,10 @@
 #
 
 - git: {local-name: ecto,        version: master, uri: 'https://github.com/plasmodic/ecto.git'}
-- git: {local-name: ecto_ros,    version: master, uri: 'https://github.com/plasmodic/ecto_ros.git'}
+- git: {local-name: ecto_ros,    version: kinetic-devel, uri: 'https://github.com/yujinrobot/ecto_ros.git'}
 - git: {local-name: ecto_opencv, version: kinetic-devel, uri: 'https://github.com/yujinrobot/ecto_opencv.git'}
 
 - git: {local-name: cv_backports, version: kinetic-devel, uri: 'https://github.com/yujinrobot/cv_backports.git'}
+- git: {local-name: opencv_candidate, version: kinetic-devel, uri: 'https://github.com/yujinrobot/opencv_candidate.git'}
+- git: {local-name: vision_opencv, version: kinetic-devel, uri: 'https://github.com/yujinrobot/vision_opencv.git'}
 - git: {local-name: xdot, version: master, uri: 'https://github.com/jbohren/xdot.git'}

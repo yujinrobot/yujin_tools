@@ -7,17 +7,17 @@
 - git: {local-name: dslam_bag,              version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam_bag.git'}
 
 # The core dslam library (no gui needed)
-- git: {local-name: dslam,                  version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
+- git: {local-name: dslam,                  version: kinetic-devel, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
 # Ecto pipeline, map utilities and viewers for dslam
-- git: {local-name: dslam_desktop,          version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
+- git: {local-name: dslam_desktop,          version: kinetic-devel, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
 # Map version information only
 - git: {local-name: dslam_map_version,      version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam_map_version.git'}
 # Library to filter the raw data from the new bosch gyro
 - git: {local-name: imu,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/imu.git'}
 # Supporting qglv widgets and algorithms to create dslam viewers
-- git: {local-name: qglv_toolkit,           version: devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
+- git: {local-name: qglv_toolkit,           version: kinetic-devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
 # Localisation framework, includes initialisation methods with AR markers
-- git: {local-name: elf,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/elf.git'}
+- git: {local-name: elf,                    version: kinetic-devel, uri: 'https://bitbucket.org/yujinrobot/elf.git'}
 
 # Open source releases that are often changing 
 # support library for mixing ros and sophus

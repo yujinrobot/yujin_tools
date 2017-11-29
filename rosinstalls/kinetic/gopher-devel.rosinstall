@@ -10,7 +10,7 @@
 - git: { local-name: 'gopher',             version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher.git'}
 
 # Calibration software (mostly for the 2d/3d sensors)
-- git: { local-name: 'gopher_calibration', version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/gopher_calibration.git'}
+- git: { local-name: 'gopher_calibration', version: 'kinetic-devel',         uri: 'https://bitbucket.org/yujinrobot/gopher_calibration.git'}
 
 # Drivers
 - git: { local-name: 'somanet_driver',     version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/somanet_driver.git'}
