@@ -4,7 +4,7 @@
 #
 
 # Fork of the open source release for ar markers
-- git: {local-name: 'ar_track_alvar',          version: 'devel', uri: 'https://github.com/yujinrobot/ar_track_alvar.git'}
+- git: {local-name: 'ar_track_alvar',          version: 'kinetic-devel', uri: 'https://github.com/yujinrobot/ar_track_alvar.git'}
 # Our own costmap equivalent of the very nice swiss grid map library, forked to yujinrobot from stonier to protect against changes
 - git: {local-name: 'cost_map',                version: 'devel', uri: 'https://github.com/yujinrobot/cost_map.git'}
 # Fork of the very nice swiss grid maps
@@ -14,7 +14,7 @@
 - git: {local-name: 'depthimage_to_laserscan', version: 'devel', uri: 'https://github.com/yujinrobot/depthimage_to_laserscan.git'}
 
 # Supporting library for calibrating the depth sensors
-- git: {local-name: 'depth_calibration',       version: 'devel', uri: 'https://github.com/yujinrobot/depth_calibration.git'}
+- git: {local-name: 'depth_calibration',       version: 'kinetic-devel', uri: 'https://github.com/yujinrobot/depth_calibration.git'}
 # Customised down sampling package
 - git: {local-name: 'downsampler',             version: 'devel', uri: 'https://github.com/yujinrobot/downsampler.git'}
 - git: {local-name: 'plane_calibration',       version: 'devel', uri: 'https://github.com/yujinrobot/plane_calibration.git'}
@@ -30,7 +30,7 @@
 # Various useful tools, e.g. the command velocity mux, smoothers and teleop packages.
 - git: {local-name: 'yujin_ocs',               version: 'devel', uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
 # This open source package will be use temporary to use opencv 2 overall.
-- git: {local-name: 'vision_opencv',           version: 'indigo-opencv2',                        uri: 'https://github.com/yujinrobot/vision_opencv.git'}
+- git: {local-name: 'vision_opencv',           version: 'indigo-opencv2',  uri: 'https://github.com/yujinrobot/vision_opencv.git'}
 
 # Binary Repos - from our collaboration with KoDae on the medi cart project, they are working on elevators
 - git: {local-name: 'kuns',                    version: 'devel', uri: 'https://bitbucket.org/yujinrobot/kuns.git'}
