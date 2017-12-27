@@ -29,6 +29,8 @@
 - git: {local-name: 'obstacle_detection',      version: 'devel', uri: 'https://bitbucket.org/yujinrobot/obstacle_detection.git'}
 # Various useful tools, e.g. the command velocity mux, smoothers and teleop packages.
 - git: {local-name: 'yujin_ocs',               version: 'devel', uri: 'https://github.com/yujinrobot/yujin_ocs.git'}
+# This open source package will be use temporary to use opencv 2 overall.
+- git: {local-name: 'vision_opencv',           version: 'indigo-opencv2',                        uri: 'https://github.com/yujinrobot/vision_opencv.git'}
 
 # Binary Repos - from our collaboration with KoDae on the medi cart project, they are working on elevators
 - git: {local-name: 'kuns',                    version: 'devel', uri: 'https://bitbucket.org/yujinrobot/kuns.git'}
