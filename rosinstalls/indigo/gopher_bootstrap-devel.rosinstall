@@ -39,7 +39,7 @@
 - git: { local-name: 'catkin_pip',            version: 'devel', uri: 'https://github.com/asmodehn/catkin_pip.git'}
 - git: { local-name: 'pyros_interfaces_ros',  version: 'master', uri: 'https://github.com/asmodehn/pyros-rosinterface.git'}
 - git: { local-name: 'pyros_schemas',         version: 'master', uri: 'https://github.com/yujinrobot/pyros-schemas.git'}
-- git: { local-name: 'pyros_msgs',            version: 'master', uri: 'https://github.com/asmodehn/pyros-msgs.git'}
+- git: { local-name: 'pyros_msgs',            version: 'master', uri: 'https://github.com/yujinrobot/pyros-msgs.git'}
 # for python packages, we need the patches from the rosrelease repo, but we should report fixes upstream...
 # And be aware of https://github.com/asmodehn/catkin_pip/issues/106
 # - git: { local-name: 'pyros',                 version: 'release/indigo/pyros', uri: 'https://github.com/asmodehn/pyros-rosrelease.git'}

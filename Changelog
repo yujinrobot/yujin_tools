@@ -1,3 +1,5 @@
+0.4.58
+ - yujin_tools: change pyros_msgs repo from pyros-dev to yujinrobot repo in rosinstall devel.
 0.4.57
  - yujin_tools: change pyros_schemas repo from pyros-dev to yujinrobot repo in rosinstall devel.
 0.4.56
