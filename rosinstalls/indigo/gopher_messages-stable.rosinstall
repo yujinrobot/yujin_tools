@@ -12,10 +12,10 @@
 
 # Messages
 - git: { local-name: 'environment_interactions_msgs', version: 'release/0.1-indigo',        uri: 'https://bitbucket.org/yujinrobot/environment_interactions_msgs.git'}
-- git: { local-name: 'gopher_msgs',                   version: 'release/0.7-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
+- git: { local-name: 'gopher_msgs',                   version: 'release/0.8-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_msgs.git'}
 - git: { local-name: 'py_trees_msgs',                 version: 'release/0.2-indigo-kinetic',        uri: 'https://github.com/yujinrobot/py_trees_msgs.git'}
 - git: { local-name: 'rocon_msgs',                    version: 'release/0.10-indigo-gopher', uri: 'https://github.com/robotics-in-concert/rocon_msgs.git'}
-- git: { local-name: 'somanet_msgs',                  version: 'release/0.5-indigo',        uri: 'https://bitbucket.org/yujinrobot/somanet_msgs.git'}
+- git: { local-name: 'somanet_msgs',                  version: 'release/0.6-indigo',        uri: 'https://bitbucket.org/yujinrobot/somanet_msgs.git'}
 - git: { local-name: 'yocs_msgs',                     version: 'release/0.7-indigo-gopher', uri: 'https://github.com/yujinrobot/yocs_msgs.git'}
 - git: { local-name: 'feed_the_troll_msgs',           version: 'release/0.1-indigo-kinetic', uri: 'https://github.com/stonier/feed_the_troll_msgs.git'}
 

@@ -9,19 +9,19 @@
 
 # The application and interactions framework
 # Tools many useful python modules used pretty much everywhere, bit like the ecl of python for us
-- git: { local-name: 'rocon_tools',           version: 'release/0.8-indigo-gopher',        uri: 'https://github.com/robotics-in-concert/rocon_tools.git'}
+- git: { local-name: 'rocon_tools',           version: 'release/0.9-indigo-gopher',        uri: 'https://github.com/robotics-in-concert/rocon_tools.git'}
 - git: { local-name: 'rocon_app_platform',    version: 'release/0.10-indigo-gopher',        uri: 'https://github.com/robotics-in-concert/rocon_app_platform.git'}
 - git: { local-name: 'gopher_rapps',          version: 'release/0.3-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}
 
 # Version and changelog for the gopher sdk
-- git: { local-name: 'gopher_version',        version: 'release/1.10.2-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_version.git'}
+- git: { local-name: 'gopher_version',        version: 'release/1.11.0-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_version.git'}
 
 # Has the very important gopher_bootstrap which includes common parameterisations and launchers for gopher robots
 # and gopher simulations.
-- git: { local-name: 'gopher_common',         version: 'release/0.9-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
+- git: { local-name: 'gopher_common',         version: 'release/0.10-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 
 # ROSWeb client nodes
-- git: { local-name: 'gopher_jobbroker',      version: 'release/0.9',        uri: 'https://bitbucket.org/yujinrobot/gopher_jobbroker.git'}
+- git: { local-name: 'gopher_jobbroker',      version: 'release/0.10',        uri: 'https://bitbucket.org/yujinrobot/gopher_jobbroker.git'}
 - git: { local-name: 'gopher_iot_webclient', version: 'release/0.2', uri: 'https://bitbucket.org/yujinrobot/gopher_iot_webclient.git'}
 
 # The robot web application
@@ -30,7 +30,7 @@
 - git: { local-name: 'gopher_web_releases',   version: 'release/0.1',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_releases'}
 
 # Out gopher behaviours and behaviour trees
-- git: { local-name: 'gopher_crazy_hospital', version: 'release/0.6-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
+- git: { local-name: 'gopher_crazy_hospital', version: 'release/0.7-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
 # The fundamental behaviour trees modules
 - git: { local-name: 'py_trees_suite',        version: 'release/0.6-indigo-kinetic',        uri: 'https://github.com/yujinrobot/py_trees_suite'}
 
@@ -38,12 +38,12 @@
 - git: { local-name: 'rostful',               version: 'release/0.2-indigo', uri: 'https://github.com/yujinrobot/rostful.git'}
 # Only in case of testing before package release
 - git: { local-name: 'catkin_pip',            version: 'release/0.3-indigo', uri: 'https://github.com/yujinrobot/catkin_pip.git'}
-- git: { local-name: 'pyros_interfaces_ros',  version: 'release/0.5-indigo', uri: 'https://github.com/yujinrobot/pyros-rosinterface.git'}
-- git: { local-name: 'pyros_schemas',         version: 'release/0.1.0-indigo', uri: 'https://github.com/yujinrobot/pyros-schemas.git'}
+- git: { local-name: 'pyros_interfaces_ros',  version: 'release/0.6-indigo', uri: 'https://github.com/yujinrobot/pyros-rosinterface.git'}
+- git: { local-name: 'pyros_schemas',         version: 'release/0.1.2-indigo', uri: 'https://github.com/yujinrobot/pyros-schemas.git'}
 - git: { local-name: 'pyros_msgs',            version: 'release/0.1.0-indigo', uri: 'https://github.com/yujinrobot/pyros-msgs.git'}
 
 # Deployment
-- git: { local-name: 'yujin_ansible',     version: 'release/0.2',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
+- git: { local-name: 'yujin_ansible',     version: 'release/0.2.1',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
 
 # Environment Integrations
 # doors is only for documentation builds for now...its along way out of date and we dont use it
