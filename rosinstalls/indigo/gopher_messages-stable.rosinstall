@@ -22,4 +22,4 @@
 
 # A convenient library that helps us centralise the gargantuan number of parameterisations and remaps we do
 # Very heavily used by the gopher behaviour trees.
-- git: { local-name: 'gopher_configuration',          version: 'release/0.5-indigo', uri: 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}
+- git: { local-name: 'gopher_configuration',          version: 'release/0.6-indigo', uri: 'https://bitbucket.org/yujinrobot/gopher_configuration.git'}
