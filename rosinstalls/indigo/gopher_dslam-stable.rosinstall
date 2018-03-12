@@ -9,7 +9,7 @@
 # The core dslam library (no gui needed)
 - git: {local-name: dslam,                     version: release/0.10-indigo, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
 # Ecto pipeline, map utilities and viewers for dslam
-- git: {local-name: dslam_desktop,             version: release/0.9-indigo, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
+- git: {local-name: dslam_desktop,             version: release/0.10-indigo, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
 # Map version information only
 - git: {local-name: dslam_map_version,         version: release/0.5-indigo, uri: 'https://bitbucket.org/yujinrobot/dslam_map_version.git'}
 # Library to filter the raw data from the new bosch gyro
