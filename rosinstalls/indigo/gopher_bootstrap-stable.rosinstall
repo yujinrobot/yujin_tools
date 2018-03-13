@@ -18,7 +18,7 @@
 
 # Has the very important gopher_bootstrap which includes common parameterisations and launchers for gopher robots
 # and gopher simulations.
-- git: { local-name: 'gopher_common',         version: 'release/0.10-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
+- git: { local-name: 'gopher_common',         version: 'release/0.11-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 
 # ROSWeb client nodes
 - git: { local-name: 'gopher_jobbroker',      version: 'release/0.10',        uri: 'https://bitbucket.org/yujinrobot/gopher_jobbroker.git'}
