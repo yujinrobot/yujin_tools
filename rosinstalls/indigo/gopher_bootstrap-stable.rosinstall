@@ -14,7 +14,7 @@
 - git: { local-name: 'gopher_rapps',          version: 'release/0.3-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_rapps.git'}
 
 # Version and changelog for the gopher sdk
-- git: { local-name: 'gopher_version',        version: 'release/1.11.0-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_version.git'}
+- git: { local-name: 'gopher_version',        version: 'release/1.11.3-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_version.git'}
 
 # Has the very important gopher_bootstrap which includes common parameterisations and launchers for gopher robots
 # and gopher simulations.
