@@ -35,6 +35,7 @@
 
 # Out gopher behaviours and behaviour trees
 - git: { local-name: 'gopher_crazy_hospital', version: 'release/0.7-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
+- git: { local-name: 'gopher_cns',            version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_cns.git'}
 # The fundamental behaviour trees modules
 - git: { local-name: 'py_trees_suite',        version: 'release/0.6-indigo-kinetic',        uri: 'https://github.com/yujinrobot/py_trees_suite'}
 
