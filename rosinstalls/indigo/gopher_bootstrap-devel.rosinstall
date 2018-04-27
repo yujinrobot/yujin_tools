@@ -50,6 +50,9 @@
 # - git: { local-name: 'pyros',                 version: 'release/indigo/pyros', uri: 'https://github.com/asmodehn/pyros-rosrelease.git'}
 # - git: { local-name: 'pyros_config',        version: 'release/indigo/pyros_config', uri: 'https://github.com/asmodehn/pyros-config-rosrelease.git'}
 
+# Robot software messages
+- git: { local-name: 'rs_msgs',               version: 'devel', uri: 'https://bitbucket.org/yujinrobot/rs_msgs.git'}
+
 # Deployment
 - git: { local-name: 'yujin_ansible',     version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
 
