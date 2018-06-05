@@ -38,6 +38,9 @@
 # The fundamental behaviour trees modules
 - git: { local-name: 'py_trees_suite',        version: 'devel',        uri: 'https://github.com/yujinrobot/py_trees_suite'}
 
+# Intelligence modules
+- git: { local-name: 'gopher_failure_detector', version: 'devel',      uri: 'https://bitbucket.org/yujinrobot/gopher_failure_detector.git'}
+
 # Ros 2 Rest
 #- git: { local-name: 'rostful',               version: 'gopher-devel', uri: 'https://github.com/asmodehn/rostful.git'}
 - git: { local-name: 'rostful',               version: 'release/0.2-indigo', uri: 'https://github.com/yujinrobot/rostful.git'}
