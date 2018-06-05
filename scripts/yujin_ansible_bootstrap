@@ -128,7 +128,7 @@ pretty_print "  python-yujin-ansible...........packages.yujinrobot.com"
 if [ ! -f /etc/apt/sources.list.d/yujin.list ]; then
   echo "deb http://packages.yujinrobot.com/yujin/ubuntu ${DISTRIB_CODENAME} main" > /tmp/yujin.list
   sudo mv /tmp/yujin.list /etc/apt/sources.list.d/yujin.list
-  wget http://packages.yujinrobot.com/yujin.key -O - | sudo apt-key add -
+  wget http://packages.yujinrobot.com/yujin/yujin.key -O - | sudo apt-key add -
 fi
 echo ""
 
