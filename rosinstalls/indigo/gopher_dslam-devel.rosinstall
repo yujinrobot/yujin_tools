@@ -18,8 +18,6 @@
 - git: {local-name: qglv_toolkit,           version: devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
 # Localisation framework, includes initialisation methods with AR markers
 - git: {local-name: elf,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/elf.git'}
-# Yujin libraries
-- git: { local-name: 'yujin_shield',         version: 'master',         uri: 'https://bitbucket.org/yujinrobot/shield.git'}
 
 # Open source releases that are often changing 
 # support library for mixing ros and sophus
