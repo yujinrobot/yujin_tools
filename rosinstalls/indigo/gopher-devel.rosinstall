@@ -21,6 +21,8 @@
 
 # Library to filter the raw data from the new bosch gyro
 - git: {local-name: imu,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/imu.git'}
+# Continental rack controller(Maybe It is temporally added.)
+- git: {local-name: rack_ros,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/rack_ros.git'}
 
 # Used to enable retrieval of the 'recommended' firmware version that should be run with this gopher sdk
 - git: { local-name: 'somanet_firmware',   version: 'devel', uri: 'https://bitbucket.org/yujinrobot/somanet_firmware.git'}
