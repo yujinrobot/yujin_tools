@@ -58,6 +58,7 @@ source_deb:
 deb:
 	rm -rf dist deb_dist
 	python setup.py --command-packages=stdeb.command bdist_deb
+	cp deb_dist/*.deb .
 
 register:
 	python setup.py register
