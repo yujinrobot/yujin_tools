@@ -78,6 +78,7 @@ gopher-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/
 gopher-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher-stable.rosinstall'
 gopher_concert-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert-devel.rosinstall'
 gopher_concert-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert-stable.rosinstall'
+gopher_bootstrap-continental: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_bootstrap-continental.rosinstall'
 gopher_bootstrap-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_bootstrap-devel.rosinstall'
 gopher_bootstrap-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_bootstrap-stable.rosinstall'
 gopher_desktop-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_desktop-devel.rosinstall'
