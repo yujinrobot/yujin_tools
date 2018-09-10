@@ -1,0 +1,10 @@
+# Forks of the open source ecto pipeline
+# 
+#   Permissions: open to all - these are open source third party forks.
+#
+
+- git: {local-name: ecto,        version: devel, uri: 'https://github.com/stonier/ecto.git'}
+- git: {local-name: ecto_ros,    version: devel, uri: 'https://github.com/stonier/ecto_ros.git'}
+- git: {local-name: ecto_opencv, version: devel, uri: 'https://github.com/stonier/ecto_opencv.git'}
+
+#- git: {local-name: cv_backports, version: indigo, uri: 'https://github.com/stonier/cv_backports.git'}

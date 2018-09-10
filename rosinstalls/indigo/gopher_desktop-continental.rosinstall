@@ -1,0 +1,19 @@
+# == Overview ==
+#
+# Software for simulations and remote/visual interactions with gopher robots. We all share in the development and maintenance
+# these packages.
+#
+#   Permissions: open to all gopher developers - it's all dev/admin tools and no rocket science here
+#
+
+# Gopher podium/stage/gazebo simulations and rviz, rqt plugins
+- git: { local-name: 'gopher_desktop', version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_desktop.git'}
+
+# Has the rocon remocon
+- git: { local-name: 'rocon_qt_gui',   version: 'devel', uri: 'https://github.com/robotics-in-concert/rocon_qt_gui.git'}
+
+# Enabling library that keeps rqt gui's open even if the robot goes up and down
+- git: { local-name: 'rqt_wrapper',    version: 'devel', uri: 'https://github.com/stonier/rqt_wrapper.git'}
+
+# Visualisation for behaviour trees
+- git: { local-name: 'rqt_py_trees',   version: 'devel', uri: 'https://github.com/yujinrobot/rqt_py_trees.git'}
