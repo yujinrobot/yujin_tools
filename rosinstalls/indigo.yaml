@@ -48,6 +48,7 @@ _catkin: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indig
 
 # ros core
 catkin: [_catkin]
+ecto-continental: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto-continental.rosinstall'
 ecto-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto-devel.rosinstall'
 ecto-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecto-stable.rosinstall'
 yaml_cpp: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/yaml_cpp.rosinstall'
@@ -56,6 +57,7 @@ yaml_cpp: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indi
 dslam_desktop: [_dslam, 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/dslam_desktop.rosinstall']
 ecl: [ecl-devel]
 ecl-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecl-devel.rosinstall'
+ecl-continental: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecl-continental.rosinstall'
 ecl-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/ecl-stable.rosinstall'
 hello: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/hello.rosinstall'
 qt_ros: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/qt_ros.rosinstall'
@@ -74,19 +76,25 @@ arm_dslam_cubie: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstal
 pluto: 'https://bitbucket.org/yujinrobot/pluto/raw/hydro-devel/pluto.rosinstall'
 
 # gopher
+gopher-continental: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher-continental.rosinstall'
 gopher-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher-devel.rosinstall'
 gopher-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher-stable.rosinstall'
+gopher_concert-continental: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert-continental.rosinstall'
 gopher_concert-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert-devel.rosinstall'
 gopher_concert-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_concert-stable.rosinstall'
 gopher_bootstrap-continental: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_bootstrap-continental.rosinstall'
 gopher_bootstrap-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_bootstrap-devel.rosinstall'
 gopher_bootstrap-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_bootstrap-stable.rosinstall'
+gopher_desktop-continental: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_desktop-continental.rosinstall'
 gopher_desktop-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_desktop-devel.rosinstall'
 gopher_desktop-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_desktop-stable.rosinstall'
+gopher_messages-continental: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_messages-continental.rosinstall'
 gopher_messages-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_messages-devel.rosinstall'
 gopher_messages-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_messages-stable.rosinstall'
+gopher_navigation-continental: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_navigation-continental.rosinstall'
 gopher_navigation-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_navigation-devel.rosinstall'
 gopher_navigation-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_navigation-stable.rosinstall'
+gopher_dslam-continental: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_dslam-continental.rosinstall'
 gopher_dslam-devel: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_dslam-devel.rosinstall'
 gopher_dslam-stable: 'https://raw.github.com/yujinrobot/yujin_tools/master/rosinstalls/indigo/gopher_dslam-stable.rosinstall'
 
