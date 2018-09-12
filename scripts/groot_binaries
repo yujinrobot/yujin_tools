@@ -83,6 +83,10 @@ case $i in
     DEVEL=1
     shift
     ;;
+    --continental)
+    CONTINENTAL=1
+    shift
+    ;;
     --push)
     PUSH=1
     shift
@@ -102,7 +106,7 @@ if [ ! -z "$SHOW_HELP" ]; then
   exit 0
 fi
 
-if [ -z "$STABLE" ] && [ -z "$DEVEL" ]; then
+if [ -z "$STABLE" ] && [ -z "$DEVEL" ] && [ -z "$CONTINENTAL" ]; then
   echo ""
   echo "ERROR : you must set one of either --stable or --devel"
   echo ""
@@ -115,6 +119,9 @@ fi
 
 if [ ! -z "$STABLE" ]; then
   RELEASE="stable"
+elif [ ! -z "$CONTINENTAL" ]
+then
+  RELEASE="continental"
 else
   RELEASE="devel"
   if [ ! -z "$PARTNERS" ]; then
