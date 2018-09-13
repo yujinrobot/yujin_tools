@@ -17,7 +17,7 @@
 
 # Has the very important gopher_bootstrap which includes common parameterisations and launchers for gopher robots
 # and gopher simulations.
-- git: { local-name: 'gopher_common',         version: 'disk_usage',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
+- git: { local-name: 'gopher_common',         version: 'continental',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 
 # The robot site-configuration
 - git: { local-name: 'gopher_siteconf',       version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_siteconf.git'}
