@@ -21,7 +21,7 @@
 # Any important (especially IP sensitive) navigation code in here, especially local and global planning packages.
 - git: {local-name: 'gopher_navigation',       version: 'devel', uri: 'https://bitbucket.org/yujinrobot/gopher_navigation.git'}
 # Any not so important navigation packages - docking, elevators, simple motions, etc.
-- git: {local-name: 'gopher_motion_control',   version: 'Continental', uri: 'https://bitbucket.org/yujinrobot/gopher_motion_control.git'}
+- git: {local-name: 'gopher_motion_control',   version: 'continental', uri: 'https://bitbucket.org/yujinrobot/gopher_motion_control.git'}
 # Forks of the open source ROS navistack
 - git: {local-name: 'navigation',              version: 'devel', uri: 'https://github.com/yujinrobot/navigation.git'}
 - git: {local-name: 'navigation_layers',       version: 'devel', uri: 'https://github.com/yujinrobot/navigation_layers.git'}
