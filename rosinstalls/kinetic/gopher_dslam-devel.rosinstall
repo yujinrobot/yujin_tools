@@ -21,7 +21,7 @@
 
 # Open source releases that are often changing 
 # support library for mixing ros and sophus
-- git: {local-name: 'sophus_ros_toolkit',      version: 'devel', uri: 'https://github.com/stonier/sophus_ros_toolkit.git'}
+# - git: {local-name: 'sophus_ros_toolkit',      version: 'devel', uri: 'https://github.com/stonier/sophus_ros_toolkit.git'}
 
 # communication libraries between the gopher sbc and the dslam boards
 - git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
