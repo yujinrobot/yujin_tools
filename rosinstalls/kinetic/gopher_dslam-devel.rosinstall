@@ -12,8 +12,6 @@
 - git: {local-name: dslam_desktop,          version: kinetic-devel, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
 # Map version information only
 - git: {local-name: dslam_map_version,      version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam_map_version.git'}
-# Library to filter the raw data from the new bosch gyro
-- git: {local-name: imu,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/imu.git'}
 # Supporting qglv widgets and algorithms to create dslam viewers
 - git: {local-name: qglv_toolkit,           version: kinetic-devel, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
 # Localisation framework, includes initialisation methods with AR markers
@@ -25,8 +23,3 @@
 # Yujin libraries
 - git: { local-name: 'shield',         version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/shield.git'}
 
-# communication libraries between the gopher sbc and the dslam boards
-- git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
-- git: {local-name: nanomsg, version: indigo, uri: 'https://github.com/stonier/nanomsg.git'}
-
-- git: {local-name: flatbuffers, version: kinetic, uri: 'https://github.com/yujinrobot/flatbuffers.git'}
