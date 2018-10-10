@@ -9,7 +9,7 @@
 # The core dslam library (no gui needed)
 - git: {local-name: dslam,                  version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam.git'}
 # Ecto pipeline, map utilities and viewers for dslam
-- git: {local-name: dslam_desktop,          version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
+- git: {local-name: dslam_desktop,          version: continental, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
 # Map version information only
 - git: {local-name: dslam_map_version,      version: devel, uri: 'https://bitbucket.org/yujinrobot/dslam_map_version.git'}
 # Supporting qglv widgets and algorithms to create dslam viewers
@@ -17,7 +17,7 @@
 # Localisation framework, includes initialisation methods with AR markers
 - git: {local-name: elf,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/elf.git'}
 # Yujin libraries
-- git: { local-name: 'shield',         version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/shield.git'}
+- git: { local-name: 'shield',         version: 'continental',         uri: 'https://bitbucket.org/yujinrobot/shield.git'}
 
 # Open source releases that are often changing
 # support library for mixing ros and sophus
