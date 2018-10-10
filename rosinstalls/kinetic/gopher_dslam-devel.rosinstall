@@ -22,6 +22,8 @@
 # Open source releases that are often changing 
 # support library for mixing ros and sophus
 # - git: {local-name: 'sophus_ros_toolkit',      version: 'devel', uri: 'https://github.com/stonier/sophus_ros_toolkit.git'}
+# Yujin libraries
+- git: { local-name: 'shield',         version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/shield.git'}
 
 # communication libraries between the gopher sbc and the dslam boards
 - git: {local-name: message_multiplexing, version: indigo, uri: 'https://github.com/stonier/message_multiplexing.git'}
