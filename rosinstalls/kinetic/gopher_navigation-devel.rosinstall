@@ -8,7 +8,7 @@
 # Our own costmap equivalent of the very nice swiss grid map library, forked to yujinrobot from stonier to protect against changes
 - git: {local-name: 'cost_map',                version: 'devel', uri: 'https://github.com/yujinrobot/cost_map.git'}
 # Fork of the very nice swiss grid maps
-# - git: {local-name: 'grid_map',                version: 'devel', uri: 'https://github.com/yujinrobot/grid_map.git'}
+- git: {local-name: 'grid_map',                version: 'devel', uri: 'https://github.com/yujinrobot/grid_map.git'}
 
 # Can probably drop this one now - we have not used this for a long time
 - git: {local-name: 'depthimage_to_laserscan', version: 'kinetic', uri: 'https://github.com/yujinrobot/depthimage_to_laserscan.git'}
