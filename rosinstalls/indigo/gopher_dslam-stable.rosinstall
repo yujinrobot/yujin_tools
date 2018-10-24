@@ -12,8 +12,6 @@
 - git: {local-name: dslam_desktop,             version: release/0.11.0-indigo, uri: 'https://bitbucket.org/yujinrobot/dslam_desktop.git'}
 # Map version information only
 - git: {local-name: dslam_map_version,         version: release/0.5-indigo, uri: 'https://bitbucket.org/yujinrobot/dslam_map_version.git'}
-# Library to filter the raw data from the new bosch gyro
-- git: {local-name: imu,                       version: release/0.2-indigo, uri: 'https://bitbucket.org/yujinrobot/imu.git'}
 # Supporting qglv widgets and algorithms to create dslam viewers
 - git: {local-name: qglv_toolkit,              version: release/0.1-indigo, uri: 'https://github.com/yujinrobot/qglv_toolkit.git'}
 # Localisation framework, includes initialisation methods with AR markers
