@@ -100,7 +100,7 @@
 - git: { local-name: 'pyros_msgs',            version: 'release/0.1.0-indigo', uri: 'https://github.com/yujinrobot/pyros-msgs.git'}
 
 # Robot software messages
-- git: { local-name: 'rs_msgs',               version: 'release/0.2-indigo', uri: 'https://bitbucket.org/yujinrobot/rs_msgs.git'}
+- git: { local-name: 'rs_msgs',            version: 'release/0.2-indigo', uri: 'https://bitbucket.org/yujinrobot/rs_msgs.git'}
 
 # Deployment
 - git: { local-name: 'yujin_ansible',     version: 'release/0.3',        uri: 'https://bitbucket.org/yujinrobot/yujin_ansible'}
