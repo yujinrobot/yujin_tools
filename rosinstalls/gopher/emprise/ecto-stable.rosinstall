@@ -1,0 +1,5 @@
+- git: {local-name: ecto,        version: release/0.6-indigo, uri: 'https://github.com/stonier/ecto.git'}
+- git: {local-name: ecto_ros,    version: release/0.4-indigo, uri: 'https://github.com/stonier/ecto_ros.git'}
+- git: {local-name: ecto_opencv, version: release/0.5-indigo, uri: 'https://github.com/stonier/ecto_opencv.git'}
+
+#- git: {local-name: cv_backports, version: indigo, uri: 'https://github.com/stonier/cv_backports.git'}
