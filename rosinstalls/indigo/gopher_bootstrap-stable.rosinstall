@@ -20,12 +20,12 @@
 - git: { local-name: 'gopher_common',         version: 'release/0.12-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 
 # The robot site-configuration
-- git: { local-name: 'gopher_siteconf',       version: 'release/0.1.1-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_siteconf.git'}
+- git: { local-name: 'gopher_siteconf',       version: 'release/0.2-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_siteconf.git'}
 
 # ROSWeb client nodes
 - git: { local-name: 'gopher_jobbroker',      version: 'release/0.10',        uri: 'https://bitbucket.org/yujinrobot/gopher_jobbroker.git'}
-- git: { local-name: 'gopher_iot_webclient',  version: 'release/0.2',        uri: 'https://bitbucket.org/yujinrobot/gopher_iot_webclient.git'}
-- git: { local-name: 'gopher_webclients',     version: 'release/0.1-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_webclients.git'}
+- git: { local-name: 'gopher_iot_webclient',  version: 'release/0.3',        uri: 'https://bitbucket.org/yujinrobot/gopher_iot_webclient.git'}
+- git: { local-name: 'gopher_webclients',     version: 'release/0.2-indigo',        uri: 'https://bitbucket.org/yujinrobot/gopher_webclients.git'}
 
 # The robot web application
 - git: { local-name: 'gopher_web_ui',         version: 'release/0.4',        uri: 'https://bitbucket.org/yujinrobot/gopher_web_ui.git'}
