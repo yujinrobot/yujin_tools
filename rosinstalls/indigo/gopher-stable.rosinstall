@@ -7,7 +7,7 @@
 
 # Mostly for gopher_robot which contains all launchers and parameterisations for bringing up a gopher robot.
 # Also includes a few other essentials such as the remote gopher utilities.
-- git: { local-name: 'gopher',             version: 'release/0.12.0-indigo',         uri: 'https://bitbucket.org/yujinrobot/gopher.git'}
+- git: { local-name: 'gopher',             version: 'release/0.13-indigo',         uri: 'https://bitbucket.org/yujinrobot/gopher.git'}
 
 # Calibration software (mostly for the 2d/3d sensors)
 - git: { local-name: 'gopher_calibration', version: 'release/0.3-indigo',         uri: 'https://bitbucket.org/yujinrobot/gopher_calibration.git'}
