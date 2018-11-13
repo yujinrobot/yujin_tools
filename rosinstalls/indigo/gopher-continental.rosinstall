@@ -19,11 +19,10 @@
 - git: { local-name: 'astra_camera',       version: 'filter_library_custom', uri: 'https://github.com/yujinrobot/ros_astra_camera.git'}
 - git: { local-name: 'tim510_ros',         version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/tim510_ros.git'}
 - git: { local-name: 'magnetic_sensor',         version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/magnetic_sensor.git'}
-- git: { local-name: 'rack_ros',         version: 'devel',         uri: 'https://bitbucket.org/yujinrobot/rack_ros.git'}
 
 # Library to filter the raw data from the new bosch gyro
 - git: {local-name: imu,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/imu.git'}
-# Continental rack controller(Maybe It is temporally added.)
+# Continental rack controller(Maybe It is temporally added until branch seperation.)
 - git: {local-name: rack_ros,                    version: devel, uri: 'https://bitbucket.org/yujinrobot/rack_ros.git'}
 
 # Used to enable retrieval of the 'recommended' firmware version that should be run with this gopher sdk
