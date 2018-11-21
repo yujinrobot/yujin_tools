@@ -7,7 +7,7 @@
 - git: { local-name: 'feed_the_troll',        version: 'release/0.1-indigo-kinetic',        uri: 'https://github.com/stonier/feed_the_troll.git'}
 
 # Robot setup GUI program
-- git: { local-name: 'gocart_ezsetup',        version: 'release/0.2-indigo',        uri: 'https://bitbucket.org/yujinrobot/gocart_ezsetup.git'}
+- git: { local-name: 'gocart_ezsetup',        version: 'release/0.3-indigo',        uri: 'https://bitbucket.org/yujinrobot/gocart_ezsetup.git'}
 
 # The application and interactions framework
 # Tools many useful python modules used pretty much everywhere, bit like the ecl of python for us
