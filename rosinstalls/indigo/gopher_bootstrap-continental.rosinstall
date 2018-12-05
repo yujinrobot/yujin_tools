@@ -6,6 +6,9 @@
 # A bit like the generic ros param server, but for dynamic reconfigurable parameters
 - git: { local-name: 'feed_the_troll',        version: 'devel',        uri: 'https://github.com/stonier/feed_the_troll.git'}
 
+# Robot setup GUI program
+- git: { local-name: 'gocart_ezsetup',        version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gocart_ezsetup.git'}
+
 # The application and interactions framework
 # Tools many useful python modules used pretty much everywhere, bit like the ecl of python for us
 - git: { local-name: 'rocon_tools',           version: 'devel',        uri: 'https://github.com/robotics-in-concert/rocon_tools.git'}
@@ -17,7 +20,7 @@
 
 # Has the very important gopher_bootstrap which includes common parameterisations and launchers for gopher robots
 # and gopher simulations.
-- git: { local-name: 'gopher_common',         version: 'disk_usage',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
+- git: { local-name: 'gopher_common',         version: 'continental',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 
 # The robot site-configuration
 - git: { local-name: 'gopher_siteconf',       version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_siteconf.git'}
