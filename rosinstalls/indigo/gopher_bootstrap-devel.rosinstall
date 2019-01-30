@@ -38,6 +38,7 @@
 # Out gopher behaviours and behaviour trees
 - git: { local-name: 'gopher_crazy_hospital', version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_crazy_hospital.git'}
 - git: { local-name: 'gopher_cns',            version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_cns.git'}
+- git: { local-name: 'rospy_log_template',    version: 'master',       uri: 'https://bitbucket.org/yujinrobot/rospy_log_template.git'}
 # The fundamental behaviour trees modules
 - git: { local-name: 'py_trees_suite',        version: 'devel',        uri: 'https://github.com/yujinrobot/py_trees_suite'}
 
