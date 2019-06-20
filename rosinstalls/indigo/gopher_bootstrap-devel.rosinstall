@@ -23,7 +23,9 @@
 - git: { local-name: 'gopher_common',         version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_common.git'}
 
 # The robot site-configuration
-- git: { local-name: 'gopher_siteconf',       version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_siteconf.git'}
+- git: { local-name: 'dyn_siteconf',          version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/dyn_siteconf.git'}
+- git: { local-name: 'map_attribute_conf',    version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/map_attribute_conf.git'}
+#- git: { local-name: 'gopher_siteconf',       version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_siteconf.git'}
 
 # ROSWeb client nodes
 - git: { local-name: 'gopher_jobbroker',      version: 'devel',        uri: 'https://bitbucket.org/yujinrobot/gopher_jobbroker.git'}
